@@ -1,0 +1,8 @@
+#dirs
+_cache/
+_site/
+
+#binary
+hakyll
+hakyll.hi
+hakyll.o
