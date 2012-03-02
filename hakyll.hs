@@ -42,6 +42,7 @@ main = hakyll $ do
     create "posts.html" $ constA mempty
         >>> arr (setField "title" "All posts")
         >>> requireAllA "posts/*" addPostList
+        >>> renderTagsField "prettytags" (fromCapture "tags/*")
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
@@ -50,11 +51,22 @@ main = hakyll $ do
     match "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "Personal Home Page of Carlos Lopez-Camey")
+        >>> requireA "tags" (setFieldA "tags" (renderCategoryList'))
         >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . sortByBaseName) >>> addPostList)
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
 
+    -- Tags
+    create "tags" $
+        requireAll "posts/*" (\_ ps -> readTags ps :: Tags String)
+
+    -- Add a tag list compiler for every tag
+    match "tags/*" $ route $ setExtension ".html"
+    metaCompile $ require_ "tags"
+        >>> arr tagsMap
+        >>> arr (map (\(t, p) -> (tagIdentifier t, makeTagList t p)))
+        
     -- Read templates
     match "templates/*" $ compile templateCompiler
 
@@ -70,6 +82,27 @@ main = hakyll $ do
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
 
+    where       
+      renderTagList' :: Compiler (Tags String) String
+      renderTagList' = renderTagList tagIdentifier
+
+      tagIdentifier :: String -> Identifier (Page String)
+      tagIdentifier = fromCapture "tags/*"
+      
+    
+    
+makeTagList :: String
+            -> [Page String]
+            -> Compiler () (Page String)
+makeTagList tag posts =
+    constA posts
+        >>> pageListCompiler recentFirst "templates/postitem.html"
+        >>> arr (copyBodyToField "posts" . fromBody)
+        >>> arr (setField "title" ("Posts tagged " ++ tag))
+        >>> applyTemplateCompiler "templates/posts.html"
+        >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
+        
 -- | Auxiliary compiler: generate a post list from a list of given posts, and
 -- add it to the current page under @$posts@
 --
