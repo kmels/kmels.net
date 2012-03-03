@@ -1,0 +1,26 @@
+---
+Title: 404
+---
+
+You've tried to access a page that doesn't exist or might have been moved, renamed or deleted.
+
+<p id="newurl"></p>
+
+<p>Have a great day</p>
+
+<script language="javascript" type="text/javascript">
+    /* 
+    too boring to do this now (must separate tokens by "-"," ")
+
+      var thisURL = document.location.href;
+      var urlPattern = /(http:\/\/)(www.)*([a-zA-Z0-9\.\-]*)(.*)/i;
+      var match = urlPattern.exec(thisURL);
+    
+      if (match!=null){           
+          var URI = match[4];
+          var googleURL = "http://google.com/?q=inurl:kmels.net "+URI;
+          document.getElementById("newurl").innerHTML = 'Google is somewhat smart, try searching for: <a href='+googleURL+'>'+URI+'</a> in it.'
+      }
+    */
+
+</script>

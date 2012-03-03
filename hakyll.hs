@@ -23,6 +23,9 @@ main = hakyll $ do
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
+        
+    -- static files
+    match "robots.txt" file
 	
     -- Images
     match "images/*" $ do
@@ -51,7 +54,7 @@ main = hakyll $ do
     match "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "Personal Home Page of Carlos Lopez-Camey")
-        >>> requireA "tags" (setFieldA "tags" (renderCategoryList'))
+        >>> requireA "tags" (setFieldA "tags" (renderTagList'))
         >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . sortByBaseName) >>> addPostList)
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
@@ -76,7 +79,7 @@ main = hakyll $ do
         requireAll_ "posts/*" >>> renderRss mainFeed
     
     -- Static pages
-    match (list ["about.markdown","contact.markdown"]) $ do
+    match (list ["about.markdown","contact.markdown","404.markdown"]) $ do
     route   $ setExtension "html"
     compile $ pageCompiler
         >>> applyTemplateCompiler "templates/default.html"
