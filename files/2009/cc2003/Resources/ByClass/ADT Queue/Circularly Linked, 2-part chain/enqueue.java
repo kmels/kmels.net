@@ -1,0 +1,1 @@
+public void enqueue(Object newEntry){	if (isChainFull())	{ 		// allocate a new node and insert it after node that freeNode 		// references		Node newNode = new Node(null, freeNode.getNextNode());		freeNode.setNextNode(newNode);	} // end if	freeNode.setData(newEntry);	freeNode = freeNode.getNextNode();} // end enqueue

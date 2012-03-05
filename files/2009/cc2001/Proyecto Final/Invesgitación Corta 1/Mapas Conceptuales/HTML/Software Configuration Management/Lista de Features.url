@@ -1,0 +1,5 @@
+http://www.versionsapp.com/releasenotes
+[DEFAULT]
+BASEURL=http://www.versionsapp.com/releasenotes
+[InternetShortcut]
+URL=http://www.versionsapp.com/releasenotes

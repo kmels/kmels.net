@@ -1,0 +1,1 @@
+public boolean hasNext(){	return currentIndex < length;} // end hasNext

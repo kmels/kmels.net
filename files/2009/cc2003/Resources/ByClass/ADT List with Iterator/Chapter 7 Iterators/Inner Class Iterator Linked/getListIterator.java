@@ -1,0 +1,1 @@
+	public IteratorInterface getListIterator()	{		return new IteratorForLinkedList();	} // end getListIterator

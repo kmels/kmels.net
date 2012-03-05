@@ -1,0 +1,21 @@
+
+	.DATA
+
+DURACION 	DW 10000
+TONO		DW 512H
+
+
+	.CODE
+
+
+	IN AL, 61H
+	PUSH AX
+A20:	mov dx, duracion
+a30:
+
+
+
+
+	aooroadsfoasdfoasdfoasdfoadsfasdf
+	
+	OUT

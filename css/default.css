@@ -45,5 +45,6 @@ div#navigation a {
 }
 
 div#footer{
+    margin-top: 60px;
     clear: both;
 }

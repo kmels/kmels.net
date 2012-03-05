@@ -1,0 +1,5 @@
+http://www.android.com/market/
+[DEFAULT]
+BASEURL=http://www.android.com/market/
+[InternetShortcut]
+URL=http://www.android.com/market/

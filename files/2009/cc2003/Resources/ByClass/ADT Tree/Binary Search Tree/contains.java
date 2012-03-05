@@ -1,0 +1,1 @@
+public boolean contains(Comparable entry){	return getEntry(entry) != null; } // end contains

@@ -1,0 +1,26 @@
+;R1 contador
+Set R1 0
+
+; R0 tiene el handle 
+OpenFile "archivo" R0
+
+; si existe, seguir, si no, salir
+JMP R0 Seguir 
+
+; si sigue aqui, no sirve
+Set 1 R0
+JMP R0 Salir
+
+;sumar uno mas (a la linea)
+Seguir  Set R2 1
+Add R1 R2 
+
+;escribir linea y escribir readline
+Echo R1 
+Echo ReadLine R0 R3
+
+; si R3 >0 => pueden haber mas lineas
+JMP R3 Seguir
+
+Salir End
+

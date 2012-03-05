@@ -1,0 +1,272 @@
+\documentclass{article}
+% Change "article" to "report" to get rid of page number on title page
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+\usepackage{Tabbing}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{chngpage}
+\usepackage{soul,color}
+\usepackage{sagetex}
+\usepackage{graphicx,float,wrapfig}
+
+% In case you need to adjust margins:
+\topmargin=-0.45in      %
+\evensidemargin=0in     %
+\oddsidemargin=0in      %
+\textwidth=6.5in        %
+\textheight=9.0in       %
+\headsep=0.25in         %
+
+% Homework Specific Information
+\newcommand{\hmwkTitle}{Proyecto C\'{o}digos y Grupos}
+\newcommand{\hmwkDueDate}{Martes,\ Dic\ 1,\ 2009}
+\newcommand{\hmwkClass}{MM2015}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{H. Villafuerte}
+\newcommand{\hmwkAuthorName}{Carlos E. L\'{o}pez Camey}
+
+% Setup the header and footer
+\pagestyle{fancy}                                                       %
+\lhead{\hmwkAuthorName}                                                 %
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}  %
+\rhead{\firstxmark}                                                     %
+\lfoot{\lastxmark}                                                      %
+\cfoot{}                                                                %
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}}                          %
+\renewcommand\headrulewidth{0.4pt}                                      %
+\renewcommand\footrulewidth{0.4pt}                                      %
+
+% This is used to trace down (pin point) problems
+% in latexing a document:
+%\tracingall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some tools
+%\newcommand{\enterProblemHeader}[1]{\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak%
+   %                                 \nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak}%
+\newcommand{\exitProblemHeader}[1]{\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak%
+                                   \nobreak\extramarks{#1}{}\nobreak}%
+
+\newlength{\labelLength}
+\newcommand{\labelAnswer}[2]
+  {\settowidth{\labelLength}{#1}%
+   \addtolength{\labelLength}{0.25in}%
+   \changetext{}{-\labelLength}{}{}{}%
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#2\end{minipage}}%
+   \marginpar{\fbox{#1}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   \changetext{}{+\labelLength}{}{}{}}%
+
+\setcounter{secnumdepth}{0}
+\newcommand{\homeworkProblemName}{}%
+\newcounter{homeworkProblemCounter}%
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]%
+  {\stepcounter{homeworkProblemCounter}%
+   \renewcommand{\homeworkProblemName}{#1}%
+   \section{\homeworkProblemName}%
+   %\enterProblemHeader{\homeworkProblemName}
+   }%
+  %{\exitProblemHeader{\homeworkProblemName}}%
+
+\newcommand{\problemAnswer}[1]
+  {\noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}}%
+
+\newcommand{\problemLAnswer}[1]
+  {\labelAnswer{\homeworkProblemName}{#1}}
+
+\newcommand{\homeworkSectionName}{}%
+\newlength{\homeworkSectionLabelLength}{}%
+\newenvironment{homeworkSection}[1]%
+  {% We put this space here to make sure we're not connected to the above.
+   % Otherwise the changetext can do funny things to the other margin
+
+   \renewcommand{\homeworkSectionName}{#1}%
+   \settowidth{\homeworkSectionLabelLength}{\homeworkSectionName}%
+   \addtolength{\homeworkSectionLabelLength}{0.25in}%
+   \changetext{}{-\homeworkSectionLabelLength}{}{}{}%
+   \subsection{\homeworkSectionName}%
+   \enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]}}%
+  {\enterProblemHeader{\homeworkProblemName}%
+
+   % We put the blank space above in order to make sure this margin
+   % change doesn't happen too soon (otherwise \sectionAnswer's can
+   % get ugly about their \marginpar placement.
+   \changetext{}{+\homeworkSectionLabelLength}{}{}{}}%
+
+\newcommand{\sectionAnswer}[1]
+  {% We put this space here to make sure we're disconnected from the previous
+   % passage
+
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}%
+   \enterProblemHeader{\homeworkProblemName}\exitProblemHeader{\homeworkProblemName}%
+   \marginpar{\fbox{\homeworkSectionName}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   }%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make title
+\title{\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\\normalsize\vspace{0.1in}\small{Para entregar\ el\ \hmwkDueDate}\\\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}}
+\date{}
+\author{\textbf{\hmwkAuthorName}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{spacing}{1.1}
+\maketitle
+% Uncomment the \tableofcontents and \newpage lines to get a Contents page
+% Uncomment the \setcounter line as well if you do NOT want subsections
+%       listed in Contents
+%\setcounter{tocdepth}{1}
+%\tableofcontents
+
+
+%\newpage
+
+% When problems are long, it may be desirable to put a \newpage or a
+% \clearpage before each homeworkProblem environment
+\begin{homeworkProblem}[Grupos. ]
+\subsection{(a) Seleccionando un grupo finito:}
+Utilizemos $S_n$
+
+\subsection{(b) Seleccionemos un entero n que determinar\'{a} el orden del grupo elegido}
+
+\begin{sageblock}
+sage: n = round(random()*10)
+sage: n
+9.0
+sage: G = SymmetricGroup(9)
+sage: G.order()
+362880
+\end{sageblock}
+
+Vemos que el orden de G es de 362880.
+
+\subsection{(c) Obtengamos un listado $H$ de subgrupos de $G$}
+
+\begin{sageblock}
+sage: H = G.normal_subgroups()
+sage: H
+[Permutation Group with generators [()],
+ Permutation Group with generators [(2,3)(4,5), (2,4,3), (2,4,6,5,3), (2,5,3)(4,7,6), (2,8,7,4,5,6,3), (2,9,8,5,6,4,3), (1,3,2)],
+ Permutation Group with generators [(1,2), (1,2,3,4,5,6,7,8,9)]]
+\end{sageblock}
+
+\subsection{(d) Orden de los subgrupos $H$ }
+
+\begin{sageblock}
+sage: [subgrupo.order() for subgrupo in H]
+[1, 181440, 362880]
+\end{sageblock}
+
+Vemos que el \'{u}ltimo subgrupo del listado $H$ tiene el mismo orden que el grupo inicial $G$.
+
+\begin{sageblock}
+sage: G.order() == H[2].order()
+True
+\end{sageblock}
+
+\subsection{(e) Repitamos algunas veces}
+
+Hagamos lo siguiente en sage
+\begin{sageblock}
+Grupo = SymmetricGroup(7);
+
+
+def verificar(G,H):
+    return G.order() == H[len(H)-1].order()
+
+for n in range(1,20):
+    G = SymmetricGroup(n)
+    print verificar(G,G.normal_subgroups())
+\end{sageblock}
+
+Vemos como respuesta
+\begin{sageblock}
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+True
+\end{sageblock}
+
+Lo cual, demuestra nuestra congetura para todos los grupos $S_1\dots S_{20}$ aunque no para todos.
+
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}[C\'{o}digos]
+
+\subsection{(a) Escojamos un mensaje $M$}
+
+Escojamos "Superfragilisticoespiralidoso"
+\begin{sageblock}
+M = "Superfragilisticoespiralidoso"
+\end{sageblock}
+
+\subsection{(b) Codifiquemos $M$ empleando Hamming(7,4) sobre un canal que introduce 1-bit de error}
+
+\begin{sageblock}
+sage: C = HammingCode(3,GF(2))
+sage: G = C.gen_mat()
+sage: H = C.check_mat()
+sage: Mv = str2vec(M,4)
+sage: Mv = [c*G for c in Mv]
+sage: Mv = [c + error_canal(7,1) for c in Mv]
+sage: Mv = [C.decode(c) for c in Mv]
+sage: Mv = [G.solve_left(c).list() for c in Mv]
+sage: Mhat = vec2str(Mv)
+sage: print M, '->', Mhat
+Superfragilisticoespiralidoso -> Superfragilisticoespiralidoso
+sage: print M==Mhat
+True
+\end{sageblock}
+
+Vemos que el mensaje $M$ se pudo recuperar.
+
+\subsection{(c) Codifiquemoslo ahora sobre un canal con 2-bits de error}
+
+\begin{sageblock}
+sage: C = HammingCode(3,GF(2))
+sage: G = C.gen_mat()
+sage: H = C.check_mat()
+sage: Mv = str2vec(M,4)
+sage: Mv = [c*G for c in Mv]
+sage: Mv = [c + error_canal(7,1) for c in Mv]
+sage: Mv = [C.decode(c) for c in Mv]
+sage: Mv = [G.solve_left(c).list() for c in Mv]
+sage: Mhat = vec2str(Mv)
+sage: print M==Mhat
+False
+\end{sageblock}
+
+Vemos que el mensaje $M$ NO se pudo recuperar.
+\end{homeworkProblem}
+
+
+\end{spacing}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

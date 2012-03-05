@@ -1,0 +1,1 @@
+public Object remove(int givenPosition){	Object result = null;  // return value	if ((givenPosition >= 1) && (givenPosition <= entry.size()))	{		result = entry.elementAt(givenPosition-1);		entry.removeElementAt(givenPosition-1);	} // end if	return result;} // end remove

@@ -1,0 +1,1 @@
+public Iterator getValueIterator(){	return new ValueIterator();} // end getValueIterator

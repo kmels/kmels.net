@@ -1,0 +1,1 @@
+public void addEdge(Object begin, Object end, double edgeWeight){	Vertex beginVertex = (Vertex)vertices.getValue(begin);	Vertex endVertex = (Vertex)vertices.getValue(end);	beginVertex.addEdge(endVertex, edgeWeight);	edgeCount++;} // end addEdgepublic void addEdge(Object begin, Object end){	addEdge(begin, end, 0);} // end addEdge

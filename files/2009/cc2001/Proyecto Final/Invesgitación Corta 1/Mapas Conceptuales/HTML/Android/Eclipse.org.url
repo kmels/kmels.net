@@ -1,0 +1,5 @@
+http://www.eclipse.org/
+[DEFAULT]
+BASEURL=http://www.eclipse.org/
+[InternetShortcut]
+URL=http://www.eclipse.org/

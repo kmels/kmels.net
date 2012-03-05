@@ -1,0 +1,1 @@
+public Object remove(Object key){	Entry findEntry = new Entry(key, null);	Entry returnedEntry = (Entry)bst.remove(findEntry);	Object result = null;	if (returnedEntry != null)		result = returnedEntry.getValue();			return result;} // end remove

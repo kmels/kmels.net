@@ -1,0 +1,9 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 00961H 00962H MTASKING_TEXT      CODE
+ 00970H 009A7H 00038H _DATA              DATA
+ 009B0H 059AFH 05000H STACK              STACK
+
+Program entry point at 0000:0000
+

@@ -1,0 +1,1 @@
+public Object add(Object key, Object value){	Entry newEntry = new Entry(key, value);	Entry returnedEntry = (Entry)bst.add(newEntry);	Object result = null;	if (returnedEntry != null)		result = returnedEntry.getValue();	return result;} // end add

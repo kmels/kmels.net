@@ -1,0 +1,254 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+\usepackage{url}
+\usepackage{graphics}
+
+\decimalpoint
+
+\title{Proyecto: Prueba t de Hip\'{o}tesis}
+\date{\today}
+\begin{document}
+
+\begin{titlepage}
+
+
+
+\noindent Universidad del Valle de Guatemala \\
+Departamento de Matem\'{a}tica\\
+Modelos Estad\'{i}sticos I - CU109\\
+
+\vspace{6cm}
+
+%  \maketitle
+\center{\huge{\textsc{\textbf{Proyecto: \\Prueba t de Hip\'{o}tesis}}}}
+
+\vspace{5cm}
+
+\begin{flushright}
+ Integrantes del grupo: \\
+ David Coronado 07325\\
+ David Hsieh 08225\\
+ Carlos L\'{o}pez 08107\\
+ H\'{e}ctor Ruano 09063\\
+Guatemala 17 de Mayo del 2010
+\end{flushright}
+
+\end{titlepage}
+
+
+\tableofcontents
+
+\pagebreak
+
+
+  
+
+  \section{Marco Te\'{o}rico}
+
+En el estudio de la estad\'{i}stica, sabemos como se pueden estimar par\'{a}metros tales como la media. Sin embargo, muchos problemas en Ingenier\'{i}a y Ciencia requieren que se tome una decisi\'{o}n entre aceptar o rechazar una proposici\'{o}n sobre alguno de estos par\'{a}metros, a esta proposici\'{o}n le llamamos \textbf{hip\'{o}tesis}\cite{DeLaTorre}. 
+
+Para todo tipo de investigaci\'{o}n, se establece una hip\'{o}tesis nula $H_0$ que se presume verdadera hasta que haya una evidencia estad\'{i}stica en la forma de una prueba de hip\'{o}tesis que indique lo contrario i.e. rechaze $H_0$; para esto, se formula una o hip\'{o}tesis alternativa $H_a$ que difiera de $H_0$.
+
+Una prueba de hip\'{o}tesis es aquella que permite, siguiendo los pasos adecuados, rechazar o aceptar una hip\'{o}tesis.  La prueba de hip\'{o}tesis en la que fundamentamos nuestros resultados, es llamada prueba de t de Student \cite{Students_Ttest_wiki_en}\cite{Students_T_wiki_es}, la cual est\'{a} basada en una distribuci\'{o}n de t, que no es m\'{a}s que una distribuci\'{o}n de probabilidad que estima la media de una distribuci\'{o}n normal \cite{Students_Tdist_wiki_en}, por lo tanto suponemos que nuestras poblaciones siguen una \textbf{distribuci\'{o}n normal}.
+
+Para rechazar o aceptar la hip\'{o}tesis nula en una prueba de T, encontramos una regi\'{o}n cr\'{i}tica en la distribuci\'{o}n, la cual es el conjunto de eventos en las que, si ocurren, nos llevan a decidir o no si hay una diferencia, para encontrar la regi\'{o}n cr\'{i}tica se usa el criterio de un intervalo de confianza. Un intervalo de confianza es un tipo de intervalo estimado de un par\'{a}metro poblacional. En vez de estimar el par\'{a}metro en un s\'{o}lo valor, un intervalo es probable que contenga al valor, por lo tanto los intervalos de confianza los usamos para indicar la confiabilidad del valor estimado \cite{IntervaloDeConfianza_wiki_es}.
+
+  \section{Descripci\'{o}n del experimento}
+
+Los estudiantes de la UVG tienen derecho a utilizar las instalaciones de la biblioteca. Existe la idea de que la biblioteca es visitada m\'{a}s por estudiantes mujeres que por estudiantes hombres. El fin de este experimento es comprobar dicha hip\'{o}tesis midiendo el promedio de estudiantes de cada g\'{e}nero que visitan la biblioteca de la UVG por unidad de tiempo y hacer las pruebas correspondientes. 
+  
+  \section{Procedimiento}
+  
+Se midi\'{o} promedio de estudiantes que utilizan la biblioteca de la UVG por unidad de tiempo (5 minutos). La primera poblacion esta compuesta por los estudiantes hombres de la UVG y la otra poblacion por las estudiantes mujeres de la UVG. 
+
+Para realizar el experimento se empez\'{o} recolectando los datos. Los datos se tomaron manualmente por los miembros del grupo. Hubo un evento de recolecci\'{o}n de datos en el cual dos miembros contaban a los estudiantes que ingresaban mientras que otro contaba los intervalos de tiempo. Este procedimiento duro hora y media (150 minutos) y la entrada de estudiantes era registrada en intervalos de 5 minutos. Por lo tanto, se tuvieron 30 muestras, las cuales se componen de la cantidadade estudiantes de cada poblaci\'{o}n que entran a la biblioteca cada 5 minutos. 
+
+Luego estos datos fueron tomados para llevar a cabo el procedimiento de prueba de hip\'{o}tesis, se realizo antes la Prueba F para ver si los datos tienen varianzas diferentes o iguales y se calculo el coeficiente de correlaci\'{o}n para confirmar si los datos eran o no pareados.
+
+
+%Filburt poné como sacamos los datos y  como repartimos las 30 muestras <<--- Ya lo puse arriba! 
+ 
+
+  \section{Resultados}
+  
+  Durante la hora y media de observaci\'{o}n, obtuvimos los siguientes resultados:
+  
+  \begin{center}\begin{tabular}{ l | c | c } \textbf{N\'{u}mero de muestra} & \textbf{Poblaci\'{o}n 2: Cantidad de Hombres} & \textbf{Poblaci\'{o}n 2: Cantidad de Mujeres} \\ \hline 
+  \#1, minuto 0: & 5 & 2 \\
+  \#2, minuto 10: & 3 & 3 \\
+  \#3, minuto 15: & 2 & 5 \\
+  \#4, minuto 20: & 4 & 4 \\
+  \#5, minuto 25: & 3 & 6 \\
+  \#6, minuto 30: & 6 & 1 \\
+  \#7, minuto 35: & 1 & 2 \\
+  \#8, minuto 40: & 4 & 4 \\
+  \#9, minuto 45: & 6 & 2 \\
+  \#10, minuto 50: & 2 &5 \\
+  \#11, minuto 55: & 1 & 6 \\
+  \#12, minuto 60: & 0 & 2 \\
+  \#13, minuto 65: & 2 & 5 \\
+  \#14, minuto 70: & 4 & 2 \\
+  \#15, minuto 75: & 2 & 5 \\
+  \#16, minuto 80: & 5 & 4 \\
+  \#17, minuto 85: & 2 & 2 \\
+  \#18, minuto 90: & 0 & 1 \\
+  \#19, minuto 95: & 1 & 4 \\
+  \#20, minuto 100: & 5 & 0 \\
+  \#21, minuto 105: & 7 & 2 \\
+  \#22, minuto 110: & 4 & 4 \\
+  \#23, minuto 115: & 2 & 3 \\
+  \#24, minuto 120: & 5 & 6 \\
+  \#25, minuto 125: & 4 & 7 \\
+  \#26, minuto 130: & 8 & 4 \\
+  \#27, minuto 135: & 5 & 2 \\
+  \#28, minuto 140: & 3 & 4 \\
+  \#29, minuto 145: & 1 & 7 \\
+  \#30, minuto 150: & 2 & 4 \\
+  \end{tabular}
+
+Durante una 1 hora y 30 minutos, entraron un total de 99 hombres y 108 mujeres, implicando que, las medias muestrales de cada poblaci\'{o}n son:\\
+\textbf{Poblaci\'{o}n 1 (hombres):} 3.6 hombres por minuto\\
+\textbf{Poblaci\'{o}n 2 (mujeres):} 3.3 por minuto\\
+
+\end{center}
+  
+  
+  \section{An\'{a}lisis}
+
+Para poder realizar la prueba de hip\'{o}tesis t de Student, necesitamos saber si las poblaciones que estamos estudiando se comportan normalmente, es decir se pueden representar con una distribuci\'{o}n normal de Gauss.
+
+Por lo tanto, constru\'{i}mos la siguiente tabla
+\begin{center}
+\begin{tabular}{ l | c | c | r | c } 
+  $i$ & $x_i$ Hombres & $x_i$ Mujeres & $F_{acm}$ & $z$ \\ \hline 
+  1 & 0 & 0 & 0.0167 & -2.03\\
+  2 & 0 & 1 & 0.05 & -1.64 \\
+    3 & 1 & 1 & 0.0833 & -1.38 \\
+4 & 1 & 2 & 0.1167 & -1.20 \\
+5 & 1 & 2 & 0.15 & -1.04\\
+6 & 1 & 2 & 0.183 & -0.91\\
+7 & 2 & 2 & 0.2167 & -0.78\\
+8 & 2 & 2 & 0.25 & -0.68\\
+9 & 2 & 2 & 0.2833 & -0.57\\
+10 & 2 & 2 & 0.3167 & -0.48\\
+11 & 2 & 2 & 0.35 &  -0.39 \\
+12 & 2 & 2 & 0.383 & -0.30\\
+13 & 2 & 3 & 0.4167 & -0.21\\
+14 & 3 & 3 & 0.45 & -0.13\\
+15 & 3 & 4 & 0.483 & -0.04 \\
+16 & 3 & 4 & 0.5167 & 0.04\\
+17 & 4 & 4 & 0.55 &  0.13\\
+18 & 4 & 4 & 0.583 & 0.21\\
+19 & 4 & 4 & 0.6167 & 0.30\\
+20 & 4 & 4 &0.65 &0.39\\
+21 & 4 & 4 & 0.683 & 0.48\\
+22 & 5 & 5 & 0.7167 & 0.57\\
+23 & 5 & 5  & 0.75 & 0.68\\
+24 & 5 & 5 & 0.783 & 0.78\\
+25 & 5 & 5 & 0.8167 & 0.91\\
+26 & 5 & 6 & 0.85 & 1.04\\
+27 & 6 & 6 & 0.883 & 1.20\\
+28 & 6 & 6 & 0.9167 & 1.38\\
+29 & 7 & 7 & 0.95 & 1.64\\
+30 & 8 & 7 & 0.9833 & 2.03\\
+  \end{tabular}
+\end{center}
+
+%Deivu  
+
+Se formula la hip\'{o}tesis alternativa, en donde se dice que la media poblaci\'{o}n de las mujeres que visitan la biblioteca por cada cinco minutos es mayor a la media poblacional de los hombres que visitan la biblioteca por cada cinco minutos.
+\[H_a : \mu_M> \mu_H\]
+
+Luego se formula la hip\'{o}tesis nula, en la cual se dice lo contrario, junto a la igualdad.
+\[H_0: \mu_M \leq \mu_H\]
+
+Se obtienen los par\'{a}metros, las medias muestrales de los hombres y las mujeres que visitan la biblioteca por cada cinco minutos.
+
+\[\bar{X}_H=\dfrac{\displaystyle\sum_{i=1}^n{X_{i_H}}}{n}=\dfrac{5+3+2+\hdots+2}{30}=3.3\]
+\[\bar{X}_M=\dfrac{\displaystyle\sum_{i=1}^n{X_{i_M}}}{n}=\dfrac{2+3+5+\hdots+4}{30}=3.6\]
+
+\[S_H = \dfrac{\displaystyle\sum_{i=1}^n{(X_{i_H}-\bar{X_H})}^2}{n-1}=\dfrac{(5-3.3)^2}{30-1}+ \dfrac{(3-3.3)^2}{30-1}+ \cdots+\dfrac{(2-3.3)^2}{30-1}= 1.830771\]
+\[S_M = \dfrac{\displaystyle\sum_{i=1}^n{(X_{i_M}-\bar{X_M})}^2}{n-1}=\dfrac{(2-3.6)^2}{30-1}+ \dfrac{(3-3.6)^2}{30-1}+ \cdots+\dfrac{(4-3.6)^2}{30-1}= 2.053592\]
+
+%POISSON
+\[ f(n;\lambda) =\dfrac{\lambda^ne^{-\lambda}}{n!} = \dfrac{3.3^{30}*e^{-3.3}}{30!}  =\]
+%POISSON
+
+\vspace{0.5cm}
+Como n = 30, se tienen muestras peque\~{n}as, por lo tanto se realiza la prueba t.
+
+Debido a que no se conocen las varianzas, se realiza la prueba F para determinar si se puede asumir varianzas iguales.
+
+\[F_0=\dfrac{S_M^2}{S_H^2}=\dfrac{2.053592^2}{1.830771^2}=1.25\]
+\[F_{critica} = F_{n_M-1,n_H-1}= F_{29, 29}=1.90\] 
+
+\[1.25 < 1.90\] 
+
+
+
+$F_0$ se encuentra en la regi\'{o}n de aceptaci\'{o}n, por lo tanto se asumen las varianzas iguales. 
+
+\[\sigma_H^2 = \sigma_M^2\]
+
+Entonces se prosigue a hacer la prueba con el estad\'{i}stico de prueba:
+
+\[t_0 =\dfrac{\bar{X_M}-\bar{X_H}-\Delta_0}{S_p\sqrt{\dfrac{1}{n_M}-\dfrac{1}{n_H}}} \]
+
+Para ello, es necesario obtener el error de estimaco\'{o}n $S_p$:
+
+\[ S_p = \sqrt{\dfrac{(n_M-1)S_M^2+(n_H-1)S_H^2}{n_M+n_H-2}}=\sqrt{\dfrac{(30-1) 2.053592^2+(30-1) 1.830771^2}{30+30-2}}=1.945374\]
+
+Al en disposici\'{o}n el error de estimaci\'{o}n, se prosigue a obtener el estad\'{i}stico de prueba:
+
+\[ t_0=\dfrac{3.6-3.3}{1.945374\sqrt{\dfrac{1}{30}+\dfrac{1}{30}}} = 0.597260\]
+
+\[ t_{critico} = t_{\alpha, n_M+n_H-2} = t_{0.05, 30+30-2} = t_{0.05, 58} = 1.684 \]
+
+\[ t_0 < t_{critico}\]
+
+Se puede observar, que el valor $t_0$ obtenido es menor que el valor $t_{critico}$, por lo que se encuentra en el \'{a}rea de aceptaci\'{o}n. De ser as\'{i}, se acepta la hip\'{o}tesis nula.
+
+Entonces se concluye que, \bf{probablemente con $\alpha = 0.05$, la media poblacional de mujeres que visitan la biblioteca no es mayor a la media poblacional de hombres que visitan la biblioteca.}
+
+
+
+%cakerada: probabilidad de poisson: que probabilidad hay que entre una mujer en 5 minutos? un hombre? la probabilidad de que entre una mujer O un hombre, una mujer Y un hombre? dos mujeres?
+
+  \section{Conclusiones}
+
+\begin{itemize}
+\item No hay suficiente evidencia para concluir que la media de mujeres que visitan la biblioteca es mayor a la media de hombres que visitan la biblioteca. 
+
+\item Se utiliz\'{o} la Prueba t ya que la muestra es peque\~{n}a y no se conocen las varianzas de las muestras.
+
+\item A pesar de que la media muestral de las mujeres es mayor que la media muestral de los hombres, al realizar la prueba de hip\'{o}tesis, se observ\'{o} que no hay diferencia entre las dos muestras. 
+\end{itemize}
+  
+  \section{Recomendaciones}
+
+\begin{itemize}
+\item Para obtener mejores resultados se recomienda que se haga el experimento con una muestra m\'{a}s grande, ya que la probabilidad de cometer un error de tipo I disminuye. 
+
+\item Se recomienda variar las horas de recolecci\'{o}n de datos para tener una informaci\'{o}n m\'{a}s general.
+\end{itemize}
+
+  \begin{thebibliography}{1}
+
+  \bibitem{DeLaTorre} Leticia De La Torre, Cap\'{i}tulo 2, Curso de Estad\'{i}stica I, Ingenier\'{i}a Industrial, Instituto Tecnol\'{o}gico de Chihuaha, 2002, 1991.
+
+   \bibitem{Students_Ttest_wiki_en}\textit{Student's t-test}, Wikipedia en Ing\'{e}s, 16 de Mayo del 2010 \url{http://en.wikipedia.org/wiki/Student's_t-test}
+
+   \bibitem{Students_Tdist_wiki_en}\textit{Student's t-distribution}, Wikipedia en Ing\'{e}s, 16 de Mayo del 2010, \url{http://en.wikipedia.org/wiki/Student's_t-distribution}
+  
+\bibitem{Students_T_wiki_es}Prueba t de Student, Wikipedia en Espa\~{n}ol, 16 de Mayo del 2010, \url{http://es.wikipedia.org/wiki/Prueba_t_de_Student}
+
+\bibitem{IntervaloDeConfianza_wiki_es}\textit{Confidence Interval}, Wikipedia en Ing\'{e}s, 16 de Mayo del 2010, \url{http://en.wikipedia.org/wiki/Confidence_interval}
+
+  \end{thebibliography}
+\end{document}
+
+
+
+

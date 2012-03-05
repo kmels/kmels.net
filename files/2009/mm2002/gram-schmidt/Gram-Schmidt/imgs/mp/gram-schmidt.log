@@ -1,0 +1,18 @@
+This is MetaPost, Version 1.005 (Web2C 7.5.7) (mem=mpost 2009.4.1)  9 MAY 2009 13:44
+**gram-schmidt
+(gram-schmidt.mp (jh.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/boxes.mp)
+(/usr/local/texlive/2008/texmf-dist/metapost/base/graph.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/marith.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/string.mp))
+(/usr/local/texlive/2008/texmf-dist/metapost/base/format.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/string.mp)
+(/usr/local/texlive/2008/texmf-dist/metapost/base/texnum.mp)))) (arrow.mp)
+[1] [2] [3])
+*
+! Emergency stop.
+<*> gram-schmidt
+                
+End of file on the terminal!
+
+3 output files written: gram-schmidt.1 .. gram-schmidt.3

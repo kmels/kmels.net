@@ -1,0 +1,20 @@
+*************************************************************
+	Minimización del AFD creado convirtiendo un AFN con subconjuntos
+*************************************************************
+Tiempo de creación del autómanta: 2024210ns = 20.2421ms
+Genera un lenguaje a partir de la regex: (a*|b*)c -> (((a*)|(b*)).c)
+*************************************************************
+Lista de símbolos: [a, b, c]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0, q1, q2, q3]
+Lista de aceptación (F): [q3]
+Transiciones:
+	* T(q0,a) = q1
+	* T(q0,b) = q2
+	* T(q0,c) = q3
+	* T(q1,a) = q1
+	* T(q1,c) = q3
+	* T(q2,b) = q2
+	* T(q2,c) = q3
+
+*************************************************************

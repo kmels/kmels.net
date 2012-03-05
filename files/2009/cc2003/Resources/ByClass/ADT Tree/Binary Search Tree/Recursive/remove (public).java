@@ -1,0 +1,1 @@
+public Comparable remove(Comparable entry){	ReturnObject oldEntry = new ReturnObject(null);	BinaryNode newRoot = remove(getRootNode(), entry, oldEntry);	setRootNode(newRoot);	return oldEntry.get();} // end remove

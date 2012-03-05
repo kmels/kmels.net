@@ -1,0 +1,11 @@
+This is MetaPost, Version 1.005 (Web2C 7.5.7) (mem=mpost 2009.4.1)  5 MAY 2009 10:00
+**prueba
+(prueba.mp
+>> documentclass
+! Isolated expression.
+<to be read again> 
+                   {
+l.7 \documentclass{
+                   book}
+? x
+

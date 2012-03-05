@@ -1,0 +1,63 @@
+/**
+ * 
+ */
+package com.fb.gcms.bll.support;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fb.gcms.bll.SettingsService;
+import com.fb.gcms.dal.SettingsDAO;
+import com.fb.gcms.dal.support.SettingsDAOMemImpl;
+import com.fb.gcms.dom.Settings;
+
+/**
+ * @author Carlos Lopez-Camey
+ *
+ */
+@Service
+public class SettingsServiceImpl implements SettingsService {	
+	private SettingsDAO settingDAO;
+	
+	@Override
+	public void delete(Settings instance) {
+		this.settingDAO.delete(instance);
+	}
+
+	@Override
+	public List<Settings> findAll() {
+		return this.settingDAO.findAll();
+	}
+
+	@Override
+	public Settings findById(Long id) {
+		return this.settingDAO.findById(id);
+	}
+
+	@Override
+	public Settings save(Settings instance) {
+		return this.save(instance);
+	}
+
+	@Override
+	public Settings update(Settings instance) {
+		return this.settingDAO.update(instance);
+	}
+
+	/**
+	 * @return the settingDAO
+	 */
+	public SettingDAO getSettingDAO() {
+		return settingDAO;
+	}
+
+	@Autowired
+	/**
+	 * @param settingDAO the settingDAO to set
+	 */
+	public void setSettingDAO(SettingDAO settingDAO) {
+		this.settingDAO = settingDAO;
+	}	
+}

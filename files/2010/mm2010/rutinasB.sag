@@ -1,0 +1,150 @@
+def NewtonRaphson(e,seed,f,f_): #seed es x_0, f_ es derivada
+    next = seed - f(seed)/f_(seed)
+    print "x_i: ",next.n(digits=9), "f(x_i):" , f(seed).n(digits=9) 
+    if abs(next-seed)<e:
+        return next
+    else:
+        return NewtonRaphson(e,next,f,f_)
+        
+
+def PuntoFijo(G,x0,e):
+    while abs(G(x0)-x0) > e:
+        print "x_i: " , x0, " G(x_i): ", G(x0)
+        x0 = G(x0)
+    return x0
+
+def BiseccionLibro(f,xmin,xmax,e,numeroMaximoIteraciones):
+    contador = 1 
+    if (xmin >= xmax):
+        print "MULA, manda bien los parametros"
+    else:
+        if (f(xmax)*f(xmin) > 1):
+            print "Mal intevalo, no hay cambi de signo"
+        else:
+            while(contador <= numeroMaximoIteraciones):
+                puntoMedio = xmin + (xmax-xmin)/2
+                print "x: ", puntoMedio.n(digits=6), " f(x)", f(puntoMedio).n(digits=6)
+                if ((f(puntoMedio) == 0) or ((xmax-xmin)/2 < e)):
+                    print "Encajono x: " , puntoMedio, " f(x)", f(puntoMedio)
+                    return puntoMedio
+                contador = contador + 1
+                if f(xmin)*f(puntoMedio) > 0:
+                    xmin = puntoMedio
+                else:
+                    xmax = puntoMedio
+        print "No hubieron suficientes iteraciones"
+
+def secanteLibro(f,x0,x1,e,numeroIteraciones):
+    contador = 2
+    fx0 = f(x0)
+    fx1 = f(x1)
+
+    while (contador <= numeroIteraciones):
+        nextX = x1 - fx1*(x1-x0)/(fx1-fx0)
+        print "next x: ", nextX.n(digits=6) , " f(x)", f(nextX).n(digits=6)
+        if (abs(nextX-x1) < e):
+            print "Encontro! x:", nextX , " f(x): ",f(nextX)
+            return nextX
+        print "paso"
+        contador = contador + 1        
+        x0 = x1
+        fx0 = fx1
+        x1 = nextX
+        fx1 = f(nextX)
+
+    print "No encontro!"
+
+#funcion que no tiene mucha exactitud en los puntos flotantes
+def secanteLibroOptimizada(f,x0,x1,e,numeroIteraciones):
+    contador = 2
+    exactitud = 1000
+    juanferGay = 6 #numero de decimales a imprimir
+    fx0 = f(x0).n(digits=exactitud)
+    fx1 = f(x1).n(digits=exactitud)
+
+    while (contador <= numeroIteraciones):
+        nextX = (x1 - fx1*(x1-x0)/(fx1-fx0)).n(digits=exactitud)
+        print "next x: ", nextX.n(digits=juanferGay) , " f(x)", f(nextX).n(digits=juanferGay)
+        if (abs(nextX-x1) < e):
+            print "Encontro! x:", nextX.n(digits=juanferGay) , " f(x): ",f(nextX).n(digits=juanferGay)
+            return nextX
+        print "paso"
+        contador = contador + 1
+        x0 = x1.n(digits=exactitud)
+        fx0 = fx1.n(digits=exactitud)
+        x1 = nextX.n(digits=exactitud)
+        fx1 = f(nextX).n(digits=exactitud)
+
+    print "No encontro!"
+
+
+def muller(f,x0,x1,x2,e,numeroIteraciones):
+    h1 = x1 - x0
+    h2 = x2 - x1
+    sigma1 = (f(x1)-f(x0))/h1
+    sigma2 = (f(x2)-f(x1))/h2
+    d = (sigma2-sigma1)/(h2+h1)
+    i = 2
+
+    while (i<=numeroIteraciones):
+        b = sigma2 + h2*d
+        D = sqrt(b**2-4*f(x2)*d)# NOTE: May be complex arithmetic
+
+        E = 0 #para inicialiarla en el ambiente
+        if abs(b-D) < abs(b+d):
+            E = b + D
+        else:
+            E = b - D
+            
+        h = -2*f(x2)/E
+        p = x2 + h
+        print "proximo x: ", p , " f(x)", f(p)
+        if abs(h) < e:
+            print "Encontro! x: ", p , " f(x)" , f(p)
+            return p
+        x0 = x1
+        x1 = x2
+        x2 = p
+        h1 = x1 - x0
+        h2 = x2 - x1
+        sigma1 = (f(x1)-f(x0))/h1
+        sigma2 = (f(x2)-f(x1))/h2
+        d = (sigma2-sigma1)/(h2+h1)
+        i = i + 1
+    print "No encontro"
+
+def mullerOptimizado(f,x0,x1,x2,e,numeroIteraciones):
+    exactitud = 6
+    h1 = (x1 - x0).n(digits=exactitud)
+    h2 = (x2 - x1).n(digits=exactitud)
+    sigma1 = ((f(x1)-f(x0))/h1).n(digits=exactitud)
+    sigma2 = ((f(x2)-f(x1))/h2).n(digits=exactitud)
+    d = (sigma2-sigma1)/(h2+h1).n(digits=exactitud)
+    i = 2
+
+    while (i<=numeroIteraciones):
+        b = (sigma2 + h2*d).n(digits=exactitud)
+        D = sqrt(b**2-4*f(x2)*d).n(digits=exactitud)# NOTE: May be complex arithmetic
+
+        E = 0 #para inicialiarla en el ambiente
+        if abs(b-D) < abs(b+d):
+            E = (b + D).n(digits=exactitud)
+        else:
+            E = (b - D).n(digits=exactitud)
+            
+        h = (-2*f(x2)/E).n(digits=exactitud)
+        p = (x2 + h).n(digits=exactitud)
+        print "proximo x: ", p.n(digits=exactitud) , " f(x)", f(p).n(digits=exactitud)
+        if abs(h) < e:
+            print "Encontro! x: ", p.n(digits=exactitud) , " f(x)" , f(p).n(digits=exactitud)
+            return p
+        x0 = x1
+        x1 = x2
+        x2 = p
+        h1 = x1 - x0
+        h2 = x2 - x1
+        sigma1 = ((f(x1)-f(x0))/h1).n(digits=6)
+        sigma2 = ((f(x2)-f(x1))/h2).n(digits=6)
+        d = ((sigma2-sigma1)/(h2+h1)).n(digits=6)
+        i = i + 1
+    print "No encontro"

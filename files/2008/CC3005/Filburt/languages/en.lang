@@ -1,0 +1,48 @@
+[data]
+name = English
+charset = iso-8859-2
+
+[main]
+title = Filburt!
+references = References
+registers = Registers
+
+[filburt]
+description = a MIPS Simulator by
+header_text = Filburt
+show_console = Show Console
+
+[header]
+imgopen = Open File (.asm)
+imgdebug = Debug (Step by Step)
+imghelp = Help
+imgrun = Run File
+imgreinit = Re init machine
+choose_file_button = Pick your file
+upload_file_button = Upload it
+upload_text = So, you want to traduce your file written in assembler to bin, and run it here?
+
+[admin]
+email = Email Address
+
+[content]
+menu_simulator = Simulator
+menu_showBIN = Show .bin
+menu_hashTable = Symbols Table
+menu_hello = Welcome
+menu_license = License
+ 
+[simulator]
+label = Label
+address = Address
+value = Value
+value_in_HEX = Value in HEX
+operation = Operation
+
+[symbols]
+label = Label
+label_value = Label's Value
+
+[showBIN]
+linenumber = Line Number
+instruction = Instruction

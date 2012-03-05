@@ -1,0 +1,5 @@
+http://en.wikipedia.org/wiki/Software_build
+[DEFAULT]
+BASEURL=http://en.wikipedia.org/wiki/Software_build
+[InternetShortcut]
+URL=http://en.wikipedia.org/wiki/Software_build

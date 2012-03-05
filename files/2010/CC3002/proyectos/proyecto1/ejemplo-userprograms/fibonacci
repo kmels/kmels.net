@@ -1,0 +1,16 @@
+;Parametro esta en R0
+Set 0 R2
+Set 1 R3
+
+JMP R0 Sumar EscribirCero
+
+; r3 = r2 + r3
+'Sumar' 
+ADD R3 R2 R3
+'Escribir'
+Echo R3
+
+JMP R0 SumarOtro Salir
+
+EscribirCero Echo "0"
+Salir End

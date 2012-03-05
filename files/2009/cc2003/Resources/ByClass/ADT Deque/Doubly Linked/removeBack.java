@@ -1,0 +1,1 @@
+public Object removeBack(){	Object back = null;	if (!isEmpty())	{		back = lastNode.getData();		lastNode = lastNode.getPreviousNode();		if (lastNode == null)			firstNode = null;		else			lastNode.setNextNode(null);	} // end if	return back;} // end removeBack

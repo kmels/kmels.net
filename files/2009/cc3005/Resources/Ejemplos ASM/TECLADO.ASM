@@ -1,0 +1,55 @@
+Title	TECLADO   Ingreso de datos por el teclado
+;-------------------------------------------------
+	.MODEL SMALL
+	.STACK 64
+	.DATA
+; Definicion de datos
+
+NOMBRE DB 'Ingrese dos digitos', '$' ; cadena de despliegue
+LISTA  LABEL BYTE                    ; inicio de la lista de parametros
+MAXLEN DB    3                       ; numero maximo de caracteres de entrada
+ACTLEN DB    ?                       ; numero real de caracteres de entrada
+CAMPO  DB    3 DUP (' ')             ; caracteres introducidos del teclado
+FIN    DB    '$'
+ENTRAR  DB 0DH, 0AH, '$'
+
+;-------------------------------------------------
+; Inicio del codigo
+	.CODE
+CIN	PROC NEAR
+       MOV AH, 0AH    ; peticion de la funcion de entrada
+       LEA DX, LISTA  ; carga la direccion de la lista de parametros
+       INT 21H        ; llama al DOS
+       RET
+CIN	ENDP
+;-------------------------------------------------
+COUT   PROC NEAR
+       MOV AH, 09H   ; peticion para desplegar
+       INT 21H       ; llama al DOS
+       RET
+COUT   ENDP
+;-------------------------------------------------
+BEGIN	PROC FAR
+        MOV AX,@data	        ;inicializa segmento de datos
+		MOV DS,AX
+
+        LEA DX, NOMBRE         ; carga la direccion de la cadena
+        CALL COUT
+        CALL CIN
+
+        ; IMPRIMIR UN ENTER
+        LEA DX, ENTRAR
+        CALL COUT
+		
+		; para desplegar los caracteres que se leyeron
+
+        LEA DX, CAMPO          ; carga la direccion de la cadena a desplegar
+        CALL COUT
+
+        
+
+        MOV AH, 4CH   ; salida al DOS
+		INT 21H
+
+BEGIN	ENDP
+	END BEGIN

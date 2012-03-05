@@ -1,0 +1,1 @@
+private class Node{	private Object data; // data portion	private Node   next; // link to next node	private Node(Object dataPortion)	{		data = dataPortion;		next = null;	} // end constructor	private Node(Object dataPortion, Node nextNode)	{		data = dataPortion;		next = nextNode;	} // end constructor} // end Node

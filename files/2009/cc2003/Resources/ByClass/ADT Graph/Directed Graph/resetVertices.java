@@ -1,0 +1,1 @@
+protected void resetVertices(){	Iterator vertexIterator = vertices.getValueIterator();	while (vertexIterator.hasNext())	{		Vertex nextVertex = (Vertex)vertexIterator.next();		nextVertex.unVisit();		nextVertex.setCost(0);		nextVertex.setPredecessor(null);	} // end while} // end resetVertices

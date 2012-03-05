@@ -1,0 +1,1 @@
+public Object peek(){	Object top = null;	if (!isEmpty())		top = stack.lastElement();	return top;} // end peek

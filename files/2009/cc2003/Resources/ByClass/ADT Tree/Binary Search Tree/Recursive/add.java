@@ -1,0 +1,1 @@
+public Comparable add(Comparable newEntry){	ReturnObject oldEntry = new ReturnObject(null);	BinaryNode newRoot =	    (BinaryNode)addNode(getRootNode(), newEntry, oldEntry);	setRootNode(newRoot);		return oldEntry.get();} // end add

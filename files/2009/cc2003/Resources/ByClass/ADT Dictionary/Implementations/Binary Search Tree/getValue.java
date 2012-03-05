@@ -1,0 +1,1 @@
+public Object getValue(Object key){	Entry findEntry = new Entry(key, null);	Entry returnedEntry = (Entry)bst.getEntry(findEntry);		Object result = null;	if (returnedEntry != null)		result = returnedEntry.getValue();			return result;} // end getValue

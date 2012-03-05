@@ -1,0 +1,1 @@
+public VectorList(int initialSize){	entry = new Vector(initialSize);} // end default constructor

@@ -1,0 +1,1 @@
+public int previousIndex(){	int result;	if (hasPrevious())		result = currentIndex - 1; 	else		result = -1;	return result;} // end previousIndex

@@ -1,0 +1,1 @@
+public void reset(){	currentNode = firstNode;	priorNode = null;} // end reset

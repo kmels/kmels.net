@@ -1,0 +1,48 @@
+\documentclass[]{report}        
+\usepackage[spanish]{babel} %esto es para que las ondas estén en español
+\usepackage{url} % para la bibliografia
+\usepackage{sectsty}
+
+%Para que los numeros de las secciones estén del lado izquierdo del margen
+\makeatletter
+\def\@seccntformat#1{\protect\makebox[0pt][r]{\csname
+	the#1\endcsname\quad}}
+\makeatother
+
+\begin{document}
+
+\title{Proyecto Final: Temario 3}   % type title between braces
+\author{Carlos L\'{o}pez (08107) y H\'{e}ctor Hurtarte () \\ 
+Universidad del Valle de Guatemala}         % type author(s) between braces
+\date{7 de Junio, 2010}    % type date between braces
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+
+\end{abstract}
+
+%hector
+\include{intro}
+%hector
+\include{proyecto-desc}
+
+%SRS
+%hector
+\include{srs-propuesta-administrativa}
+
+%kmels
+\include{srs-propuesta-tecnica}
+
+%kmels
+\include{srs-analisis-costo-beneficio}
+
+%despues
+\include{srs-solucion-propuesta}
+
+%fin SRS
+\include{recomendaciones-conclusiones}
+\include{referencias}
+
+
+\end{document}

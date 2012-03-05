@@ -1,0 +1,21 @@
+This is MetaPost, Version 1.005 (Web2C 7.5.7) (mem=mpost 2009.4.1)  9 MAY 2009 09:22
+**proyecciones
+(proyecciones.mp (jh.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/boxes.mp)
+(/usr/local/texlive/2008/texmf-dist/metapost/base/graph.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/marith.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/string.mp))
+(/usr/local/texlive/2008/texmf-dist/metapost/base/format.mp
+(/usr/local/texlive/2008/texmf-dist/metapost/base/string.mp)
+(/usr/local/texlive/2008/texmf-dist/metapost/base/texnum.mp)))) (arrow.mp)
+>> proyecciones.mp
+>> proyecciones.mpx
+! Unable to make mpx file.
+l.21   label.lrt(btex
+                      {$\ell$} etex,.618[z0,z2]);
+The two files given above are one of your source files
+and an auxiliary file I need to read to find out what your
+btex..etex blocks mean. If you don't know why I had trouble,
+try running it manually through MPto -tex, TeX, and DVItoMP.
+
+

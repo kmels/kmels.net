@@ -1,0 +1,1 @@
+public void addVertex(Object vertexLabel){	vertices.add(vertexLabel, new Vertex(vertexLabel));} // end addVertex

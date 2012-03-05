@@ -1,0 +1,1 @@
+public boolean add(int newPosition, Object newEntry){	throw new UnsupportedOperationException("Illegal attempt to " +       	         "add at a specified position within a sorted list.");} // end add

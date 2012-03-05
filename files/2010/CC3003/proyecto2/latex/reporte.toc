@@ -1,0 +1,47 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {0.1}Objetivos}{2}
+\contentsline {section}{\numberline {0.2}Funcionamiento general}{2}
+\contentsline {section}{\numberline {0.3}Tipo de Sistema}{2}
+\contentsline {chapter}{\numberline {1}Propuesta formal SRS}{3}
+\contentsline {section}{\numberline {1.1}Propuesta Administrativa}{3}
+\contentsline {subsection}{\numberline {1.1.1}Propuesta de Personal}{3}
+\contentsline {paragraph}{Calificaci\'{o}n del personal}{3}
+\contentsline {paragraph}{Organizaci\'{o}n corporativa, admin. Y faciidades}{3}
+\contentsline {subsection}{\numberline {1.1.2}Resumen}{4}
+\contentsline {subsection}{\numberline {1.1.3}Definici\'{o}n del Problema}{4}
+\contentsline {paragraph}{Antecedentes}{4}
+\contentsline {paragraph}{Problema fundamental}{4}
+\contentsline {paragraph}{Descripci\'{o}n del problema por el cliente}{4}
+\contentsline {subsection}{\numberline {1.1.4}Caracter\'{i}sticas del sistema}{5}
+\contentsline {paragraph}{M\'{o}dulo de Inscripci\'{o}n de personas}{5}
+\contentsline {paragraph}{M\'{o}dulo de Registro de Matrimonios}{6}
+\contentsline {paragraph}{M\'{o}dulo de Registro de Divorcios}{6}
+\contentsline {paragraph}{M\'{o}dulo de Empadronamiento}{7}
+\contentsline {paragraph}{Otros requerimientos no funcionales}{7}
+\contentsline {paragraph}{Tipos de usuario}{7}
+\contentsline {paragraph}{Ambiente de operaci\'{o}n}{7}
+\contentsline {subsection}{\numberline {1.1.5}Dificultades y limitaciones significativas en la soluci\'{o}n del problema}{7}
+\contentsline {subsection}{\numberline {1.1.6}Dependencias y suposiciones}{7}
+\contentsline {section}{\numberline {1.2}An\'{a}lisis costo-beneficio}{8}
+\contentsline {subsection}{\numberline {1.2.1}Durabilidad del sistema}{8}
+\contentsline {subsection}{\numberline {1.2.2}Beneficios para el usuario}{8}
+\contentsline {paragraph}{Tangibles}{8}
+\contentsline {paragraph}{Intangibles}{8}
+\contentsline {subsection}{\numberline {1.2.3}Costos}{8}
+\contentsline {paragraph}{Tangibles}{8}
+\contentsline {paragraph}{Intangibles}{8}
+\contentsline {subsection}{\numberline {1.2.4}Factibilidad}{8}
+\contentsline {section}{\numberline {1.3}Soluci\'{o}n Propuesta}{9}
+\contentsline {subsection}{\numberline {1.3.1}Descripci\'{o}n de soluci\'{o}n}{9}
+\contentsline {subsection}{\numberline {1.3.2}Posibles problemas t\'{e}cnicos y c\'{o}mo enfrentarlos}{9}
+\contentsline {subsection}{\numberline {1.3.3}Descripci\'{o}n de la soluci\'{o}n con diagramas DFD}{9}
+\contentsline {subsection}{\numberline {1.3.4}Implementaci\'{o}n de la soluci\'{o}n}{9}
+\contentsline {paragraph}{Modelo relacional de la base de datos de la soluci\'{o}n}{9}
+\contentsline {paragraph}{Diagramas UML}{9}
+\contentsline {paragraph}{Ciclo de vida a utilizar}{9}
+\contentsline {paragraph}{Lenguaje de programaci\'{o}n y sistema de almacenamiento}{9}
+\contentsline {paragraph}{Plan de pruebas (Testing)}{9}
+\contentsline {paragraph}{Planeaci\'{o}n: Diagrama de Gantt}{9}
+\contentsline {subsection}{\numberline {1.3.5}Riesgos en la soluci\'{o}n propuesta y su minimizaci\'{o}n}{9}
+\contentsline {section}{\numberline {1.4}Recomendaciones}{10}
+\contentsline {section}{\numberline {1.5}Conclusiones}{10}

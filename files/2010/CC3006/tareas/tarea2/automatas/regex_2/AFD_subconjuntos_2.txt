@@ -1,0 +1,25 @@
+*************************************************************
+	AFD creado convirtiendo un AFN con subconjuntos
+*************************************************************
+Tiempo de creación del autómanta: 22799264ns = 227.99264ms
+Genera un lenguaje a partir de la regex: (b|b)*abb(a|b)* -> ((((((b|b)*).a).b).b).((a|b)*))
+*************************************************************
+Lista de símbolos: [b, a]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0, q1, q2, q3, q4, q5, q6]
+Lista de aceptación (F): [q4, q5, q6]
+Transiciones:
+	* T(q0,b) = q1
+	* T(q0,a) = q2
+	* T(q1,b) = q1
+	* T(q1,a) = q2
+	* T(q2,b) = q3
+	* T(q3,b) = q4
+	* T(q4,b) = q5
+	* T(q4,a) = q6
+	* T(q5,b) = q5
+	* T(q5,a) = q6
+	* T(q6,b) = q5
+	* T(q6,a) = q6
+
+*************************************************************

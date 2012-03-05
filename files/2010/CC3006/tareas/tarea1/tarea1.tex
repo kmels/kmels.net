@@ -1,0 +1,407 @@
+\documentclass{article}
+% Change "article" to "report" to get rid of page number on title page
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+\usepackage{Tabbing}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{chngpage}
+\usepackage{soul,color}
+\usepackage{sagetex}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{graphicx,float,wrapfig}
+
+% In case you need to adjust margins:
+\topmargin=-0.45in      %
+\evensidemargin=0in     %
+\oddsidemargin=0in      %
+\textwidth=6.5in        %
+\textheight=9.0in       %
+\headsep=0.25in         %
+
+% Homework Specific Information
+\newcommand{\hmwkTitle}{Tarea \#1}
+\newcommand{\hmwkDueDate}{Lunes,\ Enero\ 25,\ 2010}
+\newcommand{\hmwkClass}{CC3006}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{Bidkar Pojoy}
+\newcommand{\hmwkAuthorName}{Carlos E. L\'{o}pez Camey}
+
+% Setup the header and footer
+\pagestyle{fancy}                                                       %
+\lhead{\hmwkAuthorName}                                                 %
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}  %
+\rhead{\firstxmark}                                                     %
+\lfoot{\lastxmark}                                                      %
+\cfoot{}                                                                %
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}}                          %
+\renewcommand\headrulewidth{0.4pt}                                      %
+\renewcommand\footrulewidth{0.4pt}                                      %
+
+% This is used to trace down (pin point) problems
+% in latexing a document:
+%\tracingall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some tools
+%\newcommand{\enterProblemHeader}[1]{\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak%
+   %                                 \nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak}%
+\newcommand{\exitProblemHeader}[1]{\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak%
+                                   \nobreak\extramarks{#1}{}\nobreak}%
+
+\newlength{\labelLength}
+\newcommand{\labelAnswer}[2]
+  {\settowidth{\labelLength}{#1}%
+   \addtolength{\labelLength}{0.25in}%
+   \changetext{}{-\labelLength}{}{}{}%
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#2\end{minipage}}%
+   \marginpar{\fbox{#1}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   \changetext{}{+\labelLength}{}{}{}}%
+
+\setcounter{secnumdepth}{0}
+\newcommand{\homeworkProblemName}{}%
+\newcounter{homeworkProblemCounter}%
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]%
+  {\stepcounter{homeworkProblemCounter}%
+   \renewcommand{\homeworkProblemName}{#1}%
+   \section{\homeworkProblemName}%
+   %\enterProblemHeader{\homeworkProblemName}
+   }%
+  %{\exitProblemHeader{\homeworkProblemName}}%
+
+\newcommand{\problemAnswer}[1]
+  {\noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}}%
+
+\newcommand{\problemLAnswer}[1]
+  {\labelAnswer{\homeworkProblemName}{#1}}
+
+\newcommand{\homeworkSectionName}{}%
+\newlength{\homeworkSectionLabelLength}{}%
+\newenvironment{homeworkSection}[1]%
+  {% We put this space here to make sure we're not connected to the above.
+   % Otherwise the changetext can do funny things to the other margin
+
+   \renewcommand{\homeworkSectionName}{#1}%
+   \settowidth{\homeworkSectionLabelLength}{\homeworkSectionName}%
+   \addtolength{\homeworkSectionLabelLength}{0.25in}%
+   \changetext{}{-\homeworkSectionLabelLength}{}{}{}%
+   \subsection{\homeworkSectionName}%
+   \enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]}}%
+  {\enterProblemHeader{\homeworkProblemName}%
+
+   % We put the blank space above in order to make sure this margin
+   % change doesn't happen too soon (otherwise \sectionAnswer's can
+   % get ugly about their \marginpar placement.
+   \changetext{}{+\homeworkSectionLabelLength}{}{}{}}%
+
+\newcommand{\sectionAnswer}[1]
+  {% We put this space here to make sure we're disconnected from the previous
+   % passage
+
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}%
+   \enterProblemHeader{\homeworkProblemName}\exitProblemHeader{\homeworkProblemName}%
+   \marginpar{\fbox{\homeworkSectionName}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   }%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make title
+\title{\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\\normalsize\vspace{0.1in}\small{Para entregar\ el\ \hmwkDueDate}\\\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}}
+\date{}
+\author{\textbf{\hmwkAuthorName}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{spacing}{1.1}
+\maketitle
+% Uncomment the \tableofcontents and \newpage lines to get a Contents page
+% Uncomment the \setcounter line as well if you do NOT want subsections
+%       listed in Contents
+%\setcounter{tocdepth}{1}
+%\tableofcontents
+
+
+%\newpage
+
+% When problems are long, it may be desirable to put a \newpage or a
+% \clearpage before each homeworkProblem environment
+\begin{homeworkProblem}[Problema 1]
+\subsection{a) Cu\'{a}l es la finalidad de los compiladores?}
+
+Traducir un lenguaje de programaci\'{o}n $L_1$, que es un lenguaje que entendemos en cierta manera los humanos, a otro lenguaje $L_2$. Usualmente, $L_2$ es c\'{o}digo de m\'{a}s "bajo nivel", es decir, la mayor\'{i}a de veces, c\'{o}digo objeto. El c\'{o}digo objeto es, t\'{i}picamente, c\'{o}digo de m\'{a}quina o instrucciones binarias.
+
+El proceso de traducci\'{o}n o compilar se hace con el objetivo de crear un programa \textit{ejecutable.}
+
+\subsection{b) Qu\'{e} tienen en com\'{u}n los compiladores y los int\'{e}rpretes?}
+
+Los dos act\'{u}an en alg\'{u}n momento como traductores.
+
+\subsection{c) Qu\'{e} diferencia existe entre un compilador y un int\'{e}rprete?}
+
+El compilador produce un c\'{o}digo traducido a partir de un lenguaje de programaci\'{o}n, generalmente en un archivo. Un int\'{e}rprete, adem\'{a}s de traducir (generalmente), interpreta el lenguaje de programaci\'{o}n, como su nombre lo dice.
+
+
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 2]
+
+\subsection{a) Enumere lenguajes de programaci\'{o}n que est\'{e}n implementados como compiladores.}
+
+Pascal, C, C++, Delphi.
+
+\subsection{b) Enumere lenguajes de programaci\'{o}n que est\'{e}n implementados como int\'{e}rpretes}
+
+Ruby, Python, Perl, Lisp.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 3]
+
+\subsection{Describa las fases de un compilador junto al flujo de informaci\'{o}n que existe entre ellas.}
+
+\tikzstyle{int}=[draw, fill=blue!15, minimum size=2em]
+\tikzstyle{init} = [pin edge={to-,thin,black}]
+
+\begin{itemize}
+\item \textbf{An\'{a}lisis L\'{e}xico}: Convierte o separa el programa desde una serie de caracteres, a una serie de \textit{tokens} llamados \textbf{Lexemas} que representan los bloques del programa. Los \textit{tokens} son palabras "clave" del lenguaje i.e. palabras como \textit{if,print,while}, operadores matem\'{a}ticos como +,*, etc. 
+
+Los $tokens$ generados son de la forma $<nombre-del-token,valor-atribu\textit{\'{i}}do>$, que est\'{a}n representados en una \textbf{Tabla de S\'{i}mbolos}, similar a una $hash-table$.
+
+\begin{center}
+\begin{tikzpicture}[node distance=4.5cm,auto,>=latex']
+    \node [int, pin={[init]above:$Tokenizador$}] (a) {An\'{a}lisis L\'{e}xico};
+    \node (b) [left of=a,node distance=4.5cm, coordinate] {a};
+    \node [init] (c) [right of=a] {Serie de Tokens};
+    \node [coordinate] (end) [right of=c, node distance=2cm]{};
+    \path[->] (b) edge node {Programa Fuente} (a);
+    \path[->] (a) edge node {} (c) ;
+\end{tikzpicture}
+
+\end{center}
+
+\item \textbf{An\'{a}lisis Sint\'{a}ctico o \textit{Parseo}}: Chequea que los $tokens$ recibidos a partir del an\'{a}lisis l\'{e}xico aparezcan en el orden correcto, es decir, que formen instrucciones gram\'{a}ticalmente correctas. Por ejemplo, en Java, la instrucci\'{o}n $variable++;$ est\'{a} sint\'{a}cticamente correcta, pero la instrucci\'{o}n $++variable;$ no, el orden de los $tokens$ est\'{a} mal.
+
+En esta fase, se produce el llamado \textbf{\'{A}rbol Sint\'{a}ctico} (o una estructura similar), representando la estructura gramatical de los $tokens$ recibidos. Para poder generar el \'{a}rbol sint\'{a}ctico, se necesita una definici\'{o}n de una \textbf{Gram\'{a}tica}.
+
+\begin{center}
+\begin{tikzpicture}[node distance=4.5cm,auto,>=latex']
+    \node [int, pin={[init]above:Gram\'{a}tica atribu\'{i}da}] (a) {$Parser$};
+    \node (b) [left of=a,node distance=4.5cm, coordinate] {a};
+    \node [init] (c) [right of=a] {\'{A}rbol Sint\'{a}ctico};
+    \node [coordinate] (end) [right of=c, node distance=2cm]{};
+    \path[->] (b) edge node {Serie de Tokens} (a);
+    \path[->] (a) edge node {} (c) ;
+\end{tikzpicture}
+\end{center}
+
+\item \textbf{An\'{a}lisis Sem\'{a}ntico}: Se analiza el $significado$ del \'{a}rbol sem\'{a}ntico constru\'{i}do. Esto se refiere a los aspectos tales como chequear que las variables utilizadas hayan sido declaradas e.g. $variable++;$ puede estar gramaticalmente-correcta pero si la variable $variable$ no fue declarada, entonces esta sem\'{a}nticamente incorrecta.
+
+Opcionalmente, se puede requerir de una definici\'{o}n de conversi\'{o}n de tipos \'{i}mplicita, conocida como \textbf{\textit{Coercion}} (en ingl\'{e}s) para la verificaci\'{o}n de tipos de variable e.g. una variable $entera$ se podr\'{i}a operar con una $booleana$. Algunos lenguajes "dejan" que los compiladores puedan definir esta conversi\'{o}n de tipos. Adem\'{a}s de verificar los tipos de las variables con las que pueden operar, se verifica que se haya salido de un $ciclo$, se analizaa el \'{a}mbito de las variables, etc.
+
+ \begin{center}
+\begin{tikzpicture}[node distance=5.5cm,auto,>=latex']
+    \node [int, pin={[init]above:Definici\'{o}n de conversi\'{o}n de tipos}] (a) {An\'{a}lisis Sem\'{a}ntico};
+    \node (b) [left of=a,node distance=5.5cm, coordinate] {a};
+    \node [init] (c) [right of=a] {Tipos de variable verificados, etc.};
+    \node [coordinate] (end) [right of=c, node distance=2cm]{};
+    \path[->] (b) edge node {\'{A}rbol Sint\'{a}ctico} (a);
+    \path[->] (a) edge node {} (c) ;
+\end{tikzpicture}
+\end{center}
+
+\item \textbf{Generaci\'{o}n de C\'{o}digo}: Se traduce el programa fuente al c\'{o}digo objetivo, en donde se pueden constru\'{i}r m\'{a}s de una representaci\'{o}n intermedia, con diferentes formas. 
+\end{itemize}
+
+Luego de la generaci\'{o}n de c\'{o}digo, el compilador puede pasar por una pase de optimizaci\'{o}n de c\'{o}digo.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 4]
+
+\subsection{Qu\'{e} son las \textbf{context-free-grammars} o gr\'{a}maticas independientes del contexto?}
+
+Es una definici\'{o}n de una gram\'{a}tica $G$ (utilizada en el an\'{a}lisis sint\'{a}ctico), que consta de:
+
+\begin{enumerate}
+\item Un conjunto de \textbf {terminales} (los $tokens$ generados por el an\'{a}lisis l\'{e}xico).
+\item Un conjunto de \textbf{no terminales } (variables sin\'{a}cticas)
+\item Un conjunto de cadenas  (Reglas o producciones posibles)
+\item Una definici\'{o}n de un \textbf{no terminal} como s\'{i}mbolo inicial de $G$.
+\end{enumerate}
+
+\textbf{Ejemplo, $G$:} \\
+\indent \indent $L -> L $ '+' $d$\\
+\indent \indent $L -> L $ '-' $d$\\
+\indent \indent $L -> d$\\
+\indent \indent $L -> '0' || '1' || '2' ... '9' $\\
+
+En donde el s\'{i}mbolo inicial es el \textbf{no terminal} $L$.\\ 
+
+Definimos aqu\'{i} a $L(G) = \{ w | w \text{ es derivada a partir de $G$}\}$, que es el conjunto de todas las producciones posibles a partir de $G$ \\
+
+Definimos tambi\'{e}n al s\'{i}mbolo $\epsilon$ como la cadena de cero terminales (o no terminales) i.e. una cadena vac\'{i}a. 
+
+Una producci\'{o}n posible es $w = 5 $ '+' $1$, que proviene a partir de las reglas producidas: \\
+
+\indent \indent $L -> L $ '+' $d$ (Regla 1) \\
+\indent \indent $L -> d $ '+' $d$ (Regla 3)\\
+\indent \indent $L -> 5 $ '+' $d$ (Regla 4) \\
+\indent \indent $L -> 5 $ '+' $1$ (Regla 4) \\
+
+Y decimos que $w \in L(G)$
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 5]
+
+\subsection{Que significa ambiguedad en las gram\'{a}ticas independientes del contexto. Ejemplifique}
+
+Dada una gram\'{a}tica $G$, decimos que esta es ambigua si y solo s\'{i}, una producci\'{o}n $w \in L(G)$, puede ser 'generada' o inferida por dos series de reglas diferentes.
+
+\textbf{Ejemplo:}
+Dada la gram\'{a}tica G:
+\indent \indent $S -> S $ '+' $S$\\
+\indent \indent $S -> S $ '-' $S$\\
+\indent \indent $S -> '0' || '1' || '2' ... '9' $\\
+
+Verifiquemos $w = 9$ '-' 5 '+' 2 $\in L(G)$ 
+
+\textbf{Inferencia 1:} \\
+\indent \indent $S -> S $ '-' $S$ (Regla 2) \\
+\indent \indent $S -> 9 $ '-' $S$ (Regla 3) \\
+\indent \indent $S -> 9 $ '-' $S$ '+' $S$ (Regla 1) \\
+\indent \indent $S -> 9 $ '-' $5$ '+' $S$ (Regla 3) \\
+\indent \indent $S -> 9 $ '-' $5$ '+' $2$ (Regla 3) \\
+
+\textbf{Inferencia 2:}\\
+\indent \indent $S -> S $ '+' $S$ (Regla 1) \\
+\indent \indent $S -> S $ '-' $S$ '+' $S$ (Regla 2) \\
+\indent \indent $S -> 9 $ '-' $S$ '+' $S$ (Regla 3) \\
+\indent \indent $S -> 9 $ '-' $5$ '+' $S$ (Regla 3) \\
+\indent \indent $S -> 9 $ '-' $5$ '+' $2$ (Regla 3) \\
+
+Claramente, vemos que $w$ pudo ser inferida de dos diferentes maneras, entonces decimos que $G$ es ambigua.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 6]
+\subsection{Defina que es \'{A}rbol Sint\'{a}ctico}
+
+Sea $G$ una gram\'{a}tica independiente del contexto, un \'{a}rbol sint\'{a}ctico cumple con:
+\begin{enumerate}
+\item La ra\'{i}z del \'{a}rbol es un s\'{i}mbolo gramatical $\in G$ no terminal
+\item Las hojas (nodos sin hijos), son s\'{i}mbolos gramaticales $\in G$ terminales o $\epsilon$
+\item Cada nodo interior, es un s\'{i}mbolo gramatical $\in G$ \ no terminal
+\item Para todo nodo interior $A$, cuyos hijos sean $X_1,X_2 \dots X_n$ de izquierda a derecha, entonces existe una producci\'{o}n  $A = X_1 X_2  \dots X_n \in L(G)$. Aqu\'{i} $X_1,X_2 \dots X_n$ pueden ser s\'{i}mbolos gramaticales terminales o no terminales.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 7]
+
+\subsection{Cu\'{a}l es la diferencia entre un componente l\'{e}xico ($token$) y un lexema?}
+
+Un \textbf{lexema} es una secuencia de caracteres en el programa fuente que $matchea$ (concuerda) un patr\'{o}n para un $token$ y es identificado por el analizador l\'{e}xico o $scanner$ como una instancia de ese $token$. Un patr\'{o}n es una descripci\'{o}n de la forma que los lexemas de un token puedan tomar.\\
+
+Por ejemplo, el lexema \textbf{24010} es una instancia del token $numero$, por que concuerda (hace $match$) con la descripci\'{o}n del token $<numero,$cualquier constante num\'{e}rica$>$
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 8]
+
+\subsection{Cuales son los elementos principales de una gram\'{a}tica independiente del contexto?}
+
+Los elementos importantes, son los 3 conjuntos del que consta la gram\'{a}tica, y la especificaci\'{o}n del s\'{i}mbolo inicial.\\
+
+Eso es, 
+\begin{enumerate}
+\item Un conjunto de \textbf {terminales} (los $tokens$ generados por el an\'{a}lisis l\'{e}xico).
+\item Un conjunto de \textbf{no terminales } (variables sin\'{a}cticas)
+\item Un conjunto de cadenas  (Reglas o producciones posibles)
+\item Una definici\'{o}n de un \textbf{no terminal} como s\'{i}mbolo inicial de $G$.
+\end{enumerate}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 9]
+
+\subsection{Dada la Gram\'{a}tica $G$:}
+\indent \indent $S -> SS$ '+' \\
+\indent $S -> SS$ '*' \\
+\indent $S -> a$ \\
+
+Donde $S$ es el s\'{i}mbolo inicial y $a,+$ y * son terminales para la gram\'{a}tica. Demuestre que la cadena "aa+a*" pertenece a $L(G)$ \\
+
+\textbf{Demostraci\'{o}n:} \\
+\indent $S -> SS$ '*' (Regla 2) \\
+\indent $S -> SS$ '+' $S$ '*' (Regla 1) \\
+\indent $S -> aS$ '+' $S$ '*' (Regla 3) \\
+\indent $S -> aa$ '+' $S$ '*' (Regla 3) \\
+\indent $S -> aa$ '+' $a$ '*' (Regla 3) \\
+$\qed$
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema 10]
+
+\subsection{Defina que es traducci\'{o}n dirigida por la sintaxis.}
+
+Es una traducci\'{o}n que se hace adjutando reglas o fragmentos de programa a una producci\'{o}n en una gram\'{a}tica. Por ejemplo, podr\'{i}amos tener la siguiente producci\'{o}n para el no-terminal $exp$
+\[ exp -> exp_1  + \textit{otro-t\'{e}rmino}\]
+
+podr\'{i}amos llegar a traducir $exp$ como la suma de dos sub-expresiones ($exp_1$ y \textit{otro-t\'{e}rmino}), en pseudo-c\'{o}digo, algo como:
+\[ \text{traducir } exp_1 \]
+\[ \text{traducir } \textit{otro-t\'{e}rmino}\]
+\[ \text{manejar } +\\ \]
+
+Entonces, se asocia un elemento gramatical con un atributo, y para cada producci\'{o}n, asociamos un conjunto de reglas sem\'{a}nticas i.e. instrucciones para calcular los atributos. Un ejemplo de un atributo podr\'{i}a ser, el tipo de dato de una expresi\'{o}n.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Problema Extra]
+
+\subsection{Dada la gram\'{a}tica $G$}
+\indent \indent $num -> 11$\\
+\indent  $num -> 1001$\\
+\indent $num -> num \: 0$\\
+\indent $num -> num \: num$ \\
+
+Demuestre que todas las producciones $w \in L(G)$ son divisibles por 3.\\
+
+\textbf{Soluci\'{o}n}:\\
+\indent \indent Notemos que, la \textbf{Regla \#1} y la  \textbf{Regla \#2} dan ya a n\'{u}meros divisibles por 3, eso es que '$11_{b}$' es 3 en decimal y '$1001_b$' es 9. %Probemos ahora que la \textbf{Regla \#3} es cierta sabiendo que \#1 y \#2 son ciertas.
+\\
+
+Sabemos que para convertir de binario a decimal, usamos el 2 como base y lo elevamos a la potencia correspondiente (de la casilla, empezando desde 0 y la derecha) dependiendo si el bit del n\'{u}mero binario en la casilla es un '1' o un '0'. Por ejemplo, vemos que $11_b = 2^0 + 2^1$, $1001_b = 2^0 + 2^3 = 9$  \\
+
+Supongamos que en la Regla \#3, $num$ es un m\'{u}ltiplo de 3, eso es $num = 3x$, que es cierto si $num$ 'proviene' de la Regla \#1 y \#2. Si anadimos un bit '0' a la derecha (como dice la Regla que queremos probar), notemos que, con los ejemplos 
+
+\[ \text{'11'} + \text{'0'} = \text{'110'} = 2^1 + 2^2 = 6\]
+
+Que es el mismo resultado de, sumarle 1 a los exponentes de las bases sumadas de $num$ anterior. Eso es, en vez de $2^0$ y $2^1$, que suman 3, ahora tenemos $2^1$ y $2^2$.  Al anadir el '0' a la derecha, estamos b\'{a}sicamente mutiplicando por $2^1$ cada n\'{u}mero que estamos sumando. En efecto,
+\[ num_{b} = 2^0 + 2^1 \dots 2^n \]
+\[ num_{b} + \text{'0'}= (2^0 + 2^1 \dots 2^n)*(2^1)\]
+\[ num_{b} + \text{'0'}= 2^{0+1} + 2^{1+1} \dots 2^{n+1}\]
+
+e.g. '11' + '0' = '110' =  $(2^0 + 2^1)*(2^1) = (2^1 + 2^2) = 6$
+
+Si estamos multiplicando a $num$ -que es un supuesto m\'{u}ltiplo de 3- por dos, tenemos $3x*2$ que es tambi\'{e}n m\'{u}ltiplo de 3. Probamos que la Regla 3 produce n\'{u}meros m\'{u}ltiplos de 3, si y solo si, al n\'{u}mero al que le estamos anadiendo el '0' por la derecha, es m\'{u}ltiplo de 3. \\
+
+Para probar la \textbf{Regla \#4}, re-escribamos $num -> num_1 \: num_2$, para diferenciar. Notemos que si $num_1$ y $num_2$ son m\'{u}ltiplos de 3, tenemos, $num_1 = 3*u$ y $num_2 = 3*v$. La Regla \#4 dice b\'{a}sicamente que la suma de dos $num$ (diferentes o iguales), es otro $num$. Pero $num_1$ est\'{a} en cierta forma 'desplazado' hacia la izquierda $n$ posiciones, es decir, como en la Regla \#3, multiplicar por algun m\'{u}ltiplo de 2 i.e. $2^n$. Entonces tenemos $num = num_1 + num_2 = 3*u*2^n + 3*v = 3*(2^n*u+v)$ que tambi\'{e}n es un m\'{u}ltiplo de 3.\\
+
+"Probando" con el "caso base", es decir, con la Regla \#1 y \#2, tenemos $num -> num + num = \text{'11'} + \text{'1001'} = (2^0 + 2^1)*2^4 + (2^0 + 2^3) = 3*2^4+ 9 = 57 = \text{'111001$_b$'} $
+\qed
+\end{homeworkProblem}
+
+\end{spacing}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,1 @@
+public boolean add(Object newEntry){	Node newNode = new Node(newEntry);	if (isEmpty())	firstNode = newNode;	else                   // add to end of nonempty list	{	Node lastNode = getNodeAt(length);	lastNode.next = newNode; // make last node reference new node	} // end if	length++;	return true;}  // end add

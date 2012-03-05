@@ -1,0 +1,329 @@
+<HTML>
+<HEAD>
+  <TITLE>Objetos y Abstracción -  OOP</TITLE>
+  <meta NAME = "GENERATOR"          CONTENT = "IHMC CmapTools v4.18 ">
+  <meta NAME = "KEYWORDS"           CONTENT = "Carlos Eduardo López Camey, Carné 08107, Concept Map, cmap, CmapTools, IHMC, Objetos y Abstracción -  OOP,  Privado,  Encapsulamiento,  Datos de Instancia,  Lenguajes Modernos,  Interfaz,  Comprensión,  OOP,  Constantes,  Uniformidad,  Flexibilidad,  forma estructurada de programar software,  Estabilidad,  Publico,  Por: Carlos Eduardo López Camey (Carné #08107) Juan Fernando Valdés (Carné #07048) y José García Meagli (Carné #07218),  Reusabilidad,  Niveles o permisos de acceso,  Características,  Herencia,  Una Clase,  Métodos">
+  <meta NAME = "DESCRIPTION"        CONTENT = "This Concept Map, created with IHMC CmapTools, has information related to: Objetos y Abstracción -  OOP, Mantenibilidad mediante técnicas como Polimorfismo, forma estructurada de programar software que implica Mantenibilidad, forma estructurada de programar software que implica Comprensión, Mantenibilidad mediante técnicas como Herencia, forma estructurada de programar software que implica Uniformidad, Reusabilidad mediante técnicas como Encapsulamiento, forma estructurada de programar software aplicable en Lenguajes Modernos, Estabilidad mediante técnicas como Encapsulamiento, Estabilidad mediante técnicas como Polimorfismo, Reusabilidad mediante técnicas como Polimorfismo, Herencia de Una Clase, Características como Métodos, Uniformidad mediante técnicas como Herencia, Mantenibilidad mediante técnicas como Encapsulamiento, Niveles o permisos de acceso que son Protegido, Flexibilidad mediante técnicas como Encapsulamiento, Comprensión mediante técnicas como Polimorfismo, Comprensión mediante técnicas como Herencia, Uniformidad mediante técnicas como Encapsulamiento, Atributos como Datos de Instancia">
+  <meta NAME = "AUTHOR"             CONTENT = "IHMC CmapTools">
+  <meta HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset = UTF-8">
+  <script LANGUAGE="JavaScript1.2">
+  <!--
+    //  PopUp --
+    //  Institute for Human and Machine Cognition, http://www.ihmc.us/
+    //  CmapTools, Version 4.15, http://cmap.ihmc.us/
+    //  Modify by: CmapTools Developers, cmapsupport@ihmc.us
+    //  Date: 02/05/2008
+
+    var IE = 0;
+    var IE4PC = 0;
+    var NS = 0;
+    var GECKO = 0;
+
+    var openpopups = new Array();
+
+    if (document.all) {                 // Internet Explorer Detected
+	   IE = true;	
+    }
+    else if (document.layers) {         // Netscape Navigator Detected
+	   NS = true;	
+    }
+    else if (document.getElementById) { // Netscape 6 Detected
+       GECKO = true;
+    }
+    else {
+	   alert("Unrecognized Browser Detected::\nSorry, your browser is not compatible.");
+    }
+
+    if (IE)
+    {
+	   OS = navigator.platform;
+	   VER = new String(navigator.appVersion);
+	   VER = VER.substr (0, VER.indexOf(" "));
+	   if ((VER < 4.8) && (OS == "Win32")) 
+	   {
+	       IE4PC = 1;
+	   }
+    }
+
+    function handleResize() {
+	    location.reload();
+	    return false;
+    }
+
+
+    if ((NS) && (navigator.platform == "MacPPC")) {
+	   window.captureEvents (Event.RESIZE);
+	   window.onresize = handleResize;
+    }
+
+    function openResource(event, resourcePath, resourceName, resourceType)
+    {
+	   var newwindow;
+
+       // Resource MIMETypes are enumerated as follows: 
+       // cMap     = Undefined
+       // Image    = 0
+       // Video    = 1
+       // Text     = 2
+       // Audio    = 3
+
+       popDown();
+
+	   switch (resourceType) 
+	   {
+	    case 0:     //Image
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<center><img src=\"';
+                    text += resourcePath;
+                    text +='\"> </center>';
+             break;
+		
+	    case 1:  text   // Video
+		     newwindow = window.open (resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+                     var text ='<embed src=\"';
+                     text += resourcePath;
+                     text +='\" autostart=true> </embed> ';
+             break;
+
+	    case 2:      // Text or Unknown 
+		     newwindow = window.open(resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+              break;
+
+	    case 3:       // Audio
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<embed src=\"';
+                    text += resourcePath;
+                    text +='\" autoplay=true> </embed> ';
+             break;
+
+	    case 4:
+                    newwindow = window.open(resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+	     break;
+	    }
+        return;
+    }
+
+
+
+    function popUpEvt(event, popupName)
+    {
+	popDown();
+
+	if (GECKO)
+	{
+	    document.getElementById(popupName).style.left = event.layerX;
+	    document.getElementById(popupName).style.top = event.layerY;
+	    document.getElementById(popupName).style.background = "#B3B3B3";
+	    document.getElementById(popupName).style.visibility = "visible";
+	    openpopups.push(popupName);
+	}
+	else if (NS) 
+	{
+	    document.layers[popupName].moveTo (event.pageX, event.pageY);
+	    document.layers[popupName].bgColor = "#B3B3B3";
+	    document.layers[popupName].visibility = "show";
+	    openpopups.push(popupName);
+	}
+	else // if (IE)
+	{
+	    window.event.cancelBubble = true;
+	    if (!IE4PC) {
+		document.all[popupName].style.backgroundColor = "#B3B3B3";
+	    }	
+	    document.all[popupName].style.left = window.event.clientX + document.body.scrollLeft;
+	    document.all[popupName].style.top = window.event.clientY + document.body.scrollTop;
+	    document.all[popupName].style.visibility = "visible";
+	    openpopups[openpopups.length] = popupName;
+	}
+	return false;
+    }
+
+    function popDown()
+    {
+	var popupname;
+	
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+		document.getElementById(popupname).style.visibility = "hidden";
+	    }
+	    else if (NS) {
+		document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+		document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+	return;
+    }
+
+    function popDownNoGecko() 
+    {
+	var popupname;
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+           //  document.getElementById(popupname).style.visibility = "hidden"; 
+	        return;   // erased for test purposes
+	    }  
+	    else if (NS) {
+	        document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+	        document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+        return;
+    }
+  //-->
+  </script>
+</HEAD>
+<BODY bgcolor="#FFFFFF" leftmargin="0" topmargin="0">
+  <noscript>    <table width=90% cellpadding=10>      <tr>	<td bgcolor=ff4444>	  <font color=000000 size=+1 face="helvetica">	    <h1>Warning:</h1>	    <b>JavaScript is turned OFF.  None of the links on this page will work until it is reactivated.	      <p>		<a href="http://cmap.ihmc.us/docs/EnablingJavaScript.html">		  If you need help turning JavaScript On, click here.		</a>	      </p>	    </b>	</td>      </tr>    </table>
+This Concept Map, created with IHMC CmapTools, has information related to: Objetos y Abstracción -  OOP, Mantenibilidad mediante técnicas como Polimorfismo, forma estructurada de programar software que implica Mantenibilidad, forma estructurada de programar software que implica Comprensión, Mantenibilidad mediante técnicas como Herencia, forma estructurada de programar software que implica Uniformidad, Reusabilidad mediante técnicas como Encapsulamiento, forma estructurada de programar software aplicable en Lenguajes Modernos, Estabilidad mediante técnicas como Encapsulamiento, Estabilidad mediante técnicas como Polimorfismo, Reusabilidad mediante técnicas como Polimorfismo, Herencia de Una Clase, Características como Métodos, Uniformidad mediante técnicas como Herencia, Mantenibilidad mediante técnicas como Encapsulamiento, Niveles o permisos de acceso que son Protegido, Flexibilidad mediante técnicas como Encapsulamiento, Comprensión mediante técnicas como Polimorfismo, Comprensión mediante técnicas como Herencia, Uniformidad mediante técnicas como Encapsulamiento, Atributos como Datos de Instancia
+
+</noscript>
+
+<map name="Objetos y Abstracción -  OOP">
+  <area shape="rect"
+        href="1232035043831I2108363923I1348ItextIhtml"
+        onClick="popUpEvt(event,'1232035043831I2108363923I1348ItextIhtml'); return false;"
+        coords="337,557,355,575">
+  <area shape="rect"
+        href="1232035555493I1860284039I2116ItextIhtml"
+        onClick="popUpEvt(event,'1232035555493I1860284039I2116ItextIhtml'); return false;"
+        coords="778,316,796,334">
+  <area shape="rect"
+        href="1232035593693I1371986841I2251ItextIhtml"
+        onClick="popUpEvt(event,'1232035593693I1371986841I2251ItextIhtml'); return false;"
+        coords="781,659,799,677">
+  <area shape="rect"
+        href="1232033827504I1946384404I721ItextIhtml"
+        onClick="popUpEvt(event,'1232033827504I1946384404I721ItextIhtml'); return false;"
+        coords="689,198,707,216">
+  <area shape="rect"
+        href="1232035040223I929933413I1324ItextIhtml"
+        onClick="popUpEvt(event,'1232035040223I929933413I1324ItextIhtml'); return false;"
+        coords="524,431,542,449">
+  <area shape="rect"
+        href="1232033849465I842568302I797ItextIhtml"
+        onClick="popUpEvt(event,'1232033849465I842568302I797ItextIhtml'); return false;"
+        coords="727,507,745,525">
+  <area shape="rect"
+        href="1232034969063I370628690I1128ItextIhtml"
+        onClick="popUpEvt(event,'1232034969063I370628690I1128ItextIhtml'); return false;"
+        coords="395,246,413,264">
+  <area shape="rect"
+        href="1232035014799I576940016I1246ItextIhtml"
+        onClick="popUpEvt(event,'1232035014799I576940016I1246ItextIhtml'); return false;"
+        coords="418,431,436,449">
+</map>
+
+<center>
+  <table width=* height=* cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td valign=center align=center>
+      <img USEMAP="#Objetos y Abstracción -  OOP"
+           SRC="Objetos y Abstracción -  OOP.jpg"
+           ALIGN=middle
+           BORDER=0
+           onClick=popDown();>
+      </td>    </tr>    <tr>      <td VALIGN=top ALIGN=right>      <table>	<tr>             <td ALIGN=right VALIGN=middle>                 <map NAME="CmapToolsTrademark">                     <area SHAPE="rect"                           href="http://cmap.ihmc.us/"                           onClick="openResource(event,'http://cmap.ihmc.us/', 0, 2); return false;"                           coords="1,1,210,50">                 </map>	<tr>	  <td  ALIGN=right VALIGN=middle>               <img USEMAP="#CmapToolsTrademark"                    SRC="CmapToolsTrademark.gif"                     ALT="IHMC Cmap Tools Trademark" width="210" height="50"                    ALIGN=middle                    BORDER=0>	   </td>	     <td VALIGN=middle>         </td>	</tr>      </table>    </td>  </tr></table></center></body></html>
+<div id="1232035043831I2108363923I1348ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.kioskea.net/contents/poo/encapsul.php3" TITLE="">
+      Concepto de Encapsulación
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232035555493I1860284039I2116ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Object-oriented_programming_language" TITLE="">
+      Algunos Lenguajes que soportan OOP
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232035593693I1371986841I2251ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Interface_(Java)" TITLE="">
+      Definición de Interfaz (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232033827504I1946384404I721ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/docs/books/tutorial/java/concepts/" TITLE="">
+      Algunos conceptos que involucra (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232035040223I929933413I1324ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.kioskea.net/contents/poo/heritage.php3" TITLE="">
+      Concepto de Herencia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232033849465I842568302I797ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Class_(computer_science)" TITLE="">
+      Definición de qué es una Clase (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232034969063I370628690I1128ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.miguelmatas.es/blog/2007/10/17/buenas-practicas-legibilidad-y-mantenibilidad-del-codigo/" TITLE="">
+      Un buen ejemplo de Mantenibilidad
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1232035014799I576940016I1246ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.kioskea.net/contents/poo/encapsul.php3" TITLE="">
+      Concepto de Polimorfismo
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+

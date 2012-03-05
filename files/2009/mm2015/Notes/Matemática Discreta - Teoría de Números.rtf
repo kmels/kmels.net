@@ -1,0 +1,572 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf110
+{\fonttbl\f0\fnil\fcharset0 LucidaGrande;\f1\fnil\fcharset0 Georgia;}
+{\colortbl;\red255\green255\blue255;\red128\green128\blue128;}
+{\info
+{\title Matem\'e1tica Discreta - Teor\'eda de N\'fameros}
+{\subject MM2015}
+{\doccomm }
+{\creatim\yr2009\mo10\dy8\hr12\min28\sec21\timesinceref276719301}
+{\revtim\yr2009\mo10\dy15\hr13\min16\sec8\timesinceref277326968}
+{\keywords Number Theory}}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\f0\fs22 \cf2 Title:  \cf0 Matem\'e1tica Discreta - Teor\'eda de N\'fameros\
+\cf2 Date:  \cf0 October 8, 2009 12:28 PM\
+\cf2 Category:  \cf0 MM2015\
+\cf2 Tags:  \cf0 Number Theory\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\f1\b\fs36 \cf0 Teor\'eda de n\'fameros\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\fs24 \cf0 Fuentes de estudio:\
+	
+\b0 Notas de clase\
+	Wikipedia :]\
+	Libro de Stein\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 Historia\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 \'93Dios invent\'f3 los n\'fameros naturales, los dem\'e1s es creaci\'f3n del hombre\'94 Leopoldo Kronecker (o algo as\'ed), siglo IXX\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 Griegos: N\'fameros rectangulares y cuadrados
+\fs36 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 6 = 	* * *\
+ 	* * *\
+\
+8  = 	* * * *\
+	* * * *\
+\
+9 = 	* * *\
+	* * *\
+	* * *\
+\
+4 = 	* *\
+	* *\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 \'bfQu\'e9 pasa con n\'fameros como 5, pensando en \'93n\'fameros rectangulares\'94?
+\b0 \
+\
+5 = * * * * *\
+\
+3 = * * *\
+\
+7 = * * * * * * *\
+\
+Los griegos les llamaron: 
+\b n\'fameros primos\
+\
+N\'fameros Triangulares\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 T_1 = 	*	;	T_2 =	*		; T_3= 	* 		....  T_n\
+						* *				* *\
+		 								* * *\
+\
+\'bfCu\'e1ntos puntos tiene T_n? \
+Ecuaci\'f3n de recurrencia
+\b \
+
+\b0 	T_n = T_\{n-1\}	+ n\
+\
+	T_n = sum_\{k=o\}^n k = \\frac\{1\}\{2\} n(n+1)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 Una conjetura\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 La suma de dos n\'fameros triangulares consecutivos es un n\'famero cuadrado\
+\
+\{prueba por inducci\'f3n\}\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 \'bfQu\'e9 pasa si sumamos n\'fameros impares hasta cierto n\'famero?\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 1\
+1 + 3 = 4\
+1 + 3 + 5 = 9\
+1 + 3 + 5 + 7 = 16 \
+...\
+\
+\
+\\sum_\{i=o\}^n (2i-1) = n^2 (n\'fameros cuadrados!)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 N\'fameros m\'e1gicos (\\forall n>2)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 Arreglo de los enteros de 1..n^2, de forma que todas las filas y columnas y diagonales, suman lo mismo. (
+\i La suma m\'e1gica
+\i0 )\
+\
+Construyendo un cuadrado m\'e1gico para n = 3\
+\
+		*	*	*	-> S_m\
+		*	*	*\
+		*	*	*\
+\
+Tenemos n filas, con fila_i = S_m, entonces \
+\
+n*S_m = \\sum_\{i=0\}^\{n^2\} k = 1+2+3+4.. n^2 = \\frac\{1\}\{2\} n^2 ( n^2+1)\
+\
+=> S_m = \\frac\{1\}\{2\} n(n^2+1) \
+\
+\{Hacer el ejemplo de un cuadrado m\'e1gico para n=3\} Sabiendo que S_m = 15 = 1/2*3*10\
+\
+	8	1	6\
+	3	5	7\
+	4	9	2\
+\
+(Algoritmo de Loubere)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 Teor\'eda de n\'fameros, 
+\b0 muy relacionada con juegos, posteriormente (ahora con la compu) dem\'e1s cosas, e.g. con criptograf\'eda \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 N\'fameros primos
+\b0\fs24 \
+	\
+\'93Elementos qu\'edmicos de la matem\'e1tica\'94, \
+Intuici\'f3n, si queremos describir n\'fameros naturales, usamos primos\
+\
+Dado c = a*b, llamamos 
+\b factores
+\b0  de 
+\i c 
+\i0 a 
+\i a 
+\i0 y 
+\i b
+\i0  (tambi\'e9n 
+\b divisores
+\b0  de c).\
+\
+NOTA: Cuando c, s\'f3lo admite la factorizaci\'f3n trivial c = 1*c (donde 1 y 
+\i c 
+\i0 son los \
+factores triviales) decimos que c es 
+\b primo.
+\b0  Si no es as\'ed, c es un 
+\b n\'famero compuesto.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 \
+\'bfC\'f3mo podemos 
+\b decidir 
+\b0 si un n\'famero c es primo (o compuesto)?\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 \'bfSi es compuesto, c\'f3mo podemos encontrar su factorizaci\'f3n en n\'fameros primos?
+\b0 \
+\
+Soluci\'f3n trivial, tomar k_i < c, dividir c/k. \
+\
+Nota: c = a*b\
+\
+Qu\'e9 podemos decir de \\sqrt(c) en relaci\'f3n a $a$ y $b$? (desigualdades)\
+\
+\\textbf\{No\} podemos tener que \\textbf\{ambos\} $a$ y $b$ sean mayores que $\\sqrt\{c\}$\
+\
+Qu\'e9 pasa si $a,b > \\sqrt\{c\}$... => $ a*b > c$ (contradicci\'f3n!)\
+\
+
+\b Problema: 
+\b0 Decidir si 97 es primo?\
+\
+$\\sqrt\{97\}$ = 9\
+\
+97/2, 97/3, 97/7... no dividen \'93exactamente\'94.\
+\
+
+\b La criba (
+\i siere
+\i0 ) de Erat\'f3stenes\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 Idea: No dividir dentro de los k\'92s que son n\'fameros compuestos. \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 NOTA: 
+\b0 Existen infinitos primos\
+\
+
+\b Prueba:
+\b0  Asumimos que hay n\'famero finito de primos\
+	\{Primo_1, primo_2.... primo_r\}\
+\
+Mult\
+	N = \\mult_\{i=0\}^n \
+\
+Notemos que todos los p_k dividen a N, pero ninguno de esos primos divide a N+1, entonces N+1 es primo.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 Primos de Fermat\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 F_n = 2^\{2^n\} + 1\
+\
+F_0,F_1..F_4..  son primos..\
+\
+Vino Euler y prob\'f3 con F_5, que no es primo\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 BUSCAR: 
+\b0 Relaci\'f3n de los primos de fermat, para construci\'f3n de pol\'edgonos regulares.\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 \'91Primos\'92 de Mersenne\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 \\[M_p = 2^p - 1\\]\
+\
+donde $p$ es primo.\
+\
+Probando,\
+\
+$ M_2 =2^3-1=3 $, OK\
+\
+$ M_3 = 2^3-1 = 7$, OK\
+\
+$ M_5 = 2^5 - 1=31$, OK\
+\
+$ M_7 = 2^7-1 = 127$, OK\
+\
+$\\vdots$\
+\
+$ M_\{31\} = 2^31 -1$\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 Cu\'e1ntos d\'edgitos tiene $M_p$?
+\b0 \
+\
+Patr\'f3n:\
+\
+$ 1 \\dots 9$, log(1) = 0$\
+$10 \\dots 99$, log(10) = 1$\
+$100 \\dots 999$ = 2$\
+....\
+\
+$log(300,541) ~= 5.6 $ \
+$log(100,000) = log (10^5) = 5$ \
+$log(1M) = log (10^6) = 6$\
+\
+Trivial:\
+	$log (M_p) = log (2^p-1) $\
+\
+	$log (M_p +1) = 2^p, $\
+\
+
+\b Qu\'e9 pasa con $M_p+1$?
+\b0 \
+	nunca termina en 9! :]\
+\
+Es valido comparar d\'edgitos de $M_p$ vs $M_p+1$? 
+\b si!\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\fs36 \cf0 Divisores (factores)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 Podemos seguir un proceso de factorizaci\'f3n de un n\'famero compuesto hasta que solo tengamos primos, y luego, el proceso \ul debe\ulnone  terminar, porque los factores son \'93m\'e1s y m\'e1s peque\'f1os\'94, pero nunca 1.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 En breve:
+\b0 \
+	Todo n\'famero natural $n > 1$, es primo o compuesto. Si es compuesto, tiene una factorizaci\'f3n en primos \'fanica (salvo el orden de los factores). 
+\b (Teorema fundamental de la aritm\'e9tica)
+\b0 \
+\
+En general, podemos escribir\
+	$n = \\mult p_i^\{\\alpha_i\} $\
+	\
+	donde $p_i$, son factores primos de $n$ y $\\alpha_i$ es la multiplicidad de cada uno.\
+\
+
+\b Qu\'e9 divisores dividen a $n$? Cu\'e1les son?\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 $36 = 6*6 = 2^2*3^2$\
+\
+Sus divisores tienen la forma, $2^\\delta_1*3^\\delta_2$\
+\
+$\\delta_1 \\in \{0,1,2\}$\
+$\\delta_2 \\in \{0,1,2\}$\
+\
+Cu\'e1ntos divisores tiene 36? 
+\b R (w/ Sage): 9
+\b0 \
+\
+||\\delta_1|| * ||delta_2|| = 3*3 = 9 <--- \
+\
+Ej: n = 140 = 2^2*5*7\
+\
+Sus divisores tienen la forma $2^\\delta_1*5^\\delta_2*5^\\delta_3$\
+\
+$\\delta_1 \\in \{0,1,2\}$\
+$\\delta_2 \\in \{0,1\}$\
+$\\delta_1 \\in \{0,1\}$\
+\
+\'bfCu\'e1ntos divisores tiene 140? 
+\b R (w/ Sage): 12\
+
+\b0 \
+En general, cuando\
+\
+$n = p_1^\{\\alpha_1\}*p_2^\{\\alpha_2\}\\dotsp_r^\{\\alpha_r\}$\
+\
+el 
+\b n\'famero de divisores 
+\b0 de n est\'e1 dado por\
+\
+$\\tau(n) = (\\alpha_1)*(\\alpha_2)\\dots(\\alpha_r+1)$ = \\mult_\{k=1\}^r (\\alpha_k+1)$\
+\
+Qu\'e9 forma tiene $n$ si $\\tau(n) = 1$ ? R: 1\
+\
+Qu\'e9 forma tiene $n$ si $\\tau(n) = 2$ ? R: n debe ser primo\
+\
+Qu\'e9 forma tiene $n$ si $\\tau(n) = 3$ ? R: n es $p^2$ donde $p$ es primo\
+\
+Qu\'e9 forma tiene $n$ si $\\tau(n) = 4$ ?\
+\
+$4=(\\alpha_1+1)*(\\alpha_2+1)\\dots(\\alpha_r+1)$ donde $\\alpha_k >= 1$, para $ 1 <= k <= r$.\
+\
+$ 4 = (\\alpha_1+1)(\\alpha_2+1)$\
+\
+donde tenemos los casos, \
+\
+1. $alpha_1 = 3 ^ \\alpha_2 = 0$ => n ^ p^3$\
+\
+2. $alpha_1 = 1 ^ \\alpha_2 = 1$ => n = p_1*p_2$\
+\
+En notaci\'f3n,\
+\
+$(\\alpha_1,\\alpha_2) = \{(3,0),(1,1)\}$\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 N\'fameros perfectos \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 Definiendo  div*(n):\
+ \
+div*(n) = div(n) - \{n\}\
+\
+Son aquellos cuya suma de sus divisores es el n\'famero mismo, i.e.\
+\
+$ n = \\sum_\{k \\in \\: div*(n)\} k$\
+\
+e.g. 6 = 1 + 2 + 3, es perfecto.\
+\
+$div*(28) = \{1,2,7,2*7,2^2)$\
+\
+$\\sum_\{k \\in div*(28)\} k = 1+2+7+14+4 = 28$, es perfecto.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\fs24 \cf0 Relaci\'f3n entre primos de Mersenne & n\'fameros perfectos.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 $6 = 2*3 	-> 2^\{2-1\}*M_2$
+\b\fs36 \
+
+\b0\fs24 $28=2^2*7 -> 2^\{3-1\}*M_3$\
+$496 = 2^4*31 -> 2^\{5-1\}*M_5$\
+\
+En general, ser\'e1 que $2^\{p-1\}*M_p$, donde $p$ y $M_p$ son primos, dado por $M_p=2^p-1$ es perfecto.\
+\
+Ejercicio de\
+\
+$div(2^\{p-1\}*M_p)$ = \{1,2,2^2,2^3\\dots,2^\{p-1\}, M_p, 2*M_p, 2^2*M_p\\dots,2^\{p-1\}*M_p\}$\
+\
+Nota con $2^\{p-1\}*M_p$\
+\
+$\\abs div(2^\{p-1\}*M_p) = 2p$\
+\
+$\\tau(2^\{p-1\}*M_p) = (p-1+1)(1+1) = 2p$\
+\
+Nota con la \'93serie geom\'e9trica\'94 $1+2+2^2 + 2^3 \\dots + 2^\{p-1\} $\
+\
+En general,\
+\
+(a) $ 1+r+r^2+r^3+ \\dots + r^n = S $ \
+multiplicando (a) por r\
+(b) $r + r^2+r^3 \\dots + r^n + r^\{n+1\} = r*S$\
+Restando b con a,\
+\
+$1 - r^\{n+1\} = S(1-r) => S = \\frac\{1-r^\{n+1\}\}\{1-r\}$\
+\
+Entonces, con la serie geom\'e9trica $1+2+2^2 + 2^3 \\dots + 2^\{p-1\}$, tenemos\
+\
+$1+2+2^2 + 2^3 \\dots + 2^\{p-1\} = \\frac\{1-2^p\}\{1-2\} = 2^p-1$\
+\
+Entonces,\
+\
+$\\sum_\{k \\in \\: div(2^\{p-1\}*M_p)\} k = (2^p-1)+M_p(2^p-1) = (2^p-1)(1+M_p) = (2^p-1)*2^p = M_p*2^p\
+\
+Finalmente, restamos\
+\
+$M_p*2^p - (2^\{p-1\}*M_p) = 2^\{p-1\}*M_p(2-1) = 2^\{p-1\}*M_p$\
+\
+En la otra clase...\
+\
+Algoritmo de Euclides\
+M\'e1ximo com\'fan divisor\
+m\'ednimo com\'fan m\'faltiplo\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 Hoja de Trabajo\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 1. Pelot\'f3n de 12 soldados puede marchar en 6 distintas formaciones:
+\b0 \
+	12x1	1x12 
+\f0\fs22 10.211.55.2
+\f1\fs24 \
+	6x2	2x6\
+	4x3	3x4\
+\
+\'bf Cu\'e1les son los pelotones m\'e1s peque\'f1os que pueden marchar en 8,12,72 distintas formaciones?\
+\
+
+\b 2. Qu\'e9 entero o enteros n<= 100 tiene el \\tau(n) m\'e1s grande.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 NOTA:  Tratar de usar ambos enfoques, te\'f3rico y computacional (sage!)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 3. Encuentre los enteros m\'e1s peque\'f1os que cumplan con \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 	$\\tau(n) = 14$\
+	$\\tau(n) = 18$\
+	$\\tau(n) = 100$\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 4. En el problema pitag\'f3rico\
+	z^2 = x^2 + y^2
+\b0 \
+\
+	a) meustre que x,y NO pueden ser ambos pares\
+	b) muestre que x,y no pueden ser ambos impares.\
+\
+
+\b 5. \
+	a) Si n es par, \'bfQu\'e9 puede decir de n^2?\
+	b) Si n es impar, \'bfqu\'e9 puede decir de n^2?
+\b0 \
+\
+
+\b 6. Encuentre el valor de x al ejecutar lo siguiente:\
+	
+\b0 a) x <- 0
+\b \
+		
+\b0 for I = 1 to n do\
+			fo j=1 to n do\
+				x <- x + 1\
+\
+	b) Cu\'e1ntas veces se evalua\
+		x<- x+1 ?\
+\
+	for I = 1 to n do\
+		for j to i/2 do			NOTA: i/2 ~= mayor entero\
+			x <- x +1\
+\
+
+\b 7. \
+	a) Muestre que 2 es factor de n^2 - n
+\b0 \
+	
+\b b) Muestre que 3 es factor n^3 - n\
+\
+	
+\b0 NOTA: Otra forma de pensar en \'e9sto es pensar \'93n^2-n es divisibile por 2\'94, etc.\
+\
+
+\b 8 . Compruebe que el cuadrado de todo entero par es de la forma (8m+1), $m \\in \\mathbb\{Z\}$
+\b0 \
+\
+
+\b 9. Euler propuso la funci\'f3n $E: \\mathbb\{N\} -> \\mathbb\{N\} E(n) = n^2-n + 41 $ y observ\'f3 que obten\'eda impares para $0 <= n <= 40$ \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b0 \cf0 	a) E(41) \'bfes primo o compuesto?\
+	b) En sage compruebe la observaci\'f3n de Euler, o $E(0), E(1), \\dots, E(40) $ son primos.\
+\
+	Bonus: H\'e1galo en 2 l\'edneas de c\'f3digo\
+	Bonus*: H\'e1galo en 1 l\'ednea de c\'f3digo\
+\
+	NOTA:\
+		Comprensi\'f3n de listas y Lambda?
+\b \
+\
+10. Cierto o no:\
+a)	
+\b0 $F_n$ es primo si $n$ es primo\
+\
+Desde $F_n$ es el n\'famero de Fibonacci.\
+\
+pruebe:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\b \cf0 b) 	
+\b0 $F_n$ es par si & s\'f3los: 3 divide a n.\
+
+\b \
+	
+\b0 \
+\
+}

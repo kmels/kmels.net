@@ -1,0 +1,161 @@
+	;; ****************************************
+	;; Author: Carlos Eduardo Lopez Camey
+	;; Date: Oct 6, 2009
+	;; UVG-CC3005 - Programacion en Assembler
+	;; PreLab7.ASM Pre Laboratorio 7
+	;;
+	;; Descripcion:
+	;; Realice un programa en Lenguaje Assembler que lea cualquier cadena de caracteres
+	;; y busque determinada palabra y la reemplace por otra que ingrese el usuario.
+	;; 
+	;; ****************************************
+
+	.model small
+	.stack 64
+	.data
+
+	;; ----------------------------------------
+	;; Definicion de algunos datos
+	;; ----------------------------------------
+
+	InstruccionesLabel	DB	'Ingrese una cadena','$'  ;Instrucciones para el usuario
+	Lista 			LABEL	BYTE		      	; Inicio de la lista de parametros
+	LongitudMaxima		DB	31		     	; Longitud maxima de la cadena
+	LongitudDeLaCadena	DB	?		      	; Longitud real de la cadena
+	ArregloDeLaCadena	DB	32 DUP ('$')	      	; Arreglo de caracteres
+	TeclaEnter 		DB	0DH,0AH,'$'
+
+	Instrucciones2Label	DB 	'Ingrese la cadena de busqueda: ','$'
+	Lista2			LABEL	BYTE
+	LongitudMaxima2		DB	31
+	LongitudDeCadenaDeBusqueda	DB ?
+	ArregloCadenaDeBusqueda	DB	32 DUP ('$')
+
+	Instrucciones3Label	DB	'Ingrese la cadena de reemplazo: ','$'
+	Lista3			LABEL	BYTE
+	LongitudMaxima3		DB	31
+	LongitudDeCadenaDeReemplazo	DB ?
+	ArregloCadenaDeReemplazo	DB	32 DUP ('$')
+	
+	MensajeDeSalida		DB	'La cadena ahora es: ','$'
+	Car_busca		DB	'a'
+	Car_reemp		DB	'x'
+	;; ----------------------------------------
+	;; Inicio del codigo
+	;; ----------------------------------------
+
+	.CODE
+
+	;; ----------------------------------------
+	;; Procedimiento para leer la cadena
+	;; ----------------------------------------
+	LeerCadena PROC NEAR
+		MOV AH,0AH
+		INT 21H
+		RET
+	LeerCadena ENDP
+
+	;; ----------------------------------------
+	;; Procedimiento para desplegar
+	;; ----------------------------------------
+	Desplegar PROC NEAR
+		MOV AH, 09H	; Peticion para desplegar
+		INT 21H		; llama al DOS
+		RET
+	Desplegar ENDP
+
+	;; ----------------------------------------
+	;; Procedimiento para escribir un enter (caracter 13)
+	;; ----------------------------------------
+
+	ImprimirEnter	PROC NEAR
+		LEA DX, TeclaEnter
+		CALL Desplegar
+		RET
+	ImprimirEnter	ENDP
+
+	;; ----------------------------------------
+	;; Inicio
+	;; ----------------------------------------
+
+	Principal	PROC FAR
+		MOV AX, @data	; Inicializar el segmento de datos
+		MOV DS, AX
+		MOV ES, AX
+
+	;; 	****
+	;; 	Instrucciones al usuario y leer su cadena
+	;; 	****
+		LEA DX, InstruccionesLabel	; Carga la direccion del mensaje para el usuario
+		CALL Desplegar			; Desplegarla
+		CALL ImprimirEnter
+		LEA DX, Lista			; Especificar en donde guardar la lectura
+		CALL LeerCadena			; Leer la Cadena y guardarla.
+		CALL ImprimirEnter		
+		LEA DX, ArregloDeLaCadena	; Hacer que DX contenga la direccion en donde esta contenida la cadena
+		CALL ImprimirEnter
+
+		LEA DX, ArregloDeLaCadena
+		CALL Desplegar
+
+	;; 	****
+	;; 	Leer la cadena que esta buscando remplazar, digamos "CadenaDeBusqueda"
+	;; 	****
+		LEA DX, Instrucciones2Label 	; Mensaje que pide cadena de busqueda
+		CALL Desplegar		    	; Despliega el mensaje
+		LEA DX, Lista2
+		CALL LeerCadena
+
+		CALL ImprimirEnter
+		LEA DX, ArregloCadenaDeBusqueda
+		CALL Desplegar
+
+	;; 	****
+	;; 	Leer la cadena de remplazo, que reemplazara a "CadenaDeBusqueda"
+	;; 	****
+		LEA DX,Instrucciones3Label
+		CALL Desplegar
+		LEA DX, Lista3
+		CALL LeerCadena
+		CALL ImprimirEnter
+
+	;; 	Tratar de Remplazar
+
+		
+		LEA DX ,LongitudDeLaCadena
+		CALL Desplegar
+		CALL ImprimirEnter
+		CLD		; Establecer el modo de izquierda a derecha
+
+		MOV 	AL, Car_busca
+		MOV	CX, WORD PTR LongitudDeLaCadena
+		MOV 	CX, 30H
+		MOV	DI, WORD PTR ArregloDeLaCadena
+	
+CIC:		REPNE	SCASB	;Repetir mientras no lo encuentre o CX sea 0
+		CALL ImprimirEnter
+		JNZ 	QueRaro	;Verificar si lo encontro
+		DEC	DI	;Ajustar direccion
+		MOV	DL, Car_reemp	; 
+		MOV	BYTE PTR[DI], DL ;remplazar el caracter
+		JMP CIC
+
+	
+Salir:		LEA DX, MensajeDeSalida
+		CALL Desplegar
+		LEA DX, ArregloDeLaCadena
+		CALL Desplegar
+	
+	;	obtenerLongitudDe ArregloDeLaCadena, Contador 
+	;	MOV DX, Contador
+	;	ADD DX, 30H
+	;	CALL ImprimirEnter
+	;	CALL Desplegar
+
+	
+
+		MOV AH, 4CH		; Salida al DOS
+		INT 21H
+
+Principal	ENDP
+	END Principal

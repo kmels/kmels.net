@@ -1,0 +1,1 @@
+public interface GeneralNodeInterface{	public Object getData();	public void setData(Object newData);	public boolean isLeaf();	public Iterator getChildrenIterator();	public void addChild(GeneralNodeInterface newChild);} // end GeneralNodeInterface

@@ -1,0 +1,16 @@
+This is MetaPost, Version 1.005 (Web2C 7.5.7) (mem=mpost 2009.4.1)  5 MAY 2009 09:20
+**x
+(/usr/local/texlive/2008/texmf-dist/fonts/source/public/levy/x.mf
+! Extra tokens will be flushed.
+<to be read again> 
+                   def
+l.3 def
+        dims = 8.5u#,asc_height#,desc_depth# enddef;
+? mpost
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or ... or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? x
+

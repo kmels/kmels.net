@@ -1,0 +1,36 @@
+*************************************************************
+	AFN creado utilizando el algoritmo de Thompson
+*************************************************************
+Tiempo de creación del autómanta: 1818179ns = 18.18179ms
+Genera un lenguaje a partir de la regex: (b|b)*abb(a|b)* -> ((((((b|b)*).a).b).b).((a|b)*))
+*************************************************************
+Lista de símbolos: [e, b, a]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17]
+Lista de aceptación (F): [q17]
+Transiciones:
+	* T(q0,e) = q7
+	* T(q0,e) = q1
+	* T(q1,e) = q2
+	* T(q1,e) = q4
+	* T(q2,b) = q3
+	* T(q3,e) = q6
+	* T(q4,b) = q5
+	* T(q5,e) = q6
+	* T(q6,e) = q7
+	* T(q6,e) = q1
+	* T(q7,a) = q8
+	* T(q8,b) = q9
+	* T(q9,b) = q10
+	* T(q10,e) = q17
+	* T(q10,e) = q11
+	* T(q11,e) = q12
+	* T(q11,e) = q14
+	* T(q12,a) = q13
+	* T(q13,e) = q16
+	* T(q14,b) = q15
+	* T(q15,e) = q16
+	* T(q16,e) = q17
+	* T(q16,e) = q11
+
+*************************************************************

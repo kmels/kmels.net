@@ -1,0 +1,1 @@
+public Object remove(Object key){	Object result = null;	int index = getHashIndex(key);	index = locate(index, key);	if (index != -1)	{ // key found; flag entry as removed and return its value		hashTable[index].setToRemoved();		result = hashTable[index].getValue();		currentSize--;	} // end if	// else key not found; result is null	return result;} // end remove

@@ -1,0 +1,336 @@
+%
+%  untitled
+%
+%  Created by Carlos Eduardo López Camey on 2009-04-17.
+%  Copyright (c) 2009 Carlos E. López Camey. All rights reserved.
+%
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\usepackage{pslatex}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm, amssymb, mathabx,stmaryrd}
+\usepackage{color}
+\usepackage{boxedminipage}
+\usepackage{listings}
+\usepackage{ifpdf}
+\usepackage{fontenc}
+\usepackage{allrunes}
+\usepackage{verbatim}
+
+\definecolor{MyGray}{rgb}{0.96,0.97,0.98}
+\makeatletter\newenvironment{graybox}{%
+   \begin{lrbox}{\@tempboxa}\begin{minipage}{\columnwidth}}{\end{minipage}\end{lrbox}%
+   \colorbox{MyGray}{\usebox{\@tempboxa}}
+}\makeatother
+
+
+\newcommand{\eqtab}{\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:}
+\newcommand{\sen}[1]{\text{sen(} #1 \text{)}}
+\renewcommand{\cos}[1]{\text{cos(} #1 \text{)}}
+% Comandos
+\newcommand{\norma}[1]{\lvert\lvert#1\lvert\rvert}
+\newcommand{\citar}[1]{\textbf{\underline{Ref:}} \cite{#1}}
+\newcommand{\enboxar}[1]{%
+  \[\fbox{%
+      \addtolength{\linewidth}{-2\fboxsep}%
+      \addtolength{\linewidth}{-2\fboxrule}%
+      \begin{minipage}{\linewidth}%
+      #1
+      \end{minipage}%
+    }\]%
+}
+%\newcommand{\dotprod}{\includegraphics{dotprod.1}}
+\renewcommand\abstract{
+\begin{center}
+{\bfseries Resumen\vspace{-.5em}\vspace{0pt}}
+\end{center}
+\quotation}
+\newtheorem{thm}{Teorema}
+\newtheorem{corolario}[thm]{Corolario}
+\theoremstyle{definition}
+\newtheorem{ejm}{Ejemplo}
+\newtheorem{defn}{Definicion}
+\newtheorem{ejemplo}[ejm]{Ejemplo}
+\newtheorem{definicion}[defn]{Definición}
+\renewcommand\refname{Referencias}
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+\title{Coeficientes Indeterminados: M\'{e}todo del Anulador}
+\author{C. L\'{o}pez \thanks{Carlos Eduardo L\'{o}pez Camey, Universidad del Valle de Guatemala, Ecuaciones Diferenciales UVG-MM2014, Carné \#08107, http://kmels.net}}
+\date{Septiembre del 2009}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\begin{document}
+
+
+
+\maketitle
+% Licencia
+\begin{abstract}
+	
+\end{abstract}
+
+\section {Introducci\'{o}n}
+
+Consideremos ciertas ecuaciones diferenciales no homog\'{e}neas con ciertos coeficientes constantes de orden $l$:
+
+\begin{equation}\label{eq1}
+	L(y) = f(x),\eqtab \text{en efecto}
+\end{equation}
+
+\begin{equation*}
+	L(y) = (a_lD^l + a_{l-1}D^{l-1} + \dots + a_1D + a_o)y
+\end{equation*}
+
+podemos dar soluci\'{o}n a \eqref{eq1} si sabemos como anular $f(x)$ con operadores simples. Aqu\'{i} llamamos "anular" al efecto de aplicar un anulador m\'{i}nimo no trivial, digamos alg\'{u}n $M = (p_mD^m + \dots + b_1D + b_0)$ a ambos lados de \eqref{eq1} para obtener una ecuaci\'{o}n homog\'{e}nea $M(L(y)) = 0$ o bien
+\begin{equation}\label{eq2}
+	ML(y) = 0
+\end{equation}
+
+cuya soluci\'{o}n no necesariamente es la misma que la de \eqref{eq1}, pero contendr\'{a} la soluci\'{o}n de \eqref{eq1}, ya que podemos extraer la soluci\'{o}n de \eqref{eq1} desde la de \eqref{eq2}. Para ilustrar esto sabemos,
+
+\begin{equation*}
+	L(y) = f(x) \implies ML(y) = 0 \Leftrightarrow y = C_1y_1 + C_2y_2 + \dots C_{m+l}y_{m+l}, \eqtab
+\end{equation*} 
+
+en donde $L$ es de orden $l$ y $M$ es de orden $m$, lo que vuelve a $ML(y)$ una ecuaci\'{o}n diferencial homog\'{e}nea de grado $m+l$ cuyas soluciones $y_1, \dots, y_{m+l}$ son linearmente independientes, es decir, que forman un conjunto fundamental de soluciones esta E.D. Si las soluciones de esta E.D. de orden $m+l$ son linearmente independientes, entonces, la soluci\'{o}n a la ecuaci\'{o}n diferencial no homog\'{e}nea $L(y) = f(x)$ est\'{a} contenida en la nueva ecuaci\'{o}n homog\'{e}nea $ML(y) = 0$, aunque en algunos casos, se pueda perder informaci\'{o}n al aplicar $M$.
+
+\section{Encontrando $M$}
+
+\begin{ejemplo}
+Consideremos la siguiente ecuaci\'{o}n diferencial lineal no homog\'{e}nea con coeficientes constantes
+\[L_1(y) = y'' - y = 1\]
+
+Resolviendo la parte homog\'{e}nea de $L_1$, tenemos como ra\'{i}ces de su polinomio caracter\'{i}stico $r^2 - r$, a $\pm 1$, por lo que su soluci\'{o}n complementaria es $y_c = c_1e^x + c_2e^{-x}$, con $c_1,c_2 \in \mathbb{R}$.
+
+Para resolver la parte no homog\'{e}nea y haciendo uso del m\'{e}todo del anulador, necesitamos un operador $M$ que vuelva homog\'{e}nea a nuestra ecuaci\'{o}n diferencial $L_1$. Si derivamos ambos lados para \'{e}sta, tenemos
+\[ ML(y) =  y''' - y' = 0\]
+lo que nos deja con una E.D. homog\'{e}nea, eso es en efecto, \textbf{el resultado de  aplicar el operando $M = D$} en ambos lados de la ecuaci\'{o}n de $L(y)$.\\
+
+Resolviendo $ML(y)$, tenemos como ra\'{i}ces a 0 y a $\pm 1$, que nos deja como soluci\'{o}n general de esta (o vi\'{e}ndolo desde otra perspectiva, la particular de $L(y)$) a $y_{p} = k_1 + k_2e^x + k_3e^{-x}$, con $k_1,k_2,k_3 \in \mathbb{R}$\\
+
+Pero los t\'{e}rminos $k_2e^x$ y $k_3e^{-x}$ ya est\'{a}n inclu\'{i}dos en la soluci\'{o}n complementaria $y_c$ de $L_1$, lo que nos deja con $y_p = k_1$.\\
+
+Encontremos ahora el coefieciente particular $k_1$ para $y_p$. 
+
+\begin{center}
+$y'_p  = 0$ \\
+$y''_p  = 0 $ \\
+\end{center}
+
+\[  y''_p - y_p = 1 \Leftrightarrow  (0) - k_1 = 1 \implies k_1 = -1\]
+
+Lo que nos deja con la soluci\'{o}n particular de $L_1$, $y_p = -1$ \\
+
+Sabiendo que la ecuaci\'{o}n general de $L(y)$ es, $y = y_c + y_p$, tenemos entonces
+\enboxar{\[ y = c_1e^x + c_2e^{-x}  - 1 \eqtab c_1,c_2 \in \mathbb{R} \]}
+\end{ejemplo}
+
+Habiendo resuelto la E.D. del \textbf{Ejemplo 1}, tan s\'{o}lamente aplicando el operador anulador $M = D$, es decir, el operador diferencial ($D$), fue un caso trivial, pero para algunas ecuaciones diferenciales este no es el caso, resumamos entonces, los diferentes anuladores para volver homog\'{e}nea a una ecuaci\'{o}n que no lo es.
+
+\begin{enumerate}
+\item Para anular una constante $C \in \mathbb{R}$, usar el operador $D$ (como en el Ejemplo 1)\\
+	Para anular $x^n,x^{n-1}, \dots, C$, usar $D^{n+1}$
+\item Para anular $e^{kx}$, usar el operador $(D - k)^{n+1}$\\
+	Para anular $x^ne^{kx}, x^{n-1}e^{kx}, \dots, e^{kx}$, usar el operador $(D-k)^{n+1}$
+\item Para anular  $\sen{kx}$ \'{o} $\cos{kx}$ (o las dos al mismo tiempo), usar el operador $(D^2 + k^2)$.\\
+	Para anular $x^n\sen{kx},x^n\cos{kx},x^{n-1}\sin{kx},\dots,\sen{kx},\cos{kx}$, usar el operador $(D^2 + k^2)^{n+1}$
+\item Para anular $e^{kx}\sen{bx}$ \'{o} $e^{kx}\cos{bx}$ (o las dos al mismo tiempo), necesitamos el operador cuyo polimonio caracter\'{i}stico tenga como ra\'{i}ces a $k \pm bi$, es decir, $(r - k - bi)(r - k + li) = r^2 - 2kr + (k^2 + b^2)$, en efecto el operador a usar es $(D^2 - 2kD + k^2 + b^2)$\\
+	Para anular $x^ne^{kx}\sen{bx}, x^ne^{kx}\cos{bx},x^{n-1}e^{kx}\sin{bx}, x^{n-1}e^{kx}\cos{bx},\dots,e^{kx}\sin{bx}$ \'{o} $e^{kx}\cos{bx}$, usar el operador $(D^2 - 2kD + k^2 + b^2)^{n+1}$
+\end{enumerate}
+
+\begin{ejemplo}
+Encontremos un operador diferencial lineal con coeficientes constantes, con el m\'{i}nimo grado posible y anula a la funci\'{o}n dada.
+
+\begin{itemize}
+\item $e^{8x} + e^{2x}: \eqtab (D-8)(D-2)$
+\item $2x^3 + 7x^2e^{-2x}: \eqtab D^4(D+2)^3$ 
+\item $2\sen{3x} + 3\cos{6x}: \eqtab (D^2+9)(D^2+36)$
+\item $3x^6 + 2x^4 + x^3 - 2: \eqtab D^7$
+\item $x\sen{2x} + \cos{2x} + 3: \eqtab D(D^2+4)^2$
+\item $x_x^2\cos{3x}+x\sen{2x}+\cos{5x}-\sen{5x}: \eqtab D^2(D^2+9)^3(D^2+4)^2(D^2+25)$
+\item $x^3+e^{-x} + e^x\sen{2x}: \eqtab	D^4(D+1)(D^2-2D+5)$
+\item $x^4e^x\sen{2x}+3xe^x\cos{2x}: \eqtab (D^2-2D+5)^5$
+\end{itemize}
+\end{ejemplo}
+
+\section{Resumen de los pasos a seguir}
+
+Los siguientes pasos explicados pueden variar alguna vez, pero cada uno va a ser parte del proceso de resolver la E.D eventualmente
+
+\begin{enumerate}
+\item Identificar la soluci\'{o}n complementaria de $L$, $y_c$ que consiste en la combinaci\'{o}n lineal de $l$ funciones linealmente independientes . Esta es, la soluci\'{o}n a la E.D. homog\'{e}nea relacionada.
+
+\item Obtener una nueva ecuaci\'{o}n diferencial lineal homog\'{e}nea aplicando el anulador m\'{i}nimo posible $M$ de la funci\'{o}n relacionada con $L$ a ambos lados de la E.D. original $L$, para obtener $ML(y)$ 
+	\begin{enumerate}
+		\item Resolver la nueva ecuaci\'{o}n homog\'{e}nea $ML(y)$, que tendr\'{a} $m+l$ funciones soluciones linealmente independientes.
+		\item Identificar cuales de esas funciones, ya est\'{a}n contenidas en $y_c$. 
+		\item Las funciones que no fueron "eliminadas" por el paso 2b, forman a $y_p$
+	\end{enumerate}
+	
+\item Sustitu\'{i}r los coeficientes indeterminados de $y_p$ en la E.D. original $L(y)$
+	\begin{enumerate}
+		\item Establecer $L(y_p = f(x)$ y expandir la igualdad
+		\item Comparar los coeficientes en las diferentes funciones de $L(y_p)$ con los de $f(x)$ y resolver para ellos, para obtener $y_p$ 
+	\end{enumerate}
+	
+\item Establecer la soluci\'{o}n general de $L(y)$, que es $y_c + y_p$.
+\end{enumerate} 
+
+\section{M\'{a}s Ejemplos}
+\begin{ejemplo}
+	Resolvamos 
+	\[ y'' - 3y' - 40y = 6e^{2x}\]
+Eso es,
+	\[ L_2(y) = (D^2 - 3D - 40)y = 6e^{2x}\]
+	
+Resolviendo la parte homog\'{e}nea de $L_2(y)$, tenemos que las ra\'{i}ces de su polinomio caracter\'{i}stico son, $8$ y $-5$.
+
+\[ y_c = c_1e^{8x} + c_2e^{-5x} \]
+
+Ahora, aplicamos el anulador $M_2 = (D - 2)$:
+
+\[ (D-2)(D-8)(D+5)y = (D-2)(6e^{2x})\]
+\[ ML(y) = (D-2)(D-8)(D+5)y = 0 \]
+
+La soluci\'{o}n a $ML_2(y)$ es entonces,
+	\[ y = Ae^{2x} + Be^{8x} + Ce^{-5x}\]
+En donde, el t\'{e}rmino $Ae^{2x}$ representa a $y_p$ y $y_c2 = Be^{8x} + Ce^{-5x}$, que ya est\'{a} inclu\'{i}do en $y_c$ de $L_2(y)$
+
+Resolviendo por el m\'{e}todo de coeficientes indeterminados entonces,
+
+\[ y_p = Ae^{2x} \]
+\[ y'_p = 2Ae^{2x} \]
+\[ y''_p = 4Ae^{x} \]
+
+\[ y''_p - 3y'_p - 40y_p = 6e^{2x} \Leftrightarrow (4Ae^{2x}) - 3(2Ae^{2x}) - 40(Ae^{2x}) = 6e^{2x} \]
+
+Resolviendo entonces para $A$,
+	\[ e^{2x}A(4-6-40) = 6e^{2x} \]
+	\[ \Leftrightarrow -42A = 6 \]
+	\[ \Leftrightarrow A = - \frac{1}{7} \]
+	
+Lo que nos deja, a la soluci\'{o}n general $y = y_p + y_c$
+	\enboxar{
+	\[ y = - \frac{1}{7}e^{2x} + Be^{8x} + Ce^{-5x}, \eqtab	B,C \in \mathbb{R} \]
+	}
+\end{ejemplo}
+
+\begin{ejemplo}
+	Resolviendo
+	\[ L_3(y) = (D^2 - 3D - 40)y = \sen{2x} \] 
+	
+Resolviendo la parte homog\'{e}nea, tenemos como ra\'{i}ces a 8 y -5 de nuevo, por lo que
+	\[ y_c3 = c_1e^{8x} + c_2e^{-5x}\]
+	
+Ahora, procediendo a anular, es decir, volviendo homog\'{e}nea a $L(y)$ y obteniendo $ML(y)$ al aplicar $M_3 = (D^2 + 4)$, tenemos
+
+	\[ ML_3(y) = (D^2+ 4)(D-8)(D+5)y = (D^2+4)\sin{2x}\]
+	\[ ML_3(y) = (D^2+ 4)(D-8)(D+5)y = 0 \]
+	
+De donde, tenemos como soluci\'{o}n particular
+	\[ y_p = A\sin{2x} + B\cos{2x} \]
+	
+Ya que, los t\'{e}rminos $e^{8x}$ y $e^{-5x}$ ya est\'{a}n inclu\'{i}dos en $y_c$ . Encontremos entonces los valores de $A$ y $B$
+
+\[ y_p = A\sen{2x} + B\cos{2x}\]
+\[ y'_p = 2A\sen{2x} - 2B\sen{2x} \]
+\[ y''_p = -4A\sen{2x} - 4B\cos{2x} \]
+
+Nos deja
+
+\[ (-4A\sen{2x} - 4B\cos{2x}) - 3(2A\cos{2x} - 2B\sen{2x} - 40(A\sen{2x} + B\cos{2x}) = \sen{2x} \]
+\[ (-4A + 6B - 40A)\sen{2x} + (-4B - 6A - 40B)\cos{2x} = \sen{2x} \]
+\[ (-44A + 6B)\sen{2x} + (-6A - 44B)\cos{2x} = \sen{2x} \]
+
+Y resolviendo el sistema de ecuaciones
+\[ -44A + 6B = 1\]
+\[ -6A - 44B = 0 \]
+
+nos deja con $A = -\frac{11}{493}$ y $B=\frac{3}{986}$ y
+\[ y_p = -\frac{11}{493}\sen{2x} + \frac{3}{986}\cos{2x}.\]
+
+Encontrando la soluci\'{o}n final $y = y_p + y_c$
+
+\enboxar{\[ y = -\frac{11}{493}\sen{2x} + \frac{3}{986}\cos{2x} + Ee^{8x} + Fe^{-5x} \eqtab E,F \in \mathbb{R}\]}
+\end{ejemplo}
+
+\begin{ejemplo}
+Resolviendo 
+\[ y'' + 6y' + 8y = e^{3x} - \sen{x} \]
+\[ L_4(y) = (D^2 + 6D + 8)y = e^{3x} - \sen{x} \]
+
+Resolviendo la parte homog\'{e}nea de $L_4$, tenemos como ra\'{i}ces del polinomio caracter\'{i}stico a $-4$ y $-2$
+\[ y_c = c_1e^{-4x} + c_2e^{-2x} \]
+
+Aplicando el anulador $M_4 = (D- 3)(D^+1)$, tenemos
+
+\[ (D-3)(D^2 + 1)(D^2+6D+8)y = (D-3)(D^2+1)(e^{3x} - \sen{x}) \]
+\[ ML_4(y) = (D-3)(D^2 + 1)(D^2+6D+8)y = 0 \]
+
+Resolviendo ahora, tenemos como ra\'{i}ces a 3, $\pm i$, -4 y -2. Las soluciones de las \'{u}ltimas dos ra\'{i}ces ya fueron inclu\'{i}das en $y_c$, lo que nos deja con 
+ \[y_p = c_3e^{3x} + c_4\cos{x} + c_5\sen{x}\]
+ 
+ Y resolviendo los coeficientes indeterminados
+ 
+ \[ y'_p = 3c_3e^{3x} - c_4\sen{x} + c_5\cos{x} \]
+ \[ y''_p = 9c_3e^{3x} - c_4\cos{x} - c_5\sen{x} \]
+ 
+ Implicando que
+ 
+ \[ 9c_3e^{3x} - c_4\cos{x} - c_5\sen{x} + 6(3c_3e^{3x} - c_4\sen{x} + c_5\cos{x}) + 8(c_3e^{3x}+c_4\cos{x} + c_5\sen{x}) = e^{3x}\]
+ 
+ \[ 9c_3e^{3x} - c_4\cos{x} - c_5\sen{x} + 18c_3e^{3x} - 6c_4\sen{x} + 6c_5\cos{x} + 8c_3e^{3x} + 8c_4\cos{x} + 8c_5\sen{x} = e^{3x}\]
+ 
+ \[ 35c_3e^{3x} + 7c_4\cos{x} - 6c_4\sen{x} + 7c_5\sen{x} + 6c_5\cos{x} = e^{3x} - \sen{x}\]
+ 
+Que nos deja con el sistema de ecuaciones siguiente
+
+\[ 35c_3 = 1\] 
+\[ 7c_4 + 6c_5 = 0\]
+\[ -6c_4 + 7c_5 = -1 \]
+
+y resolviendo, tenemos
+$c_3 = \frac{1}{35}, c_4 = -\frac{7}{35}, c_5=\frac{6}{65}$\\
+
+Finalmente, escribiendo la soluci\'{o}n general de $L_4$, $y = y_p + y_c$
+
+\enboxar{\[ y = c_1e^{-4x} + c_2e^{-2x} + \frac{1}{35}e^{3x} - \frac{7}{85}\cos{x} + \frac{6}{65}\sen{x} \]}
+\end{ejemplo}
+
+\section{Comparaci\'{o}n con otros m\'{e}todos}
+
+Primero que nada, vamos a resaltar desventajas y ventajas que tiene \'{e}ste m\'{e}todo
+\begin{itemize}
+	\item \textbf{Ventaja: }Para resolver la soluci\'{o}n particular de una E.D, es suficiente saber resolver ecuaciones de sistemas lineales y de conocer, el anulador a aplicar.
+	\item \textbf{Desventaja} Podr\'{i}an quedar un sistema de ecuaciones muy grande a resolver.
+\end{itemize}
+
+Comparando con el m\'{e}todo de superposici\'{o}n y el de variaci\'{o}n de par\'{a}metros
+\begin{itemize}
+\item \textbf{Variaci\'{o}n de par\'{a}metros vs. M\'{e}todo del anulador}: Vemos que en variaci\'{o}n de par\'{a}metros, de igual forma resolvemos una ecuaci\'{o}n homog\'{e}nea primero (para obtener la soluci\'{o}n complementaria). Luego, con el m\'{e}todo de variaci\'{o}n de par\'{a}metros hace falta calcular tres determinantes de matrices, y luego integrar, lo que hace m\'{a}s largo el proceso. \\
+
+La \'{u}nica ventaja ac\'{a} sobre el m\'{e}todo del anulador es que, no hace falta resolver sistemas de ecuaciones, pero a mi juicio, es mucho m\'{a}s preferible, resolverlo, que calcular determinantes de matrices o integrales (pueden ser matrices muy grandes, o integrales largas).
+
+\item \textbf{Superposici\'{o}n vs. M\'{e}todo del anulador} De igual forma, hay que resolver para la soluci\'{o}n homog\'{e}nea en ambos casos. En el m\'{e}todo de superposici\'{o}n, antes de llegar a resolver el sistema de ecuaciones (que se hace en ambos casos tambi\'{e}n), hay que tener una buena intuici\'{o}n para proponer la forma de $y_p$, cuando en el m\'{e}todo del anulador, solo hace falta resolver una ecuaci\'{o}n homog\'{e}nea.
+
+\end{itemize}
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+	\bibitem{Dougherty} 2007, Michael M. Dougherty,
+	   {\it Lecture 10: Nonhomogeneous Linear ODEs And The Annihilator Method}, Southwestern Oklahoma State University, Differential Equations 1.
+	   \bibitem{Zill} 2006, Dennis G. Zill, \it{Ecuaciones Diferenciales con aplicaciones de modelado}, Octava Edici\'{o}n.
+  \end{thebibliography}
+
+\end{document}

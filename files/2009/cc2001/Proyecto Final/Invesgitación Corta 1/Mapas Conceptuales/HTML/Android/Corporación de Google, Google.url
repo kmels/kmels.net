@@ -1,0 +1,5 @@
+http://www.google.es/corporate/
+[DEFAULT]
+BASEURL=http://www.google.es/corporate/
+[InternetShortcut]
+URL=http://www.google.es/corporate/

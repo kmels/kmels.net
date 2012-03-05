@@ -1,0 +1,5 @@
+http://s3.amazonaws.com/versionsapp/screenshots/browser.jpg
+[DEFAULT]
+BASEURL=http://s3.amazonaws.com/versionsapp/screenshots/browser.jpg
+[InternetShortcut]
+URL=http://s3.amazonaws.com/versionsapp/screenshots/browser.jpg

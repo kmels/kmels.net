@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>Binary Search Tree (Árboles de Búsqueda Binaria)</title>
+  <meta name="Generator" content="Cocoa HTML Writer" />
+  <meta name="CocoaVersion" content="949.54" />
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Lucida Grande; color: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Lucida Grande; color: #808080}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Lucida Grande; color: #000000; min-height: 13.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Georgia}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Georgia; color: #000000; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Georgia; color: #000000}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia; color: #000000}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia; color: #000000; min-height: 14.0px}
+    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Georgia; color: #000000}
+    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Georgia; color: #000000; min-height: 21.0px}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Georgia}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Georgia; min-height: 16.0px}
+    span.s1 {color: #808080}
+    span.s2 {color: #000000}
+    span.s3 {font: 14.0px Georgia}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Title:<span class="Apple-converted-space">  </span></span>Binary Search Tree (Árboles de Búsqueda Binaria)</p>
+<p class="p1"><span class="s1">Date:<span class="Apple-converted-space">  </span></span>August 31, 2009 7:19 AM</p>
+<p class="p2">Category:<span class="Apple-converted-space">  </span><span class="s2">CC2003</span></p>
+<p class="p1"><span class="s1">Tags:<span class="Apple-converted-space">  </span></span>Tree, Árboles</p>
+<p class="p3"><br /></p>
+<p class="p4"><b>Árbol de búsqueda Binaria</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6"><b>Definición:</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span><b>Iterador:</b> in-order</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(están Ordenados)</p>
+<p class="p8"><span class="s2"><span class="Apple-tab-span">	</span></span><b>Ejemplo:</b> <a href="http://cs.jhu.edu/~goodrich/dsa/trees/btree.html">http://cs.jhu.edu/~goodrich/dsa/trees/btree.html</a></p>
+<p class="p8"><span class="s2"><span class="Apple-tab-span">	</span></span><b>Complejidad de la búsqueda: </b>O(log(n))</p>
+<p class="p9"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><br /></p>
+<p class="p7">Utilizados en las bases de datos, pero no en esta forma.</p>
+<p class="p7">Funciona algo así como la búsqueda de raíces en el método de Newton. Descartando mitad primero, después la otra mitad y así hasta encontrar.<span class="Apple-converted-space"> </span></p>
+<p class="p9"><br /></p>
+<p class="p7"><b>Después</b>, vamos a poner la condición de que el árbol esté balanceado:</p>
+<p class="p9"><br /></p>
+<p class="p10"><b>Árbol Splay</b></p>
+<p class="p11"><b></b><br /></p>
+<p class="p6"><b>Definición:</b></p>
+<p class="p7"><span class="s3"><b><span class="Apple-tab-span">	</span></b></span>Son binarios, pero tienen un algoritmo adicional: Splay</p>
+<p class="p7"><span class="Apple-tab-span">	</span>Cumple con un que el papá sea mayor que los dos hijos.</p>
+<p class="p9"><br /></p>
+<p class="p7"><span class="Apple-tab-span">	</span>Cuando se vaya a insertar, buscar, eliminar: se usa Splay.</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>El que estabamos insertando: queda en la raíz del árbol</p>
+<p class="p9"><br /></p>
+<p class="p12"><b>Splay:</b></p>
+<p class="p13"><b></b><br /></p>
+<p class="p8"><span class="Apple-tab-span">	</span>Operación que tiene que ver con tres elementos: el nodo mismo, el papá y el abuelo.</p>
+<p class="p7"><span class="s2"><span class="Apple-tab-span">	</span></span>Ejemplo: <a href="http://www.cs.nyu.edu/algvis/java/SplayTree.html">http://www.cs.nyu.edu/algvis/java/SplayTree.html</a></p>
+<p class="p9"><br /></p>
+<p class="p4"><b>Red Black</b></p>
+<p class="p9"><span class="Apple-tab-span">	</span></p>
+<p class="p9"><br /></p>
+<p class="p9"><span class="Apple-tab-span">	</span></p>
+</body>
+</html>

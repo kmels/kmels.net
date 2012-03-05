@@ -1,0 +1,273 @@
+\documentclass{article}
+% Change "article" to "report" to get rid of page number on title page
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+\usepackage{algorithmic}
+\usepackage{upgreek}
+\usepackage{Tabbing}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{chngpage}
+\usepackage{soul,color}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{shapes.arrows,chains,positioning}
+\usepackage{fancybox}
+\usepackage{graphicx,float,wrapfig}
+
+% In case you need to adjust margins:
+\topmargin=-0.45in      %
+\evensidemargin=0in     %
+\oddsidemargin=0in      %
+\textwidth=6.5in        %
+\textheight=9.0in       %
+\headsep=0.25in         %
+
+% Homework Specific Information
+\newcommand{\hmwkTitle}{Tarea \#4}
+\newcommand{\hmwkDueDate}{Lunes,\ Abril\ 26,\ 2010}
+\newcommand{\hmwkClass}{CC3006}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{Bidkar Pojoy}
+\newcommand{\hmwkAuthorName}{Carlos E. L\'{o}pez Camey}
+
+
+\newcommand{\set}[1]{\{ #1  \}}
+\newcommand{\cerradura}[1]{cerradura$-$\epsilon(#1) }
+
+
+% Setup the header and footer
+\pagestyle{fancy}                                                       %
+\lhead{\hmwkAuthorName}                                                 %
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}  %
+\rhead{\firstxmark}                                                     %
+\lfoot{\lastxmark}                                                      %
+\cfoot{}                                                                %
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}}                          %
+\renewcommand\headrulewidth{0.4pt}                                      %
+\renewcommand\footrulewidth{0.4pt}                                      %
+
+% This is used to trace down (pin point) problems
+% in latexing a document:
+%\tracingall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some tools
+%\newcommand{\enterProblemHeader}[1]{\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak%
+   %                                 \nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak}%
+\newcommand{\exitProblemHeader}[1]{\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak%
+                                   \nobreak\extramarks{#1}{}\nobreak}%
+
+\newlength{\labelLength}
+\newcommand{\labelAnswer}[2]
+  {\settowidth{\labelLength}{#1}%
+   \addtolength{\labelLength}{0.25in}%
+   \changetext{}{-\labelLength}{}{}{}%
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#2\end{minipage}}%
+   \marginpar{\fbox{#1}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   \changetext{}{+\labelLength}{}{}{}}%
+
+\setcounter{secnumdepth}{0}
+\newcommand{\homeworkProblemName}{}%
+\newcounter{homeworkProblemCounter}%
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]%
+  {\stepcounter{homeworkProblemCounter}%
+   \renewcommand{\homeworkProblemName}{#1}%
+   \section{\homeworkProblemName}%
+   %\enterProblemHeader{\homeworkProblemName}
+   }%
+  %{\exitProblemHeader{\homeworkProblemName}}%
+
+\newcommand{\problemAnswer}[1]
+  {\noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}}%
+
+\newcommand{\problemLAnswer}[1]
+  {\labelAnswer{\homeworkProblemName}{#1}}
+
+\newcommand{\homeworkSectionName}{}%
+\newlength{\homeworkSectionLabelLength}{}%
+\newenvironment{homeworkSection}[1]%
+  {% We put this space here to make sure we're not connected to the above.
+   % Otherwise the changetext can do funny things to the other margin
+
+   \renewcommand{\homeworkSectionName}{#1}%
+   \settowidth{\homeworkSectionLabelLength}{\homeworkSectionName}%
+   \addtolength{\homeworkSectionLabelLength}{0.25in}%
+   \changetext{}{-\homeworkSectionLabelLength}{}{}{}%
+   \subsection{\homeworkSectionName}%
+   \enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]}}%
+  {\enterProblemHeader{\homeworkProblemName}%
+
+   % We put the blank space above in order to make sure this margin
+   % change doesn't happen too soon (otherwise \sectionAnswer's can
+   % get ugly about their \marginpar placement.
+   \changetext{}{+\homeworkSectionLabelLength}{}{}{}}%
+
+\newcommand{\sectionAnswer}[1]
+  {% We put this space here to make sure we're disconnected from the previous
+   % passage
+
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}%
+   \enterProblemHeader{\homeworkProblemName}\exitProblemHeader{\homeworkProblemName}%
+   \marginpar{\fbox{\homeworkSectionName}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   }%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make title
+\title{\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\\normalsize\vspace{0.1in}\small{Para entregar\ el\ \hmwkDueDate}\\\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}}
+\date{}
+\author{\textbf{\hmwkAuthorName}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{spacing}{1.1}
+\maketitle
+% Uncomment the \tableofcontents and \newpage lines to get a Contents page
+% Uncomment the \setcounter line as well if you do NOT want subsections
+%       listed in Contents
+%\setcounter{tocdepth}{1}
+%\tableofcontents
+
+
+%\newpage
+
+% When problems are long, it may be desirable to put a \newpage or a
+% \clearpage before each homeworkProblem environment
+\begin{homeworkProblem}[Defina una Gram\'{a}tica Independiente de Contexto. \textquestiondown Cu\'{a}l es el uso que se le da a dicho concepto dentro del an\'{a}lisis sint\'{a}ctico ?]
+
+Es una gram\'{a}tica $G$ que describe sistem\'{a}ticamente la s\'{i}ntaxis de un lenguaje. En el an\'{a}lisis sint\'{a}ctico, se usa $G$ para hacer salida al \'{a}rbol sint\'{a}ctico de la entrada, eso es, la salida del an\'{a}lisis sint\'{a}ctico.
+
+Formalmente, $G$ es una 4-tupla $\langle T,NT,S_i,P \rangle$ en donde:
+\begin{enumerate}
+\item $T$, es el conjunto de s\'{i}mbolos llamados "terminales" que son s\'{i}mbolos b\'{a}sicos que forman a cadenas.
+\item $NT$, es el conjundo de s\'{i}mbolos llamados "no terminales" que son variables sint\'{a}cticas que denotan un conjunto de cadenas. Imponen una estructura jerarquica en el lenguaje.
+\item $S_i$, un elemento de $NT$ que es llamado "s\'{i}mbolo inicial" y el conjunto de cadenas que denota es el lenguaje generado por $G$.
+\item $P$, el conjunto de producciones, que especifican la manera en que cada terminal o no terminal pueden ser combinados para formar cadenas. Cada producci\'{o}n consiste en 
+\begin{itemize}
+\item Un no terminal llamado "lado izquierdo" de la producci\'{o}n.
+\item El s\'{i}mbolo $->$ 
+\item Un cuerpo o "lado derecho" de la producci\'{o}n, que consiste en cero o m\'{a}s terminales y no terminales. Los s\'{i}mbolos del cuerpo describen una manera en los que las cadenas del no terminal pueden ser constru\'{i}das
+\end{itemize}
+\end{enumerate}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[\textquestiondown Cu\'{a}l es la diferencia entre una derivaci\'{o}n por la izquierda y una derivaci\'{o}n por la derecha? \textquestiondown Qu\'{e} relaci\'{o}n tiene dicha derivaci\'{o}n con un \'{a}rbol sint\'{a}ctico?]
+
+En una derivaci\'{o}n por la izquierda, el no-terminal m\'{a}s a la izquierda es escogido siempre en cada derivaci\'{o}n, en una derivaci\'{o}n por la derecha, se escoge siempre el no-terminal m\'{a}s a la derecha.
+
+El orden en el cual los s\'{i}mbolos fueron remplazados i.e. si fue una derivaci\'{o}n por la derecha o por la izquierda, genera el mismo \'{a}rbol sint\'{a}ctico ya que este ignora el mismo. Cada \'{a}rbol sint\'{a}ctico tiene asociada una sola y \'{u}nica derivaci\'{o}n por la izquierda y una \'{u}nica derivaci\'{o}n por la derecha.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[\textquestiondown Qu\'{e} es lo que significa que una gram\'{a}tica $G$ sea ambigua?]
+
+Que esa gram\'{a}tica produce dos o m\'{a}s \'{a}rboles sint\'{a}cticos diferentes para alguna cadena $w \in L(G)$ 
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Dada la siguiente gram\'{a}tica $G$, genera una nueva gram\'{a}tica G' no recursiva por la izquierda]
+
+\textbf{$G$:} \\
+\indent \indent $E -> E \textbf{+} T | T$ \\
+\indent \indent $T -> TF | F$\\
+\indent \indent $F -> \textbf{*}|\textbf{a}|\textbf{b}$\\
+
+\noindent \textbf{$G'$:} \\
+\indent \indent $E -> T E' $\\
+\indent \indent $E' -> \textbf{+}T E' | \epsilon $\\
+\indent \indent $T -> FT'$\\
+\indent \indent $T' -> F T' | \epsilon$\\
+\indent \indent $F -> \textbf{a} F' | \textbf{b} F' $\\
+\indent \indent $F' -> \textbf{*} F' | \epsilon $\\
+
+\end{homeworkProblem}
+ 
+\begin{homeworkProblem}[Dada la siguiente gram\'{a}tica de una producci\'{o}n, genere una gram\'{a}tica equivalente que se encuentre factorizada por la izquierda]
+
+\[ A -> \alpha \beta_1  | \alpha \beta_2\]
+
+Es equivalente a 
+\noindent \textbf{$G$:} \\
+\indent \indent $A -> \alpha A' $\\\\
+\indent \indent $A' -> \beta_1 | \beta_2$\\
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Dada una producci\'{o}n de la forma $A -> X_1X_2X_3\dots X_n$ dentro de una gram\'{a}tica $G \: LL(1)$ \textquestiondown Cu\'{a}l ser\'{i}a el algoritmo utilizado para procesar dicha producci\'{o}n durante un an\'{a}lisis sint\'{a}ctico por decenso recusrivo? ]
+
+Tenemos que tener una funci\'{o}n o m\'{e}todo para cada no-terminal $X_m -> X_j X_{j+1} \dots X_k$ con la siguiente estructura:
+
+\begin{algorithmic}
+\STATE Escoger una producci\'{o}n para $X_m$ con la ayuda de $FOLLOW(X_m)$ y $FIRST(X_m)$ i.e. con la tabla de predicciones.
+\FOR{$i = 1$ a $n$} 
+\IF {$X_i$ es no-terminal } 
+        \STATE llamar al m\'{e}todo $X_i$
+\ELSE
+        \IF {$X_i$ es terminal y es igual al s\'{i}mbolo de entrada actual $\alpha$}
+                \STATE avanzar el puntero de s\'{i}mbolo actual al siguiente s\'{i}mbolo
+         \ELSE
+         		\STATE error
+        \ENDIF
+\ENDIF 
+\ENDFOR
+\end{algorithmic}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[\textquestiondown Qu\'{e} m\'{e}todos de recuperaci\'{o}n de errores existen en un an\'{a}lisis sint\'{a}ctico predictivo? \textquestiondown C\'{o}mo utilizar\'{i}a los conjuntos $PRIMERO$ y $SIGUIENTE$ de una gram\'{a}tica $LL(1)$ para implementar dichos m\'{e}todos? ]
+
+\begin{enumerate}
+\item \textbf{Modo p\'{a}nico}: En este modo de recuperaci\'{o}n de errores, se trata se dejan pasar los s\'{i}mbolos  y se trata de encontrar una sincronizaci\'{o}n de tokens que puedan ser identificados.
+
+Para esto, utilizamos $SIGUIENTE$ Y $PRIMERO$ para tratar de encontrar esa sincronizaci\'{o}n de tokens, por ejemplo, con $PRIMERO$ podr\'{i}amos saber con que s\'{i}mbolo puede empezar alg\'{u}n no-terminal y tratar de hacer match con \'{e}l.
+
+\item \textbf{Recuperaci\'{o}n a nivel de fase}: En este modo, generamos la tabla de an\'{a}lisis sint\'{a}ctico con la ayuda de $PRIMERO$ y $SIGUIENTE$, eso es, una matriz con entradas $[M,\alpha]$ en donde $M$ es un no-terminal y $\alpha$ un terminal, y la entrada que se encuentra ahi, es la sustituci\'{o}n que tendr\'{i}amos que hacer explicitamente. Si la gram\'{a}tica no es ambigua, tendremos una \'{u}nica entrada para cada espacio.
+
+Si hay entradas vac\'{i}as en la matriz, significa que para el no-terminal $M$ con el s\'{i}mbolo de entrada $\alpha$ se produce un error. La recuperaci\'{o}n a nivel de fase consiste en tratar de llenar las entradas en blanco de esta matriz con apuntadores a rutinas de error, estas rutinas pueden modificar, insertar o eliminar s\'{i}mbolos de entrada seg\'{u}n convenga o incluso sacar de la pila no-terminales.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[\textquestiondown Cu\'{a}l es el objetivo principal del an\'{a}lisis sint\'{a}ctivo ascendente o $Bottom-Up \: Parsing$ ? ]
+
+Reconocer gram\'{a}ticas $LR$ i.e. produce una derivaci\'{o}n por la derecha. Estas gram\'{a}ticas no tienen que estar factorizadas por la izquierda y pueden ser recursivas por la izquierda tambi\'{e}n (al contrario del $Top-Down \: Parsing$).
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[\textquestiondown Defina lo que es un mango ($handle$) y discuta su uso dentro del an\'{a}lisis sint\'{a}ctico ascendente.]
+
+Es una cadena compuesta por s\'{i}mbolos gramaticales que hace $match$, es decir, concuerda con el cuerpo de la definici\'{o}n de un no-terminal. En el an\'{a}lisis sint\'{a}ctico ascendente, se usa para reducir las expresiones a no-terminales y as\'{i} encontrar el \'{a}rbol sint\'{a}ctico hasta llegar a la ra\'{i}z. La \'{u}ltima reducci\'{o}n de un parseo sint\'{a}ctico ascendente por ejemplo, tiene un mango $w$ que tiene que hacer match con el cuerpo del s\'{i}mbolo inicial $S$, eso es, existe una producci\'{o}n $S -> w$ para el s\'{i}mbolo inicial $S$.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[\textquestiondown Cu\'{a}les son las cuatro operaciones o acciones que puede tener un analizador sint\'{a}ctico por despazamiento-reducci\'{o}n, y en qu\'{e} consisten?]
+
+\begin {enumerate}
+\item \textbf{Desplazar $(Shift)$}: Meter el siguiente s\'{i}mbolo de la entrada en el stack.
+\item \textbf{Reducir}: Identificar en el elemento que est\'{a} hasta arriba del  stack un handler y remplazarlo por el no-terminal en la cadena de entrada.
+\item \textbf{Aceptar}: Aceptar que la entrada est\'{a} gramaticalmente corrrecta
+\item \textbf{Error}: Rechazar la entrada, ya que no est\'{a} gramaticalmente correcta, opcionalmente llamar a una rutina de recuperaci\'{o}n de errores.
+\end{enumerate}
+
+\end{homeworkProblem}
+\subsection{Bibliograf\'{i}a}
+
+\begin{itemize}
+\item \textit{Aho, Sethi, Ullman, Compilers: Principles, Techniques, and Tools, Addison-Wesley, 1986. ISBN 0-201-10088-6}
+\end{itemize}
+
+\end{spacing}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,1 @@
+public VectorList(){	entry = new Vector();} // end constructor

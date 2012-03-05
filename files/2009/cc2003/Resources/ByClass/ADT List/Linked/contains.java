@@ -1,0 +1,1 @@
+public boolean contains(Object anEntry){	boolean found = false;	Node currentNode = firstNode;	while (!found && (currentNode != null))		{		if (anEntry.equals(currentNode.data))			found = true;		else			currentNode = currentNode.next;	} // end while	return found;} // end contains

@@ -1,0 +1,1835 @@
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 1
+C:\GASCUL.ASM
+
+
+
+      1					     ;;	****************************************
+      2					     ;;	Author:	Carlos Eduardo Lopez Camey
+      3					     ;;	Date: Oct 6, 2009
+      4					     ;;	UVG-CC3005 - Programacion en Assembler
+      5					     ;;	PreLab7.ASM Pre	Laboratorio 7
+      6					     ;;
+      7					     ;;	Descripcion:
+      8					     ;;
+      9					     ;;	****************************************
+     10
+     11					     ;;
+     12					     ;;	Macros
+     13					     ;;
+     14					     CopiarCadena_De_A	     MACRO   DesdeCual,	EnCual,	Tamano
+     15						     MOV CL, Tamano
+     16						     CLD	     ; de izquierda a derecha
+     17						     LEA SI, DesdeCual	     ; copiar de
+     18						     LEA DI, EnCual  ; pegar en
+     19						     REP MOVSB	     ; copiar bytes Tamano veces
+     20					     ENDM
+     21
+     22					     EscribirMensaje MACRO   Cadena
+     23						     PUSH DX
+     24						     LEA DX, Cadena
+     25						     CALL Desplegar
+     26						     POP DX
+     27						     CALL ImprimirEnter
+     28					     ENDM
+     29
+     30					     LeerCadenaYGuardarEn MACRO	Lista
+     31						     PUSH AX
+     32						     PUSH DX
+     33
+     34						     LEA DX, Lista
+     35						     CALL LeerCadena
+     36
+     37						     POP DX
+     38						     POP AX
+     39					     ENDM
+     40
+     41					     getPosicionDeMemoria    MACRO   Fila,Columna
+     42						     PUSH AX
+     43						     PUSH DX
+     44						     PUSH BX
+     45
+     46						     XOR AX, AX
+     47						     MOV AL, ColumnaActual
+     48						     MOV DX, 0
+     49						     MOV BX, 12
+     50						     MUL BX			     ;AX:=AX*Op
+     51						     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria = Columna+
+     52				     en	memoria
+     53
+     54						     XOR AX, AX
+     55						     MOV AL, FilaActual
+     56						     MOV DX, 0
+     57						     MOV BX, 120
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 2
+C:\GASCUL.ASM
+
+
+
+     58						     MUL BX
+     59						     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+     60				     PosicionEn	Memoria	+ Fila en memoria
+     61
+     62						     POP BX
+     63						     POP DX
+     64						     POP AX
+     65					     ENDM
+     66
+     67					     SumarCeldas     MACRO   Fila, ColumnaInicial, ColumnaFinal, QueMatriz
+     68						     LOCAL ProcederASumar, IrASalir1, SumarCelda, Salirse
+     69						     PUSH CX
+     70						     PUSH AX
+     71						     PUSH BX
+     72
+     73						     MOV CL, ColumnaFinal
+     74						     CMP CL, ColumnaInicial
+     75						     JB	IrASalir1		     ;error
+     76						     JMP ProcederASumar
+     77
+     78				     IrASalir1:
+     79						     JMP Salirse
+     80
+     81				     ProcederASumar:
+     82						     SUB CL, ColumnaInicial	     ;cuantos
+     83
+     84						     MOV AL, ColumnaInicial
+     85						     MOV ColumnaActual,	AL
+     86						     MOV Resultado, 0
+     87
+     88				     SumarCelda:
+     89						     guardarNumeroDeLaCelda_En	     FilaActual, ColumnaActual,	Numero,	QueMatriz
+     90						     MOV AL, Numero
+     91						     ADD Resultado, AL
+     92						     MOV DL, ColumnaFinal
+     93						     ADD DL, 1
+     94						     INC ColumnaActual
+     95						     CMP ColumnaActual,	DL
+     96						     JNE     SumarCelda
+     97
+     98				     Salirse:
+     99						     POP BX
+    100						     POP AX
+    101						     POP CX
+    102					     ENDM
+    103
+    104					     guardarNumeroDeLaCelda_En	     MACRO   FilaActual, ColumnaActual,	Numero,	QueMatriz
+    105						     PUSH BX
+    106						     PUSH AX
+    107						     getPosicionDeMemoria    FilaActual, ColumnaActual
+    108						     MOV BX, PosicionDeMemoria
+    109						     MOV AL, QueMatriz[BX+1]
+    110						     MOV Numero, AL
+    111						     POP AX
+    112						     POP BX
+    113					     ENDM
+    114					     ConvertirCadenaANumero	     MACRO   Cadena, Longitud, Numero
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 3
+C:\GASCUL.ASM
+
+
+
+    115						     Local Mult, Calcular1, Terminar
+    116						     PUSH CX
+    117						     PUSH BX
+    118						     PUSH DX
+    119						     PUSH AX
+    120
+    121						     MOV CL, 1
+    122
+    123						     ; calcular	unidades
+    124						     XOR BX, BX
+    125						     MOV BL, Longitud
+    126						     MOV DL, Cadena[BX-1]
+    127						     MOV Numero, DL
+    128						     SUB Numero, 30H
+    129
+    130				     Calcular1:
+    131						     PUSH CX
+    132						     PUSH DX
+    133
+    134						     MOV AL, 1
+    135				     Mult:
+    136						     MOV DL, 10
+    137						     MOV AH, 0
+    138						     MUL DL
+    139						     DEC CL
+    140						     CMP CL, 0
+    141						     JE	Terminar
+    142						     JMP Mult
+    143
+    144				     Terminar:
+    145						     POP DX
+    146						     POP CX
+    147
+    148						     MOV TemporalWord, AX		     ; almacenar 1*10 CX veces,	en	    +
+    149				     Temporalword
+    150
+    151						     XOR BX, BX
+    152						     MOV BL, Longitud
+    153						     SUB BL, CL
+    154
+    155						     MOV AL, Cadena[BX-1]
+    156						     SUB AL, 30H
+    157						     MOV AH, 0					     ;para que multiplique
+    158						     MUL TemporalWord			     ;Op=byte: AX:=AL*Op
+    159
+    160						     ;si AX es 0, significa que	el numero es 0,	entonces añadir 10^(CX-1)
+    161						     CMP AX, 0
+    162						     JE	EsCero
+    163						     JMP Sumarle
+    164				     EsCero:
+    165						     MOV AX, TemporalWord
+    166				     Sumarle:
+    167						     ADD WORD PTR Numero,  AX
+    168
+    169						     INC CL
+    170						     CMP CL, Longitud
+    171						     JNE Calcular1
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 4
+C:\GASCUL.ASM
+
+
+
+    172
+    173						     MOV AL, Numero
+    174						     POP AX
+    175						     POP DX
+    176						     POP BX
+    177						     POP CX
+    178					     ENDM
+    179
+    180
+    181					     ConvertirNumeroACadena		     MACRO   Numero  ,	     Cadena
+    182						     LOCAL Calcular,MultiplicarOtravez,TerminarHombre
+    183						     PUSH AX			     ; para multiplicar	y dividir
+    184						     PUSH CX			     ; contador
+    185						     PUSH DX			     ; usado para multiplicar con contador
+    186						     PUSH BX			     ; Indice
+    187						     MOV CX, 4			     ;maximo numero a escribir es 2^16-1, es decir  +
+    188				     65535 (5 digitos)
+    189						     MOV BX, 0
+    190				     Calcular:							     ;a	hacer 10 ^ CX
+    191						     PUSH CX
+    192						     PUSH DX
+    193						     MOV AX, 1				     ; AX = 1
+    194				     MultiplicarOtraVez:
+    195						     MOV DX, 10
+    196						     MUL DX				     ; AX = DX * AX, i.e. AX = 10*AX, CX    +
+    197				     veces
+    198						     DEC CX
+    199						     CMP CX, 0
+    200
+    201						     JE	TerminarHombre
+    202						     JMP MultiplicarOtraVez
+    203				     TerminarHombre:
+    204						     POP DX
+    205						     POP CX
+    206
+    207						     MOV TemporalWord, AX
+    208						     MOV AX, WORD PTR Numero		     ;Op=word: AX:=DX:AX / Op, DX = resto
+    209						     MOV DX, 0
+    210						     DIV     TemporalWord	     ; Es decir, AX = Numero / (10 ^ CX), DX = resto
+    211						     MOV WORD PTR Numero, DX
+    212
+    213						     ADD AX, 30H			     ;AX = Num / (10 ^ CX) + 30H
+    214						     MOV WORD PTR Cadena[BX],  AX
+    215
+    216						     INC BX
+    217						     DEC CX
+    218						     CMP CX, 0
+    219						     JNZ Calcular
+    220						     ; Las unidades quedaron en	PosicionDeMemoria
+    221						     ADD Numero, 30H
+    222						     MOV AX, WORD PTR Numero
+    223						     MOV WORD PTR Cadena[BX],  AX
+    224						     MOV Cadena[BX+1], 24H		     ; el $
+    225
+    226						     POP BX
+    227						     POP DX
+    228						     POP CX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 5
+C:\GASCUL.ASM
+
+
+
+    229						     POP AX
+    230					     ENDM
+    231
+    232					     ModificarContenidoDeCelda_ConNumero     MACRO   Fila,Columna, QueNumero, QueMatriz
+    233						     PUSH BX
+    234						     PUSH AX
+    235						     getPosicionDeMemoria    Fila, Columna
+    236						     MOV BX, PosicionDeMemoria
+    237
+    238						     MOV QueMatriz[BX],	2		     ;especificar tipo numerico
+    239						     MOV AL, QueNumero
+    240						     MOV QueMatriz[BX+1], AL
+    241
+    242						     POP AX
+    243						     POP BX
+    244					     ENDM
+    245
+    246					     ModificarContenidoDeCelda_ConCadena     MACRO   Fila,Columna, ArregloDeLaCadena,	    +
+    247				     QueMatriz
+    248						     ;LOCAL CopiarCaracter1, copiarElProximo, SalirDeAqui
+    249						     PUSH BX
+    250						     PUSH CX
+    251						     PUSH DI
+    252						     PUSH AX
+    253
+    254
+    255
+    256						     POP AX
+    257						     POP DI
+    258						     POP CX
+    259						     POP BX
+    260					     ENDM
+    261
+    262					     EscribirContenidoDeCelda	     MACRO   Fila,Columna, QueMatriz
+    263						     LOCAL Salir, Esdatonumerico,escadena,irasalir
+    264						     PUSH BX
+    265						     PUSH DX
+    266						     getPosicionDeMemoria Fila,Columna
+    267
+    268						     MOV BX, PosiciondeMemoria
+    269						     MOV DL, QueMatriz[BX]	     ;obtener tipo
+    270
+    271						     CMP DL, 0					     ;es vacio?
+    272						     JE	IrASalir				     ;si ,salir
+    273
+    274						     CMP DL, 2					     ;esnumero?
+    275						     JE	EsDatoNumerico			     ;si, es dato numercio
+    276
+    277						     CMP DL, 1
+    278						     JE	esCadena
+    279
+    280						     JMP IrASalir
+    281				     esCadena:						     ;es cadena
+    282						     EscribirMensaje kmels_Msg_Cadena
+    283
+    284						     MOV BX, PosiciondeMemoria
+    285						     EscribirMensaje QueMatriz[BX+1]
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 6
+C:\GASCUL.ASM
+
+
+
+    286
+    287						     ;forma 2
+    288						     CopiarCadena_De_A QueMatriz[BX+1],	DiezCaracteresTempArreglo, 10
+    289						     EscribirMensaje DiezCaracteresTempArreglo
+    290
+    291						     JMP Salir
+    292				     IrASalir:
+    293						     EscribirMensaje kmels_Msg_Noesnada
+    294						     JMP Salir
+    295
+    296				     esDatoNumerico:
+    297						     EscribirMensaje kmels_Msg_Numerico
+    298						     MOV BX, PosicionDeMemoria
+    299
+    300						     guardarNumeroDeLaCelda_En	     Fila, Columna, Numero, QueMatriz
+    301						     ConvertirNumeroACadena  Numero, DiezCaracteresTempArreglo
+    302						     EscribirMensaje DiezCaracteresTempArreglo
+    303
+    304				     Salir:
+    305						     POP DX
+    306						     POP BX
+    307					     ENDM
+    308
+    309
+    310					     kmels_PedirFilaYColumna MACRO
+    311						     PUSH DX
+    312						     EscribirMensaje kmels_Msg_PedirFila
+    313						     LEA DX, ListaDe1CaracterTemp
+    314						     CALL    LeerCadena
+    315						     CALL ImprimirEnter
+    316						     ; Pasarlo a FilaActual
+    317						     MOV DL, CaracterTempArreglo
+    318						     MOV     FilaActual, DL
+    319						     SUB     FilaActual, 30H
+    320
+    321						     EscribirMensaje kmels_Msg_PedirColumna
+    322						     LEA DX, ListaDe1CaracterTemp
+    323						     CALL    LeerCadena
+    324						     CALL ImprimirEnter
+    325
+    326						     ; Pasarlo a FilaActual
+    327
+    328						     MOV DL, CaracterTempArreglo
+    329						     MOV     ColumnaActual, DL
+    330						     SUB     ColumnaActual, 30H
+    331						     POP DX
+    332					     ENDM
+    333
+    334					     kmels_PedirFila_y_columns_inicial_y_final	     MACRO
+    335						     PUSH DX
+    336
+    337						     EscribirMensaje kmels_Msg_PedirFila
+    338						     LEA DX, ListaDe1CaracterTemp
+    339						     CALL    LeerCadena
+    340						     CALL ImprimirEnter
+    341						     ; Pasarlo a FilaActual
+    342						     MOV DL, CaracterTempArreglo
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 7
+C:\GASCUL.ASM
+
+
+
+    343						     MOV     FilaActual, DL
+    344						     SUB     FilaActual, 30H
+    345
+    346						     EscribirMensaje kmels_Msg_PdrColumnI
+    347						     LEA DX, ListaDe1CaracterTemp
+    348						     CALL    LeerCadena
+    349						     CALL ImprimirEnter
+    350						     ; Pasarlo a FilaActual
+    351						     MOV DL, CaracterTempArreglo
+    352						     MOV     ColumnaInicial, DL
+    353						     SUB     ColumnaInicial, 30H
+    354
+    355						     EscribirMensaje kmels_Msg_PdrColumnF
+    356						     LEA DX, ListaDe1CaracterTemp
+    357						     CALL    LeerCadena
+    358						     CALL ImprimirEnter
+    359						     ; Pasarlo a FilaActual
+    360						     MOV DL, CaracterTempArreglo
+    361						     MOV     ColumnaFinal, DL
+    362						     SUB     ColumnaFinal, 30H
+    363
+    364						     POP DX
+    365					     ENDM
+    366
+    367					     InicializarMatriz	     MACRO   QueMatriz
+    368						     LOCAL InitCelda
+    369						     ; inicializar matriz
+    370						     MOV BX, 11
+    371						     MOV DI, 0
+    372				     InitCelda:
+    373						     MOV QueMatriz[BX],	24H
+    374						     MOV QueMatriz[DI],	0H
+    375						     ADD BX, 12
+    376						     ADD DI, 12
+    377						     CMP BX, 719
+    378						     JNE InitCelda
+    379					     ENDM
+    380
+    381					     ;;	Fin de Macros
+    382	0000				     .model small
+    383	0000				     .stack 64
+    384	0000				     .data
+    385
+    386					     ;;	----------------------------------------
+    387					     ;;	Definicion de algunos datos
+    388					     ;;	----------------------------------------
+    389
+    390	0000  49 6E 67 72 65 73	61+	     InstruccionesLabel	     DB	     'Ingresar combinacion de teclas','$'  ;Instrucciones   +
+    391	      72 20 63 6F 6D 62	69+  para el usuario
+    392	      6E 61 63 69 6F 6E	20+
+    393	      64 65 20 74 65 63	6C+
+    394	      61 73 24
+    395	001F  0D 0A 24			     TeclaEnter		     DB	     0DH,0AH,'$'
+    396
+    397	0022				     ListaDe1CaracterTemp		     LABEL   BYTE		     ; Inicio de la +
+    398				     lista de parametros
+    399	0022  02			     CaraacterTempLongitudMaxima	     DB	     2					    +
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 8
+C:\GASCUL.ASM
+
+
+
+    400				     ; Longitud	maxima de la cadena
+    401	0023  ??			     CaracterTempLongitudDeLaCadena  DB	     ?						    +
+    402				     ; Longitud	real de	la cadena
+    403	0024  02*(20) 24		     CaracterTempArreglo			     DB	     2 DUP (' '),'$'		    +
+    404				     ; Arreglo de caracteres
+    405
+    406
+    407	0027				     ListaDe10CaracteresTemp		     LABEL   BYTE		     ; Inicio de la +
+    408				     lista de parametros
+    409	0027  0B			     DiezCaracteresTempMaxLen		     DB	     11					    +
+    410				     ; Longitud	maxima de la cadena
+    411	0028  ??			     DiezCaracteresTempLenReal		     DB	     ?					    +
+    412				     ; Longitud	real de	la cadena
+    413	0029  0B*(20) 24		     DiezCaracteresTempArreglo		     DB	     11	DUP (' '),'$'			    +
+    414				     ; Arreglo de caracteres
+    415	0035  ????			     NumeroTemporal				     DW	     ?
+    416	0037  ??			     NumeroTemporalB				     DB	     ?
+    417
+    418	0038  ??			     Numero			     DB	     ?
+    419	0039  ????			     PosicionDeMemoria	     DW	     ?
+    420	003B  ??			     FilaActual			     DB	     ?
+    421	003C  ??			     ColumnaActual	     DB	     ?
+    422	003D  ??			     ColumnaInicial	     DB	     ?
+    423	003E  ??			     ColumnaFinal	     DB	     ?
+    424	003F  ??			     Resultado			     DB	     ?
+    425
+    426
+    427	0040  ????			     ColumnaEnMemoria	     DW	     ?			     ;para el calculo de	    +
+    428				     getposicionenmemoria
+    429	0042  ????			     FilaEnMemoria	     DW	     ?			     ;para el calculo de	    +
+    430				     getposicionenmemoria
+    431	0044  ????			     PaginaActual    DW	     ?
+    432	0046  02D0*(20)			     Pagina1	     DB	     720 DUP  (' ')
+    433	0316  02D0*(20)			     Pagina2	     DB	     720 DUP  (' ')
+    434	05E6  02D0*(20)			     Pagina3	     DB	     720 DUP  (' ')
+    435	08B6  ????			     TemporalWord    DW	     ?
+    436
+    437					     ; kmels!
+    438
+    439	08B8  4D 61 6E 65 6A 6F	20+	     Msg_IrAManejoDeCelda		     DB	     'Manejo de	celda','$'		    +
+    440	      64 65 20 63 65 6C	64+  ; Manejo de celda
+    441	      61 24
+    442	08C8  46 75 6E 63 69 6F	6E+	     Msg_IrAFunciones		     DB	     'Funciones	$'
+    443	      65 73 20 24
+    444	08D3  41 72 63 68 69 76	6F+	     Msg_IrAArchivo	     DB	     'Archivo $'
+    445	      20 24
+    446	08DC  41 79 75 64 61 20	24	     Msg_IrAAyuda	     DB	     'Ayuda $'
+    447	08E3  46 69 6E 64 20 79	20+	     Msg_IrAFindYReplace     DB	     'Find y replace $'
+    448	      72 65 70 6C 61 63	65+
+    449	      20 24
+    450	08F3  53 61 6C 69 72 20	24	     Msg_IrASalir	     DB	     'Salir $'
+    451
+    452	08FA  49 6E 67 72 65 73	61+	     Msg_ManejoDeCelda1	     DB	     'Ingresar/Modificar Celda (String)$'
+    453	      72 2F 4D 6F 64 69	66+
+    454	      69 63 61 72 20 43	65+
+    455	      6C 64 61 20 28 53	74+
+    456	      72 69 6E 67 29 24
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 9
+C:\GASCUL.ASM
+
+
+
+    457	091C  49 6E 67 72 65 73	61+	     Msg_ManejoDeCelda1_1    DB	     'Ingresar el string de 10 letras pues$'
+    458	      72 20 65 6C 20 73	74+
+    459	      72 69 6E 67 20 64	65+
+    460	      20 31 30 20 6C 65	74+
+    461	      72 61 73 20 70 75	65+
+    462	      73 24
+    463	0941  49 6E 67 72 65 73	61+	     Msg_ManejoDeCelda2	     DB	     'Ingresar/Modificar Celda (Numero)$'
+    464	      72 2F 4D 6F 64 69	66+
+    465	      69 63 61 72 20 43	65+
+    466	      6C 64 61 20 28 4E	75+
+    467	      6D 65 72 6F 29 24
+    468	0963  49 6E 67 72 65 73	65+	     Msg_IngresarNumero	     DB	     'Ingrese numero pes$'
+    469	      20 6E 75 6D 65 72	6F+
+    470	      20 70 65 73 24
+    471	0976  43 61 6D 62 69 6F	20+	     Msg_ManejoDeCelda3	     DB	     'Cambio de	atributo$'
+    472	      64 65 20 61 74 72	69+
+    473	      62 75 74 6F 24
+    474	0989  45 73 63 72 69 62	69+	     Msg_ManejoDeCelda4	     DB	     'Escribir/Mostrar Celda$'
+    475	      72 2F 4D 6F 73 74	72+
+    476	      61 72 20 43 65 6C	64+
+    477	      61 24
+    478	09A0  49 6E 67 72 65 73	65+	     Msg_IngresarCadena	     DB	     'Ingrese cadena $'
+    479	      20 63 61 64 65 6E	61+
+    480	      20 24
+    481
+    482	09B0  53 75 6D 61 72 24		     Msg_Funciones1	     DB	     'Sumar$'
+    483	09B6  50 72 6F 6D 65 64	69+	     Msg_Funciones2	     DB	     'Promedio$'
+    484	      6F 24
+    485
+    486	09BF  50 72 65 73 69 6F	6E+	     PresionoFuncion	     DB	     'Presiono Funcion','$'
+    487	      6F 20 46 75 6E 63	69+
+    488	      6F 6E 24
+    489	09D0  4E 4F 20 50 72 65	73+	     NOPresionoFuncion	     DB	     'NO Presiono Funcion','$'
+    490	      69 6F 6E 6F 20 46	75+
+    491	      6E 63 69 6F 6E 24
+    492
+    493	09E4  46 69 6C 61 3A 20	24	     kmels_Msg_PedirFila	     DB	     'Fila: $'
+    494	09EB  43 6F 6C 75 6D 6E	61+	     kmels_Msg_PedirColumna  DB	     'Columna: $'
+    495	      3A 20 24
+    496	09F5  43 6F 6C 75 6D 6E	61+	     kmels_Msg_PdrColumnI    DB	     'Columna inicial ','$'
+    497	      20 69 6E 69 63 69	61+
+    498	      6C 20 24
+    499	0A06  43 6F 6C 75 6D 6E	61+	     kmels_Msg_PdrColumnF    DB	     'Columna final ','$'
+    500	      20 66 69 6E 61 6C	20+
+    501	      24
+    502
+    503	0A15  ????			     kmels_aDondeSaltar		     DW	     ?
+    504
+    505	0A17  4E 6F 20 65 73 20	6E+	     kmels_Msg_Noesnada		     DB	     'No es nada$'
+    506	      61 64 61 24
+    507	0A22  4E 75 6D 65 72 69	63+	     kmels_Msg_Numerico		     DB	     'Numerico $'
+    508	      6F 20 24
+    509	0A2C  43 61 64 65 6E 61	20+	     kmels_Msg_Cadena		     DB	     'Cadena $'
+    510	      24
+    511
+    512	0A34  50 72 65 73 69 6F	6E+	     PresionoCombinacionIncorrecta   DB	     'Presiono Combinacion Incorrecta','$'
+    513	      6F 20 43 6F 6D 62	69+
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 10
+C:\GASCUL.ASM
+
+
+
+    514	      6E 61 63 69 6F 6E	20+
+    515	      49 6E 63 6F 72 72	65+
+    516	      63 74 61 24
+    517
+    518
+    519
+    520
+    521					     ;;	----------------------------------------
+    522					     ;;	Inicio del codigo
+    523					     ;;	----------------------------------------
+    524
+    525	0A54				     .CODE
+    526
+    527					     ;;	----------------------------------------
+    528					     ;;	Procedimiento para leer	la cadena
+    529					     ;;	----------------------------------------
+    530	0000				     LeerCadena	PROC NEAR
+    531	0000  B4 0A				     MOV AH,0AH
+    532	0002  CD 21				     INT 21H
+    533	0004  C3				     RET
+    534	0005				     LeerCadena	ENDP
+    535
+    536					     ;;	----------------------------------------
+    537					     ;;	Procedimiento para desplegar
+    538					     ;;	----------------------------------------
+    539	0005				     Desplegar PROC NEAR
+    540	0005  B4 09				     MOV AH, 09H     ; Peticion	para desplegar
+    541	0007  CD 21				     INT 21H	     ; llama al	DOS
+    542	0009  C3				     RET
+    543	000A				     Desplegar ENDP
+    544
+    545					     ;;	----------------------------------------
+    546					     ;;	Procedimiento para escribir un enter (caracter 13)
+    547					     ;;	----------------------------------------
+    548
+    549	000A				     ImprimirEnter   PROC NEAR
+    550	000A  BA 001Fr				     LEA DX, TeclaEnter
+    551	000D  E8 FFF5				     CALL Desplegar
+    552	0010  C3				     RET
+    553	0011				     ImprimirEnter   ENDP
+    554
+    555
+    556	0011				     PedirTeclaYSaltar	     PROC    NEAR
+    557
+    558
+    559	0011			     PedirTecla:
+    560						     EscribirMensaje InstruccionesLabel
+1   561	0011  52				     PUSH DX
+1   562	0012  BA 0000r				     LEA DX, InstruccionesLabel
+1   563	0015  E8 FFED				     CALL Desplegar
+1   564	0018  5A				     POP DX
+1   565	0019  E8 FFEE				     CALL ImprimirEnter
+    566	001C  B4 00				     MOV AH,00H	     ; PeticiÃ³n entrada del teclado
+    567	001E  CD 16				     INT 16H	     ; Llama a DOS
+    568	0020  3C 00				     CMP     AL, 0   ; Â¿Se presionÃ³ tecla	de funciÃ³n?
+    569	0022  75 52				     JNZ     IrASalir	     ; no, es un caracter ASCII
+    570
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 11
+C:\GASCUL.ASM
+
+
+
+    571	0024  80 FC 3B				     CMP AH, 3BH		     ; presiono	f1 ?
+    572	0027  BA 0084r				     LEA DX, IrAManejoDeCelda
+    573	002A  89 16 0A15r			     MOV kmels_aDondeSaltar, DX
+    574	002E  FF 26 0A15r			     JMP kmels_aDondeSaltar	; si
+    575
+    576	0032  80 FC 2E				     CMP AH, 2EH			     ; Presiono	Alt+C?
+    577	0035  74 4D				     JE	IrAManejoDecelda	     ;si
+    578
+    579	0037  80 FC 3C				     CMP     AH, 3CH			     ;Presiono F2?
+    580	003A  74 55				     JE	     IrAFunciones	     ; si
+    581	003C  80 FC 21				     CMP     AH, 21H			     ;Presiono Alt+F
+    582	003F  74 50				     JE	     IrAFunciones	     ; si
+    583
+    584	0041  80 FC 3D				     CMP     AH, 3DH			     ;Presiono F3?
+    585	0044  74 59				     JE	     IrAArchivo			     ; si
+    586	0046  80 FC 1E				     CMP     AH, 1EH			     ;Presiono Alt+A
+    587	0049  74 54				     JE	     IrAArchivo			     ; si
+    588
+    589	004B  80 FC 3E				     CMP     AH, 3EH			     ;Presiono F4?
+    590	004E  74 5D				     JE	     IrAAyuda			     ; si
+    591	0050  80 FC 15				     CMP     AH, 15H			     ;Presiono Alt+F
+    592	0053  74 58				     JE	     IrAAyuda			     ; si
+    593
+    594	0055  80 FC 3F				     CMP AH, 3FH			     ;Presiono F5?
+    595	0058  74 61				     JE	IrAFindYReplace		     ; si
+    596	005A  80 FC 13				     CMP     AH, 13H			     ; Presiono	Alt+R?
+    597	005D  74 5C				     JE	     IrAFindYReplace	     ; si
+    598
+    599	005F  80 FC 40				     CMP     AH, 40H			     ; Presiono	F6 ?
+    600	0062  74 12				     JE	     IrASalir			     ; si
+    601	0064  80 FC 1F				     CMP AH, 1FH			     ; Presiono	Alt+S?
+    602	0067  74 0D				     JE	IrASalir			     ; si
+    603
+    604						     EscribirMensaje PresionoCombinacionIncorrecta
+1   605	0069  52				     PUSH DX
+1   606	006A  BA 0A34r				     LEA DX, PresionoCombinacionIncorrecta
+1   607	006D  E8 FF95				     CALL Desplegar
+1   608	0070  5A				     POP DX
+1   609	0071  E8 FF96				     CALL ImprimirEnter
+    610	0074  EB 9B				     JMP PedirTecla
+    611
+    612	0076			     IrASalir:
+    613						     EscribirMensaje Msg_IrASalir
+1   614	0076  52				     PUSH DX
+1   615	0077  BA 08F3r				     LEA DX, Msg_IrASalir
+1   616	007A  E8 FF88				     CALL Desplegar
+1   617	007D  5A				     POP DX
+1   618	007E  E8 FF89				     CALL ImprimirEnter
+    619	0081  E9 06C3				     JMP Salir
+    620
+    621	0084			     IrAManejoDeCelda:
+    622						     EscribirMensaje Msg_IrAManejoDeCelda
+1   623	0084  52				     PUSH DX
+1   624	0085  BA 08B8r				     LEA DX, Msg_IrAManejoDeCelda
+1   625	0088  E8 FF7A				     CALL Desplegar
+1   626	008B  5A				     POP DX
+1   627	008C  E8 FF7B				     CALL ImprimirEnter
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 12
+C:\GASCUL.ASM
+
+
+
+    628	008F  EB 38				     JMP ManejoDeCelda
+    629
+    630	0091			     IrAFunciones:
+    631						     EscribirMensaje Msg_IrAFunciones
+1   632	0091  52				     PUSH DX
+1   633	0092  BA 08C8r				     LEA DX, Msg_IrAFunciones
+1   634	0095  E8 FF6D				     CALL Desplegar
+1   635	0098  5A				     POP DX
+1   636	0099  E8 FF6E				     CALL ImprimirEnter
+    637	009C  E9 03FD				     JMP Funciones
+    638
+    639	009F			     IrAArchivo:
+    640						     EscribirMensaje Msg_IrAArchivo
+1   641	009F  52				     PUSH DX
+1   642	00A0  BA 08D3r				     LEA DX, Msg_IrAArchivo
+1   643	00A3  E8 FF5F				     CALL Desplegar
+1   644	00A6  5A				     POP DX
+1   645	00A7  E8 FF60				     CALL ImprimirEnter
+    646	00AA  E9 FF64				     JMP PedirTecla
+    647
+    648	00AD			     IrAAyuda:
+    649						     EscribirMensaje Msg_IrAAyuda
+1   650	00AD  52				     PUSH DX
+1   651	00AE  BA 08DCr				     LEA DX, Msg_IrAAyuda
+1   652	00B1  E8 FF51				     CALL Desplegar
+1   653	00B4  5A				     POP DX
+1   654	00B5  E8 FF52				     CALL ImprimirEnter
+    655	00B8  E9 FF56				     JMP PedirTecla
+    656
+    657	00BB			     IrAFindYReplace:
+    658						     EscribirMensaje Msg_IrAFindYReplace
+1   659	00BB  52				     PUSH DX
+1   660	00BC  BA 08E3r				     LEA DX, Msg_IrAFindYReplace
+1   661	00BF  E8 FF43				     CALL Desplegar
+1   662	00C2  5A				     POP DX
+1   663	00C3  E8 FF44				     CALL ImprimirEnter
+    664	00C6  E9 FF48				     JMP PedirTecla
+    665
+    666	00C9			     ManejoDeCelda:
+    667						     EscribirMensaje Msg_ManejoDeCelda1
+1   668	00C9  52				     PUSH DX
+1   669	00CA  BA 08FAr				     LEA DX, Msg_ManejoDeCelda1
+1   670	00CD  E8 FF35				     CALL Desplegar
+1   671	00D0  5A				     POP DX
+1   672	00D1  E8 FF36				     CALL ImprimirEnter
+    673						     EscribirMensaje Msg_ManejoDeCelda2
+1   674	00D4  52				     PUSH DX
+1   675	00D5  BA 0941r				     LEA DX, Msg_ManejoDeCelda2
+1   676	00D8  E8 FF2A				     CALL Desplegar
+1   677	00DB  5A				     POP DX
+1   678	00DC  E8 FF2B				     CALL ImprimirEnter
+    679						     EscribirMensaje Msg_ManejoDeCelda3
+1   680	00DF  52				     PUSH DX
+1   681	00E0  BA 0976r				     LEA DX, Msg_ManejoDeCelda3
+1   682	00E3  E8 FF1F				     CALL Desplegar
+1   683	00E6  5A				     POP DX
+1   684	00E7  E8 FF20				     CALL ImprimirEnter
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 13
+C:\GASCUL.ASM
+
+
+
+    685						     EscribirMensaje Msg_ManejoDeCelda4
+1   686	00EA  52				     PUSH DX
+1   687	00EB  BA 0989r				     LEA DX, Msg_ManejoDeCelda4
+1   688	00EE  E8 FF14				     CALL Desplegar
+1   689	00F1  5A				     POP DX
+1   690	00F2  E8 FF15				     CALL ImprimirEnter
+    691
+    692	00F5  B4 00				     MOV AH, 00H		     ;Pedir Algo
+    693	00F7  CD 16				     INT     16H
+    694	00F9  3C 31				     CMP AL, 31H		     ;es uno
+    695	00FB  74 11				     JE	     IrAModificarCeldaString
+    696	00FD  3C 32				     CMP AL, 32H	     ;es dos
+    697	00FF  74 07				     JE	IrAModificarCeldaNumerica
+    698	0101  3C 34				     CMP AL, 34H	     ; es cuatro
+    699	0103  74 06				     JE	IrAEscribirCelda
+    700	0105  E9 FF09				     JMP PedirTecla
+    701
+    702	0108			     IrAModificarCeldaNumerica:
+    703	0108  E9 0105				     JMP     ModificarCeldaNumerica
+    704	010B			     IrAEscribirCelda:
+    705	010B  E9 01F2				     JMP EscribirCelda
+    706
+    707	010E			     IrAModificarCeldaString:
+    708	010E  EB 26				     JMP ModificarCeldaString
+    709
+    710	0110				     PedirTeclaYSaltar ENDP
+    711					     ;;	----------------------------------------
+    712					     ;;	Inicio
+    713					     ;;	----------------------------------------
+    714
+    715	0110				     Principal	     PROC FAR
+    716	0110  B8 0000s				     MOV AX, @data   ; Inicializar el segmento de datos
+    717	0113  8E D8				     MOV DS, AX
+    718	0115  8E C0				     MOV ES, AX
+    719
+    720
+    721						     InicializarMatriz Pagina1
+1   722	0117  BB 000B				     MOV BX, 11
+1   723	011A  BF 0000				     MOV DI, 0
+1   724	011D			     ??0000:
+1   725	011D  C6 87 0046r 24			     MOV Pagina1[BX], 24H
+1   726	0122  C6 85 0046r 00			     MOV Pagina1[DI], 0H
+1   727	0127  83 C3 0C				     ADD BX, 12
+1   728	012A  83 C7 0C				     ADD DI, 12
+1   729	012D  81 FB 02CF			     CMP BX, 719
+1   730	0131  75 EA				     JNE ??0000
+    731
+    732	0133  E8 FEDB				     CALL PedirTeclaYSaltar
+    733
+    734	0136			     ModificarCeldaString:
+    735						     kmels_PedirFilaYColumna		     ;Pedir que	fila
+1   736	0136  52				     PUSH DX
+1   737						     EscribirMensaje kmels_Msg_PedirFila
+2   738	0137  52				     PUSH DX
+2   739	0138  BA 09E4r				     LEA DX, kmels_Msg_PedirFila
+2   740	013B  E8 FEC7				     CALL Desplegar
+2   741	013E  5A				     POP DX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 14
+C:\GASCUL.ASM
+
+
+
+2   742	013F  E8 FEC8				     CALL ImprimirEnter
+1   743	0142  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1   744	0145  E8 FEB8				     CALL    LeerCadena
+1   745	0148  E8 FEBF				     CALL ImprimirEnter
+1   746	014B  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1   747	014F  88 16 003Br			     MOV     FilaActual, DL
+1   748	0153  80 2E 003Br 30			     SUB     FilaActual, 30H
+1   749						     EscribirMensaje kmels_Msg_PedirColumna
+2   750	0158  52				     PUSH DX
+2   751	0159  BA 09EBr				     LEA DX, kmels_Msg_PedirColumna
+2   752	015C  E8 FEA6				     CALL Desplegar
+2   753	015F  5A				     POP DX
+2   754	0160  E8 FEA7				     CALL ImprimirEnter
+1   755	0163  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1   756	0166  E8 FE97				     CALL    LeerCadena
+1   757	0169  E8 FE9E				     CALL ImprimirEnter
+1   758	016C  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1   759	0170  88 16 003Cr			     MOV     ColumnaActual, DL
+1   760	0174  80 2E 003Cr 30			     SUB     ColumnaActual, 30H
+1   761	0179  5A				     POP DX
+    762						     getPosicionDeMemoria		     FilaActual,ColumnaActual
+1   763	017A  50				     PUSH AX
+1   764	017B  52				     PUSH DX
+1   765	017C  53				     PUSH BX
+1   766	017D  33 C0				     XOR AX, AX
+1   767	017F  A0 003Cr				     MOV AL, ColumnaActual
+1   768	0182  BA 0000				     MOV DX, 0
+1   769	0185  BB 000C				     MOV BX, 12
+1   770	0188  F7 E3				     MUL BX			     ;AX:=AX*Op
+1   771	018A  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+    772				     ColumnaActual en memoria
+1   773	018D  33 C0				     XOR AX, AX
+1   774	018F  A0 003Br				     MOV AL, FilaActual
+1   775	0192  BA 0000				     MOV DX, 0
+1   776	0195  BB 0078				     MOV BX, 120
+1   777	0198  F7 E3				     MUL BX
+1   778	019A  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+    779				     PosicionEn	Memoria	+ FilaActual en	memoria
+1   780	019E  5B				     POP BX
+1   781	019F  5A				     POP DX
+1   782	01A0  58				     POP AX
+    783						     EscribirMensaje				     Msg_IngresarCadena
+1   784	01A1  52				     PUSH DX
+1   785	01A2  BA 09A0r				     LEA DX, Msg_IngresarCadena
+1   786	01A5  E8 FE5D				     CALL Desplegar
+1   787	01A8  5A				     POP DX
+1   788	01A9  E8 FE5E				     CALL ImprimirEnter
+    789						     LeerCadenayGuardarEn		     ListaDe10CaracteresTemp
+1   790	01AC  50				     PUSH AX
+1   791	01AD  52				     PUSH DX
+1   792	01AE  BA 0027r				     LEA DX, ListaDe10CaracteresTemp
+1   793	01B1  E8 FE4C				     CALL LeerCadena
+1   794	01B4  5A				     POP DX
+1   795	01B5  58				     POP AX
+    796	01B6  E8 FE51				     CALL ImprimirEnter
+    797
+    798						     getPosicionDeMemoria FilaActual,ColumnaActual
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 15
+C:\GASCUL.ASM
+
+
+
+1   799	01B9  50				     PUSH AX
+1   800	01BA  52				     PUSH DX
+1   801	01BB  53				     PUSH BX
+1   802	01BC  33 C0				     XOR AX, AX
+1   803	01BE  A0 003Cr				     MOV AL, ColumnaActual
+1   804	01C1  BA 0000				     MOV DX, 0
+1   805	01C4  BB 000C				     MOV BX, 12
+1   806	01C7  F7 E3				     MUL BX			     ;AX:=AX*Op
+1   807	01C9  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+    808				     ColumnaActual en memoria
+1   809	01CC  33 C0				     XOR AX, AX
+1   810	01CE  A0 003Br				     MOV AL, FilaActual
+1   811	01D1  BA 0000				     MOV DX, 0
+1   812	01D4  BB 0078				     MOV BX, 120
+1   813	01D7  F7 E3				     MUL BX
+1   814	01D9  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+    815				     PosicionEn	Memoria	+ FilaActual en	memoria
+1   816	01DD  5B				     POP BX
+1   817	01DE  5A				     POP DX
+1   818	01DF  58				     POP AX
+    819	01E0  8B 1E 0039r			     MOV BX, PosicionDeMemoria
+    820
+    821	01E4  C6 87 0046r 01			     MOV Pagina1[BX], 1			     ;especificar tipo cadena
+    822
+    823	01E9  B9 000A				     MOV CX, 10
+    824	01EC			     CopiarCaracter1:
+    825	01EC  BF 000A				     MOV DI, 10
+    826	01EF  2B F9				     SUB DI, CX
+    827	01F1  8A 85 0029r			     MOV AL, DiezCaracteresTempArreglo[DI]	     ;Caracter
+    828						     ;verificar	que no sea enter (no copiarlo)
+    829	01F5  3C 0D				     CMP AL, 0DH
+    830	01F7  74 04				     JE	copiarElProximo		     ;si es, no	copiarlo..
+    831
+    832	01F9  88 87 0047r			     MOV Pagina1[BX+1],	AL		     ;el BX+1 se refiere a el porque el	mero+
+    833				     BX	es el tipo
+    834	01FD			     copiarElProximo:
+    835	01FD  49				     DEC CX
+    836	01FE  43				     INC BX
+    837
+    838	01FF  3C 0D				     CMP AL, 0DH				     ;si es enter, terminar de	    +
+    839				     copiar cadena
+    840	0201  74 05				     JE	SalirDeAqui
+    841
+    842	0203  83 FB 0A				     CMP BX, 10
+    843	0206  75 E4				     JNE CopiarCaracter1
+    844
+    845	0208			     SalirDeAqui:
+    846						     ;poner un $ despues de que	termine	la cadena
+    847	0208  C6 87 0046r 24			     MOV Pagina1[BX], 24H
+    848
+    849						     ;ModificarContenidoDeCelda_ConCadena FilaActual,ColumnaActual,		    +
+    850				     DiezCaracteresTempArreglo,	Pagina1
+    851	020D  E9 FE01				     JMP PedirTecla
+    852
+    853	0210			     ModificarCeldaNumerica:
+    854						     kmels_PedirFilaYColumna		     ;Pedir que	fila
+1   855	0210  52				     PUSH DX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 16
+C:\GASCUL.ASM
+
+
+
+1   856						     EscribirMensaje kmels_Msg_PedirFila
+2   857	0211  52				     PUSH DX
+2   858	0212  BA 09E4r				     LEA DX, kmels_Msg_PedirFila
+2   859	0215  E8 FDED				     CALL Desplegar
+2   860	0218  5A				     POP DX
+2   861	0219  E8 FDEE				     CALL ImprimirEnter
+1   862	021C  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1   863	021F  E8 FDDE				     CALL    LeerCadena
+1   864	0222  E8 FDE5				     CALL ImprimirEnter
+1   865	0225  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1   866	0229  88 16 003Br			     MOV     FilaActual, DL
+1   867	022D  80 2E 003Br 30			     SUB     FilaActual, 30H
+1   868						     EscribirMensaje kmels_Msg_PedirColumna
+2   869	0232  52				     PUSH DX
+2   870	0233  BA 09EBr				     LEA DX, kmels_Msg_PedirColumna
+2   871	0236  E8 FDCC				     CALL Desplegar
+2   872	0239  5A				     POP DX
+2   873	023A  E8 FDCD				     CALL ImprimirEnter
+1   874	023D  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1   875	0240  E8 FDBD				     CALL    LeerCadena
+1   876	0243  E8 FDC4				     CALL ImprimirEnter
+1   877	0246  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1   878	024A  88 16 003Cr			     MOV     ColumnaActual, DL
+1   879	024E  80 2E 003Cr 30			     SUB     ColumnaActual, 30H
+1   880	0253  5A				     POP DX
+    881						     getPosicionDeMemoria		     FilaActual,ColumnaActual
+1   882	0254  50				     PUSH AX
+1   883	0255  52				     PUSH DX
+1   884	0256  53				     PUSH BX
+1   885	0257  33 C0				     XOR AX, AX
+1   886	0259  A0 003Cr				     MOV AL, ColumnaActual
+1   887	025C  BA 0000				     MOV DX, 0
+1   888	025F  BB 000C				     MOV BX, 12
+1   889	0262  F7 E3				     MUL BX			     ;AX:=AX*Op
+1   890	0264  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+    891				     ColumnaActual en memoria
+1   892	0267  33 C0				     XOR AX, AX
+1   893	0269  A0 003Br				     MOV AL, FilaActual
+1   894	026C  BA 0000				     MOV DX, 0
+1   895	026F  BB 0078				     MOV BX, 120
+1   896	0272  F7 E3				     MUL BX
+1   897	0274  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+    898				     PosicionEn	Memoria	+ FilaActual en	memoria
+1   899	0278  5B				     POP BX
+1   900	0279  5A				     POP DX
+1   901	027A  58				     POP AX
+    902						     EscribirMensaje				     Msg_IngresarNumero
+1   903	027B  52				     PUSH DX
+1   904	027C  BA 0963r				     LEA DX, Msg_IngresarNumero
+1   905	027F  E8 FD83				     CALL Desplegar
+1   906	0282  5A				     POP DX
+1   907	0283  E8 FD84				     CALL ImprimirEnter
+    908						     LeerCadenayGuardarEn		     ListaDe10CaracteresTemp
+1   909	0286  50				     PUSH AX
+1   910	0287  52				     PUSH DX
+1   911	0288  BA 0027r				     LEA DX, ListaDe10CaracteresTemp
+1   912	028B  E8 FD72				     CALL LeerCadena
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 17
+C:\GASCUL.ASM
+
+
+
+1   913	028E  5A				     POP DX
+1   914	028F  58				     POP AX
+    915	0290  E8 FD77				     CALL ImprimirEnter
+    916						     ConvertirCadenaANumero		     DiezCaracteresTempArreglo,		    +
+    917				     DiezCaracteresTempLenReal,	Numero
+1   918	0293  51				     PUSH CX
+1   919	0294  53				     PUSH BX
+1   920	0295  52				     PUSH DX
+1   921	0296  50				     PUSH AX
+1   922	0297  B1 01				     MOV CL, 1
+1   923	0299  33 DB				     XOR BX, BX
+1   924	029B  8A 1E 0028r			     MOV BL, DiezCaracteresTempLenReal
+1   925	029F  8A 97 0028r			     MOV DL, DiezCaracteresTempArreglo[BX-1]
+1   926	02A3  88 16 0038r			     MOV Numero, DL
+1   927	02A7  80 2E 0038r 30			     SUB Numero, 30H
+1   928	02AC			     ??0002:
+1   929	02AC  51				     PUSH CX
+1   930	02AD  52				     PUSH DX
+1   931	02AE  B0 01				     MOV AL, 1
+1   932	02B0			     ??0001:
+1   933	02B0  B2 0A				     MOV DL, 10
+1   934	02B2  B4 00				     MOV AH, 0
+1   935	02B4  F6 E2				     MUL DL
+1   936	02B6  FE C9				     DEC CL
+1   937	02B8  80 F9 00				     CMP CL, 0
+1   938	02BB  74 02				     JE	??0003
+1   939	02BD  EB F1				     JMP ??0001
+1   940	02BF			     ??0003:
+1   941	02BF  5A				     POP DX
+1   942	02C0  59				     POP CX
+1   943	02C1  A3 08B6r				     MOV TemporalWord, AX		     ; almacenar 1*10 CX veces,	en	    +
+    944				     Temporalword
+1   945	02C4  33 DB				     XOR BX, BX
+1   946	02C6  8A 1E 0028r			     MOV BL, DiezCaracteresTempLenReal
+1   947	02CA  2A D9				     SUB BL, CL
+1   948	02CC  8A 87 0028r			     MOV AL, DiezCaracteresTempArreglo[BX-1]
+1   949	02D0  2C 30				     SUB AL, 30H
+1   950	02D2  B4 00				     MOV AH, 0					     ;para que multiplique
+1   951	02D4  F7 26 08B6r			     MUL TemporalWord			     ;Op=byte: AX:=AL*Op
+1   952	02D8  3D 0000				     CMP AX, 0
+1   953	02DB  74 02				     JE	EsCero
+1   954	02DD  EB 03				     JMP Sumarle
+1   955	02DF			     EsCero:
+1   956	02DF  A1 08B6r				     MOV AX, TemporalWord
+1   957	02E2			     Sumarle:
+1   958	02E2  01 06 0038r			     ADD WORD PTR Numero,  AX
+1   959	02E6  FE C1				     INC CL
+1   960	02E8  3A 0E 0028r			     CMP CL, DiezCaracteresTempLenReal
+1   961	02EC  75 BE				     JNE ??0002
+1   962	02EE  A0 0038r				     MOV AL, Numero
+1   963	02F1  58				     POP AX
+1   964	02F2  5A				     POP DX
+1   965	02F3  5B				     POP BX
+1   966	02F4  59				     POP CX
+    967						     ModificarContenidoDeCelda_ConNumero     FilaActual,ColumnaActual, Numero,	    +
+    968				     Pagina1
+1   969	02F5  53				     PUSH BX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 18
+C:\GASCUL.ASM
+
+
+
+1   970	02F6  51				     PUSH CX
+1   971	02F7  57				     PUSH DI
+1   972	02F8  50				     PUSH AX
+1   973	02F9  58				     POP AX
+1   974	02FA  5F				     POP DI
+1   975	02FB  59				     POP CX
+1   976	02FC  5B				     POP BX
+    977	02FD  E9 FD11				     JMP PedirTecla
+    978
+    979	0300			     EscribirCelda:
+    980						     kmels_PedirFilaYColumna		     ;Pedir que	fila
+1   981	0300  52				     PUSH DX
+1   982						     EscribirMensaje kmels_Msg_PedirFila
+2   983	0301  52				     PUSH DX
+2   984	0302  BA 09E4r				     LEA DX, kmels_Msg_PedirFila
+2   985	0305  E8 FCFD				     CALL Desplegar
+2   986	0308  5A				     POP DX
+2   987	0309  E8 FCFE				     CALL ImprimirEnter
+1   988	030C  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1   989	030F  E8 FCEE				     CALL    LeerCadena
+1   990	0312  E8 FCF5				     CALL ImprimirEnter
+1   991	0315  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1   992	0319  88 16 003Br			     MOV     FilaActual, DL
+1   993	031D  80 2E 003Br 30			     SUB     FilaActual, 30H
+1   994						     EscribirMensaje kmels_Msg_PedirColumna
+2   995	0322  52				     PUSH DX
+2   996	0323  BA 09EBr				     LEA DX, kmels_Msg_PedirColumna
+2   997	0326  E8 FCDC				     CALL Desplegar
+2   998	0329  5A				     POP DX
+2   999	032A  E8 FCDD				     CALL ImprimirEnter
+1  1000	032D  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1001	0330  E8 FCCD				     CALL    LeerCadena
+1  1002	0333  E8 FCD4				     CALL ImprimirEnter
+1  1003	0336  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1004	033A  88 16 003Cr			     MOV     ColumnaActual, DL
+1  1005	033E  80 2E 003Cr 30			     SUB     ColumnaActual, 30H
+1  1006	0343  5A				     POP DX
+   1007						     getPosicionDeMemoria		     FilaActual,ColumnaActual
+1  1008	0344  50				     PUSH AX
+1  1009	0345  52				     PUSH DX
+1  1010	0346  53				     PUSH BX
+1  1011	0347  33 C0				     XOR AX, AX
+1  1012	0349  A0 003Cr				     MOV AL, ColumnaActual
+1  1013	034C  BA 0000				     MOV DX, 0
+1  1014	034F  BB 000C				     MOV BX, 12
+1  1015	0352  F7 E3				     MUL BX			     ;AX:=AX*Op
+1  1016	0354  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1017				     ColumnaActual en memoria
+1  1018	0357  33 C0				     XOR AX, AX
+1  1019	0359  A0 003Br				     MOV AL, FilaActual
+1  1020	035C  BA 0000				     MOV DX, 0
+1  1021	035F  BB 0078				     MOV BX, 120
+1  1022	0362  F7 E3				     MUL BX
+1  1023	0364  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1024				     PosicionEn	Memoria	+ FilaActual en	memoria
+1  1025	0368  5B				     POP BX
+1  1026	0369  5A				     POP DX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 19
+C:\GASCUL.ASM
+
+
+
+1  1027	036A  58				     POP AX
+   1028	036B  C6 06 0029r 00			     MOV DiezCaracteresTempArreglo, 0H
+   1029						     EscribirContenidoDeCelda		     FilaActual,ColumnaActual, Pagina1
+1  1030	0370  53				     PUSH BX
+1  1031	0371  52				     PUSH DX
+1  1032						     getPosicionDeMemoria FilaActual,ColumnaActual
+2  1033	0372  50				     PUSH AX
+2  1034	0373  52				     PUSH DX
+2  1035	0374  53				     PUSH BX
+2  1036	0375  33 C0				     XOR AX, AX
+2  1037	0377  A0 003Cr				     MOV AL, ColumnaActual
+2  1038	037A  BA 0000				     MOV DX, 0
+2  1039	037D  BB 000C				     MOV BX, 12
+2  1040	0380  F7 E3				     MUL BX			     ;AX:=AX*Op
+2  1041	0382  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1042				     ColumnaActual en memoria
+2  1043	0385  33 C0				     XOR AX, AX
+2  1044	0387  A0 003Br				     MOV AL, FilaActual
+2  1045	038A  BA 0000				     MOV DX, 0
+2  1046	038D  BB 0078				     MOV BX, 120
+2  1047	0390  F7 E3				     MUL BX
+2  1048	0392  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1049				     PosicionEn	Memoria	+ FilaActual en	memoria
+2  1050	0396  5B				     POP BX
+2  1051	0397  5A				     POP DX
+2  1052	0398  58				     POP AX
+1  1053	0399  8B 1E 0039r			     MOV BX, PosiciondeMemoria
+1  1054	039D  8A 97 0046r			     MOV DL, Pagina1[BX]	     ;obtener tipo
+1  1055	03A1  80 FA 00				     CMP DL, 0					     ;es vacio?
+1  1056	03A4  74 41				     JE	??0007					     ;si ,??0004
+1  1057	03A6  80 FA 02				     CMP DL, 2					     ;esnumero?
+1  1058	03A9  74 4A				     JE	??0005			     ;si, es dato numercio
+1  1059	03AB  80 FA 01				     CMP DL, 1
+1  1060	03AE  74 02				     JE	??0006
+1  1061	03B0  EB 35				     JMP ??0007
+1  1062	03B2			     ??0006:					     ;es cadena
+1  1063						     EscribirMensaje kmels_Msg_Cadena
+2  1064	03B2  52				     PUSH DX
+2  1065	03B3  BA 0A2Cr				     LEA DX, kmels_Msg_Cadena
+2  1066	03B6  E8 FC4C				     CALL Desplegar
+2  1067	03B9  5A				     POP DX
+2  1068	03BA  E8 FC4D				     CALL ImprimirEnter
+1  1069	03BD  8B 1E 0039r			     MOV BX, PosiciondeMemoria
+1  1070						     EscribirMensaje Pagina1[BX+1]
+2  1071	03C1  52				     PUSH DX
+2  1072	03C2  8D 97 0047r			     LEA DX, Pagina1[BX+1]
+2  1073	03C6  E8 FC3C				     CALL Desplegar
+2  1074	03C9  5A				     POP DX
+2  1075	03CA  E8 FC3D				     CALL ImprimirEnter
+1  1076						     CopiarCadena_De_A Pagina1[BX+1], DiezCaracteresTempArreglo, 10
+2  1077	03CD  B1 0A				     MOV CL, 10
+2  1078	03CF  FC				     CLD	     ; de izquierda a derecha
+2  1079	03D0  8D B7 0047r			     LEA SI, Pagina1[BX+1]   ; copiar de
+2  1080	03D4  BF 0029r				     LEA DI, DiezCaracteresTempArreglo	     ; pegar en
+2  1081	03D7  F3> A4				     REP MOVSB	     ; copiar bytes 10 veces
+1  1082						     EscribirMensaje DiezCaracteresTempArreglo
+2  1083	03D9  52				     PUSH DX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 20
+C:\GASCUL.ASM
+
+
+
+2  1084	03DA  BA 0029r				     LEA DX, DiezCaracteresTempArreglo
+2  1085	03DD  E8 FC25				     CALL Desplegar
+2  1086	03E0  5A				     POP DX
+2  1087	03E1  E8 FC26				     CALL ImprimirEnter
+1  1088	03E4  E9 00B0				     JMP ??0004
+1  1089	03E7			     ??0007:
+1  1090						     EscribirMensaje kmels_Msg_Noesnada
+2  1091	03E7  52				     PUSH DX
+2  1092	03E8  BA 0A17r				     LEA DX, kmels_Msg_Noesnada
+2  1093	03EB  E8 FC17				     CALL Desplegar
+2  1094	03EE  5A				     POP DX
+2  1095	03EF  E8 FC18				     CALL ImprimirEnter
+1  1096	03F2  E9 00A2				     JMP ??0004
+1  1097	03F5			     ??0005:
+1  1098						     EscribirMensaje kmels_Msg_Numerico
+2  1099	03F5  52				     PUSH DX
+2  1100	03F6  BA 0A22r				     LEA DX, kmels_Msg_Numerico
+2  1101	03F9  E8 FC09				     CALL Desplegar
+2  1102	03FC  5A				     POP DX
+2  1103	03FD  E8 FC0A				     CALL ImprimirEnter
+1  1104	0400  8B 1E 0039r			     MOV BX, PosicionDeMemoria
+1  1105						     guardarNumeroDeLaCelda_En	     FilaActual, ColumnaActual,	Numero,	Pagina1
+2  1106	0404  53				     PUSH BX
+2  1107	0405  50				     PUSH AX
+2  1108						     getPosicionDeMemoria    FilaActual, ColumnaActual
+3  1109	0406  50				     PUSH AX
+3  1110	0407  52				     PUSH DX
+3  1111	0408  53				     PUSH BX
+3  1112	0409  33 C0				     XOR AX, AX
+3  1113	040B  A0 003Cr				     MOV AL, ColumnaActual
+3  1114	040E  BA 0000				     MOV DX, 0
+3  1115	0411  BB 000C				     MOV BX, 12
+3  1116	0414  F7 E3				     MUL BX			     ;AX:=AX*Op
+3  1117	0416  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1118				     ColumnaActual en memoria
+3  1119	0419  33 C0				     XOR AX, AX
+3  1120	041B  A0 003Br				     MOV AL, FilaActual
+3  1121	041E  BA 0000				     MOV DX, 0
+3  1122	0421  BB 0078				     MOV BX, 120
+3  1123	0424  F7 E3				     MUL BX
+3  1124	0426  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1125				     PosicionEn	Memoria	+ FilaActual en	memoria
+3  1126	042A  5B				     POP BX
+3  1127	042B  5A				     POP DX
+3  1128	042C  58				     POP AX
+2  1129	042D  8B 1E 0039r			     MOV BX, PosicionDeMemoria
+2  1130	0431  8A 87 0047r			     MOV AL, Pagina1[BX+1]
+2  1131	0435  A2 0038r				     MOV Numero, AL
+2  1132	0438  58				     POP AX
+2  1133	0439  5B				     POP BX
+1  1134						     ConvertirNumeroACadena  Numero, DiezCaracteresTempArreglo
+2  1135	043A  50				     PUSH AX			     ; para multiplicar	y dividir
+2  1136	043B  51				     PUSH CX			     ; contador
+2  1137	043C  52				     PUSH DX			     ; usado para multiplicar con contador
+2  1138	043D  53				     PUSH BX			     ; Indice
+2  1139	043E  B9 0004				     MOV CX, 4			     ;maximo Numero a escribir es 2^16-1, es decir  +
+   1140				     65535 (5 digitos)
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 21
+C:\GASCUL.ASM
+
+
+
+2  1141	0441  BB 0000				     MOV BX, 0
+2  1142	0444			     ??0008:						     ;a	hacer 10 ^ CX
+2  1143	0444  51				     PUSH CX
+2  1144	0445  52				     PUSH DX
+2  1145	0446  B8 0001				     MOV AX, 1				     ; AX = 1
+2  1146	0449			     ??0009:
+2  1147	0449  BA 000A				     MOV DX, 10
+2  1148	044C  F7 E2				     MUL DX				     ; AX = DX * AX, i.e. AX = 10*AX, CX    +
+   1149				     veces
+2  1150	044E  49				     DEC CX
+2  1151	044F  83 F9 00				     CMP CX, 0
+2  1152	0452  74 02				     JE	??000A
+2  1153	0454  EB F3				     JMP ??0009
+2  1154	0456			     ??000A:
+2  1155	0456  5A				     POP DX
+2  1156	0457  59				     POP CX
+2  1157	0458  A3 08B6r				     MOV TemporalWord, AX
+2  1158	045B  A1 0038r				     MOV AX, WORD PTR Numero		     ;Op=word: AX:=DX:AX / Op, DX = resto
+2  1159	045E  BA 0000				     MOV DX, 0
+2  1160	0461  F7 36 08B6r			     DIV     TemporalWord	     ; Es decir, AX = Numero / (10 ^ CX), DX = resto
+2  1161	0465  89 16 0038r			     MOV WORD PTR Numero, DX
+2  1162	0469  05 0030				     ADD AX, 30H			     ;AX = Num / (10 ^ CX) + 30H
+2  1163	046C  89 87 0029r			     MOV WORD PTR DiezCaracteresTempArreglo[BX],  AX
+2  1164	0470  43				     INC BX
+2  1165	0471  49				     DEC CX
+2  1166	0472  83 F9 00				     CMP CX, 0
+2  1167	0475  75 CD				     JNZ ??0008
+2  1168	0477  80 06 0038r 30			     ADD Numero, 30H
+2  1169	047C  A1 0038r				     MOV AX, WORD PTR Numero
+2  1170	047F  89 87 0029r			     MOV WORD PTR DiezCaracteresTempArreglo[BX],  AX
+2  1171	0483  C6 87 002Ar 24			     MOV DiezCaracteresTempArreglo[BX+1], 24H			     ; el $
+2  1172	0488  5B				     POP BX
+2  1173	0489  5A				     POP DX
+2  1174	048A  59				     POP CX
+2  1175	048B  58				     POP AX
+1  1176						     EscribirMensaje DiezCaracteresTempArreglo
+2  1177	048C  52				     PUSH DX
+2  1178	048D  BA 0029r				     LEA DX, DiezCaracteresTempArreglo
+2  1179	0490  E8 FB72				     CALL Desplegar
+2  1180	0493  5A				     POP DX
+2  1181	0494  E8 FB73				     CALL ImprimirEnter
+1  1182	0497			     ??0004:
+1  1183	0497  5A				     POP DX
+1  1184	0498  5B				     POP BX
+   1185	0499  E9 FB75				     JMP PedirTecla
+   1186
+   1187	049C			     Funciones:
+   1188						     EscribirMensaje Msg_Funciones1
+1  1189	049C  52				     PUSH DX
+1  1190	049D  BA 09B0r				     LEA DX, Msg_Funciones1
+1  1191	04A0  E8 FB62				     CALL Desplegar
+1  1192	04A3  5A				     POP DX
+1  1193	04A4  E8 FB63				     CALL ImprimirEnter
+   1194						     EscribirMensaje Msg_Funciones2
+1  1195	04A7  52				     PUSH DX
+1  1196	04A8  BA 09B6r				     LEA DX, Msg_Funciones2
+1  1197	04AB  E8 FB57				     CALL Desplegar
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 22
+C:\GASCUL.ASM
+
+
+
+1  1198	04AE  5A				     POP DX
+1  1199	04AF  E8 FB58				     CALL ImprimirEnter
+   1200
+   1201	04B2  B4 00				     MOV AH, 00H		     ;Pedir Algo
+   1202	04B4  CD 16				     INT     16H
+   1203	04B6  3C 31				     CMP AL, 31H		     ;es uno
+   1204	04B8  74 07				     JE	     IrASumar
+   1205	04BA  3C 32				     CMP AL, 32H	     ;es dos
+   1206	04BC  74 05				     JE	IrAPromedio
+   1207	04BE  E9 FB50				     JMP PedirTecla
+   1208
+   1209	04C1			     IrASumar:
+   1210	04C1  EB 03				     JMP Sumar
+   1211	04C3			     IrAPromedio:
+   1212	04C3  E9 0136				     JMP Promedio
+   1213
+   1214	04C6			     Sumar:
+   1215						     kmels_PedirFila_y_columns_inicial_y_final
+1  1216	04C6  52				     PUSH DX
+1  1217						     EscribirMensaje kmels_Msg_PedirFila
+2  1218	04C7  52				     PUSH DX
+2  1219	04C8  BA 09E4r				     LEA DX, kmels_Msg_PedirFila
+2  1220	04CB  E8 FB37				     CALL Desplegar
+2  1221	04CE  5A				     POP DX
+2  1222	04CF  E8 FB38				     CALL ImprimirEnter
+1  1223	04D2  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1224	04D5  E8 FB28				     CALL    LeerCadena
+1  1225	04D8  E8 FB2F				     CALL ImprimirEnter
+1  1226	04DB  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1227	04DF  88 16 003Br			     MOV     FilaActual, DL
+1  1228	04E3  80 2E 003Br 30			     SUB     FilaActual, 30H
+1  1229						     EscribirMensaje kmels_Msg_PdrColumnI
+2  1230	04E8  52				     PUSH DX
+2  1231	04E9  BA 09F5r				     LEA DX, kmels_Msg_PdrColumnI
+2  1232	04EC  E8 FB16				     CALL Desplegar
+2  1233	04EF  5A				     POP DX
+2  1234	04F0  E8 FB17				     CALL ImprimirEnter
+1  1235	04F3  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1236	04F6  E8 FB07				     CALL    LeerCadena
+1  1237	04F9  E8 FB0E				     CALL ImprimirEnter
+1  1238	04FC  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1239	0500  88 16 003Dr			     MOV     ColumnaInicial, DL
+1  1240	0504  80 2E 003Dr 30			     SUB     ColumnaInicial, 30H
+1  1241						     EscribirMensaje kmels_Msg_PdrColumnF
+2  1242	0509  52				     PUSH DX
+2  1243	050A  BA 0A06r				     LEA DX, kmels_Msg_PdrColumnF
+2  1244	050D  E8 FAF5				     CALL Desplegar
+2  1245	0510  5A				     POP DX
+2  1246	0511  E8 FAF6				     CALL ImprimirEnter
+1  1247	0514  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1248	0517  E8 FAE6				     CALL    LeerCadena
+1  1249	051A  E8 FAED				     CALL ImprimirEnter
+1  1250	051D  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1251	0521  88 16 003Er			     MOV     ColumnaFinal, DL
+1  1252	0525  80 2E 003Er 30			     SUB     ColumnaFinal, 30H
+1  1253	052A  5A				     POP DX
+   1254						     SumarCeldas     FilaActual, ColumnaInicial, ColumnaFinal, Pagina1
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 23
+C:\GASCUL.ASM
+
+
+
+1  1255	052B  51				     PUSH CX
+1  1256	052C  50				     PUSH AX
+1  1257	052D  53				     PUSH BX
+1  1258	052E  8A 0E 003Er			     MOV CL, ColumnaFinal
+1  1259	0532  3A 0E 003Dr			     CMP CL, ColumnaInicial
+1  1260	0536  72 02				     JB	??000C			     ;error
+1  1261	0538  EB 02				     JMP ??000B
+1  1262	053A			     ??000C:
+1  1263	053A  EB 5D				     JMP ??000E
+1  1264	053C			     ??000B:
+1  1265	053C  2A 0E 003Dr			     SUB CL, ColumnaInicial	     ;cuantos
+1  1266	0540  A0 003Dr				     MOV AL, ColumnaInicial
+1  1267	0543  A2 003Cr				     MOV ColumnaActual,	AL
+1  1268	0546  C6 06 003Fr 00			     MOV Resultado, 0
+1  1269	054B			     ??000D:
+1  1270						     guardarNumeroDeLaCelda_En	     FilaActual, ColumnaActual,	Numero,	Pagina1
+2  1271	054B  53				     PUSH BX
+2  1272	054C  50				     PUSH AX
+2  1273						     getPosicionDeMemoria    FilaActual, ColumnaActual
+3  1274	054D  50				     PUSH AX
+3  1275	054E  52				     PUSH DX
+3  1276	054F  53				     PUSH BX
+3  1277	0550  33 C0				     XOR AX, AX
+3  1278	0552  A0 003Cr				     MOV AL, ColumnaActual
+3  1279	0555  BA 0000				     MOV DX, 0
+3  1280	0558  BB 000C				     MOV BX, 12
+3  1281	055B  F7 E3				     MUL BX			     ;AX:=AX*Op
+3  1282	055D  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1283				     ColumnaActual en memoria
+3  1284	0560  33 C0				     XOR AX, AX
+3  1285	0562  A0 003Br				     MOV AL, FilaActual
+3  1286	0565  BA 0000				     MOV DX, 0
+3  1287	0568  BB 0078				     MOV BX, 120
+3  1288	056B  F7 E3				     MUL BX
+3  1289	056D  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1290				     PosicionEn	Memoria	+ FilaActual en	memoria
+3  1291	0571  5B				     POP BX
+3  1292	0572  5A				     POP DX
+3  1293	0573  58				     POP AX
+2  1294	0574  8B 1E 0039r			     MOV BX, PosicionDeMemoria
+2  1295	0578  8A 87 0047r			     MOV AL, Pagina1[BX+1]
+2  1296	057C  A2 0038r				     MOV Numero, AL
+2  1297	057F  58				     POP AX
+2  1298	0580  5B				     POP BX
+1  1299	0581  A0 0038r				     MOV AL, Numero
+1  1300	0584  00 06 003Fr			     ADD Resultado, AL
+1  1301	0588  8A 16 003Er			     MOV DL, ColumnaFinal
+1  1302	058C  80 C2 01				     ADD DL, 1
+1  1303	058F  FE 06 003Cr			     INC ColumnaActual
+1  1304	0593  38 16 003Cr			     CMP ColumnaActual,	DL
+1  1305	0597  75 B2				     JNE     ??000D
+1  1306	0599			     ??000E:
+1  1307	0599  5B				     POP BX
+1  1308	059A  58				     POP AX
+1  1309	059B  59				     POP CX
+   1310						     ConvertirNumeroACadena  Resultado,	DiezCaracteresTempArreglo
+1  1311	059C  50				     PUSH AX			     ; para multiplicar	y dividir
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 24
+C:\GASCUL.ASM
+
+
+
+1  1312	059D  51				     PUSH CX			     ; contador
+1  1313	059E  52				     PUSH DX			     ; usado para multiplicar con contador
+1  1314	059F  53				     PUSH BX			     ; Indice
+1  1315	05A0  B9 0004				     MOV CX, 4			     ;maximo Resultado a escribir es 2^16-1, es	    +
+   1316				     decir 65535 (5 digitos)
+1  1317	05A3  BB 0000				     MOV BX, 0
+1  1318	05A6			     ??000F:						     ;a	hacer 10 ^ CX
+1  1319	05A6  51				     PUSH CX
+1  1320	05A7  52				     PUSH DX
+1  1321	05A8  B8 0001				     MOV AX, 1				     ; AX = 1
+1  1322	05AB			     ??0010:
+1  1323	05AB  BA 000A				     MOV DX, 10
+1  1324	05AE  F7 E2				     MUL DX				     ; AX = DX * AX, i.e. AX = 10*AX, CX    +
+   1325				     veces
+1  1326	05B0  49				     DEC CX
+1  1327	05B1  83 F9 00				     CMP CX, 0
+1  1328	05B4  74 02				     JE	??0011
+1  1329	05B6  EB F3				     JMP ??0010
+1  1330	05B8			     ??0011:
+1  1331	05B8  5A				     POP DX
+1  1332	05B9  59				     POP CX
+1  1333	05BA  A3 08B6r				     MOV TemporalWord, AX
+1  1334	05BD  A1 003Fr				     MOV AX, WORD PTR Resultado			     ;Op=word: AX:=DX:AX / Op, DX = +
+   1335				     resto
+1  1336	05C0  BA 0000				     MOV DX, 0
+1  1337	05C3  F7 36 08B6r			     DIV     TemporalWord	     ; Es decir, AX = Resultado	/ (10 ^	CX), DX	=   +
+   1338				     resto
+1  1339	05C7  89 16 003Fr			     MOV WORD PTR Resultado, DX
+1  1340	05CB  05 0030				     ADD AX, 30H			     ;AX = Num / (10 ^ CX) + 30H
+1  1341	05CE  89 87 0029r			     MOV WORD PTR DiezCaracteresTempArreglo[BX],  AX
+1  1342	05D2  43				     INC BX
+1  1343	05D3  49				     DEC CX
+1  1344	05D4  83 F9 00				     CMP CX, 0
+1  1345	05D7  75 CD				     JNZ ??000F
+1  1346	05D9  80 06 003Fr 30			     ADD Resultado, 30H
+1  1347	05DE  A1 003Fr				     MOV AX, WORD PTR Resultado
+1  1348	05E1  89 87 0029r			     MOV WORD PTR DiezCaracteresTempArreglo[BX],  AX
+1  1349	05E5  C6 87 002Ar 24			     MOV DiezCaracteresTempArreglo[BX+1], 24H			     ; el $
+1  1350	05EA  5B				     POP BX
+1  1351	05EB  5A				     POP DX
+1  1352	05EC  59				     POP CX
+1  1353	05ED  58				     POP AX
+   1354						     EscribirMensaje		     DiezCaracteresTempArreglo
+1  1355	05EE  52				     PUSH DX
+1  1356	05EF  BA 0029r				     LEA DX, DiezCaracteresTempArreglo
+1  1357	05F2  E8 FA10				     CALL Desplegar
+1  1358	05F5  5A				     POP DX
+1  1359	05F6  E8 FA11				     CALL ImprimirEnter
+   1360	05F9  E9 FA15				     JMP PedirTecla
+   1361
+   1362	05FC			     Promedio:
+   1363						     kmels_PedirFila_y_columns_inicial_y_final
+1  1364	05FC  52				     PUSH DX
+1  1365						     EscribirMensaje kmels_Msg_PedirFila
+2  1366	05FD  52				     PUSH DX
+2  1367	05FE  BA 09E4r				     LEA DX, kmels_Msg_PedirFila
+2  1368	0601  E8 FA01				     CALL Desplegar
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 25
+C:\GASCUL.ASM
+
+
+
+2  1369	0604  5A				     POP DX
+2  1370	0605  E8 FA02				     CALL ImprimirEnter
+1  1371	0608  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1372	060B  E8 F9F2				     CALL    LeerCadena
+1  1373	060E  E8 F9F9				     CALL ImprimirEnter
+1  1374	0611  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1375	0615  88 16 003Br			     MOV     FilaActual, DL
+1  1376	0619  80 2E 003Br 30			     SUB     FilaActual, 30H
+1  1377						     EscribirMensaje kmels_Msg_PdrColumnI
+2  1378	061E  52				     PUSH DX
+2  1379	061F  BA 09F5r				     LEA DX, kmels_Msg_PdrColumnI
+2  1380	0622  E8 F9E0				     CALL Desplegar
+2  1381	0625  5A				     POP DX
+2  1382	0626  E8 F9E1				     CALL ImprimirEnter
+1  1383	0629  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1384	062C  E8 F9D1				     CALL    LeerCadena
+1  1385	062F  E8 F9D8				     CALL ImprimirEnter
+1  1386	0632  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1387	0636  88 16 003Dr			     MOV     ColumnaInicial, DL
+1  1388	063A  80 2E 003Dr 30			     SUB     ColumnaInicial, 30H
+1  1389						     EscribirMensaje kmels_Msg_PdrColumnF
+2  1390	063F  52				     PUSH DX
+2  1391	0640  BA 0A06r				     LEA DX, kmels_Msg_PdrColumnF
+2  1392	0643  E8 F9BF				     CALL Desplegar
+2  1393	0646  5A				     POP DX
+2  1394	0647  E8 F9C0				     CALL ImprimirEnter
+1  1395	064A  BA 0022r				     LEA DX, ListaDe1CaracterTemp
+1  1396	064D  E8 F9B0				     CALL    LeerCadena
+1  1397	0650  E8 F9B7				     CALL ImprimirEnter
+1  1398	0653  8A 16 0024r			     MOV DL, CaracterTempArreglo
+1  1399	0657  88 16 003Er			     MOV     ColumnaFinal, DL
+1  1400	065B  80 2E 003Er 30			     SUB     ColumnaFinal, 30H
+1  1401	0660  5A				     POP DX
+   1402						     SumarCeldas     FilaActual, ColumnaInicial, ColumnaFinal, Pagina1
+1  1403	0661  51				     PUSH CX
+1  1404	0662  50				     PUSH AX
+1  1405	0663  53				     PUSH BX
+1  1406	0664  8A 0E 003Er			     MOV CL, ColumnaFinal
+1  1407	0668  3A 0E 003Dr			     CMP CL, ColumnaInicial
+1  1408	066C  72 02				     JB	??0013			     ;error
+1  1409	066E  EB 02				     JMP ??0012
+1  1410	0670			     ??0013:
+1  1411	0670  EB 5D				     JMP ??0015
+1  1412	0672			     ??0012:
+1  1413	0672  2A 0E 003Dr			     SUB CL, ColumnaInicial	     ;cuantos
+1  1414	0676  A0 003Dr				     MOV AL, ColumnaInicial
+1  1415	0679  A2 003Cr				     MOV ColumnaActual,	AL
+1  1416	067C  C6 06 003Fr 00			     MOV Resultado, 0
+1  1417	0681			     ??0014:
+1  1418						     guardarNumeroDeLaCelda_En	     FilaActual, ColumnaActual,	Numero,	Pagina1
+2  1419	0681  53				     PUSH BX
+2  1420	0682  50				     PUSH AX
+2  1421						     getPosicionDeMemoria    FilaActual, ColumnaActual
+3  1422	0683  50				     PUSH AX
+3  1423	0684  52				     PUSH DX
+3  1424	0685  53				     PUSH BX
+3  1425	0686  33 C0				     XOR AX, AX
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 26
+C:\GASCUL.ASM
+
+
+
+3  1426	0688  A0 003Cr				     MOV AL, ColumnaActual
+3  1427	068B  BA 0000				     MOV DX, 0
+3  1428	068E  BB 000C				     MOV BX, 12
+3  1429	0691  F7 E3				     MUL BX			     ;AX:=AX*Op
+3  1430	0693  A3 0039r				     MOV PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1431				     ColumnaActual en memoria
+3  1432	0696  33 C0				     XOR AX, AX
+3  1433	0698  A0 003Br				     MOV AL, FilaActual
+3  1434	069B  BA 0000				     MOV DX, 0
+3  1435	069E  BB 0078				     MOV BX, 120
+3  1436	06A1  F7 E3				     MUL BX
+3  1437	06A3  01 06 0039r			     ADD PosicionDeMemoria, AX			     ; Posicion	en memoria =	    +
+   1438				     PosicionEn	Memoria	+ FilaActual en	memoria
+3  1439	06A7  5B				     POP BX
+3  1440	06A8  5A				     POP DX
+3  1441	06A9  58				     POP AX
+2  1442	06AA  8B 1E 0039r			     MOV BX, PosicionDeMemoria
+2  1443	06AE  8A 87 0047r			     MOV AL, Pagina1[BX+1]
+2  1444	06B2  A2 0038r				     MOV Numero, AL
+2  1445	06B5  58				     POP AX
+2  1446	06B6  5B				     POP BX
+1  1447	06B7  A0 0038r				     MOV AL, Numero
+1  1448	06BA  00 06 003Fr			     ADD Resultado, AL
+1  1449	06BE  8A 16 003Er			     MOV DL, ColumnaFinal
+1  1450	06C2  80 C2 01				     ADD DL, 1
+1  1451	06C5  FE 06 003Cr			     INC ColumnaActual
+1  1452	06C9  38 16 003Cr			     CMP ColumnaActual,	DL
+1  1453	06CD  75 B2				     JNE     ??0014
+1  1454	06CF			     ??0015:
+1  1455	06CF  5B				     POP BX
+1  1456	06D0  58				     POP AX
+1  1457	06D1  59				     POP CX
+   1458						     ; Dividir dentro del numero de celdas
+   1459	06D2  A1 003Fr				     MOV AX, WORD PTR Resultado		     ;almacenar	resultado de la	suma
+   1460	06D5  B4 00				     MOV AH, 0
+   1461	06D7  8A 0E 003Er			     MOV CL, ColumnaFinal
+   1462	06DB  80 C1 01				     ADD CL, 1
+   1463	06DE  2A 0E 003Dr			     SUB CL, ColumnaInicial
+   1464	06E2  F6 F1				     DIV     CL							     ;Op=byte:	    +
+   1465				     AL:=AX / Op, dividir!
+   1466	06E4  A2 003Fr				     MOV Resultado, AL				     ;almacenarlo en resultado
+   1467						     ConvertirNumeroACadena  Resultado,	DiezCaracteresTempArreglo
+1  1468	06E7  50				     PUSH AX			     ; para multiplicar	y dividir
+1  1469	06E8  51				     PUSH CX			     ; contador
+1  1470	06E9  52				     PUSH DX			     ; usado para multiplicar con contador
+1  1471	06EA  53				     PUSH BX			     ; Indice
+1  1472	06EB  B9 0004				     MOV CX, 4			     ;maximo Resultado a escribir es 2^16-1, es	    +
+   1473				     decir 65535 (5 digitos)
+1  1474	06EE  BB 0000				     MOV BX, 0
+1  1475	06F1			     ??0016:						     ;a	hacer 10 ^ CX
+1  1476	06F1  51				     PUSH CX
+1  1477	06F2  52				     PUSH DX
+1  1478	06F3  B8 0001				     MOV AX, 1				     ; AX = 1
+1  1479	06F6			     ??0017:
+1  1480	06F6  BA 000A				     MOV DX, 10
+1  1481	06F9  F7 E2				     MUL DX				     ; AX = DX * AX, i.e. AX = 10*AX, CX    +
+   1482				     veces
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 27
+C:\GASCUL.ASM
+
+
+
+1  1483	06FB  49				     DEC CX
+1  1484	06FC  83 F9 00				     CMP CX, 0
+1  1485	06FF  74 02				     JE	??0018
+1  1486	0701  EB F3				     JMP ??0017
+1  1487	0703			     ??0018:
+1  1488	0703  5A				     POP DX
+1  1489	0704  59				     POP CX
+1  1490	0705  A3 08B6r				     MOV TemporalWord, AX
+1  1491	0708  A1 003Fr				     MOV AX, WORD PTR Resultado			     ;Op=word: AX:=DX:AX / Op, DX = +
+   1492				     resto
+1  1493	070B  BA 0000				     MOV DX, 0
+1  1494	070E  F7 36 08B6r			     DIV     TemporalWord	     ; Es decir, AX = Resultado	/ (10 ^	CX), DX	=   +
+   1495				     resto
+1  1496	0712  89 16 003Fr			     MOV WORD PTR Resultado, DX
+1  1497	0716  05 0030				     ADD AX, 30H			     ;AX = Num / (10 ^ CX) + 30H
+1  1498	0719  89 87 0029r			     MOV WORD PTR DiezCaracteresTempArreglo[BX],  AX
+1  1499	071D  43				     INC BX
+1  1500	071E  49				     DEC CX
+1  1501	071F  83 F9 00				     CMP CX, 0
+1  1502	0722  75 CD				     JNZ ??0016
+1  1503	0724  80 06 003Fr 30			     ADD Resultado, 30H
+1  1504	0729  A1 003Fr				     MOV AX, WORD PTR Resultado
+1  1505	072C  89 87 0029r			     MOV WORD PTR DiezCaracteresTempArreglo[BX],  AX
+1  1506	0730  C6 87 002Ar 24			     MOV DiezCaracteresTempArreglo[BX+1], 24H			     ; el $
+1  1507	0735  5B				     POP BX
+1  1508	0736  5A				     POP DX
+1  1509	0737  59				     POP CX
+1  1510	0738  58				     POP AX
+   1511						     EscribirMensaje		     DiezCaracteresTempArreglo
+1  1512	0739  52				     PUSH DX
+1  1513	073A  BA 0029r				     LEA DX, DiezCaracteresTempArreglo
+1  1514	073D  E8 F8C5				     CALL Desplegar
+1  1515	0740  5A				     POP DX
+1  1516	0741  E8 F8C6				     CALL ImprimirEnter
+   1517	0744  E9 F8CA				     JMP PedirTecla
+   1518
+   1519	0747			     Salir:
+   1520	0747  B4 4C				     MOV AH, 4CH	     ; Salida al DOS
+   1521	0749  CD 21				     INT 21H
+   1522
+   1523	074B			     Principal	     ENDP
+   1524					     END Principal
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 28
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??0000			Near   _TEXT:011D		   #724	 730
+??0001			Near   _TEXT:02B0		   #932	 939
+??0002			Near   _TEXT:02AC		   #928	 961
+??0003			Near   _TEXT:02BF		   938	#940
+??0004			Near   _TEXT:0497		   1088	 1096  #1182
+??0005			Near   _TEXT:03F5		   1058	 #1097
+??0006			Near   _TEXT:03B2		   1060	 #1062
+??0007			Near   _TEXT:03E7		   1056	 1061  #1089
+??0008			Near   _TEXT:0444		   #1142  1167
+??0009			Near   _TEXT:0449		   #1146  1153
+??000A			Near   _TEXT:0456		   1152	 #1154
+??000B			Near   _TEXT:053C		   1261	 #1264
+??000C			Near   _TEXT:053A		   1260	 #1262
+??000D			Near   _TEXT:054B		   #1269  1305
+??000E			Near   _TEXT:0599		   1263	 #1306
+??000F			Near   _TEXT:05A6		   #1318  1345
+??0010			Near   _TEXT:05AB		   #1322  1329
+??0011			Near   _TEXT:05B8		   1328	 #1330
+??0012			Near   _TEXT:0672		   1409	 #1412
+??0013			Near   _TEXT:0670		   1408	 #1410
+??0014			Near   _TEXT:0681		   #1417  1453
+??0015			Near   _TEXT:06CF		   1411	 #1454
+??0016			Near   _TEXT:06F1		   #1475  1502
+??0017			Near   _TEXT:06F6		   #1479  1486
+??0018			Near   _TEXT:0703		   1485	 #1487
+??DATE			Text   "10/20/09"
+??FILENAME		Text   "GASCUL	"
+??TIME			Text   "14:44:53"
+??VERSION		Number 0201
+@CODE			Text   _TEXT			   #382	 #382  #525
+@CODESIZE		Text   0			   #382
+@CPU			Text   0101H
+@CURSEG			Text   _TEXT			   #384	 #525
+@DATA			Text   DGROUP			   #382	 716
+@DATASIZE		Text   0			   #382
+@FILENAME		Text   GASCUL
+@MODEL			Text   2			   #382
+@WORDSIZE		Text   2			   #384	 #525
+CARAACTERTEMPLONGITU	Byte   DGROUP:0022		   #399
+CARACTERTEMPARREGLO	Byte   DGROUP:0024		   #403	 746  758  865	877  991  1003	1226  1238  1250  1374	1386  1398
+CARACTERTEMPLONGITUD	Byte   DGROUP:0023		   #401
+COLUMNAACTUAL		Byte   DGROUP:003C		   #421	 759  760  767	803  878  879  886  1004  1005	1012  1037  1113  +
+							   1267	 1278  1303  1304  1415	 1426  1451  1452
+COLUMNAENMEMORIA	Word   DGROUP:0040		   #427
+COLUMNAFINAL		Byte   DGROUP:003E		   #423	 1251  1252  1258  1301	 1399  1400  1406  1449	 1461
+COLUMNAINICIAL		Byte   DGROUP:003D		   #422	 1239  1240  1259  1265	 1266  1387  1388  1407	 1413  1414  1463
+COPIARCARACTER1		Near   _TEXT:01EC		   #824	 843
+COPIARELPROXIMO		Near   _TEXT:01FD		   830	#834
+DESPLEGAR		Near   _TEXT:0005		   #539	 551  563  607	616  625  634  643  652	 661  670  676	682  688  +
+							   740	752  786  859  871  905	 985  997  1066	 1073  1085  1093  1101	  +
+							   1179	 1191  1197  1220  1232	 1244  1357  1368  1380	 1392  1514
+DIEZCARACTERESTEMPAR	Byte   DGROUP:0029		   #413	 827  925  948	1028  1080  1084  1163	1170  1171  1178  1341	  +
+							   1348	 1349  1356  1498  1505	 1506  1513
+DIEZCARACTERESTEMPLE	Byte   DGROUP:0028		   #411	 924  946  960
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 29
+Symbol Table
+
+
+
+DIEZCARACTERESTEMPMA	Byte   DGROUP:0027		   #409
+ESCERO			Near   _TEXT:02DF		   953	#955
+ESCRIBIRCELDA		Near   _TEXT:0300		   705	#979
+FILAACTUAL		Byte   DGROUP:003B		   #420	 747  748  774	810  866  867  893  992	 993  1019  1044  1120	  +
+							   1227	 1228  1285  1375  1376	 1433
+FILAENMEMORIA		Word   DGROUP:0042		   #429
+FUNCIONES		Near   _TEXT:049C		   637	#1187
+IMPRIMIRENTER		Near   _TEXT:000A		   #549	 565  609  618	627  636  645  654  663	 672  678  684	690  742  +
+							   745	754  757  788  796  861	 864  873  876	907  915  987  990  999	  +
+							   1002	 1068  1075  1087  1095	 1103  1181  1193  1199	 1222  1225  1234 +
+							   1237	 1246  1249  1359  1370	 1373  1382  1385  1394	 1397  1516
+INSTRUCCIONESLABEL	Byte   DGROUP:0000		   #390	 562
+IRAARCHIVO		Near   _TEXT:009F		   585	587  #639
+IRAAYUDA		Near   _TEXT:00AD		   590	592  #648
+IRAESCRIBIRCELDA	Near   _TEXT:010B		   699	#704
+IRAFINDYREPLACE		Near   _TEXT:00BB		   595	597  #657
+IRAFUNCIONES		Near   _TEXT:0091		   580	582  #630
+IRAMANEJODECELDA	Near   _TEXT:0084		   572	577  #621
+IRAMODIFICARCELDANUM	Near   _TEXT:0108		   697	#702
+IRAMODIFICARCELDASTR	Near   _TEXT:010E		   695	#707
+IRAPROMEDIO		Near   _TEXT:04C3		   1206	 #1211
+IRASALIR		Near   _TEXT:0076		   569	600  602  #612
+IRASUMAR		Near   _TEXT:04C1		   1204	 #1209
+KMELS_ADONDESALTAR	Word   DGROUP:0A15		   #503	 573  574
+KMELS_MSG_CADENA	Byte   DGROUP:0A2C		   #509	 1065
+KMELS_MSG_NOESNADA	Byte   DGROUP:0A17		   #505	 1092
+KMELS_MSG_NUMERICO	Byte   DGROUP:0A22		   #507	 1100
+KMELS_MSG_PDRCOLUMNF	Byte   DGROUP:0A06		   #499	 1243  1391
+KMELS_MSG_PDRCOLUMNI	Byte   DGROUP:09F5		   #496	 1231  1379
+KMELS_MSG_PEDIRCOLUM	Byte   DGROUP:09EB		   #494	 751  870  996
+KMELS_MSG_PEDIRFILA	Byte   DGROUP:09E4		   #493	 739  858  984	1219  1367
+LEERCADENA		Near   _TEXT:0000		   #530	 744  756  793	863  875  912  989  1001  1224	1236  1248  1372  +
+							   1384	 1396
+LISTADE10CARACTEREST	Byte   DGROUP:0027		   #407	 792  911
+LISTADE1CARACTERTEMP	Byte   DGROUP:0022		   #397	 743  755  862	874  988  1000	1223  1235  1247  1371	1383  1395
+MANEJODECELDA		Near   _TEXT:00C9		   628	#666
+MODIFICARCELDANUMERI	Near   _TEXT:0210		   703	#853
+MODIFICARCELDASTRING	Near   _TEXT:0136		   708	#734
+MSG_FUNCIONES1		Byte   DGROUP:09B0		   #482	 1190
+MSG_FUNCIONES2		Byte   DGROUP:09B6		   #483	 1196
+MSG_INGRESARCADENA	Byte   DGROUP:09A0		   #478	 785
+MSG_INGRESARNUMERO	Byte   DGROUP:0963		   #468	 904
+MSG_IRAARCHIVO		Byte   DGROUP:08D3		   #444	 642
+MSG_IRAAYUDA		Byte   DGROUP:08DC		   #446	 651
+MSG_IRAFINDYREPLACE	Byte   DGROUP:08E3		   #447	 660
+MSG_IRAFUNCIONES	Byte   DGROUP:08C8		   #442	 633
+MSG_IRAMANEJODECELDA	Byte   DGROUP:08B8		   #439	 624
+MSG_IRASALIR		Byte   DGROUP:08F3		   #450	 615
+MSG_MANEJODECELDA1	Byte   DGROUP:08FA		   #452	 669
+MSG_MANEJODECELDA1_1	Byte   DGROUP:091C		   #457
+MSG_MANEJODECELDA2	Byte   DGROUP:0941		   #463	 675
+MSG_MANEJODECELDA3	Byte   DGROUP:0976		   #471	 681
+MSG_MANEJODECELDA4	Byte   DGROUP:0989		   #474	 687
+NOPRESIONOFUNCION	Byte   DGROUP:09D0		   #489
+NUMERO			Byte   DGROUP:0038		   #418	 926  927  958	962  1131  1158	 1161  1168  1169  1296	 1299	  +
+							   1444	 1447
+NUMEROTEMPORAL		Word   DGROUP:0035		   #415
+Turbo Assembler	 Version 2.01	     10/20/09 14:44:54	    Page 30
+Symbol Table
+
+
+
+NUMEROTEMPORALB		Byte   DGROUP:0037		   #416
+PAGINA1			Byte   DGROUP:0046		   #432	 725  726  821	832  847  1054	1072  1079  1130  1295	1443
+PAGINA2			Byte   DGROUP:0316		   #433
+PAGINA3			Byte   DGROUP:05E6		   #434
+PAGINAACTUAL		Word   DGROUP:0044		   #431
+PEDIRTECLA		Near   _TEXT:0011		   #559	 610  646  655	664  700  851  977  1185  1207	1360  1517
+PEDIRTECLAYSALTAR	Near   _TEXT:0011		   #556	 732
+POSICIONDEMEMORIA	Word   DGROUP:0039		   #419	 771  778  807	814  819  890  897  1016  1023	1041  1048  1053  +
+							   1069	 1104  1117  1124  1129	 1282  1289  1294  1430	 1437  1442
+PRESIONOCOMBINACIONI	Byte   DGROUP:0A34		   #512	 606
+PRESIONOFUNCION		Byte   DGROUP:09BF		   #486
+PRINCIPAL		Far    _TEXT:0110		   #715	 1524
+PROMEDIO		Near   _TEXT:05FC		   1212	 #1362
+RESULTADO		Byte   DGROUP:003F		   #424	 1268  1300  1334  1339	 1346  1347  1416  1448	 1459  1466  1491 +
+							   1496	 1503  1504
+SALIR			Near   _TEXT:0747		   619	#1519
+SALIRDEAQUI		Near   _TEXT:0208		   840	#845
+SUMAR			Near   _TEXT:04C6		   1210	 #1214
+SUMARLE			Near   _TEXT:02E2		   954	#957
+TECLAENTER		Byte   DGROUP:001F		   #395	 550
+TEMPORALWORD		Word   DGROUP:08B6		   #435	 943  951  956	1157  1160  1333  1337	1490  1494
+
+Macro Name						   Cref	(defined at #)
+
+CONVERTIRCADENAANUME					   #114	 916
+CONVERTIRNUMEROACADE					   #181	 1134  1310  1467
+COPIARCADENA_DE_A					   #14	1076
+ESCRIBIRCONTENIDODEC					   #262	 1029
+ESCRIBIRMENSAJE						   #22	560  604  613  622  631	 640  649  658	667  673  679  685  737	  +
+							   749	783  856  868  902  982	 994  1063  1070  1082	1090  1098  1176  +
+							   1188	 1194  1217  1229  1241	 1354  1365  1377  1389	 1511
+GETPOSICIONDEMEMORIA					   #41	762  798  881  1007  1032  1108	 1273  1421
+GUARDARNUMERODELACEL					   #104	 1105  1270  1418
+INICIALIZARMATRIZ					   #367	 721
+KMELS_PEDIRFILAYCOLU					   #310	 735  854  980
+KMELS_PEDIRFILA_Y_CO					   #334	 1215  1363
+LEERCADENAYGUARDAREN					   #30	789  908
+MODIFICARCONTENIDODE					   #232	 #246  967
+SUMARCELDAS						   #67	1254  1402
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+DGROUP			Group				   #382	 382  716
+  STACK			16  0040 Para	Stack	STACK	   #383
+  _DATA			16  0A54 Word	Public	DATA	   #382	 #384
+_TEXT			16  074B Word	Public	CODE	   #382	 382  #525  525
+

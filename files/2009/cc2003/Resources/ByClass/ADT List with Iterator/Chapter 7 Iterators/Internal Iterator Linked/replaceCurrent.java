@@ -1,0 +1,1 @@
+public void replaceCurrent(Object newEntry) throws NoSuchElementException{	if (hasCurrent())		currentNode.data = newEntry;	else		throw new NoSuchElementException("replaceCurrent(): " +	      	                             "no current entry");} // end replaceCurrent

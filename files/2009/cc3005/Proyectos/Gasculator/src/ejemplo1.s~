@@ -1,0 +1,11 @@
+	.text
+
+_start:	.global	_start
+	.global	main
+
+	b	main
+main:
+
+
+	mov	pc,lr
+	.end

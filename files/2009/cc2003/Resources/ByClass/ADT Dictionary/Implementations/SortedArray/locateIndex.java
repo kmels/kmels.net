@@ -1,0 +1,1 @@
+private int locateIndex(Object key){ 	// sequential search	Comparable cKey = (Comparable) key;	int index = 0;	while ( (index < currentSize) &&			cKey.compareTo(entries[index].getKey()) > 0 ) 		index++;	return index;} // end locateIndex

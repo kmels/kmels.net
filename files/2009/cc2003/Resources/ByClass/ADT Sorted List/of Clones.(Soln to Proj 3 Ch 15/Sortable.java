@@ -1,0 +1,1 @@
+public interface Sortable extends Comparable, Cloneable{	public Object clone(); // overrides Objectâs protected clone	public int compareTo(Object other); // can omit this line} // end Sortable

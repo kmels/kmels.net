@@ -1,0 +1,1 @@
+public LList(){	firstNode = null;	lastNode = null;	length = 0;} // end default constructor

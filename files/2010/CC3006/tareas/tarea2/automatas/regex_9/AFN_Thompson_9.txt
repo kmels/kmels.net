@@ -1,0 +1,35 @@
+*************************************************************
+	AFN creado utilizando el algoritmo de Thompson
+*************************************************************
+Tiempo de creación del autómanta: 1065080ns = 10.6508ms
+Genera un lenguaje a partir de la regex: 0?(1|e)?0* -> (((0|e).((1|e)|e)).(0*))
+*************************************************************
+Lista de símbolos: [e, 0, 1]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17]
+Lista de aceptación (F): [q17]
+Transiciones:
+	* T(q0,e) = q1
+	* T(q0,e) = q3
+	* T(q1,0) = q2
+	* T(q2,e) = q5
+	* T(q3,e) = q4
+	* T(q4,e) = q5
+	* T(q5,e) = q6
+	* T(q5,e) = q12
+	* T(q6,e) = q7
+	* T(q6,e) = q9
+	* T(q7,1) = q8
+	* T(q8,e) = q11
+	* T(q9,e) = q10
+	* T(q10,e) = q11
+	* T(q11,e) = q14
+	* T(q12,e) = q13
+	* T(q13,e) = q14
+	* T(q14,e) = q17
+	* T(q14,e) = q15
+	* T(q15,0) = q16
+	* T(q16,e) = q17
+	* T(q16,e) = q15
+
+*************************************************************

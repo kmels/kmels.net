@@ -1,0 +1,33 @@
+por kmels,
+
+Basado en lo que hay en http://certik.github.com/sympy/modules/solvers/ode.html
+
+Aspectos importantes
+	ODE's solamente.
+	Un parametro opcional a especificar es el metodo por el cual se quiere resolver la ecuacion.
+	 
+	 Podemos mandarle integrales de hints! eso esta buenisimo.
+
+	 En el source, version 0.6.3beta, en sympy/solvers/tests, hay un test_ode.py, tiene 12 tests. Habria que ver que tanto abarcan estos tests.
+	    
+	 ODE, es el metodo para resolver ODE's, pero, que si queremos computar el polinomio caracteristico y la solucion complementaria (y_c) de una ecuacion, es decir, la misma babosada, probemos el solver de polinomios tambien ! :).
+
+	 Hay una clase de numerica, deplano para metodos numericos, :O, aqui ya estariamos abarcando mas... por si pensamos hacerlo los 6 juntos..
+
+	 Casi todas las ecuaciones que resuelve ODE.py, las podemos resolver nosotros: Separables, exactas, lineales, Bernoulli, lineal homogeneas, lineal no homogeneas, solo "Liuuville" no lo reconoci.
+
+Cosas interesantes que propongo probar
+      En la key best_hint del metahint 'all', es decir, el parametro para obtener la mejor solucion dada por 'best', podemos probar que en realidad sea asi, tambien, que es la mejor solucion? Varias cosas por probar aca
+
+      El meta hint "best", retorna la mejor solucion probando TODOS! (no como el anterior que solo computa con el 'mejor' hint)  los metodos posibles! Habria que probar ejemplos y ver que tanto coinciden con mandando la key 'best_hint', para ver si en realidad, 'best_hint', usa la mejor opcion.. 
+
+      Podemos mandarle integrales de hint, por si hay unas muy dificiles de hacer.. podriamos probar eso tambien.
+
+      Probar, todos los metodos y atributos de varias ODE's, si son lineales... el grado que tienen, si son homogeneas, si no lo son, etc... todo eso, aunque seguramente, estaria bien pero igual va :]
+
+      Probemos echarnoslo! con todo, mandandole valores null, etc... testeandolo con todo.
+
+      Comparar ODE's lineales con coeficientes constantes, haciendolo con este modulo por variacion de parametros, y con uno de variacion de parametros, implementado por nosotros... a ver que tan iguales son.
+
+      
+

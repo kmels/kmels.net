@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>Matemática Discreta - Grafos</title>
+  <meta name="Generator" content="Cocoa HTML Writer" />
+  <meta name="CocoaVersion" content="1038.11" />
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'; color: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'; color: #929292}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'; color: #929292; min-height: 13.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia; min-height: 14.0px}
+    span.s1 {color: #929292}
+    span.s2 {color: #000000}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Title:<span class="Apple-converted-space">  </span></span>Matemática Discreta - Grafos</p>
+<p class="p1"><span class="s1">Date:<span class="Apple-converted-space">  </span></span>September 29, 2009 12:25 PM</p>
+<p class="p2">Category:<span class="Apple-converted-space">  </span><span class="s2">MM2015</span></p>
+<p class="p2">Tags: <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br /></p>
+<p class="p4"><b>Teoría de Grafos</b></p>
+<p class="p4">Pequeño Resumen</p>
+<p class="p5"><br /></p>
+<p class="p4">Fórmula de Cayley:</p>
+<p class="p4"><span class="Apple-tab-span">	</span>n^{n-2}, número de árboeles etiquetados en n vértices</p>
+<p class="p5"><br /></p>
+<p class="p4">Códigos (secuencias) de Prüfer:</p>
+<p class="p4"><span class="Apple-tab-span">	</span>Una herramienta para demostrar la Fórmula de Cayley</p>
+<p class="p5"><br /></p>
+<p class="p4">Código de Prüfer de</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>7<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>3</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>|</p>
+<p class="p4"><span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>5<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>4<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>8<span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>|</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>2<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>6</p>
+<p class="p5"><br /></p>
+<p class="p4">es, 574244</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Enfoque algebraíco</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p4"><b>Un Árbol</b>, es un grafo conexo acíclico</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Un Árbol etiquetado</b>, es un árbol en el cual cada vértice $v_i$, tiene una etiqueta única.</p>
+<p class="p5"><br /></p>
+<p class="p4">Cada grafo conexo G, admite un <b>árbol recobridor </b>("Spanning tree"), que es un árbol que conecta cada vértice de G y cuyos enlaces son enlaces de G.</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Un grafo completo, </b>es un grafo simple en el que todo par de vértices tiene un enlace entre ellos. Notacion $K_n$</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>??? </b>Tratemos de encontrar <b>árboles recubridores </b>en <b>grafos completos </b>(K_n). Esto es lo mismo que el número de árboles etiquetados en n vértices.</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>La matriz de grados D</b>, para un grafo G = (V,E) con ||v|| = n, es una matriz diagonal de nxn</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span>D_{ij} = deg(v_i) &lt;=&gt; I = j, 0 &lt;=&gt; i\=j</p>
+<p class="p5"><br /></p>
+<p class="p4">G1=</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>V1<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>V2<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>V3</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>|</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>V4</p>
+<p class="p5"><br /></p>
+<p class="p4">D =<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[ 2<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>0]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[ 0<span class="Apple-tab-span">	</span>3<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>0]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[0<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>0]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[0<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>2]</p>
+<p class="p5"><br /></p>
+<p class="p4">A =<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[0<span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>2]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[1<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>1]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[0<span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>0]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>[1<span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>0<span class="Apple-tab-span">	</span>0]</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>La matriz Laplaciano, </b>de un grafo</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>L<span class="Apple-tab-span">	</span>=<span class="Apple-tab-span">	</span>D<span class="Apple-tab-span">	</span>-<span class="Apple-tab-span">	</span>A<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Fundamental: Teoría de Grafos espectral.</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Teorema de Kirchhoff: </b>Para un grafo conexo G dado con n vértices, sean</p>
+<p class="p4"><span class="Apple-tab-span">	</span>\lambda_1, \lambda_2,\dots,\lambda_{n-1}</p>
+<p class="p4">son los eigenvalores (no nulos) del Laplaciano de G. Entonces, el número árboles recrubridores de G</p>
+<p class="p4">está dado por T(G) = 1\n * \lambda_1\lambda_2,\dots\lambda_{n-1}</p>
+<p class="p5"><br /></p>
+<p class="p4">Sage</p>
+<p class="p4">$ n=4</p>
+<p class="p4">$ G= graphs.CompleteGraph(n)</p>
+<p class="p4">$ L = G.laplacian_matrix()</p>
+<p class="p4">$ A = G.adjancency_matrix()</p>
+<p class="p4">$ eigen = L.eigenvalues()</p>
+<p class="p4">$ T = prod(e[1:])/n</p>
+<p class="p4">$ print T</p>
+<p class="p5"><br /></p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Pendiente:</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span></b>No trataremos la Sección 4.4 de Flahive (Subgrafos monocromáticos).</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span>En la Sección 4.5 de Flahive (Árboles Recubridores).</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span>No trataremos la sección 4.5.1 de Flahive.</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span>Sección 4.6 -&gt; Lecture adicinal de Dasgupta</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span>No trataremos la 4.7 de Flahive.</p>
+</body>
+</html>

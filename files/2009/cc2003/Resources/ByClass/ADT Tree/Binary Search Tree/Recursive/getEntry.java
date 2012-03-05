@@ -1,0 +1,1 @@
+public Comparable getEntry(Comparable entry) {	return findEntry(getRootNode(), entry);} // end getEntry

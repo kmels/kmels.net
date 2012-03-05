@@ -1,0 +1,5 @@
+http://es.wikipedia.org/wiki/Sistema_operativo
+[DEFAULT]
+BASEURL=http://es.wikipedia.org/wiki/Sistema_operativo
+[InternetShortcut]
+URL=http://es.wikipedia.org/wiki/Sistema_operativo

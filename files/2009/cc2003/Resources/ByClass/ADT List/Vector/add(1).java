@@ -1,0 +1,1 @@
+public boolean add(Object newEntry){	entry.addElement(newEntry);	return true;} // end add

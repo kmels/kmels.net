@@ -1,0 +1,1 @@
+public void enqueue(Object newEntry){	if (isFull()) // isFull is private		doubleArray();	backIndex = (backIndex + 1) % queue.length;	queue[backIndex] = newEntry;} // end enqueue

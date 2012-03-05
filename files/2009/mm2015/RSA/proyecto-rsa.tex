@@ -1,0 +1,338 @@
+\documentclass{article}
+% Change "article" to "report" to get rid of page number on title page
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+\usepackage{Tabbing}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{chngpage}
+\usepackage{soul,color}
+\usepackage{sagetex}
+\usepackage{graphicx,float,wrapfig}
+
+% In case you need to adjust margins:
+\topmargin=-0.45in      %
+\evensidemargin=0in     %
+\oddsidemargin=0in      %
+\textwidth=6.5in        %
+\textheight=9.0in       %
+\headsep=0.25in         %
+
+% Homework Specific Information
+\newcommand{\hmwkTitle}{Proyecto RSA}
+\newcommand{\hmwkDueDate}{Jueves,\ Nov\ 11,\ 2009}
+\newcommand{\hmwkClass}{MM2015}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{H. Villafuerte}
+\newcommand{\hmwkAuthorName}{Carlos E. L\'{o}pez Camey}
+
+% Setup the header and footer
+\pagestyle{fancy}                                                       %
+\lhead{\hmwkAuthorName}                                                 %
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}  %
+\rhead{\firstxmark}                                                     %
+\lfoot{\lastxmark}                                                      %
+\cfoot{}                                                                %
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}}                          %
+\renewcommand\headrulewidth{0.4pt}                                      %
+\renewcommand\footrulewidth{0.4pt}                                      %
+
+% This is used to trace down (pin point) problems
+% in latexing a document:
+%\tracingall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some tools
+%\newcommand{\enterProblemHeader}[1]{\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak%
+   %                                 \nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak}%
+\newcommand{\exitProblemHeader}[1]{\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak%
+                                   \nobreak\extramarks{#1}{}\nobreak}%
+
+\newlength{\labelLength}
+\newcommand{\labelAnswer}[2]
+  {\settowidth{\labelLength}{#1}%
+   \addtolength{\labelLength}{0.25in}%
+   \changetext{}{-\labelLength}{}{}{}%
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#2\end{minipage}}%
+   \marginpar{\fbox{#1}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   \changetext{}{+\labelLength}{}{}{}}%
+
+\setcounter{secnumdepth}{0}
+\newcommand{\homeworkProblemName}{}%
+\newcounter{homeworkProblemCounter}%
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]%
+  {\stepcounter{homeworkProblemCounter}%
+   \renewcommand{\homeworkProblemName}{#1}%
+   \section{\homeworkProblemName}%
+   %\enterProblemHeader{\homeworkProblemName}
+   }%
+  %{\exitProblemHeader{\homeworkProblemName}}%
+
+\newcommand{\problemAnswer}[1]
+  {\noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}}%
+
+\newcommand{\problemLAnswer}[1]
+  {\labelAnswer{\homeworkProblemName}{#1}}
+
+\newcommand{\homeworkSectionName}{}%
+\newlength{\homeworkSectionLabelLength}{}%
+\newenvironment{homeworkSection}[1]%
+  {% We put this space here to make sure we're not connected to the above.
+   % Otherwise the changetext can do funny things to the other margin
+
+   \renewcommand{\homeworkSectionName}{#1}%
+   \settowidth{\homeworkSectionLabelLength}{\homeworkSectionName}%
+   \addtolength{\homeworkSectionLabelLength}{0.25in}%
+   \changetext{}{-\homeworkSectionLabelLength}{}{}{}%
+   \subsection{\homeworkSectionName}%
+   \enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]}}%
+  {\enterProblemHeader{\homeworkProblemName}%
+
+   % We put the blank space above in order to make sure this margin
+   % change doesn't happen too soon (otherwise \sectionAnswer's can
+   % get ugly about their \marginpar placement.
+   \changetext{}{+\homeworkSectionLabelLength}{}{}{}}%
+
+\newcommand{\sectionAnswer}[1]
+  {% We put this space here to make sure we're disconnected from the previous
+   % passage
+
+   \noindent\fbox{\begin{minipage}[c]{\columnwidth}#1\end{minipage}}%
+   \enterProblemHeader{\homeworkProblemName}\exitProblemHeader{\homeworkProblemName}%
+   \marginpar{\fbox{\homeworkSectionName}}%
+
+   % We put the blank space above in order to make sure this
+   % \marginpar gets correctly placed.
+   }%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make title
+\title{\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\\normalsize\vspace{0.1in}\small{Para entregar\ el\ \hmwkDueDate}\\\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}}
+\date{}
+\author{\textbf{\hmwkAuthorName}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{spacing}{1.1}
+\maketitle
+% Uncomment the \tableofcontents and \newpage lines to get a Contents page
+% Uncomment the \setcounter line as well if you do NOT want subsections
+%       listed in Contents
+%\setcounter{tocdepth}{1}
+%\tableofcontents
+
+
+%\newpage
+
+% When problems are long, it may be desirable to put a \newpage or a
+% \clearpage before each homeworkProblem environment
+\begin{homeworkProblem}[Fase de experimentaci\'{o}n/Conocimiento b\'{a}sico ]
+
+\subsection{(c) Factorizar 18 y 27 en primos, qu\'{e} podemos decir de gcd(18,27)?}
+
+\begin{sageblock}
+sage: factor(18)
+2 * 3^2
+sage: factor(27)
+3^3
+\end{sageblock}
+
+Vemos que los dos tienen como factor com\'{u}n el 3, de hecho, $3^2$. Podemos decir que gcd(18,27) = 9 precisamente, porque ese es el mayor divisor que tienen en com\'{u}n.
+
+\begin{sageblock}
+sage: gcd(18,27)
+9
+\end{sageblock}
+
+\subsection{(d) Factorizar 11 y 17 en primos, qu\'{e} podemos decir de gcd(11,17)?}
+
+\begin{sageblock}
+sage: factor(11)
+11
+sage: factor(17)
+17
+\end{sageblock}
+
+Nos damos cuenta que 11 y 17 no tienen descomposici\'{o}n en factores, es decir que no tienen ning\'{u}n factor en com\'{u}n exceptuando al 1.
+\begin{sageblock}
+sage: gcd(11,17)
+1
+\end{sageblock}
+
+
+\subsection{(f) Factorizar 32 y 45 en primos, qu\'{e} podemos decir de gcd(32,45)?}
+
+\begin{sageblock}
+sage: factor(32)
+2^5
+sage: factor(45)
+3^2 * 5
+\end{sageblock}
+
+Nos damos cuenta (de nuevo) que 32 y 45 no tienen ning\'{u}n factor en com\'{u}n. En efecto, 
+\begin{sageblock}
+sage: gcd(32,45)
+1
+\end{sageblock}
+
+
+
+\end{homeworkProblem}
+
+
+
+
+
+
+\begin{homeworkProblem}[Generamos nuestra llave p\'{u}blica]
+\subsection{Encontremos dos primos $p_1$ y $p_2$}
+
+\begin{sageblock} 
+#find primes
+p1set = False;  p2set = False
+reversedPrimes = list(reversed(list(primes(80)))) #len(str(2^80)) is large enough
+i = 0
+while not p2set:
+    prime = reversedPrimes[i]
+    pnumber = 2**prime -1
+
+    if is_prime(pnumber):
+        if p1set:
+            p2 = pnumber
+            print 'retorno'
+            p2set = True
+        else:
+            p1 = pnumber
+            p1set = True
+    i+=1
+\end{sageblock} 
+
+Obtenemos $p_1 = 2305843009213693951$ y $p_2 = 2147483647 \implies n = 4951760154835678088235319297$
+
+\subsection{Encontremos un $e \in \mathbb{N}$ tal que $gcd(e,\phi(n))=1$}
+
+Aqu\'{i}, $\phi(n)$ representa al n\'{u}mero de co-primos de $n$ menores que el mismo tambi\'{e}n llamada funci\'{o}n phi de Euler. En sage, esta est\'{a} implementada como \begin{sageblock}euler_phi(n)\end{sageblock}.
+
+Recordemos que $gcd(p,q) = k$ se refiere al n\'{u}mero $k$ mayor posible que es divisor de $p$ y de $q$ al mismo tiempo, es decir, al m\'{a}ximo com\'{u}n divisor.
+
+\begin{sageblock}
+def get_e(phi):
+    e = 2
+    while gcd(e,phi)!=1:
+        e +=1
+    return e
+\end{sageblock}
+
+Que, obteniendo un (cualquiera) $e$ que cumpla para $phi(n) = 4951760152529835076874141700$, tenemos $e=17$
+\subsection{Llave p\'{u}blica}
+
+Nuestra llave p\'{u}blica es entonces, la pareja ordenada $(n,e) = (4951760154835678088235319297, 17)$
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Encontrando nuestra llave privada]
+
+\subsection{Encontrar $d \in \mathbb{Z}$, tal que $d\cdot e = 1 (\mod \phi(n))$ }
+
+\begin{sageblock}
+def get_d(e,phi):
+    return inverse_mod(e,phi)
+\end{sageblock}
+
+Obtenemos entonces, $d=4077920125612805357425763753$ 
+
+\subsection{Llave privada}
+
+Nuestra llave privada es, la tripleta $(p_1,p_2,d)$ = $(2305843009213693951, 2147483647, 4077920125612805357425763753 )$
+\end{homeworkProblem}
+
+\begin{homeworkProblem}[Como encriptamos y desencriptamos]
+
+Para un entero $m<n$, encriptar usando $c = m^e (\mod n)$, i.e.
+
+\begin{sageblock}
+def get_rsa_number_encryption(m,publicKey):
+    e = publicKey[1]
+    n = publicKey[0]
+    return power_mod(m,e,n)
+\end{sageblock}
+
+Desencriptamos $c$ usando $m = c^d (\mod n))$, i.e.
+
+\begin{sageblock}
+def get_rsa_number_decryption(c,privateKey):
+    n = privateKey[0]*privateKey[1]
+    d = privateKey[2]
+    return power_mod(c,d,n)
+\end{sageblock}	
+
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}[Encriptando una palabra]
+
+La palabra que se encriptar\'{a} es "PUCHICA"
+
+\subsection{Codificaci\'{o}n}
+La convenci\'{o}n que se uso es que para codificar la palabra a un n\'{u}mero para que pueda ser encriptado, usamos ASCIIs. En efecto, la palabra "ABC", ser\'{i}a codificada por el n\'{u}mero 656667.
+
+Para codificar, usamos
+\begin{sageblock}
+def message_to_ascii_representation(message):
+    ascii_rep = ""
+    for character_index in range(0,len(message)):
+        character = message[character_index]
+        ascii_rep += str(ord(character))
+
+    return int(ascii_rep)
+\end{sageblock}
+
+en donde codificando "PUCHICA", obtenemos el n\'{u}mero $m = 80856772736765$ .
+
+\subsection{Decodificaci\'{o}n}
+An\'{a}logamente a la codificaci\'{o}n, el proceso inverso estar\'{i}a implementado de la siguiente forma
+
+\begin{sageblock}
+def ascii_representation_to_message(ascii_rep):
+    ascii_rep = str(ascii_rep)
+    mssg = ""
+    for hasta in range(0,len(ascii_rep),2):
+        ord = int(ascii_rep[hasta:hasta+2])
+        mssg += chr(ord)
+    return mssg
+\end{sageblock}
+
+
+\subsection{Encriptando}
+
+Para encriptar $m = 80856772736765 $ , necesitaremos nuestra llave p\'{u}blica $(4951760154835678088235319297, 17)$, que encriptando como describimos anteriormente, tenemos
+
+\[ c = 4175976697833683195181896730\]
+
+\subsection{Desencriptando}
+
+Para desencriptar $c = 4175976697833683195181896730$ con nuestra llave privada, tenemos
+
+\begin{sageblock}
+sage: private_key
+(2305843009213693951, 2147483647, 4077920125612805357425763753)
+sage: desencriptado = get_rsa_number_decryption(4175976697833683195181896730,private_key)
+sage: desencriptado
+80856772736765
+sage: ascii_representation_to_message(desencriptado)
+'PUCHICA'
+\end{sageblock}
+
+Que es el mensaje que hab\'{i}amos encriptado inicialmente.
+\end{homeworkProblem}
+
+\end{spacing}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

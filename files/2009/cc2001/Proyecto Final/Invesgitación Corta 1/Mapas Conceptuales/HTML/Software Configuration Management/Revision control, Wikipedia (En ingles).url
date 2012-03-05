@@ -1,0 +1,5 @@
+http://en.wikipedia.org/wiki/Revision_control
+[DEFAULT]
+BASEURL=http://en.wikipedia.org/wiki/Revision_control
+[InternetShortcut]
+URL=http://en.wikipedia.org/wiki/Revision_control

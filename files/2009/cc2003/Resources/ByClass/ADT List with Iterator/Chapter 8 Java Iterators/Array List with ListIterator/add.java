@@ -1,0 +1,1 @@
+public void add(Object newEntry){	wasAddCalled = true;	currentIndex++;	ArrayListWithListIterator.this.add(currentIndex, newEntry);} // end add

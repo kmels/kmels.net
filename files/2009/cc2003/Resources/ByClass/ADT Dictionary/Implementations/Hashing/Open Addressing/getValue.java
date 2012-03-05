@@ -1,0 +1,1 @@
+public Object getValue(Object key){	Object result = null;	int index = getHashIndex(key);	index = locate(index, key);	if (index != -1)		result = hashTable[index].getValue(); // key found; get value	// else key not found; result is null	return result;} // end getValue

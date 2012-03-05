@@ -1,0 +1,1 @@
+public Comparable removeMax(){	Comparable root = null;	if (!isEmpty())	{		root = heap[1]; // return value		heap[1] = heap[lastIndex]; // form a semiheap		lastIndex--;   // decrease size		reheap(1);     // transform to a heap	} // end if		return root;} // end removeMax

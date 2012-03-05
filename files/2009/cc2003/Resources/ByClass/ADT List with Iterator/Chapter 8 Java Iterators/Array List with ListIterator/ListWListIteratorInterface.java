@@ -1,0 +1,1 @@
+import java.util.*;public interface ListWithListIteratorInterface extends ListInterface{	public ListIterator getListIterator();} // end ListWithListIteratorInterface

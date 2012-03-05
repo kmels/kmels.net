@@ -1,0 +1,1 @@
+public Object pop(){	Object top = null;	if (!isEmpty())	{		top = stack.lastElement();		stack.removeElementAt(stack.size()-1);	} // end if	return top;} // end pop

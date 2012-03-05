@@ -1,0 +1,1 @@
+public boolean add(int newPosition, Object newEntry){	boolean isSuccessful = true;	if (!isFull() && (newPosition >= 1) 	              && (newPosition <= length+1)) 	{		makeRoom(newPosition);		entry[newPosition-1] = newEntry;		length++;	}	else		isSuccessful = false;	return isSuccessful;} // end add

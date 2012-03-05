@@ -1,0 +1,447 @@
+%
+%  untitled
+%
+%  Created by Carlos Eduardo López Camey on 2009-04-17.
+%  Copyright (c) 2009 Carlos E. López Camey. All rights reserved.
+%
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\usepackage{pslatex}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm, amssymb, mathabx,stmaryrd}
+\usepackage{color}
+
+\usepackage{boxedminipage}
+\usepackage{listings}
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+\usepackage{fontenc}
+\usepackage{allrunes}
+\usepackage{verbatim}
+
+\definecolor{MyGray}{rgb}{0.96,0.97,0.98}
+\makeatletter\newenvironment{graybox}{%
+   \begin{lrbox}{\@tempboxa}\begin{minipage}{\columnwidth}}{\end{minipage}\end{lrbox}%
+   \colorbox{MyGray}{\usebox{\@tempboxa}}
+}\makeatother
+
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+\setlength\topmargin{0in}
+\setlength\headheight{0in}
+\setlength\headsep{0in}
+\setlength\textheight{7.7in}
+\setlength\textwidth{6.5in}
+\setlength\oddsidemargin{0in}
+\setlength\evensidemargin{0in}
+\setlength\parindent{0.25in}
+\setlength\parskip{0.1in}
+
+\ifpdf
+  \DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+% Comandos
+\newcommand{\norma}[1]{\lvert\lvert#1\lvert\rvert}
+\newcommand{\citar}[1]{\textbf{\underline{Ref:}} \cite{#1}}
+\newcommand{\enboxar}[1]{%
+  \[\fbox{%
+      \addtolength{\linewidth}{-2\fboxsep}%
+      \addtolength{\linewidth}{-2\fboxrule}%
+      \begin{minipage}{\linewidth}%
+      #1
+      \end{minipage}%
+    }\]%
+}
+%\newcommand{\dotprod}{\includegraphics{dotprod.1}}
+\renewcommand\abstract{
+\begin{center}
+{\bfseries Resumen\vspace{-.5em}\vspace{0pt}}
+\end{center}
+\quotation}
+\newtheorem{thm}{Teorema}
+\newtheorem{corolario}[thm]{Corolario}
+\theoremstyle{definition}
+\newtheorem{ejm}{Ejemplo}
+\newtheorem{defn}{Definicion}
+\newtheorem{ejemplo}[ejm]{Ejemplo}
+\newtheorem{definicion}[defn]{Definición}
+\renewcommand\refname{Referencias}
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+\title{Ortogonalización de Gram-Schmidt}
+\author{C. López \thanks{Carlos Eduardo López Camey, Universidad del Valle de Guatemala, Álgebra Líneal, Carné \#08107, http://kmels.net}}
+\date{Mayo del 2009}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\begin{document}
+
+
+
+\maketitle
+% Licencia
+\begin{center}
+\includegraphics[scale=0.83]{imgs/cc/cc_by_30.pdf}\hspace*{0.95ex}\includegraphics[scale=0.83]{imgs/cc/cc_sa_30.pdf}\\[1.5ex]Éste trabajo está licenciado bajo la licencia \textit{Creative Commons Attribution-ShareAlike 3.0}.
+\vspace*{1.5ex}
+\end{center}
+% Licencia
+\begin{abstract}
+	En cualquier espacio prehilbertiano, podemos escoger la base en la que queremos trabajar. Muy frecuentemente, el hecho de trabajar en una base ortogonal simplifica mucho los cálculos a hacer. 
+	El proceso de Gram-Schmidt es un algoritmo que construye una base ortonormal u ortogonal $\mathcal{B}$ para un espacio prehilbertiano $\mathcal{V}$ dada una base arbitraria $\mathcal{D}$ para ese mismo espacio.
+\end{abstract}
+
+\section*{Introducción}
+\paragraph\indent 
+\noindent El nombre de éste proceso proviene de los matemáticos Jørgen Perdersen Gram y Erhard Schmidt, aunque ellos \emph{irónicamente} no fueran los primeros en trabajarlo. Las diferentes versiones que se han publicado del proceso que ahora conocemos como el proceso de Gram-Schmidt han sido una interesante historia. La primera, una versión ahora conocida como  "modificicación de Gram-Schmidt" (MGS) fue descrita por primera vez por Laplace en 1812 y es equivalente a un método descrito por Bauer (1865, casi 40 años después). Y también es un caso especial de un algoritmo más general atribuído a Cauchy! publlicado en 1837.\citar{Axelsson}\cite{Farebrother} Gram y Schmidt obtuvieron el crédito por publicarlo en alguna fecha entre los años 1907-1908.\citar{ShortHistory-NSLD}
+
+\pagebreak
+\begin{center}
+\textbf{Notación}
+\end{center}
+\begin{center}
+  \begin{tabular}{r|l}
+  	$\mathbb{R}, \mathbb{R}^n$  & números reales, n-tuplas de reales \\
+	\{\dots $\:\lvert\:$ \dots \}  & conjunto de \dots tales que \dots \\
+	\( (a\,..\,b) \), \( [a\,..\,b] \) & intervalo (abierto o cerrado) de los reales entre $a$ y $b$\\
+	\( V,W,U \) & espacios vectoriales\\
+    \( \nu,\mu,\omega \)  & vectores\\
+	\( \norma{\nu} \)  & norma L-2 o euclidiana de $\nu$\\
+	\(\langle\mu,\nu\rangle\) y  \(\mu\cdot\nu\)& producto interno real entre los vectores $\mu$ y $\nu$ \\
+	 $\alpha_1  \: \alpha_2$ & multiplicacion de dos reales $\alpha_1$ y $\alpha_2$\\
+	\( \mu \perp \nu \)  & ortogonalidad entre $\mu$ y $\nu$\\
+	$\mathcal{V,S,E}$ & conjuntos \\
+    \( B,D \)              & bases\\
+  \end{tabular}
+\end{center}
+\section*{Producto interior, norma y ortogonalidad}
+\subsection*{Producto interior}
+\paragraph\indent El producto interior es una generalización de lo que conocemos como producto punto. En un espacio vectorial, es una manera de multiplicar vectores, dando como resultado de esta multiplicación, un escalar.
+
+\noindent Un espacio vectorial junto con un producto interior en él, es llamado un \textbf{espacio prehilbertiano} o \textbf{espacio prehilbert}.
+\vspace{10 mm}
+\hrule
+\begin{definicion}\label{def:Prehilbertiano}  
+	Un espacio vectorial $V$ cuyo campo escalar es $\mathbb{R}$, es llamado un espacio prehilbertiano si para cada par de elementos $\mu,\nu$ en $V$ está definido un producto interno real $\langle\mu,\nu\rangle$ cumpliendose para $\mu,\nu,\omega \in V$ y $\alpha$ $\in$ $\mathbb{R}$: %\citar{FrankDeutsch} %pagina 2
+	\begin{enumerate}
+		\item $\langle\mu+\nu,\omega\rangle =\langle\mu,\omega\rangle + \langle\nu,\omega\rangle$
+		\item $\langle\alpha\nu,\omega\rangle=\alpha\langle\nu,\omega\rangle$
+		\item $\langle\nu,\omega\rangle=\langle\omega,\nu\rangle$
+		\item $\langle\nu,\nu\rangle > 0$ $\Leftrightarrow$ $\nu\neq0$
+		\item $\langle\nu,\nu\rangle$ = 0 $\Leftrightarrow$ $\nu=0$
+	\end{enumerate} %termina definicion
+\end{definicion}
+\hrule
+
+En general, decimos que el producto interno de dos vectores de \emph{n} componentes reales es la combinación lineal de sus componentes, siendo \'{e}ste el producto punto usual. Sean $\mu$,$\nu$ vectores
+\begin{equation*}
+	\langle\mu,\nu\rangle = \mu\cdot\nu = \displaystyle\sum_{i=1}^n\mu_i\nu_i=\mu_1\nu_1+\mu\nu_2\dots+\mu_n\nu_n
+\end{equation*}
+\begin{ejemplo}
+	El espacio euclidiano $\mathbb{R}^n$ sobre los reales, en donde el producto interno está dado por el producto punto usual $\langle\mathbb{R}^n,\varoplus,\varotimes,\mathbb{R}\rangle$ es un espacio prehilbertiano. Sean $\mu,\nu$ y $\omega$ vectores $\in$ $\mathbb{R}^n$ y $\alpha$ escalar $\in$ $\mathbb{R}$ entonces
+	\begin{enumerate}
+	\item $\langle\mu\varoplus\nu,\omega\rangle = \displaystyle\sum_{i=1}^n (\mu_{i}+\nu_{i})\omega_{i} = \displaystyle\sum_{i=1}^n \mu_{i}\omega_{i}\ + \nu_{i}\omega_{i} = \langle\mu,\omega\rangle \varoplus \langle\nu,\omega\rangle$
+	\item $\langle\alpha\varotimes\nu,\omega\rangle= \displaystyle\sum_{i=1}^n(\alpha\mu_i)\omega_i = \displaystyle\sum_{i=1}^n\alpha(\mu_i\omega_i) = \alpha\:\displaystyle\sum_{i=1}^n\mu_i\omega_i = \alpha\varotimes\langle\nu,\omega\rangle$
+	\item $\langle\nu,\omega\rangle=\langle\omega,\nu\rangle = \displaystyle\sum_{i=1}^n\mu_i\omega_i = \displaystyle\sum_{i=1}^n\omega_i\mu_i = \langle\omega,\nu\rangle$
+	\item $\langle\nu,\nu\rangle = \displaystyle\sum_{i=1}^n\nu_i\nu_i = \displaystyle\sum_{i=1}^n(\nu_i)^2 > 0$ $\Leftrightarrow$ $\nu\neq0$
+	\item $\langle\nu,\nu\rangle = \displaystyle\sum_{i=1}^n\nu_i\nu_i = \displaystyle\sum_{i=1}^n(\nu_i)^2 = 0 \Leftrightarrow \nu=0$
+	\end{enumerate}%
+\end{ejemplo}
+
+\subsection*{Dimensi\'{o}n de un vector}
+\paragraph \indent Sabemos lo que es la base de un espacio vectorial, y sabemos tambi\'{e}n que un espacio puede tener muchas bases diferentes. Por lo tanto, no podemos hablar de "la" base para un espacio vectorial, aunque algunos espacios vectoriales tengan bases que nos parece encontrar m\'{a}s naturalmente que otras, es decir, por ejemplo la base de ${P}_2$, el espacio vectorial de los polinomios de grado mayor o igual que dos, tiene como una base a $\mathcal{B} = \langle 1,x,x^2 \rangle$. 
+
+\noindent Pero por ejemplo, en el espacio \{ $\alpha_2x^2 + \alpha_1x + \alpha_0 \lvert 2\alpha_2 - \alpha_0 = \alpha_1$ \} ninguna base se nos ocurre tan naturalmente como antes.
+
+Sin embargo, podemos encontrar algo sobre las bases que est\'{a} asociado \'{u}nicamente con el espacio. Entonces, con cada espacio, podemos asociar un n\'{u}mero, el n\'{u}mero de vectores que aparecen en cualquiera de sus bases.
+\\
+\hrule
+\begin{definicion}
+Un espacio vectorial es de dimensi\'{o}n finita si y solo si tiene una base con cualesquiera cantidad finita de vectores.
+\end{definicion}
+\hrule
+
+\pagebreak
+\subsection*{Longitud o norma de un vector}
+\vspace{10mm}
+\hrule
+\begin{definicion}\label{def:Norma}
+	Dado un vector de dimensión $n$ $\nu$ = $\left(\begin{array}{c} \nu_1 \\\nu_2\\\vdots\\\nu_n\end{array}\right)$, para p = 1,2\dots, la norma denotada $\norma{\nu}_p$ de ese vector se define como $\norma{\nu}_p = (\displaystyle\sum_{i}\lvert{\nu_i}\rvert^p)^{1/p}$ y cumple con las siguientes propiedades: \citar{Gradshteyn}
+
+	\begin{enumerate}
+		\item $\norma{\nu}$ $>$ 0 $\Leftrightarrow$ $\nu$ $\neq$ 0 
+		\item $\norma{\nu}$ = 0 $\Leftrightarrow$ $\nu$ = 0 
+		\item $\norma{\emph{k}\nu}$ = $ \emph{k} \norma{\nu}$ para cualquier escalar \emph{k}
+		\item $\norma{\nu+\mu}$ $\leq$ $\norma{\nu}+\norma{\mu}$ también llamada \textbf{desigualdad triangular}
+	\end{enumerate}
+\end{definicion}
+\hrule
+
+\noindent La norma más communmente encontrada y con la que estaremos trabajando es la llamada norma-L2 o norma Euclidiana.
+
+\begin{equation}
+	\norma{\nu}_2 = (\displaystyle\sum_{i}^n\lvert{\nu_i}\rvert^2)^\frac{1}{2} =  \sqrt{\nu\cdot\nu} = \sqrt{\langle\nu,\nu\rangle} 
+\end{equation}
+
+\noindent En general, las propiedades (1), (2) y (3) se cumplen fácilmente siguiendo las propiedades del producto interno. La propiedad (4) o desigualdad triangular la demostraremos más adelante con la ayuda del siguiente teorema.
+
+\enboxar{\begin{thm}\label{thm:Cauchy-Schwartz}
+	Llamada también \textbf{desigualdad de Cauchy-Schwartz}, sean $\mu$ y $\nu$ dos vectores cualesquiera en un espacio prehilbertiano, se cumple 
+	\[\langle\mu,\nu\rangle \leq \norma{\mu} \:\norma{\nu}\] manteniendo la igualdad si y solo si $\mu$ y $\nu$ son linealmente dependientes.
+\end{thm}}
+
+\begin{proof}[Demostración:]
+Si $\nu$ y $\mu$ son linealmente dependientes, digamos $\mu=\alpha\nu$ para cualquier escalar $\alpha$ entonces
+		\[\langle\alpha\nu,\nu\rangle = \norma{\alpha\nu}\:\norma{\nu}\]
+		\[\alpha\langle\nu,\nu\rangle = \alpha\norma{\nu}\:\norma{\nu}\]
+		\[\alpha\norma{\nu}^2=\alpha\norma{\nu}^2\]
+Si $\nu$ y $\mu$ son linealmente independientes, entonces para cualquier escalar $\lambda$ vemos que $\mu - \lambda\nu \neq 0$
+		\[\langle\mu-\lambda\nu,\mu-\lambda\nu\rangle > 0\]
+		\[\mu\cdot\mu - 2\lambda\nu\cdot\mu + \lambda^2\:\nu\cdot\nu > 0\]
+		\[\langle\mu,\mu\rangle - 2\lambda\langle\nu,\mu\rangle + \lambda^2\langle\nu,\nu\rangle > 0\]
+Supongamos $\lambda = \langle\mu,\nu\rangle\langle\nu,\nu\rangle^{-1}$
+		\[\langle\mu,\mu\rangle - 2\langle\mu,\nu\rangle\langle\nu,\nu\rangle^{-1}\langle\nu,\mu\rangle + (\langle\mu,\nu\rangle\langle\nu,\nu\rangle^{-1})^2\langle\nu,\nu\rangle > 0\]
+		\[\langle\mu,\mu\rangle - 2\langle\mu,\nu\rangle\langle\nu,\mu\rangle\langle\nu,\nu\rangle^{-1} + \langle\mu,\nu\rangle^2\langle\nu,\nu\rangle^{-2}\langle\nu,\nu\rangle > 0\]
+		\[\langle\mu,\mu\rangle - 2\langle\mu,\mu\rangle\langle\nu,\nu\rangle\langle\nu,\nu\rangle^{-1} + \langle\mu,\nu\rangle^2\langle\nu,\nu\rangle^{-1}> 0\]
+		\[\langle\mu,\nu\rangle^2\langle\nu,\nu\rangle^{-1} -\langle\mu,\mu\rangle\ > 0\]
+Que es cierto si y solo si
+	\[\langle\mu,\nu\rangle^2\langle\nu,\nu\rangle^{-1} > \langle\mu,\mu\rangle\]
+	\[\langle\mu,\nu\rangle^2\ > \langle\mu,\mu\rangle\langle\nu,\nu\rangle\]
+	\[\lvert\langle\mu,\nu\rangle\rvert > \norma{\mu} \:\norma{\nu}\]
+\end{proof}
+\enboxar{
+\begin{thm}
+	Llamado también teorema de \textbf{desigualdad triangular}, sean $\mu,\nu$ dos vectores cualesquiera en un espacio prehilbertiano, 
+	\[\norma{\mu+\nu} \leq \norma{\mu}+\norma{\nu}\]
+\end{thm}}
+
+Podríamos pensar que ésta desigualdad equivale al enunciado que afirma "La distancia más corta entre dos puntos está en una linea recta."\\
+\begin{center}
+	\includegraphics{imgs/mp/norma.1}
+\end{center}
+
+\begin{proof}[Demostración:]
+	\[\norma{\mu+\nu}^2 \leq (\norma{\mu}+\norma{\nu})^2\]
+	\[\norma{\mu}^2+2\langle\mu,\nu\rangle+\norma{y}^2 \leq \norma{\mu}^2+2\norma{\mu}\:\norma{\nu}+\norma{y}^2\]
+	\[\langle\mu,\nu\rangle \leq \norma{\mu}\:\norma{\nu}\]
+Cumpliendose usando la desigualdad de Cauchy-Schwartz
+\end{proof}
+Nótese que la igualdad en ésta propiedad de la norma se mantiene de nuevo si y solo si  los vectores $\mu$ y $\nu$ son linealmente dependientes.
+
+\subsection*{Ortogonalidad}
+
+\hrule
+\begin{definicion}
+Sea $V$ un espacio prehilbertiano: \citar{Hall}
+	\begin{enumerate}
+		\item Dos vectores $\mu,\nu \in$ \(V\) son ortogonales si y solo si $\langle\mu,\nu\rangle$ = 0 
+		\item Un conjunto de vectores \{$\mu_1,\mu_2\dots \mu_n$\} es ortogonal si $\mu_i$ $\perp$ $\mu_j $ $\forall$ $i,j \in [1..n]$ e $i\neq j$ 
+		\end{enumerate}
+\end{definicion}
+\hrule
+
+\begin{ejemplo}
+	Dos vectores ortogonales respecto al producto interno de vectores, es decir, el producto punto\\
+	\center{
+	\includegraphics{imgs/mp/ortogonalidad.1}
+	$\left(\begin{array}{c}1 \\-1\end{array}\right)\cdot\left(\begin{array}{c}1 \\-1\end{array}\right) = 0$ }
+\end{ejemplo}
+
+\enboxar{
+\begin{thm}\label{thm:3}
+	Si un conjunto de vectores \{$\mu_1\dots \mu_k\} \in \mathbb{R}^n$ es ortogonal para cada con $\mu_i\neq 0$, entonces el conjunto es linealmente independiente.
+\end{thm}}
+
+\begin{proof}[Demostración:]
+	Considérese la relación lineal $\alpha_1 \mu_1+\alpha_2 \mu_2+\dots +\alpha_k \mu_k=0$. Si $i \in [1 \dots k ]$, aplicando el producto punto $\mu_i$ en ambos lados de la ecuación
+\[\mu_i \cdot ( \alpha_1 \mu_1+\alpha_2 \mu_2+\dots +\alpha_k \mu_k)= \mu_i \cdot 0\]
+\[\mu_i \alpha_1\mu_1+\mu_i\alpha_2\mu_2+\dots+\mu_i\alpha_i\mu_i\dots+\mu_i\alpha_k\mu_k = 0\]
+\[\alpha_1(\mu_i\mu_1)+\alpha_2(\mu_i\mu_2)+\dots+\alpha_i(\mu_i\mu_i)+\dots+\alpha_k(\mu_i\mu_k) = 0\]
+\[\alpha_i(\mu_i\cdot\mu_i) = 0\]
+	cuya única solución es $\alpha_i = 0$ cumpliendose la propiedad (4) del producto interno.
+\end{proof}
+
+\begin{ejemplo}[Teorema de Pitágoras] 
+	Sea $\xi = $ \{$\mu_1,\mu_2\dots\mu_n$\} un conjunto ortogonal de vectores entonces
+	\[\norma{\displaystyle\sum_{i=1}^n\mu_i}^2 = \displaystyle\sum_{i=1}^n\norma{\mu_i}^2\]
+En particular, si $\mu\perp\nu \: \forall \: \mu,\nu \in \xi$
+	\[\norma{\mu+\nu}^2 = \norma{\mu}^2+\norma{\nu}^2\]
+\begin{proof}[Demostración:]
+	\[\norma{\displaystyle\sum_{i=1}^n\mu_i}^2 = \langle\displaystyle\sum_{i=1}^n\mu_i,\displaystyle\sum_{j=1}^n\mu_j\rangle = \displaystyle\sum_{i=1}^n(\langle\mu_i,\displaystyle\sum_{j=1}^n\mu_j\rangle)\]
+Pero $\mu_i\cdot\mu_j = 0 \: \forall \: i\neq j$, entonces
+\[\displaystyle\sum_{i=1}^n(\langle\mu_i,\displaystyle\sum_{j=1}^n\mu_j\rangle) = \displaystyle\sum_{i=1}^n\norma{\mu_i}^2\]\qedhere
+\end{proof}
+\end{ejemplo}
+
+\section*{Proyecciones ortogonales}
+Hasta el momento hemos hablado de lo que es la norma de un vector, el producto interior de vectores y la propiedad de la ortogonalidad. Todas éstas nos ayudarán ahora a definir lo que es una proyección ortogonal.
+
+Para poder explicar lo que es una proyección ortogonal, la consideraremos primero sobre una línea. Si queremos proyectar ortogonalmente un vector $\nu$ sobre una línea $\ell$, pensaremos que ésta es la sombra que proyecta $\nu$ en $\ell$. Sabemos que un punto se obscurecerá en la línea si alguien en esa línea al ver hacia arriba o hacia abajo, puede observar a $\nu$.
+
+\begin{center}
+\includegraphics{imgs/mp/proyecciones.1}
+\end{center}
+
+La figura anterior muestra a alguien que ha caminado en la línea hasta que la punta del vector $\nu$ esté justamente arriba de él. Aquí, la línea estará descrita como la extensión de algun vector $\ell = \{\emph{c}\mu \: \lvert \: c \in \mathbb{R}\} \neq 0$.
+
+\begin{center}
+\includegraphics{imgs/mp/proyecciones.2}
+\end{center}
+
+Podemos dar solución al coeficiente $c$ al notar que $\nu - c\mu$ $\perp$ $c\mu$, manteniendo $\nu$ su ortogonalidad con $\mu$. Haciendo uso de la propiedad de la ortogonalidad \[\langle\nu-c\mu,\mu\rangle = 0 \Rightarrow c = \frac{\nu\cdot\mu}{\mu\cdot\mu}\]
+
+\hrule
+\begin{definicion}
+	La proyección ortogonal de $\nu$ sobre una línea extendida o generada por el vector $\mu \neq 0$ es el vector 
+	\[ \textrm{proj}_{\mu}(\nu) = \frac{\nu\cdot\mu}{\mu\cdot\mu}\:\:\mu\]
+\end{definicion}
+\hrule
+
+	\begin{ejemplo}
+	Para proyectar ortogonalmente el vector $\nu$ = $\left(\begin{array}{c} 2 \\\ 3\end{array}\right)$ sobre la línea $y = 2x$, escogeremos primero la dirección de un vector para la línea $y$.
+	\[\mu = \left(\begin{array}{c} 1 \\\ 2\end{array} \right)\]
+	cumple. Entonces 
+	\begin{center}  \small \begin{tabular}{@{}c@{}}\includegraphics{imgs/mp/proyecciones.3}\end{tabular}
+	  \hspace*{6em}
+		\[\textrm{proj}_{\left(\begin{array}{c} 1 \\\ 2\end{array}\right)}(\left(\begin{array}{c} 2 \\\ 3\end{array}\right)) = 
+		\frac{\left(\begin{array}{c} 2 \\\ 3\end{array}\right)\cdot\left(\begin{array}{c} 1 \\\ 2\end{array}\right)}{ 
+	          \left(\begin{array}{c} 1 \\\ 2\end{array}\right)\cdot\left(\begin{array}{c} 1 \\\ 2\end{array}\right)}
+	     \left(\begin{array}{c} 1 \\\ 2\end{array}\right) = \displaystyle \frac{8}{5}\left(\begin{array}{c} 1 \\\ 2\end{array}\right)=\left(\begin{array}{c} 8/5 \\\ 16/5\end{array}\right)\]
+	\end{center}
+	\end{ejemplo}
+
+\section*{El proceso de Gram-Schmidt}
+Podemos estudiar la proyección sobre una línea extendida por $\mu$ como una descomposición de $\nu$ en dos partes
+
+\begin{center}  \small
+ \begin{tabular}{@{}c@{}}\includegraphics{imgs/mp/gram-schmidt.1}\end{tabular}
+  \hspace*{6em}
+  $\nu = \textrm{proj}_{\mu}{\nu} + (\nu - \textrm{proj}_{\mu}{\nu})$
+\end{center}
+
+\begin{corolario}
+	Un conjunto $\mathcal{S}$ de vectores ortogonales en un sub-espacio de tamaño $k$ de un espacio de dimensión $k$ es una base para ese espacio.
+\end{corolario}
+
+\begin{proof}[Demostración: ]
+	Sabemos que $\mathcal{S}$ es linearmente independiente (Teorema 3) y cualquier subconjunto L.I. de tamaño $k$ de un espacio de dimensión $k$ es una base
+\end{proof}
+
+Nótese que el inverso de éste Corolario no se cumple (no cualquier base de cualquier sub-espacio de $\mathbb{R}^n$ está conformada por vectores ortogonales). Pero podemos decir que para cada sub-espacio de $\mathbb{R}^n$ hay por lo menos una base compuesta por vectores ortogonales.
+
+\begin{ejemplo}
+	Los vectores $\omega_1$ y $\omega_2$ de ésta base $\mathcal{D}$ para $\mathbb{R}^2$ no son ortogonales
+	
+	\begin{center}
+	  \qquad	  \begin{tabular}{@{}c@{}}\includegraphics{imgs/mp/gram-schmidt.2}\end{tabular}
+	$\mathcal{D} = \{\left(\begin{array}{c} 4 \\\ 2\end{array} \right),\left(\begin{array}{c} 1 \\\ 3\end{array} \right)\}$
+\end{center}
+Sin embargo, podemos encontrar a partir de $\mathcal{D}$ una nueva base para el mismo espacio que esté compuesta por vectores ortogonales. Para el primer vector miembro de nuestra nueva base escogeremos a $\omega_1$
+\[\nu_1 = \left(\begin{array}{c} 4 \\\ 2\end{array} \right)\]
+Para el segundo vector, quitaremos de $\omega_2$ su parte en la dirección de $\nu_1$
+\begin{center}  \small
+   $\nu_2 = \left(\begin{array}{c} 1 \\\ 3\end{array} \right) - \textrm{proj}_{\nu_1}(\left(\begin{array}{c} 1 \\\ 3\end{array} \right)) = \left(\begin{array}{c} 1 \\\ 3\end{array} \right) - \left(\begin{array}{c} 2 \\\ 1\end{array} \right) = \left(\begin{array}{c} -1 \\\ 2\end{array} \right)$
+   \qquad
+ \begin{tabular}{@{}c@{}}\includegraphics{imgs/mp/gram-schmidt.3}\end{tabular}
+\end{center}
+que deja la parte $\nu_2$ de $\omega_2 \perp \nu_1$ (por la definición de proyección). Notemos que, por el Corolario (4), \{$\nu_1,\nu_2$\} es una base para $\mathbb{R}^2$
+\end{ejemplo}
+
+\hrule
+\begin{definicion}
+	Un conjunto de vectores ortogonal que es base para un espacio vectorial, es llamado \textbf{base ortogonal}.
+\end{definicion}
+\hrule
+
+\begin{ejemplo}
+	Para convertir a la base $\mathcal{D}$ = \{$\left(\begin{array}{c} 1 \\\ 1 \\\ 1\end{array} \right),\left(\begin{array}{c} 0 \\\ 2 \\\ 0\end{array} \right),\left(\begin{array}{c} 1 \\\ 0 \\\ 3\end{array} \right)$\} de $\mathbb{R}^3$ en una base ortogonal $\mathcal{B}$ = \{$\nu_1,\nu_2,\nu_3$\}, tomaremos el primer vector $\nu_1$ de nuestra nueva base tal y como está dado en $\mathcal{D}$.
+	\[\nu_1=\left(\begin{array}{c} 1 \\\ 1 \\\ 1\end{array} \right)\]
+Obtenemos $\nu_2$ comenzando con el segundo vector miembro de $\mathcal{D}$ y quitándole su parte en la dirección de $\nu_1$ (tal y como en el ejemplo anterior)
+\[\nu_2 = \left(\begin{array}{c} 0 \\\ 2\\\ 0\end{array} \right) - \textrm{proj}_{\nu_1}(\left(\begin{array}{c} 0 \\\ 2\\\ 0\end{array} \right)) = \left(\begin{array}{c}0 \\\ 2\\\ 0\end{array} \right) - \left(\begin{array}{c} 2/3\\\ 2/3\\\ 2/3\end{array} \right) = \left(\begin{array}{c} -2/3 \\\ 4/3\\\ -2/3\end{array} \right)\]
+De igual manera, con $\nu_3$, tomaremos el tercer vector dado en $\mathcal{D}$ y quitándole su parte en la dirección de $\nu_1$, y también en la dirección de $\nu_2$
+\[\nu_3 = \left(\begin{array}{c} 1 \\\ 0\\\ 3\end{array} \right) - \textrm{proj}_{\nu_1}(\left(\begin{array}{c} 1 \\\ 0\\\ 3\end{array} \right)) - \textrm{proj}_{\nu_2}(\left(\begin{array}{c} 1 \\\ 0\\\ 3\end{array} \right)) = \left(\begin{array}{c} -1 \\\ 0\\\ 1\end{array} \right)\]
+
+De nuevo tenemos, que $\mathcal{B} =$ \{$\left(\begin{array}{c} 1 \\\ 1\\\ 1\end{array}\right),\left(\begin{array}{c} -2/3 \\\ 4/3\\\ 2/3\end{array} \right),\left(\begin{array}{c} -1 \\\ 0\\\ 1\end{array} \right)$\}, según el Corolario (4), es una base ortogonal para $\mathbb{R}^n$.
+\end{ejemplo}
+
+El siguiente resultado --propósito de ésta publicación-- verifica que el proceso usado en estos últimos dos ejemplos funciona con cualquier base para cualquier sub-espacio de $\mathbb{R}^n$ (estamos restringidos a $\mathbb{R}^n$ ya que no dimos una definición de ortogonalidad para otros espacios vectoriales)
+
+\enboxar{
+\begin{thm}
+	\textbf{Ortogonalización de Gram-Schmidt}. \citar{Hefferon} Si $\mathcal{B} = $ \{$\omega_1,\dots\omega_k$\} es una base para un sub-espacio de $\mathbb{R}^n$ entonces, $\mathcal{D}$ =  \{$\nu_1,\nu_2,\nu_3,\dots\nu_k$\} donde	
+	\begin{align*}
+	  	\nu_1 &=\omega_1 \\
+		\nu_2 &=\omega_2-\textrm{proj}_{\nu_1}(\omega_2) \\
+		\nu_3 &=\omega_3-\textrm{proj}_{\nu_1}(\omega_3) - \textrm{proj}_{\nu_2}(\omega_3)\\
+		\vdots\\
+		\nu_k & = \omega_k - \textrm{proj}_{\nu_1}(\omega_k)-\dots-\textrm{proj}_{\omega_{k-1}}(\omega_k)
+	\end{align*}
+es una base ortogonal.
+\end{thm}}
+
+\begin{proof}[Demostración: ]
+	Usaremos la inducción para probar que cada $\nu_i$ es diferente de cero, está dentro del generado de \{$\omega_1\dots\omega_i$\} y es ortogonal a sus vectores precedentes, es decir $\nu_1\cdot\nu_i = \nu_2\cdot\nu_i\dots = \nu_{i-1}\cdot\nu_i=0$. Cumpliendose esto, junto con el Corolario (4), tendremos que \{$\nu_1,\dots\nu_k$\} es una base para el mismo espacio que \{$\omega_1,\dots\omega_k$\}.
+
+Cubriremos los casos hasta $i$ = 3, dejando al lector como ejercicio completar el resto de casos.
+
+Para $i$ = 1, el caso es trivial ya que establecemos $\nu_1 = \omega_1$, haciendolo diferente de cero y también está dentro del generado de $\mathcal{B}$. La tercera condición se cumple por vacuidad.
+
+Para $i$ = 2, expanderemos la definición de $\nu_2$
+\[\nu_2 = \omega_2 - \textrm{proj}_{\nu_1}(\omega_2) = \omega_2 - \frac{\omega_2\cdot\nu_1}{\nu_1\cdot\nu_1}\:\:\nu_1 = \omega_2 - \frac{\omega_2\cdot\nu_1}{\nu_1\cdot\nu_1}\:\:\omega_1\]
+
+Vemos que $\nu_2$ es diferente de cero, de otro modo ésta sería una dependencia lineal de $\mathcal{B}$, también muestra que está en el generado de éste y es ortogonal a su único vector precedente
+\[\nu_1\cdot\nu_2 = \nu_1\cdot(\omega_2-\textrm{proj}_{\nu_1}(\omega_2)) = 0\] 
+por la definición de proyección.
+
+Para $i$ = 3, como en el caso de $i$ = 2, expandiremos su definición
+\[\nu_3 = \nu_3-\frac{\omega_3\cdot\nu_1}{\nu_1\cdot\nu_1}\:\:\nu_1 - \frac{\omega_3\cdot\nu_2}{\nu_2\cdot\nu_2}\:\:\omega_2 = \nu_3-\frac{\omega_3\cdot\nu_1}{\nu_1\cdot\nu_1}\:\:\omega_1 -  \frac{\omega_3\cdot\nu_2}{\nu_2\cdot\nu_2}\:\:(\omega_2-\frac{\omega_2\cdot\nu_1}{\nu_1\cdot\nu_1}\:\:\omega_1)\]
+
+Mostrando que $\nu_3$ es diferente de cero y está en el generado. Mostrando que es ortogonal a su vector vector precedente $\nu_1$
+
+\begin{align*}
+	\nu_1\cdot\nu_3 & = \nu_1\cdot(\omega_3-\textrm{proj}_{\nu_1}(\omega_3) - \textrm{proj}_{\nu_2}(\omega_3))\\
+	&= \nu_1\cdot(\omega_3 - \textrm{proj}_{\nu_1}(\omega_3)) - \nu_1\cdot\textrm{proj}_{\nu_2}(\omega_3) \\
+	&= 0
+\end{align*}
+
+Vemos que el primer término es cero ya que ésta es una proyección ortogonal, como en el caso para $i$ = 2. El segundo término es cero dado que $\nu_1$ es ortogonal a $\nu_2$ (y también lo es para cualquier vector en la linea expandida por $\nu_2$). Para mostrar que $\nu_3$ es ortogonal a su otro vector precedente $\nu_2$, el proceso es el mismo.
+\end{proof}
+
+Ahora que tenemos una base ortogonal, podríamos hacer que cada vector dentro de ésta tenga longitud o norma uno, diviendo a cada uno dentro de su propia longitud. A éste proceso se le llama \textbf{normalización} y a el conjunto ortogonal formado por vectores de longitud uno, \textbf{conjunto de vectores ortonormales}.
+
+\begin{ejemplo}
+Normalizando la norma de cada vector en la base ortogonal del ejemplo (6) produce esta \emph{base ortonormal}
+\[ \langle \left(\begin{array}{c} 1/\sqrt{3} \\\ 1/\sqrt{3} \\\ 1\sqrt{3} \end{array} \right),\left(\begin{array}{c} -1/\sqrt{6} \\\ 2/\sqrt{6} \\\ -1/\sqrt{6} \end{array} \right) , \left(\begin{array}{c} -1/\sqrt{2} \\\ 0 \\\ 1/\sqrt{2} \end{array} \right) \rangle\]
+
+\end{ejemplo}
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+	\bibitem{ShortHistory-NSLD} The National Science Digital Library,
+	   {\it Short History of the names behind the Gram-Schmidt Process}, The National Science Foundation. %http://expertvoices.nsdl.org/cornell-cs322/2008/04/16/short-history-of-the-names-behind-the-gram-schmidt-process/
+  	\bibitem{FrankDeutsch} Frank Deutsch,
+	   {\it Best approximation in inner product spaces},
+	   Springer, 2001. %http://books.google.com/books?id=XFoWaDq6_mYC
+	\bibitem{Axelsson} Owe Axelsson, {\it Iterative solution methods}, Edición 3, Cambridge University Press, 1996, ISBN 0521555698, 9780521555692 %http://books.google.com/books?id=hNpJg_pUsOwC&pg=PA73#PPA73,M1
+	\bibitem{Farebrother} R.W. Farebrother, {\it Fitting Linear Relationships: A History of the Calculus of Observations 1750-1900}, Edición Ilustrada, Springer, 1999, ISBN 0387985980, 9780387985985
+	%Farebrother: http://books.google.com/books?id=i25Tp6BSo1YC&pg=PA205
+	\bibitem{Gradshteyn} Gradshteyn, I. S. y Ryzhik, {\it Tables of Integrals, Series, and Products}, Sexta edición, p. 1081, 2000, ISBN 0123736374, 9780123736376 
+	%http://books.google.com/books?id=aBgFYxKHUjsC&pg=PR21
+	\bibitem{Hall} Ernest L. Hall, {\it Handbook of Industrial Automation, Orthogonality, p. 60, ISBN ISBN 0824703731, 9780824703738}
+	\bibitem{Hefferon} J. Hefferon, Linear Algebra, Saint Michael's College.
+[Agradecimiento especial por las im\'{a}genes elaboradas en Metapost usadas en \'{e}ste texto]
+	%http://books.google.com/books?id=aBgFYxKHUjsC&pg=PR21
+	%http://books.google.com/books?id=Gv4pCVyoUVYC&pg=PA219&dq=orthogonality+gram-schmidt#PPA219,M1\\
+	%http://books.google.com/books?id=Mq1nlEKhNcsC&pg=PA275&dq=orthogonality+gram-schmidt
+  \end{thebibliography}
+
+\end{document}

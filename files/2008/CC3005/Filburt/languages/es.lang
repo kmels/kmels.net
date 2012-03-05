@@ -1,0 +1,38 @@
+[data]
+name = Espa–ol
+charset = iso-8859-1
+
+[main]
+title = Filburt!
+references = Referencias
+registers = Registros
+
+[filburt]
+description = un simulador de MIPS por
+header_text = Filburt
+show_console = Mostrar consola
+
+[header]
+imgopen = Abrir archivo (.asm)
+imgdebug = Debug (Paso por Paso)
+imghelp = Ayuda
+imgrun = Correr Archivo
+imgreinit = Re-inicializar maquina
+
+[content]
+menu_simulator = Simulador
+menu_showBIN = Mostrar .bin
+menu_hashTable = Tabla de s&iacute;mbolos
+menu_hello = Bienvenido
+menu_license = Licencia
+ 
+[simulator]
+label = Etiqueta
+address = Direcci&oacute;n
+value = Valor
+value_in_HEX = Valor en HEX
+operation = Operaci&oacute;n
+
+[symbols]
+label = Etiqueta
+label_value = Valor de la Etiqueta

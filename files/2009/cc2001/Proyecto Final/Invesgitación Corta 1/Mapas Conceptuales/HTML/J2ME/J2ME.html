@@ -1,0 +1,299 @@
+<HTML>
+<HEAD>
+  <TITLE>J2ME.html</TITLE>
+  <meta NAME = "GENERATOR"          CONTENT = "IHMC CmapTools v4.18 ">
+  <meta NAME = "KEYWORDS"           CONTENT = "gallo, Concept Map, cmap, CmapTools, IHMC, J2ME,  SDK,  Ambiente de Desarrollo,  Aplicaciones Moviles,  J2ME Wireless Toolkit 2.2,  Agregar Funcionalidad,  Paquetes Opcionales,  Dispositivos moviles,  Dispositivos,  Dispositivos Inalambricos,  Programas,  J2ME SDK,  Aplicaciones,  Hardware LImitado,  Framework,  Perfiles,  Midlets,  Dispositivos Especializados,  Tecnologias,  camaras,  Plataforma de Software">
+  <meta NAME = "DESCRIPTION"        CONTENT = "This Concept Map, created with IHMC CmapTools, has information related to: J2ME, API's Que proveen un Ambiente de Desarrollo, Aplicaciones que son Independientes del Dispositivo, Aplicaciones para Dispositivos Especializados, Paquetes Opcionales que permiten Administrar Recursos, Dispositivos Especializados que tienen Hardware Limitado, Conjunto de Tecnologias, CLDC permite crear Perfiles, Dispositivos como camaras, Aplicaciones para Dispositivos moviles, Conjunto de Especificaciones, Dispositivos como Dispositivos Inalambricos, Programas Utilizando un SDK, Plataforma de Software para Dispositivos Especializados, Distribucion de Aplicaciones Moviles, J2ME Se desarrolla a traves de Java Community Process, J2ME Para dispositivos CDC, Plataforma de Software para Dispositivos moviles, Programas llamados Midlets, CLDC ofrece Paquetes Opcionales, Paquetes Opcionales que permiten Agregar Funcionalidad">
+  <meta NAME = "AUTHOR"             CONTENT = "IHMC CmapTools">
+  <meta HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset = UTF-8">
+  <script LANGUAGE="JavaScript1.2">
+  <!--
+    //  PopUp --
+    //  Institute for Human and Machine Cognition, http://www.ihmc.us/
+    //  CmapTools, Version 4.15, http://cmap.ihmc.us/
+    //  Modify by: CmapTools Developers, cmapsupport@ihmc.us
+    //  Date: 02/05/2008
+
+    var IE = 0;
+    var IE4PC = 0;
+    var NS = 0;
+    var GECKO = 0;
+
+    var openpopups = new Array();
+
+    if (document.all) {                 // Internet Explorer Detected
+	   IE = true;	
+    }
+    else if (document.layers) {         // Netscape Navigator Detected
+	   NS = true;	
+    }
+    else if (document.getElementById) { // Netscape 6 Detected
+       GECKO = true;
+    }
+    else {
+	   alert("Unrecognized Browser Detected::\nSorry, your browser is not compatible.");
+    }
+
+    if (IE)
+    {
+	   OS = navigator.platform;
+	   VER = new String(navigator.appVersion);
+	   VER = VER.substr (0, VER.indexOf(" "));
+	   if ((VER < 4.8) && (OS == "Win32")) 
+	   {
+	       IE4PC = 1;
+	   }
+    }
+
+    function handleResize() {
+	    location.reload();
+	    return false;
+    }
+
+
+    if ((NS) && (navigator.platform == "MacPPC")) {
+	   window.captureEvents (Event.RESIZE);
+	   window.onresize = handleResize;
+    }
+
+    function openResource(event, resourcePath, resourceName, resourceType)
+    {
+	   var newwindow;
+
+       // Resource MIMETypes are enumerated as follows: 
+       // cMap     = Undefined
+       // Image    = 0
+       // Video    = 1
+       // Text     = 2
+       // Audio    = 3
+
+       popDown();
+
+	   switch (resourceType) 
+	   {
+	    case 0:     //Image
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<center><img src=\"';
+                    text += resourcePath;
+                    text +='\"> </center>';
+             break;
+		
+	    case 1:  text   // Video
+		     newwindow = window.open (resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+                     var text ='<embed src=\"';
+                     text += resourcePath;
+                     text +='\" autostart=true> </embed> ';
+             break;
+
+	    case 2:      // Text or Unknown 
+		     newwindow = window.open(resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+              break;
+
+	    case 3:       // Audio
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<embed src=\"';
+                    text += resourcePath;
+                    text +='\" autoplay=true> </embed> ';
+             break;
+
+	    case 4:
+                    newwindow = window.open(resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+	     break;
+	    }
+        return;
+    }
+
+
+
+    function popUpEvt(event, popupName)
+    {
+	popDown();
+
+	if (GECKO)
+	{
+	    document.getElementById(popupName).style.left = event.layerX;
+	    document.getElementById(popupName).style.top = event.layerY;
+	    document.getElementById(popupName).style.background = "#B3B3B3";
+	    document.getElementById(popupName).style.visibility = "visible";
+	    openpopups.push(popupName);
+	}
+	else if (NS) 
+	{
+	    document.layers[popupName].moveTo (event.pageX, event.pageY);
+	    document.layers[popupName].bgColor = "#B3B3B3";
+	    document.layers[popupName].visibility = "show";
+	    openpopups.push(popupName);
+	}
+	else // if (IE)
+	{
+	    window.event.cancelBubble = true;
+	    if (!IE4PC) {
+		document.all[popupName].style.backgroundColor = "#B3B3B3";
+	    }	
+	    document.all[popupName].style.left = window.event.clientX + document.body.scrollLeft;
+	    document.all[popupName].style.top = window.event.clientY + document.body.scrollTop;
+	    document.all[popupName].style.visibility = "visible";
+	    openpopups[openpopups.length] = popupName;
+	}
+	return false;
+    }
+
+    function popDown()
+    {
+	var popupname;
+	
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+		document.getElementById(popupname).style.visibility = "hidden";
+	    }
+	    else if (NS) {
+		document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+		document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+	return;
+    }
+
+    function popDownNoGecko() 
+    {
+	var popupname;
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+           //  document.getElementById(popupname).style.visibility = "hidden"; 
+	        return;   // erased for test purposes
+	    }  
+	    else if (NS) {
+	        document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+	        document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+        return;
+    }
+  //-->
+  </script>
+</HEAD>
+<BODY bgcolor="#FFFFFF" leftmargin="0" topmargin="0">
+  <noscript>    <table width=90% cellpadding=10>      <tr>	<td bgcolor=ff4444>	  <font color=000000 size=+1 face="helvetica">	    <h1>Warning:</h1>	    <b>JavaScript is turned OFF.  None of the links on this page will work until it is reactivated.	      <p>		<a href="http://cmap.ihmc.us/docs/EnablingJavaScript.html">		  If you need help turning JavaScript On, click here.		</a>	      </p>	    </b>	</td>      </tr>    </table>
+This Concept Map, created with IHMC CmapTools, has information related to: J2ME, API's Que proveen un Ambiente de Desarrollo, Aplicaciones que son Independientes del Dispositivo, Aplicaciones para Dispositivos Especializados, Paquetes Opcionales que permiten Administrar Recursos, Dispositivos Especializados que tienen Hardware Limitado, Conjunto de Tecnologias, CLDC permite crear Perfiles, Dispositivos como camaras, Aplicaciones para Dispositivos moviles, Conjunto de Especificaciones, Dispositivos como Dispositivos Inalambricos, Programas Utilizando un SDK, Plataforma de Software para Dispositivos Especializados, Distribucion de Aplicaciones Moviles, J2ME Se desarrolla a traves de Java Community Process, J2ME Para dispositivos CDC, Plataforma de Software para Dispositivos moviles, Programas llamados Midlets, CLDC ofrece Paquetes Opcionales, Paquetes Opcionales que permiten Agregar Funcionalidad
+
+</noscript>
+
+<map name="J2ME.html">
+  <area shape="rect"
+        href="1233285725965I121894043I4427ItextIhtml"
+        onClick="popUpEvt(event,'1233285725965I121894043I4427ItextIhtml'); return false;"
+        coords="673,1200,691,1218">
+  <area shape="rect"
+        href="1233284718846I513157125I3250ItextIhtml"
+        onClick="popUpEvt(event,'1233284718846I513157125I3250ItextIhtml'); return false;"
+        coords="591,869,609,887">
+  <area shape="rect"
+        href="1233320250869I447328945I736ItextIhtml"
+        onClick="popUpEvt(event,'1233320250869I447328945I736ItextIhtml'); return false;"
+        coords="288,753,306,771">
+  <area shape="rect"
+        href="1233321049298I1747798457I1763ItextIhtml"
+        onClick="popUpEvt(event,'1233321049298I1747798457I1763ItextIhtml'); return false;"
+        coords="162,201,180,219">
+  <area shape="rect"
+        href="1233320430418I1411485044I993ItextIhtml"
+        onClick="popUpEvt(event,'1233320430418I1411485044I993ItextIhtml'); return false;"
+        coords="189,1231,207,1249">
+  <area shape="rect"
+        href="1233285372270I1735050136I3871ItextIhtml"
+        onClick="popUpEvt(event,'1233285372270I1735050136I3871ItextIhtml'); return false;"
+        coords="711,109,729,127">
+</map>
+
+<center>
+  <table width=* height=* cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td valign=center align=center>
+      <img USEMAP="#J2ME.html"
+           SRC="J2ME.jpg"
+           ALIGN=middle
+           BORDER=0
+           onClick=popDown();>
+      </td>    </tr>    <tr>      <td VALIGN=top ALIGN=right>      <table>	<tr>             <td ALIGN=right VALIGN=middle>                 <map NAME="CmapToolsTrademark">                     <area SHAPE="rect"                           href="http://cmap.ihmc.us/"                           onClick="openResource(event,'http://cmap.ihmc.us/', 0, 2); return false;"                           coords="1,1,210,50">                 </map>	<tr>	  <td  ALIGN=right VALIGN=middle>               <img USEMAP="#CmapToolsTrademark"                    SRC="CmapToolsTrademark.gif"                     ALT="IHMC Cmap Tools Trademark" width="210" height="50"                    ALIGN=middle                    BORDER=0>	   </td>	     <td VALIGN=middle>         </td>	</tr>      </table>    </td>  </tr></table></center></body></html>
+<div id="1233285725965I121894043I4427ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a href="http://java.sun.com/products/j2mewtoolkit/download-2_2.html "TITLE="Mas informacion acerca de J2ME Wireless Toolkit 2.2.">
+      J2ME Wireless Toolkit 2.2
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233284718846I513157125I3250ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a href="http://java.sun.com/products/cldc/overview.html "TITLE="Informacion acerca del hardware requerido para utilizar la version CLDC de J2ME.">
+      Requisitos para CLDC
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233320250869I447328945I736ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a href="http://en.wikipedia.org/wiki/Software_framework "TITLE="Mas informacion acerca de un framework.">
+      Framework
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233321049298I1747798457I1763ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a href="http://en.wikipedia.org/wiki/Java_platform#Edition "TITLE="Mas informacion acerca de la Plataforma de Software Java">
+      Java Software Platform
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233320430418I1411485044I993ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a href="http://java.sun.com/javame/technology/cdc/overview.jsp#9 "TITLE="Mas informacion acerca de los dispositivos en los que corre CDC.">
+      Hardware Requerido
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233285372270I1735050136I3871ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a href="http://jcp.org/ "TITLE="Mas informacion acerca de Java Community Process">
+      Informacion acerca de JCP
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+

@@ -1,0 +1,501 @@
+<HTML>
+<HEAD>
+  <TITLE>Android</TITLE>
+  <meta NAME = "GENERATOR"          CONTENT = "IHMC CmapTools v4.18 ">
+  <meta NAME = "KEYWORDS"           CONTENT = "Carlos Lopez Camey, Concept Map, cmap, CmapTools, IHMC, Android,  Smartphones,  Pila de software,  GPS,  Android,  Aplicaciones,  Desarrolladores,  Teléfonos Móviles,  Google Inc.,  Apache Software License,  Dalvik,  Cámara,  Diferente hardware,  Middleware,  IDE,  Un sistema operativo,  Android Software Development Kit,  Kernel de Linux,  Una compañia,  Pantalla Táctil,  El lenguaje de programación Java">
+  <meta NAME = "DESCRIPTION"        CONTENT = "This Concept Map, created with IHMC CmapTools, has information related to: Android, Aplicaciones escritas en El lenguaje de programación Java, Una compañia ahora adquirida por Google Inc., Aplicaciones que corren en Dalvik, Android fue antes Una compañia, Teléfonos Móviles principalmente Smartphones, El lenguaje de programación Java mediante Android SDK, Diferente hardware como Cámara, Android SDK se puede integrar con Eclipse, Máquina virtual diseñada para correr en el Kernel de Linux, Android SDK incluye Android Framework, Aplicaciones distribuídas y/o vendidas principalmente en Android Market, Apache Software License por lo mismo, es Open Source, Android es una Pila de software, Desarrolladores hagan Modificaciones Propietarias, Diferente hardware como Pantalla Táctil, Android está bajo la licencia Apache Software License, Android forma parte de la Open Handset Alliance, Android está siendo respaldado y desarrollado por Google Inc., Android SDK incluye El emulador de un aparato, Dalvik es una Máquina virtual">
+  <meta NAME = "AUTHOR"             CONTENT = "IHMC CmapTools">
+  <meta HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset = UTF-8">
+  <script LANGUAGE="JavaScript1.2">
+  <!--
+    //  PopUp --
+    //  Institute for Human and Machine Cognition, http://www.ihmc.us/
+    //  CmapTools, Version 4.15, http://cmap.ihmc.us/
+    //  Modify by: CmapTools Developers, cmapsupport@ihmc.us
+    //  Date: 02/05/2008
+
+    var IE = 0;
+    var IE4PC = 0;
+    var NS = 0;
+    var GECKO = 0;
+
+    var openpopups = new Array();
+
+    if (document.all) {                 // Internet Explorer Detected
+	   IE = true;	
+    }
+    else if (document.layers) {         // Netscape Navigator Detected
+	   NS = true;	
+    }
+    else if (document.getElementById) { // Netscape 6 Detected
+       GECKO = true;
+    }
+    else {
+	   alert("Unrecognized Browser Detected::\nSorry, your browser is not compatible.");
+    }
+
+    if (IE)
+    {
+	   OS = navigator.platform;
+	   VER = new String(navigator.appVersion);
+	   VER = VER.substr (0, VER.indexOf(" "));
+	   if ((VER < 4.8) && (OS == "Win32")) 
+	   {
+	       IE4PC = 1;
+	   }
+    }
+
+    function handleResize() {
+	    location.reload();
+	    return false;
+    }
+
+
+    if ((NS) && (navigator.platform == "MacPPC")) {
+	   window.captureEvents (Event.RESIZE);
+	   window.onresize = handleResize;
+    }
+
+    function openResource(event, resourcePath, resourceName, resourceType)
+    {
+	   var newwindow;
+
+       // Resource MIMETypes are enumerated as follows: 
+       // cMap     = Undefined
+       // Image    = 0
+       // Video    = 1
+       // Text     = 2
+       // Audio    = 3
+
+       popDown();
+
+	   switch (resourceType) 
+	   {
+	    case 0:     //Image
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<center><img src=\"';
+                    text += resourcePath;
+                    text +='\"> </center>';
+             break;
+		
+	    case 1:  text   // Video
+		     newwindow = window.open (resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+                     var text ='<embed src=\"';
+                     text += resourcePath;
+                     text +='\" autostart=true> </embed> ';
+             break;
+
+	    case 2:      // Text or Unknown 
+		     newwindow = window.open(resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+              break;
+
+	    case 3:       // Audio
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<embed src=\"';
+                    text += resourcePath;
+                    text +='\" autoplay=true> </embed> ';
+             break;
+
+	    case 4:
+                    newwindow = window.open(resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+	     break;
+	    }
+        return;
+    }
+
+
+
+    function popUpEvt(event, popupName)
+    {
+	popDown();
+
+	if (GECKO)
+	{
+	    document.getElementById(popupName).style.left = event.layerX;
+	    document.getElementById(popupName).style.top = event.layerY;
+	    document.getElementById(popupName).style.background = "#B3B3B3";
+	    document.getElementById(popupName).style.visibility = "visible";
+	    openpopups.push(popupName);
+	}
+	else if (NS) 
+	{
+	    document.layers[popupName].moveTo (event.pageX, event.pageY);
+	    document.layers[popupName].bgColor = "#B3B3B3";
+	    document.layers[popupName].visibility = "show";
+	    openpopups.push(popupName);
+	}
+	else // if (IE)
+	{
+	    window.event.cancelBubble = true;
+	    if (!IE4PC) {
+		document.all[popupName].style.backgroundColor = "#B3B3B3";
+	    }	
+	    document.all[popupName].style.left = window.event.clientX + document.body.scrollLeft;
+	    document.all[popupName].style.top = window.event.clientY + document.body.scrollTop;
+	    document.all[popupName].style.visibility = "visible";
+	    openpopups[openpopups.length] = popupName;
+	}
+	return false;
+    }
+
+    function popDown()
+    {
+	var popupname;
+	
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+		document.getElementById(popupname).style.visibility = "hidden";
+	    }
+	    else if (NS) {
+		document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+		document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+	return;
+    }
+
+    function popDownNoGecko() 
+    {
+	var popupname;
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+           //  document.getElementById(popupname).style.visibility = "hidden"; 
+	        return;   // erased for test purposes
+	    }  
+	    else if (NS) {
+	        document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+	        document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+        return;
+    }
+  //-->
+  </script>
+</HEAD>
+<BODY bgcolor="#FFFFFF" leftmargin="0" topmargin="0">
+  <noscript>    <table width=90% cellpadding=10>      <tr>	<td bgcolor=ff4444>	  <font color=000000 size=+1 face="helvetica">	    <h1>Warning:</h1>	    <b>JavaScript is turned OFF.  None of the links on this page will work until it is reactivated.	      <p>		<a href="http://cmap.ihmc.us/docs/EnablingJavaScript.html">		  If you need help turning JavaScript On, click here.		</a>	      </p>	    </b>	</td>      </tr>    </table>
+This Concept Map, created with IHMC CmapTools, has information related to: Android, Aplicaciones escritas en El lenguaje de programación Java, Una compañia ahora adquirida por Google Inc., Aplicaciones que corren en Dalvik, Android fue antes Una compañia, Teléfonos Móviles principalmente Smartphones, El lenguaje de programación Java mediante Android SDK, Diferente hardware como Cámara, Android SDK se puede integrar con Eclipse, Máquina virtual diseñada para correr en el Kernel de Linux, Android SDK incluye Android Framework, Aplicaciones distribuídas y/o vendidas principalmente en Android Market, Apache Software License por lo mismo, es Open Source, Android es una Pila de software, Desarrolladores hagan Modificaciones Propietarias, Diferente hardware como Pantalla Táctil, Android está bajo la licencia Apache Software License, Android forma parte de la Open Handset Alliance, Android está siendo respaldado y desarrollado por Google Inc., Android SDK incluye El emulador de un aparato, Dalvik es una Máquina virtual
+
+</noscript>
+
+<map name="Android">
+  <area shape="rect"
+        href="1233326260771I1163931955I931ItextIhtml"
+        onClick="popUpEvt(event,'1233326260771I1163931955I931ItextIhtml'); return false;"
+        coords="571,499,589,517">
+  <area shape="rect"
+        href="1233237596225I1489121492I549ItextIhtml"
+        onClick="popUpEvt(event,'1233237596225I1489121492I549ItextIhtml'); return false;"
+        coords="903,241,921,259">
+  <area shape="rect"
+        href="1233238827656I1047354972I1716ItextIhtml"
+        onClick="popUpEvt(event,'1233238827656I1047354972I1716ItextIhtml'); return false;"
+        coords="536,372,554,390">
+  <area shape="rect"
+        href="1233237893468I956420226I893ItextIhtml"
+        onClick="popUpEvt(event,'1233237893468I956420226I893ItextIhtml'); return false;"
+        coords="251,248,269,266">
+  <area shape="rect"
+        href="1233238014155I659845548I1058ItextIhtml"
+        onClick="popUpEvt(event,'1233238014155I659845548I1058ItextIhtml'); return false;"
+        coords="902,498,920,516">
+  <area shape="rect"
+        href="1233237672883I1206100306I687ItextIhtml"
+        onClick="popUpEvt(event,'1233237672883I1206100306I687ItextIhtml'); return false;"
+        coords="1286,371,1304,389">
+  <area shape="rect"
+        href="1233326818694I1505985374I1628ItextIhtml"
+        onClick="popUpEvt(event,'1233326818694I1505985374I1628ItextIhtml'); return false;"
+        coords="1442,882,1460,900">
+  <area shape="rect"
+        href="1233237665692I2073200387I629ItextIhtml"
+        onClick="popUpEvt(event,'1233237665692I2073200387I629ItextIhtml'); return false;"
+        coords="1032,372,1050,390">
+  <area shape="rect"
+        href="1233238582358I1324764142I1537ItextIhtml"
+        onClick="popUpEvt(event,'1233238582358I1324764142I1537ItextIhtml'); return false;"
+        coords="1044,769,1062,787">
+  <area shape="rect"
+        href="1233238259653I1585352112I1289ItextIhtml"
+        onClick="popUpEvt(event,'1233238259653I1585352112I1289ItextIhtml'); return false;"
+        coords="904,760,922,778">
+  <area shape="rect"
+        href="1233237951707I258836347I941ItextIhtml"
+        onClick="popUpEvt(event,'1233237951707I258836347I941ItextIhtml'); return false;"
+        coords="1423,506,1441,524">
+  <area shape="rect"
+        href="1233239916806I740044579I3136ItextIhtml"
+        onClick="popUpEvt(event,'1233239916806I740044579I3136ItextIhtml'); return false;"
+        coords="422,372,440,390">
+  <area shape="rect"
+        href="1233326483541I902732496I1234ItextIhtml"
+        onClick="popUpEvt(event,'1233326483541I902732496I1234ItextIhtml'); return false;"
+        coords="1250,498,1268,516">
+  <area shape="rect"
+        href="1233326795870I760274921I1559ItextIhtml"
+        onClick="popUpEvt(event,'1233326795870I760274921I1559ItextIhtml'); return false;"
+        coords="1441,761,1459,779">
+  <area shape="rect"
+        href="1233239023546I298277733I1893ItextIhtml"
+        onClick="popUpEvt(event,'1233239023546I298277733I1893ItextIhtml'); return false;"
+        coords="91,242,109,260">
+  <area shape="rect"
+        href="1233326328995I519025764I1049ItextIhtml"
+        onClick="popUpEvt(event,'1233326328995I519025764I1049ItextIhtml'); return false;"
+        coords="434,507,452,525">
+  <area shape="rect"
+        href="1233238701143I1675015104I1635ItextIhtml"
+        onClick="popUpEvt(event,'1233238701143I1675015104I1635ItextIhtml'); return false;"
+        coords="1321,760,1339,778">
+  <area shape="rect"
+        href="1233239291603I341992890I2487ItextIhtml"
+        onClick="popUpEvt(event,'1233239291603I341992890I2487ItextIhtml'); return false;"
+        coords="1179,769,1197,787">
+  <area shape="rect"
+        href="1233238073388I1667805924I1136ItextIhtml"
+        onClick="popUpEvt(event,'1233238073388I1667805924I1136ItextIhtml'); return false;"
+        coords="903,636,921,654">
+</map>
+
+<center>
+  <table width=* height=* cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td valign=center align=center>
+      <img USEMAP="#Android"
+           SRC="Android.jpg"
+           ALIGN=middle
+           BORDER=0
+           onClick=popDown();>
+      </td>    </tr>    <tr>      <td VALIGN=top ALIGN=right>      <table>	<tr>             <td ALIGN=right VALIGN=middle>                 <map NAME="CmapToolsTrademark">                     <area SHAPE="rect"                           href="http://cmap.ihmc.us/"                           onClick="openResource(event,'http://cmap.ihmc.us/', 0, 2); return false;"                           coords="1,1,210,50">                 </map>	<tr>	  <td  ALIGN=right VALIGN=middle>               <img USEMAP="#CmapToolsTrademark"                    SRC="CmapToolsTrademark.gif"                     ALT="IHMC Cmap Tools Trademark" width="210" height="50"                    ALIGN=middle                    BORDER=0>	   </td>	     <td VALIGN=middle>         </td>	</tr>      </table>    </td>  </tr></table></center></body></html>
+<div id="1233326260771I1163931955I931ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Smartphone" TITLE="">
+      Qué es un Smartphone, Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233237596225I1489121492I549ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.pcmag.com/encyclopedia_term/0,2542,t=software+stack&i=51702,00.asp" TITLE="">
+      Definición de Pila de software, PC Magazine (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233238827656I1047354972I1716ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.google.es/corporate/" TITLE="">
+      Corporación de Google, Google
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233237893468I956420226I893ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.apache.org/licenses/LICENSE-2.0" TITLE="">
+      Apache License versión 2.0 (en Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233238014155I659845548I1058ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Dalvik_virtual_machine" TITLE="">
+      Dalvik virtual machine, en Wikipedia (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233237672883I1206100306I687ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Middleware" TITLE="">
+      Middleware en Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233326818694I1505985374I1628ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Ambiente_integrado_de_desarrollo" TITLE="">
+      Qué es un IDE, en Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233237665692I2073200387I629ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Sistema_operativo" TITLE="">
+      Sistema Operativo en Wikipedia
+      </a>
+      </td>
+    </tr>
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://code.google.com/intl/es/android/images/system-architecture.jpg" TITLE="">
+      Como está diseñada su arquitectura
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233238582358I1324764142I1537ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Software_development_kit" TITLE="">
+      Software Development Kit en Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233238259653I1585352112I1289ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://git.android.com/" TITLE="">
+      Kernel que usa Android
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233237951707I258836347I941ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Java_(programming_language)" TITLE="">
+      Java programming language en Wikipedia (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233239916806I740044579I3136ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Código_abierto" TITLE="">
+      Código Abierto en Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233326483541I902732496I1234ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.android.com/market/" TITLE="">
+      Android Market
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233326795870I760274921I1559ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.eclipse.org/" TITLE="">
+      Eclipse.org
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233239023546I298277733I1893ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://www.openhandsetalliance.com/index.html" TITLE="">
+      página de Open Handset Alliance (En Inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233326328995I519025764I1049ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Software_no_libre" TITLE="">
+      Qué es Software Propietario, Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233238701143I1675015104I1635ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Framework" TITLE="">
+      Qué es un framework, Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233239291603I341992890I2487ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://code.google.com/intl/es/android/reference/emulator.html" TITLE="">
+      Todo sobre el emulador de Android en Google (En inglés)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1233238073388I1667805924I1136ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://es.wikipedia.org/wiki/Máquina_virtual" TITLE="">
+      Máquina virtual en Wikipedia
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+

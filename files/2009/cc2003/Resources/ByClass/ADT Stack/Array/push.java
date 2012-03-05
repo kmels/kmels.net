@@ -1,0 +1,1 @@
+public void push(Object newEntry){	topIndex++;	if (topIndex >= stack.length) // if array is full		doubleArray(); // expand array	stack[topIndex] = newEntry;} // end push

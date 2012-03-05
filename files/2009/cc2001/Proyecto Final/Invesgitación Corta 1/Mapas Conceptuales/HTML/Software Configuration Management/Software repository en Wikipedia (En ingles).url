@@ -1,0 +1,5 @@
+http://en.wikipedia.org/wiki/Software_repository
+[DEFAULT]
+BASEURL=http://en.wikipedia.org/wiki/Software_repository
+[InternetShortcut]
+URL=http://en.wikipedia.org/wiki/Software_repository

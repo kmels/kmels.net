@@ -1,0 +1,5 @@
+http://subversion.tigris.org/
+[DEFAULT]
+BASEURL=http://subversion.tigris.org/
+[InternetShortcut]
+URL=http://subversion.tigris.org/

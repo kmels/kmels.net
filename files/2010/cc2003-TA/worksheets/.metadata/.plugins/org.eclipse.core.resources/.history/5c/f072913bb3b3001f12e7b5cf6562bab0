@@ -1,0 +1,93 @@
+package mundo;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.util.StringTokenizer;
+import java.util.Scanner;
+
+public class Main {
+
+  /**
+     * Delimitadores de texto
+     */
+    private static final String DELIMITERS = " ";
+
+    /**
+     * Genera la lista de tokes a partir de los delimitadores de texto      *
+     * @param parser String con la instrucci�n a evaluar, pila Pila 
+     * @return resultado Resultado de la evaluaci�n.
+     */
+    public static int evaluador(StringTokenizer parser, PilaLista<Integer> pila) {
+
+      String token;
+      int numero;
+      int resultado; 
+      
+      while (parser.hasMoreTokens())
+      {
+    	  token = parser.nextToken();
+    	  if (isParsableToInt(token))
+    	  {
+    	  numero = Integer.parseInt(token);
+    	  pila.push(numero);
+    	  }
+    	  else 
+    	  {
+    		  if (token.equals("+"))
+              {
+                resultado = pila.pop();
+                resultado = resultado + pila.pop();
+              }
+	          else if (token.equals("-"))
+	          {
+	            int pequeno = pila.pop();
+	          	resultado = pila.pop() - peque�o;
+	          }
+	          else if (token.equals("/"))
+	          {
+	              int divisor = pila.pop();
+	          	  resultado = pila.pop()/divisor;
+	          }
+	          else if (token.equals("*"))
+	          {
+	              resultado = pila.pop();
+	              resultado = resultado * pila.pop();
+	          }
+	          else
+	        	  throw new SintaxisNoValidaException("Sintaxis no v�lida.");
+    		  pila.push(resultado);
+    	  }
+
+      }         
+      	return pila.pop();
+    }
+    
+    public static boolean isParsableToInt(String i)
+    {
+    try
+    {
+    Integer.parseInt(i);
+    }
+    catch(NumberFormatException nfe)
+    {
+    return false;
+    }
+    return true;
+    }
+
+    public static void main(String[] args)
+    {
+    	System.out.print(">> " + "Ingrese una secuencia postfix"
+                + " con espacios entre n�meros y operadores. " + "\t\n");
+        PilaLista<Integer> pila = new PilaLista<Integer> ();
+    	Scanner comando = new Scanner (System.in);
+    	String instruccion = comando.nextLine();
+        StringTokenizer parser = new StringTokenizer(instruccion, DELIMITERS);
+        int resultado = evaluador(parser,pila);
+        System.out.print(">> " + String.valueOf(resultado) + "\t\n");
+
+    }
+
+}

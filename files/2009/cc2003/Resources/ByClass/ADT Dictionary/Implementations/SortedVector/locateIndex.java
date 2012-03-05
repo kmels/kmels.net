@@ -1,0 +1,1 @@
+private int locateIndex(Object key){	Comparable cKey = (Comparable)key;	int currentSize = entries.size();	int index = 0;	while ( (index < currentSize) && 	        cKey.compareTo(((Entry)(entries.elementAt(index))).getKey())>0)		index++;	return index;} // end locateIndex

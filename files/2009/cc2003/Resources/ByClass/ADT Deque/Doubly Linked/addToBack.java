@@ -1,0 +1,1 @@
+public void addToBack(Object newEntry){	DLNode newNode = new DLNode(lastNode, newEntry, null);	if (isEmpty())		firstNode = newNode;	else		lastNode.setNextNode(newNode);	lastNode = newNode;} // end addToBack

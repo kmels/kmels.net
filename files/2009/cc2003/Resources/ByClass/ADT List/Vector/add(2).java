@@ -1,0 +1,1 @@
+public boolean add(int newPosition, Object newEntry){	boolean isSuccessful = true;	if ((newPosition >= 1) && (newPosition <= entry.size()+1)) 		entry.insertElementAt(newEntry, newPosition-1); 	else		isSuccessful = false;	return isSuccessful;} // end add

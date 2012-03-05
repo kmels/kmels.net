@@ -1,0 +1,1 @@
+public interface ListWithIteratorInterface extends ListInterface{	public IteratorInterface getListIterator();} // end ListWithIteratorInterface

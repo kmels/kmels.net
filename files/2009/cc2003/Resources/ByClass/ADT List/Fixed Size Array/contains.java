@@ -1,0 +1,1 @@
+public boolean contains(Object anEntry){	boolean found = false;	for (int index = 0; !found && (index < length); index++)	{		if (anEntry.equals(entry[index]))			found = true;	} // end for	return found;} // end contains

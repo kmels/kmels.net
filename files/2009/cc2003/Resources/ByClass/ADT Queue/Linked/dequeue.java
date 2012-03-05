@@ -1,0 +1,1 @@
+public Object dequeue(){	Object front = null;	if (!isEmpty())	{		front = firstNode.getData();		firstNode = firstNode.getNextNode();		if (firstNode == null)			lastNode = null;	} // end if	return front;} // end dequeue

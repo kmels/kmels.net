@@ -1,0 +1,139 @@
+\section*{Propuesta T\'{e}cnica}
+
+\subsection{Resumen}
+
+Se requiere hacer un sistema que maneje la informaci\'{o}n de los ciudadanos de la Ciudad de Guatemala registrando cada una de las actividades que realiza en la misma. El sistema ser\'{a} instalado en la Municipalidad de Guatemala y adem\'{a}s de almacenar los datos correspondientes, podr\'{a} generar reportes y documentos legales tales como constancia de matrimonio y partidas de nacimiento.
+
+\subsection{Definici\'{o}n del Problema}
+
+\paragraph{Antecedentes}
+
+La municipalidad tiene la necesidad de manejar en un Sistema de Informaci\'{o}n los acontecimientos civiles y legales de un ciudadano nacido y registrado en la ciudad. 
+
+\paragraph{Problema fundamental}
+
+\paragraph{Descripci\'{o}n del problema por el cliente}
+
+El sistema consiste en manejar la informaci\'{o}n de los ciudadanos registrados en la Municipalidad y la posibilidad de registrar m\'{a}s. 
+
+La variedad de transacciones que un ciudadano es amplia, por lo que se requiere un sistema con las siguientes especificaciones:
+
+\begin{itemize}
+\item Para cada persona, almacenar:
+	\begin{enumerate} 
+	\item Datos generales: registro civil y de vecindad, fecha y lugar de nacimiento, nombre de la madre y padre, g\'{e}nero y tipo de parto.
+	\item Datos relacionados al estado civil: matrimonio (qui\'{e}n es su c\'{o}nyuge, lugar de origen, fecha, lugar, informaci\'{o}n del notario, registro civil, alcalde y testigos) o divorcio (notario, fecha y lugar)
+	\item En caso de defunci\'{o}n: causa y nombre del m\'{e}dico que declar\'{o} el deceso
+	\end{enumerate}
+\item Generar reportes o certificados de:
+	\begin{enumerate}
+	\item Registros hist\'{o}ricos de una persona: en caso de cambio de nombre o apellido.
+	\item Partida de nacimiento
+	\item Constancia de matrimonio
+	\item Certificado de defunci\'{o}n
+	\item Documento de registro de vecindad
+	\item Estad\'{i}sticas de nacimientos, matrimonios, divorcios por peri\'{o}dos de tiempo, edad y g\'{e}nero.
+	\end{enumerate}
+\item Para los ciudadanos mayores de 18 a\~{n}os de edad, registrar:
+	\begin{enumerate}
+	\item Nombre completo
+	\item Nombre del padre y madre
+	\item Direcci\'{o}n
+	\item Profesi\'{o}n
+	\item Caracter\'{i}sticas personales y otras anotaciones
+	\item Estado civil
+	\item Estatura en sistema m\'{e}trico 
+	\item Tipo de sangre
+	\item Firma
+	\item Huella digita
+	\item Si es alfabeto o analfabeto (si sabe leer y escribir)
+	\item \'{U}ltima escolaridad: ninguna, primaria, secundaria o universidad
+	\item Si ha prestado servicio militar 
+	\item Fotograf\'{i}a
+	\item Informaci\'{o}n sobre empadronamiento: padr\'{o}n electoral, zona y mesa  de votaci\'{o}n
+	\item N\'{u}mero de licencia de conducir
+	\item N\'{u}mero de IGSS
+	\item N\'{u}mero de Informaci\'{o}n Tributaria (NIT)
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Caracter\'{i}sticas del sistema}
+
+\paragraph{M\'{o}dulo de Inscripci\'{o}n de personas}
+\begin{itemize}
+\item \textbf{Descripci\'{o}n y prioridad.} Cuando una persona nace, es necesario que se inscriba en el registro nacional de las personas y por lo tanto en la Municipalidad, la importancia de esta inscripci\'{o}n reside en la creaci\'{o}n de un nuevo registro civil para esa persona para actualizaciones posteriores en el mismo. 
+
+\item \textbf{Acci\'{o}n y resultados.}. Uno o los dos padres podr\'{a}n ir inscribir a su hijo/a proveyendo la siguiente informaci\'{o}n:
+\begin{enumerate}
+	\item Registro de vecindad de uno o de los dos padres
+	\item Nombre completo del reci\'{e}n nacido
+	\item Nombre de uno o de los dos padres
+	\item Sexo
+	\item Tipo de parto: c\'{e}sarea,normal o comadrona.
+\end{enumerate}
+
+Como consecuencia, se le asignar\'{a} un registro civil al nuevo ciudadano.
+
+\item \textbf{Requerimientos funcionales.} Se requiere que el registro civil sea \'{u}nico pues \'{e}ste identificar\'{a} los diferentes acontecimientos civiles que la persona pueda adoptar.
+
+\end{itemize}
+
+\paragraph{M\'{o}dulo de Registro de Matrimonios}
+\begin{itemize}
+\item \textbf{Descripci\'{o}n y prioridad.} Cada persona que tenga tenga al menos 18 a\~{n}os de edad y que su estado civil no sea casado tiene la oportunidad de adquirir matrimonio con una persona de diferente sexo. Este requerimiento es necesario para que las personas puedan cambiar su estado civil adecuadamente.
+
+\item \textbf{Acci\'{o}n y resultados.} Las dos personas destinadas a casarse contactar\'{a}n a un notario que ser\'{a} el que suministre y valide la informaci\'{o}n del matrimonio. La informaci\'{o}n de este debe constar de
+\begin{enumerate}
+\item El nombre de todas as personas que fueron testigos
+\item Nombre de la persona con la que est\'{a} adquiriendo matrimonio. Debe ser del sexo opuesto
+\item La fecha en la que se efect\'{u}o.
+\item N\'{u}mero de registro civil
+\item Lugar: el municipio en donde se realiz\'{o} el acontecimiento.
+\item Alcalde: el alcalde en vigencia del lugar en donde se realiz\'{o} el matrimonio.
+\end{enumerate}
+Como consecuencia, las dos personas involucradas en el matrimonio, cambiar\'{a}n su estado civil a "casado".
+
+\item \textbf{Requerimientos funcionales.} Las personas que est\'{e}n adquiriendo matrimonio tienen que ser de sexo opuesto y ambos deben de tener al menos 18 a\~{n}os de edad.
+\end{itemize}
+
+\paragraph{M\'{o}dulo de Registro de Divorcios}
+\begin{itemize}
+\item \textbf{Descripci\'{o}n y prioridad.} Cada persona que tenga un matrimonio vigente puede invalidarlo por medio de un divorcio.
+\item \textbf{Acci\'{o}n y resultados.} Las dos personas que actualmente est\'{a}n casadas, contactar\'{a}n a un notario, el cual ser\'{a} el encargado de validar el divorcio. El notario debe proporcionar la siguiente informaci\'{o}n para que se registre el mismo
+\begin{enumerate}
+\item Lugar (municipio) en donde se efect\'{u}o el divorcio.
+\item Fecha en la cual se di\'{o}
+\item N\'{u}mero de registro civil del matrimonio.
+\item N\'{u}mero de registro civil del divorcio relacionado con el matrimonio.
+\item Alcalde vigente del lugar en donde se efectu\'{o} el divorcio.
+\end{enumerate}
+
+Como consecuencia, las dos personas que estaban anteriormente casadas, cambiar\'{a}n su estado civil a "divorciado"
+
+\item \textbf{Requerimientos funcionales.} Las dos personas deben estar deacuerdo para invalidar su matrimonio.
+
+\paragraph{M\'{o}dulo de Generaci\'{o}n de Reportes y Certificados}
+
+\end{itemize}
+
+\paragraph{M\'{o}dulo de Empadronamiento}
+\begin{itemize}
+\item \textbf{Descripci\'{o}n y prioridad.} asdf
+\item \textbf{Acci\'{o}n y resultados.} basf
+\item \textbf{Requerimientos funcionales.} asdkfj
+\end{itemize}
+
+\paragraph{Otros requerimientos no funcionales}
+\begin{itemize}
+\item \textbf{Requerimientos de rendimiento} asdf
+\item \textbf{Requerimientos de seguridad} basf
+\item \textbf{Documentaci\'{o}n para el usuario} asdkfj
+\end{itemize}
+
+\paragraph{Tipos de usuario}
+
+\paragraph{Ambiente de operaci\'{o}n}
+
+\subsection{Dificultades y limitaciones significativas en la soluci\'{o}n del problema}
+
+\subsection{Dependencias y suposiciones}

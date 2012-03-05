@@ -1,0 +1,1 @@
+public interface Listable extends Cloneable{	public Object clone(); // deep copy expected} // end Listable

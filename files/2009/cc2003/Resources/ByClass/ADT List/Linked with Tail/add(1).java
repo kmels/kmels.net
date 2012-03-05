@@ -1,0 +1,1 @@
+public boolean add(Object newEntry){	Node newNode = new Node(newEntry);	if (isEmpty())		firstNode = newNode;	else		lastNode.next = newNode;	lastNode = newNode;	length++;	return true;}  // end add

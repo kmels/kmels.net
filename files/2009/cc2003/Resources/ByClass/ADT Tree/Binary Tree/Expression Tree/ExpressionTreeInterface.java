@@ -1,0 +1,1 @@
+public interface ExpressionTreeInterface extends BinaryTreeInterface{	/** Task: Computes the value of the expression in the tree.	 *  @return the value of the expression */	public double evaluate();} // end ExpressionTreeInterface

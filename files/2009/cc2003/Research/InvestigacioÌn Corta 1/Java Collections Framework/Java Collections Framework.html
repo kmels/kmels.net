@@ -1,0 +1,524 @@
+<HTML>
+<HEAD>
+  <TITLE>Java Collections Framework</TITLE>
+  <meta NAME = "GENERATOR"          CONTENT = "IHMC CmapTools v4.18 ">
+  <meta NAME = "KEYWORDS"           CONTENT = "Carlos Lopez Camey, Mapa Conceptual, cmap, CmapTools, IHMC, Java Collections Framework,  API,  Implementar,  Java 2 SE,  Valores,  java.util,  Interfaces,  Objetos,  Objetos,  Manipular y guardar Datos,  Enumeration,  Set,  HashMap,  Clases,  un servidor DNS (Domain Name Server),  Java Collections Framework,  Hashset,  Dominio (de Objetos),  Una función,  Comparadores,  Estructuras de Datos">
+  <meta NAME = "DESCRIPTION"        CONTENT = "Este Cmap, tiene información relacionada con: Java Collections Framework, Grupo de Objetos, Interfaces como Set, una Colección (Collection) representa un Grupo, Ordenar mediante una interfaz SortedMap, Clases como TreeSet, API provee Interfaces, Map similar a Una función, Clases como TreeMap, Map implementada en HashMap, Java Collections Framework provee Interfaces, Interfaces fundamentadas por Definiciones Matemáticas, Estructuras de Datos que sirven para Manipular y guardar Datos, Java Collections Framework es una API, Map como un servidor DNS (Domain Name Server), Interfaces como List, una Colección (Collection) soporta Iteradores (Iterators), List heredadas (o especificaciones) de una Colección (Collection), una Colección (Collection) puede de ser Sólo lectura, Map implementada en TreeMap, Una función mapea un Dominio (de Objetos)">
+  <meta NAME = "AUTHOR"             CONTENT = "IHMC CmapTools">
+  <meta HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset = UTF-8">
+  <script LANGUAGE="JavaScript1.2">
+  <!--
+    //  PopUp --
+    //  Institute for Human and Machine Cognition, http://www.ihmc.us/
+    //  CmapTools, Version 4.15, http://cmap.ihmc.us/
+    //  Modify by: CmapTools Developers, cmapsupport@ihmc.us
+    //  Date: 02/05/2008
+
+    var IE = 0;
+    var IE4PC = 0;
+    var NS = 0;
+    var GECKO = 0;
+
+    var openpopups = new Array();
+
+    if (document.all) {                 // Internet Explorer Detected
+	   IE = true;	
+    }
+    else if (document.layers) {         // Netscape Navigator Detected
+	   NS = true;	
+    }
+    else if (document.getElementById) { // Netscape 6 Detected
+       GECKO = true;
+    }
+    else {
+	   alert("Unrecognized Browser Detected::\nSorry, your browser is not compatible.");
+    }
+
+    if (IE)
+    {
+	   OS = navigator.platform;
+	   VER = new String(navigator.appVersion);
+	   VER = VER.substr (0, VER.indexOf(" "));
+	   if ((VER < 4.8) && (OS == "Win32")) 
+	   {
+	       IE4PC = 1;
+	   }
+    }
+
+    function handleResize() {
+	    location.reload();
+	    return false;
+    }
+
+
+    if ((NS) && (navigator.platform == "MacPPC")) {
+	   window.captureEvents (Event.RESIZE);
+	   window.onresize = handleResize;
+    }
+
+    function openResource(event, resourcePath, resourceName, resourceType)
+    {
+	   var newwindow;
+
+       // Resource MIMETypes are enumerated as follows: 
+       // cMap     = Undefined
+       // Image    = 0
+       // Video    = 1
+       // Text     = 2
+       // Audio    = 3
+
+       popDown();
+
+	   switch (resourceType) 
+	   {
+	    case 0:     //Image
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<center><img src=\"';
+                    text += resourcePath;
+                    text +='\"> </center>';
+             break;
+		
+	    case 1:  text   // Video
+		     newwindow = window.open (resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+                     var text ='<embed src=\"';
+                     text += resourcePath;
+                     text +='\" autostart=true> </embed> ';
+             break;
+
+	    case 2:      // Text or Unknown 
+		     newwindow = window.open(resourcePath,resourceName);
+                     newwindow.onBlur = newwindow.focus()
+              break;
+
+	    case 3:       // Audio
+                    newwindow = window.open (resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+                    var text ='<embed src=\"';
+                    text += resourcePath;
+                    text +='\" autoplay=true> </embed> ';
+             break;
+
+	    case 4:
+                    newwindow = window.open(resourcePath,resourceName);
+                    newwindow.onBlur = newwindow.focus()
+	     break;
+	    }
+        return;
+    }
+
+
+
+    function popUpEvt(event, popupName)
+    {
+	popDown();
+
+	if (GECKO)
+	{
+	    document.getElementById(popupName).style.left = event.layerX;
+	    document.getElementById(popupName).style.top = event.layerY;
+	    document.getElementById(popupName).style.background = "#B3B3B3";
+	    document.getElementById(popupName).style.visibility = "visible";
+	    openpopups.push(popupName);
+	}
+	else if (NS) 
+	{
+	    document.layers[popupName].moveTo (event.pageX, event.pageY);
+	    document.layers[popupName].bgColor = "#B3B3B3";
+	    document.layers[popupName].visibility = "show";
+	    openpopups.push(popupName);
+	}
+	else // if (IE)
+	{
+	    window.event.cancelBubble = true;
+	    if (!IE4PC) {
+		document.all[popupName].style.backgroundColor = "#B3B3B3";
+	    }	
+	    document.all[popupName].style.left = window.event.clientX + document.body.scrollLeft;
+	    document.all[popupName].style.top = window.event.clientY + document.body.scrollTop;
+	    document.all[popupName].style.visibility = "visible";
+	    openpopups[openpopups.length] = popupName;
+	}
+	return false;
+    }
+
+    function popDown()
+    {
+	var popupname;
+	
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+		document.getElementById(popupname).style.visibility = "hidden";
+	    }
+	    else if (NS) {
+		document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+		document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+	return;
+    }
+
+    function popDownNoGecko() 
+    {
+	var popupname;
+	for (var i = 0; i < openpopups.length; i++) 
+	{
+	    popupname = new String (openpopups[i]);      
+	    if (GECKO) {
+           //  document.getElementById(popupname).style.visibility = "hidden"; 
+	        return;   // erased for test purposes
+	    }  
+	    else if (NS) {
+	        document.layers[popupname].visibility = "hide";
+	    }
+	    else {
+	        document.all[popupname].style.visibility = "hidden";
+	    }
+	}
+	openpopups = new Array();
+        return;
+    }
+  //-->
+  </script>
+</HEAD>
+<BODY bgcolor="#FFFFFF" leftmargin="0" topmargin="0">
+  <noscript>
+    <table width=90% cellpadding=10>
+      <tr>
+	<td bgcolor=ff4444>
+	  <font color=000000 size=+1 face="helvetica">
+	    <h1>Warning:</h1>
+	    <b>JavaScript is turned OFF.  None of the links on this page will work until it is reactivated.
+	      <p>
+		<a href="http://cmap.ihmc.us/docs/EnablingJavaScript.html">
+		  If you need help turning JavaScript On, click here.
+		</a>
+	      </p>
+	    </b>
+	</td>
+      </tr>
+    </table>
+Este Cmap, tiene información relacionada con: Java Collections Framework, Grupo de Objetos, Interfaces como Set, una Colección (Collection) representa un Grupo, Ordenar mediante una interfaz SortedMap, Clases como TreeSet, API provee Interfaces, Map similar a Una función, Clases como TreeMap, Map implementada en HashMap, Java Collections Framework provee Interfaces, Interfaces fundamentadas por Definiciones Matemáticas, Estructuras de Datos que sirven para Manipular y guardar Datos, Java Collections Framework es una API, Map como un servidor DNS (Domain Name Server), Interfaces como List, una Colección (Collection) soporta Iteradores (Iterators), List heredadas (o especificaciones) de una Colección (Collection), una Colección (Collection) puede de ser Sólo lectura, Map implementada en TreeMap, Una función mapea un Dominio (de Objetos)
+
+</noscript>
+
+<map name="Java Collections Framework">
+  <area shape="rect"
+        href="1249184862614I700337433I1106ItextIhtml"
+        onClick="popUpEvt(event,'1249184862614I700337433I1106ItextIhtml'); return false;"
+        coords="405,252,423,270">
+  <area shape="rect"
+        href="1249238294791I657905994I3135ItextIhtml"
+        onClick="popUpEvt(event,'1249238294791I657905994I3135ItextIhtml'); return false;"
+        coords="307,253,325,271">
+  <area shape="rect"
+        href="1249184611501I978361585I933ItextIhtml"
+        onClick="popUpEvt(event,'1249184611501I978361585I933ItextIhtml'); return false;"
+        coords="536,452,554,470">
+  <area shape="rect"
+        href="1249185188633I864736925I1284ItextIhtml"
+        onClick="popUpEvt(event,'1249185188633I864736925I1284ItextIhtml'); return false;"
+        coords="429,652,447,670">
+  <area shape="rect"
+        href="1249232977192I2010850592I2226ItextIhtml"
+        onClick="popUpEvt(event,'1249232977192I2010850592I2226ItextIhtml'); return false;"
+        coords="1107,853,1125,871">
+  <area shape="rect"
+        href="1249184544084I1979609728I823ItextIhtml"
+        onClick="popUpEvt(event,'1249184544084I1979609728I823ItextIhtml'); return false;"
+        coords="675,52,693,70">
+  <area shape="rect"
+        href="1249232455602I1555566988I1866ItextIhtml"
+        onClick="popUpEvt(event,'1249232455602I1555566988I1866ItextIhtml'); return false;"
+        coords="638,852,656,870">
+  <area shape="rect"
+        href="1249243592682I1379358832I897ItextIhtml"
+        onClick="popUpEvt(event,'1249243592682I1379358832I897ItextIhtml'); return false;"
+        coords="873,1253,891,1271">
+  <area shape="rect"
+        href="1249232327334I2048551061I1680ItextIhtml"
+        onClick="popUpEvt(event,'1249232327334I2048551061I1680ItextIhtml'); return false;"
+        coords="104,452,122,470">
+  <area shape="rect"
+        href="1249232945784I858921494I2186ItextIhtml"
+        onClick="popUpEvt(event,'1249232945784I858921494I2186ItextIhtml'); return false;"
+        coords="821,852,839,870">
+  <area shape="rect"
+        href="1249232804182I300550277I2080ItextIhtml"
+        onClick="popUpEvt(event,'1249232804182I300550277I2080ItextIhtml'); return false;"
+        coords="919,853,937,871">
+  <area shape="rect"
+        href="1249238787461I1809183656I3729ItextIhtml"
+        onClick="popUpEvt(event,'1249238787461I1809183656I3729ItextIhtml'); return false;"
+        coords="499,1053,517,1071">
+  <area shape="rect"
+        href="1249236692867I1978526600I923ItextIhtml"
+        onClick="popUpEvt(event,'1249236692867I1978526600I923ItextIhtml'); return false;"
+        coords="494,854,512,872">
+  <area shape="rect"
+        href="1249232763749I599091124I2011ItextIhtml"
+        onClick="popUpEvt(event,'1249232763749I599091124I2011ItextIhtml'); return false;"
+        coords="726,852,744,870">
+  <area shape="rect"
+        href="1249232983720I1969372511I2255ItextIhtml"
+        onClick="popUpEvt(event,'1249232983720I1969372511I2255ItextIhtml'); return false;"
+        coords="1013,853,1031,871">
+  <area shape="rect"
+        href="1249232989457I1351665078I2278ItextIhtml"
+        onClick="popUpEvt(event,'1249232989457I1351665078I2278ItextIhtml'); return false;"
+        coords="1308,653,1326,671">
+  <area shape="rect"
+        href="1249243806708I1883824983I1410ItextIhtml"
+        onClick="popUpEvt(event,'1249243806708I1883824983I1410ItextIhtml'); return false;"
+        coords="1400,1053,1418,1071">
+  <area shape="rect"
+        href="1249185144137I653634661I1234ItextIhtml"
+        onClick="popUpEvt(event,'1249185144137I653634661I1234ItextIhtml'); return false;"
+        coords="575,652,593,670">
+</map>
+
+<center>
+  <table width=* height=* cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td valign=center align=center>
+      <img USEMAP="#Java Collections Framework"
+           SRC="Java Collections Framework.jpg"
+           ALIGN=middle
+           BORDER=0
+           onClick=popDown();>
+      </td>
+    </tr>
+    <tr>
+      <td VALIGN=top ALIGN=right>
+      <table>
+	<tr>
+             <td ALIGN=right VALIGN=middle>
+                 <map NAME="CmapToolsTrademark">
+                     <area SHAPE="rect"
+                           href="http://cmap.ihmc.us/"
+                           onClick="openResource(event,'http://cmap.ihmc.us/', 0, 2); return false;"
+                           coords="1,1,210,50">
+                 </map>
+	<tr>
+	  <td  ALIGN=right VALIGN=middle>
+               <img USEMAP="#CmapToolsTrademark"
+                    SRC="CmapToolsTrademark.gif" 
+                    ALT="IHMC Cmap Tools Trademark" width="210" height="50"
+                    ALIGN=middle
+                    BORDER=0>
+	   </td>
+	     <td VALIGN=middle>
+         </td>
+	</tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</center>
+</body>
+</html>
+<div id="1249184862614I700337433I1106ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Application_programming_interface" TITLE="">
+      Application Programming Interface (Wikipedia)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249238294791I657905994I3135ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/package-summary.html" TITLE="">
+      Paquete Java.util
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249184611501I978361585I933ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/docs/books/tutorial/java/concepts/interface.html" TITLE="">
+      Que es una interfaz
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249185188633I864736925I1284ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Set.html" TITLE="">
+      Set (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232977192I2010850592I2226ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/HashMap.html" TITLE="">
+      Hashmap (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249184544084I1979609728I823ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/guide/collections/index.html" TITLE="">
+      Java Collections Framework (Sun.com)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232455602I1555566988I1866ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/HashSet.html" TITLE="">
+      Hashset
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249243592682I1379358832I897ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Comparator.html" TITLE="">
+      Interfaz Comparator
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232327334I2048551061I1680ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://en.wikipedia.org/wiki/Data_structure" TITLE="">
+      Data Structures (Wikipedia, EN)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232945784I858921494I2186ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/LinkedList.html" TITLE="">
+      LinkedList (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232804182I300550277I2080ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/ArrayList.html" TITLE="">
+      ArrayList (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249238787461I1809183656I3729ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Iterator.html" TITLE="">
+      Iterator (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249236692867I1978526600I923ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Collection.html" TITLE="">
+      Collection (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232763749I599091124I2011ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/TreeSet.html" TITLE="">
+      Treeset
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232983720I1969372511I2255ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/TreeMap.html" TITLE="">
+      TreeMap (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249232989457I1351665078I2278ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/Map.html" TITLE="">
+      Map (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249243806708I1883824983I1410ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/SortedMap.html" TITLE="">
+      Sorted Map (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="1249185144137I653634661I1234ItextIhtml" style="POSITION: absolute; Z-INDEX: 20; VISIBILITY: hidden; left: 0; top: 0;">
+  <table border=1 cellpadding=1 cellspacing=0 bgcolor="#dddddd">
+    <tr>
+      <td nowrap><font face="Geneva, Arial" size=2>
+      <a HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/List.html" TITLE="">
+      List (Java 2 SE)
+      </a>
+      </td>
+    </tr>
+  </table>
+</div>
+

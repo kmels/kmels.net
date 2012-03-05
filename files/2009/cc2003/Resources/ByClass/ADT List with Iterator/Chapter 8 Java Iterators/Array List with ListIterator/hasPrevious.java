@@ -1,0 +1,1 @@
+public boolean hasPrevious(){	return (currentIndex > 0) && (currentIndex <= length);} // end hasPrevious

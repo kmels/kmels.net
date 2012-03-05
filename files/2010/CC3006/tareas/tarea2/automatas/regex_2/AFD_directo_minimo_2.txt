@@ -1,0 +1,19 @@
+*************************************************************
+	Minimización del AFD creado directamente del árbol
+*************************************************************
+Tiempo de creación del autómanta: 2544668ns = 25.44668ms
+Genera un lenguaje a partir de la regex: (b|b)*abb(a|b)* -> (((((((b|b)*).a).b).b).((a|b)*)).#)
+*************************************************************
+Lista de símbolos: [b, a]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0, q1, q2, q3]
+Lista de aceptación (F): [q3]
+Transiciones:
+	* T(q0,b) = q0
+	* T(q0,a) = q1
+	* T(q1,b) = q2
+	* T(q2,b) = q3
+	* T(q3,b) = q3
+	* T(q3,a) = q3
+
+*************************************************************

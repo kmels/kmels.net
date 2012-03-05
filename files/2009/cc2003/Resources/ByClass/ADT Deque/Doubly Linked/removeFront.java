@@ -1,0 +1,1 @@
+public Object removeFront(){	Object front = null;	if (!isEmpty())	{		front = firstNode.getData();		firstNode = firstNode.getNextNode();		if (firstNode == null)			lastNode = null;		else			firstNode.setPreviousNode(null);	} // end if	return front;} // end removeFront

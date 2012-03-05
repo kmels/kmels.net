@@ -1,0 +1,17 @@
+*************************************************************
+	AFD creado directamente del árbol
+*************************************************************
+Tiempo de creación del autómanta: 1080166ns = 10.80166ms
+Genera un lenguaje a partir de la regex: (0|1)*(10)* -> ((((0|1)*).((1.0)*)).#)
+*************************************************************
+Lista de símbolos: [e, 0, 1, #]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0, q1]
+Lista de aceptación (F): [q0, q1]
+Transiciones:
+	* T(q0,0) = q0
+	* T(q0,1) = q1
+	* T(q1,0) = q0
+	* T(q1,1) = q1
+
+*************************************************************

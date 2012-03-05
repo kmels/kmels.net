@@ -1,0 +1,1 @@
+public boolean add(Comparable newEntry){	int newPosition = Math.abs(getPosition(newEntry));	return list.add(newPosition, newEntry);} // end add

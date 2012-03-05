@@ -1,0 +1,1 @@
+public boolean replace(int givenPosition, Object newEntry){	boolean isSuccessful = true;	if (!isEmpty() && (givenPosition >= 1) && (givenPosition <= length))	{		Node desiredNode = getNodeAt(givenPosition);		desiredNode.data = newEntry;	} 	else		isSuccessful = false;	return isSuccessful;} // end replace

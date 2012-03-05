@@ -1,0 +1,1 @@
+// WARNING: This interface has the same name as an interface in Chapter 7.//          The return type of the method getListIterator differs in these interfaces.import java.util.*;public interface ListWithIteratorInterface extends ListInterface{	public Iterator getListIterator();} // end ListWithIteratorInterface

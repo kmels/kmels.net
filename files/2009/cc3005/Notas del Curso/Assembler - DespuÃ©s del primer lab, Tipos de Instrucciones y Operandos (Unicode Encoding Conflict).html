@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>Assembler - Después del primer lab, Tipos de Instrucciones y Operandos</title>
+  <meta name="Generator" content="Cocoa HTML Writer" />
+  <meta name="CocoaVersion" content="949.46" />
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Lucida Grande; color: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Lucida Grande; color: #808080}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Lucida Grande; color: #000000; min-height: 13.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia; min-height: 14.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Lucida Grande; min-height: 15.0px}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Lucida Grande}
+    span.s1 {color: #808080}
+    span.s2 {color: #000000}
+    span.s3 {text-decoration: underline}
+    span.s4 {font: 12.0px Lucida Grande; text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Title:<span class="Apple-converted-space">  </span></span>Assembler - Después del primer lab, Tipos de Instrucciones y Operandos</p>
+<p class="p1"><span class="s1">Date:<span class="Apple-converted-space">  </span></span>July 27, 2009 10:46 AM</p>
+<p class="p2">Category:<span class="Apple-converted-space">  </span><span class="s2">CC3005</span></p>
+<p class="p2">Tags:<span class="Apple-converted-space">  </span><span class="s2">Intel</span></p>
+<p class="p3"><br /></p>
+<p class="p4"><b>Escribir un caracter</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>MOV AH, O2H</p>
+<p class="p4"><span class="Apple-tab-span">	</span>MOV DL, car</p>
+<p class="p4"><span class="Apple-tab-span">	</span>INT 21H</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Escribir una cadena</b></p>
+<p class="p4"><span class="Apple-tab-span">	</span>MOV AH, O9H</p>
+<p class="p4"><span class="Apple-tab-span">	</span>MOV DX, cadena</p>
+<p class="p4"><span class="Apple-tab-span">	</span>INT 21H<b><span class="Apple-tab-span">	</span></b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p5"><b></b><br /></p>
+<p class="p4"><b>Instrucciones Básicas</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>Aritméticas</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>IMUL, IDIV -&gt; trabajan con signo (I)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>ADD (registros/memoria) &lt;- Registros de segmento no se puede</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>Lógicas</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Operaciones a nivel de bits</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>Corrimiento de bits<span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Shift: SHR y SHL (left y right)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SHR a 01101110 -&gt; mueve todos los bits a la derecha -&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>queda 00110111</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>SHR -&gt; es como dividir</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Análogos a los Shift: RCL y RCR</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Rotan los bits a través del Carry Flag</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>No se pierden bits (como en los Shifts)</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>Operaciones con banderas</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Se pueden limpiar banderas. Las ponen en 0.</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>STC, STI -&gt; setean las banderas, (en 1)</p>
+<p class="p5"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>Ciclos</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Operador LOOP (repetir mientras no es cero)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(por eso CX es el registro contador)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Él solito decrementa el registro CX</p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Operador LOOPE (repetir mientras sea igual a cero, el registro CX)</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(Ver ejemplo Ciclos.ASM)</p>
+<p class="p5"><br /></p>
+<p class="p4"><b>Laboratorio: El otro miércoles</b></p>
+<p class="p5"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p5"><b></b><br /></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span>Opreandos<span class="Apple-tab-span">	</span></b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Registro -&gt; Referencia a registro (AX,BX.. apuntadores.. segmentos pero con restricciones que vamos a ver después)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Inmediato (e.g. MOV DATO, 3)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mem. Directa <span class="Apple-tab-span">	</span>-&gt; Etiquetas (eg. DATO DW 0FFFFH ; ADD DATO, 0FH)</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>-&gt; Direcciones de memoria:<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Especificadores de índice</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>e.g. MOV DX, DS:[0100H]</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>DS es de 16 bits pero usa los 4 bits de la parte baja</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Mem. Indirecta -&gt;<span class="Apple-converted-space">  </span><span class="s3">(Ver Presentación "</span><span class="s4">3.Operandos de memoria indirecta.ppt")</span></p>
+<p class="p6"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+<p class="p7"><span class="s3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>Operaciones no permitidas:</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>De memoria a memoria</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Inmediato a registro de segmento</p>
+<p class="p7"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Registro de segmento a registro de segmento<span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>Casting</b></p>
+<p class="p4"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>Byte PTR &lt;- la ajusta a un Byte</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Word PTR &lt;- la ajusta a Word</p>
+<p class="p5"><br /></p>
+<p class="p4"><span class="Apple-tab-span">	</span><b>Un .bat para automatizar el Ensamblaje, <i>Linkeaje </i>y la corrida</b><span class="Apple-tab-span">	</span>RUN.BAT<span class="Apple-converted-space"> </span></p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>#tasm %1</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>#tlink %1</p>
+<p class="p4"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>#%1</p>
+<p class="p5"><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p5"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span></p>
+</body>
+</html>

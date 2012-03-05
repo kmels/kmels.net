@@ -1,0 +1,1 @@
+public interface DequeInterface{	public void addToFront(Object newEntry);	public void addToBack(Object newEntry);	public Object removeFront();	public Object removeBack();	public Object getFront();	public Object getBack();	public boolean isEmpty();	public void clear();} // end DequeInterface

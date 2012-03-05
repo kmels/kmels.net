@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="Postfix" modificationStamp="2" version="1.2">
+    <package visibility="1">
+        <fragment handle="=Postfix/src&lt;"/>
+        <type handle="=Postfix/src&lt;{Pila.java[Pila" modificationStamp="1" restrictions="0" visibility="0"/>
+        <type handle="=Postfix/src&lt;{Principal.java[Principal" modificationStamp="1" restrictions="0" visibility="0"/>
+        <type handle="=Postfix/src&lt;{Stack.java[Stack" modificationStamp="1" restrictions="0" visibility="0"/>
+    </package>
+</component>

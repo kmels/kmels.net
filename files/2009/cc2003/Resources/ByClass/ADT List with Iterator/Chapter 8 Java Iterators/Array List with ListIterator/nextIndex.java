@@ -1,0 +1,1 @@
+public int nextIndex(){	int result;	if (hasNext())		result = currentIndex;	else		result = length;	return result;} // end nextIndex

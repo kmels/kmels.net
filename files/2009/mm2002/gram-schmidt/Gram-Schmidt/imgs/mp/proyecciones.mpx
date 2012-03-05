@@ -1,0 +1,44 @@
+% Written by DVItoMP, Version 1.003/color (Web2C 7.5.7)
+begingroup save _p,_r,_s,_n; picture _p; _p=nullpicture;
+string _n[];
+vardef _s(expr _t,_f,_m,_x,_y)(text _c)=
+  addto _p also _t infont _f scaled _m shifted (_x,_y) _c; enddef;
+_n0="cmmi10";
+_s("`",_n0,1.00000,0.0000,0.0000,);
+setbounds _p to (0,0.0000)--(4.1511,0.0000)--
+ (4.1511,6.9185)--(0,6.9185)--cycle;
+_p endgroup
+mpxbreak
+begingroup save _p,_r,_s,_n; picture _p; _p=nullpicture;
+string _n[];
+vardef _s(expr _t,_f,_m,_x,_y)(text _c)=
+  addto _p also _t infont _f scaled _m shifted (_x,_y) _c; enddef;
+_n0="cmmi10";
+_s("c"&char22,_n0,1.00000,0.0000,0.0000,);
+setbounds _p to (0,-1.9372)--(10.3144,-1.9372)--
+ (10.3144,4.2895)--(0,4.2895)--cycle;
+_p endgroup
+mpxbreak
+begingroup save _p,_r,_s,_n; picture _p; _p=nullpicture;
+string _n[];
+vardef _s(expr _t,_f,_m,_x,_y)(text _c)=
+  addto _p also _t infont _f scaled _m shifted (_x,_y) _c; enddef;
+_n0="cmmi10";
+_s(char23,_n0,1.00000,0.0000,0.0000,);
+setbounds _p to (0,0.0000)--(5.5556,0.0000)--
+ (5.5556,4.2895)--(0,4.2895)--cycle;
+_p endgroup
+mpxbreak
+begingroup save _p,_r,_s,_n; picture _p; _p=nullpicture;
+string _n[];
+vardef _s(expr _t,_f,_m,_x,_y)(text _c)=
+  addto _p also _t infont _f scaled _m shifted (_x,_y) _c; enddef;
+_n0="cmmi10";
+_s(char23,_n0,1.00000,0.0000,0.0000,);
+_n1="cmsy10";
+_s(char0,_n1,1.00000,7.7694,0.0000,);
+_s("c"&char22,_n0,1.00000,17.7320,0.0000,);
+setbounds _p to (0,-1.9372)--(28.0464,-1.9372)--
+ (28.0464,5.8115)--(0,5.8115)--cycle;
+_p endgroup
+mpxbreak

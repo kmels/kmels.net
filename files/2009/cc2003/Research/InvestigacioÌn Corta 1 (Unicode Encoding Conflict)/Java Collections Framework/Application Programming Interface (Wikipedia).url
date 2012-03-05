@@ -1,0 +1,5 @@
+http://en.wikipedia.org/wiki/Application_programming_interface
+[DEFAULT]
+BASEURL=http://en.wikipedia.org/wiki/Application_programming_interface
+[InternetShortcut]
+URL=http://en.wikipedia.org/wiki/Application_programming_interface

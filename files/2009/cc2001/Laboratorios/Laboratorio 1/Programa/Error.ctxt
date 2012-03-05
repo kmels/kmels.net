@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=errorMessage
+comment0.target=Error(String)
+comment0.text=\nConstructor\n\n
+comment1.target=String\ getErrorMsg()
+comment1.text=\nEste\ metodo\ devuelve\ el\ mensaje\ de\ error\n\n@return\ El\ mensaje\ del\ error\n\n
+numComments=2

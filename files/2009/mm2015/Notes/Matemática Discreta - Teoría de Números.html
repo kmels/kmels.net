@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <title>Matemática Discreta - Teoría de Números</title>
+  <meta name="Generator" content="Cocoa HTML Writer" />
+  <meta name="CocoaVersion" content="1038.11" />
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'; color: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'; color: #929292}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Lucida Grande'; color: #000000; min-height: 13.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Georgia}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Georgia; min-height: 21.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Georgia; min-height: 14.0px}
+    span.s1 {color: #929292}
+    span.s2 {color: #000000}
+    span.s3 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">Title:<span class="Apple-converted-space">  </span></span>Matemática Discreta - Teoría de Números</p>
+<p class="p1"><span class="s1">Date:<span class="Apple-converted-space">  </span></span>October 8, 2009 12:28 PM</p>
+<p class="p2">Category:<span class="Apple-converted-space">  </span><span class="s2">MM2015</span></p>
+<p class="p1"><span class="s1">Tags:<span class="Apple-converted-space">  </span></span>Number Theory</p>
+<p class="p3"><br /></p>
+<p class="p4"><b>Teoría de números</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6"><b>Fuentes de estudio:</b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span></b>Notas de clase</p>
+<p class="p6"><span class="Apple-tab-span">	</span>Wikipedia :]</p>
+<p class="p6"><span class="Apple-tab-span">	</span>Libro de Stein</p>
+<p class="p7"><br /></p>
+<p class="p7"><br /></p>
+<p class="p4"><b>Historia</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6">"Dios inventó los números naturales, los demás es creación del hombre" Leopoldo Kronecker (o algo así), siglo IXX</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Griegos: Números rectangulares y cuadrados</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6">6 = <span class="Apple-tab-span">	</span>* * *</p>
+<p class="p6"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span>* * *</p>
+<p class="p7"><br /></p>
+<p class="p6">8<span class="Apple-converted-space">  </span>= <span class="Apple-tab-span">	</span>* * * *</p>
+<p class="p6"><span class="Apple-tab-span">	</span>* * * *</p>
+<p class="p7"><br /></p>
+<p class="p6">9 = <span class="Apple-tab-span">	</span>* * *</p>
+<p class="p6"><span class="Apple-tab-span">	</span>* * *</p>
+<p class="p6"><span class="Apple-tab-span">	</span>* * *</p>
+<p class="p7"><br /></p>
+<p class="p6">4 = <span class="Apple-tab-span">	</span>* *</p>
+<p class="p6"><span class="Apple-tab-span">	</span>* *</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>¿Qué pasa con números como 5, pensando en "números rectangulares"?</b></p>
+<p class="p7"><br /></p>
+<p class="p6">5 = * * * * *</p>
+<p class="p7"><br /></p>
+<p class="p6">3 = * * *</p>
+<p class="p7"><br /></p>
+<p class="p6">7 = * * * * * * *</p>
+<p class="p7"><br /></p>
+<p class="p6">Los griegos les llamaron: <b>números primos</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6"><b>Números Triangulares</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">T_1 = <span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>;<span class="Apple-tab-span">	</span>T_2 =<span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>; T_3= <span class="Apple-tab-span">	</span>* <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>....<span class="Apple-converted-space">  </span>T_n</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>* *<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>* *</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>* * *</p>
+<p class="p7"><br /></p>
+<p class="p6">¿Cuántos puntos tiene T_n?<span class="Apple-converted-space"> </span></p>
+<p class="p6">Ecuación de recurrencia</p>
+<p class="p6"><span class="Apple-tab-span">	</span>T_n = T_{n-1}<span class="Apple-tab-span">	</span>+ n</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>T_n = sum_{k=o}^n k = \frac{1}{2} n(n+1)</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Una conjetura</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">La suma de dos números triangulares consecutivos es un número cuadrado</p>
+<p class="p7"><br /></p>
+<p class="p6">{prueba por inducción}</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>¿Qué pasa si sumamos números impares hasta cierto número?</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">1</p>
+<p class="p6">1 + 3 = 4</p>
+<p class="p6">1 + 3 + 5 = 9</p>
+<p class="p6">1 + 3 + 5 + 7 = 16<span class="Apple-converted-space"> </span></p>
+<p class="p6">...</p>
+<p class="p7"><br /></p>
+<p class="p7"><br /></p>
+<p class="p6">\sum_{i=o}^n (2i-1) = n^2 (números cuadrados!)</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Números mágicos (\forall n&gt;2)</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">Arreglo de los enteros de 1..n^2, de forma que todas las filas y columnas y diagonales, suman lo mismo. (<i>La suma mágica</i>)</p>
+<p class="p7"><br /></p>
+<p class="p6">Construyendo un cuadrado mágico para n = 3</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>-&gt; S_m</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>*</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>*<span class="Apple-tab-span">	</span>*</p>
+<p class="p7"><br /></p>
+<p class="p6">Tenemos n filas, con fila_i = S_m, entonces<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6">n*S_m = \sum_{i=0}^{n^2} k = 1+2+3+4.. n^2 = \frac{1}{2} n^2 ( n^2+1)</p>
+<p class="p7"><br /></p>
+<p class="p6">=&gt; S_m = \frac{1}{2} n(n^2+1)<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6">{Hacer el ejemplo de un cuadrado mágico para n=3} Sabiendo que S_m = 15 = 1/2*3*10</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>8<span class="Apple-tab-span">	</span>1<span class="Apple-tab-span">	</span>6</p>
+<p class="p6"><span class="Apple-tab-span">	</span>3<span class="Apple-tab-span">	</span>5<span class="Apple-tab-span">	</span>7</p>
+<p class="p6"><span class="Apple-tab-span">	</span>4<span class="Apple-tab-span">	</span>9<span class="Apple-tab-span">	</span>2</p>
+<p class="p7"><br /></p>
+<p class="p6">(Algoritmo de Loubere)</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Teoría de números, </b>muy relacionada con juegos, posteriormente (ahora con la compu) demás cosas, e.g. con criptografía<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p4"><b>Números primos</b></p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6">"Elementos químicos de la matemática",<span class="Apple-converted-space"> </span></p>
+<p class="p6">Intuición, si queremos describir números naturales, usamos primos</p>
+<p class="p7"><br /></p>
+<p class="p6">Dado c = a*b, llamamos <b>factores</b> de <i>c </i>a <i>a </i>y <i>b</i> (también <b>divisores</b> de c).</p>
+<p class="p7"><br /></p>
+<p class="p6">NOTA: Cuando c, sólo admite la factorización trivial c = 1*c (donde 1 y <i>c </i>son los<span class="Apple-converted-space"> </span></p>
+<p class="p6">factores triviales) decimos que c es <b>primo.</b> Si no es así, c es un <b>número compuesto.</b></p>
+<p class="p7"><br /></p>
+<p class="p6">¿Cómo podemos <b>decidir </b>si un número c es primo (o compuesto)?</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>¿Si es compuesto, cómo podemos encontrar su factorización en números primos?</b></p>
+<p class="p7"><br /></p>
+<p class="p6">Solución trivial, tomar k_i &lt; c, dividir c/k.<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6">Nota: c = a*b</p>
+<p class="p7"><br /></p>
+<p class="p6">Qué podemos decir de \sqrt(c) en relación a $a$ y $b$? (desigualdades)</p>
+<p class="p7"><br /></p>
+<p class="p6">\textbf{No} podemos tener que \textbf{ambos} $a$ y $b$ sean mayores que $\sqrt{c}$</p>
+<p class="p7"><br /></p>
+<p class="p6">Qué pasa si $a,b &gt; \sqrt{c}$... =&gt; $ a*b &gt; c$ (contradicción!)</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Problema: </b>Decidir si 97 es primo?</p>
+<p class="p7"><br /></p>
+<p class="p6">$\sqrt{97}$ = 9</p>
+<p class="p7"><br /></p>
+<p class="p6">97/2, 97/3, 97/7... no dividen "exactamente".</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>La criba (<i>siere</i>) de Eratóstenes</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">Idea: No dividir dentro de los k’s que son números compuestos.<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6"><b>NOTA: </b>Existen infinitos primos</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Prueba:</b> Asumimos que hay número finito de primos</p>
+<p class="p6"><span class="Apple-tab-span">	</span>{Primo_1, primo_2.... primo_r}</p>
+<p class="p7"><br /></p>
+<p class="p6">Mult</p>
+<p class="p6"><span class="Apple-tab-span">	</span>N = \mult_{i=0}^n<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6">Notemos que todos los p_k dividen a N, pero ninguno de esos primos divide a N+1, entonces N+1 es primo.</p>
+<p class="p7"><br /></p>
+<p class="p4"><b>Primos de Fermat</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6">F_n = 2^{2^n} + 1</p>
+<p class="p7"><br /></p>
+<p class="p6">F_0,F_1..F_4..<span class="Apple-converted-space">  </span>son primos..</p>
+<p class="p7"><br /></p>
+<p class="p6">Vino Euler y probó con F_5, que no es primo</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>BUSCAR: </b>Relación de los primos de fermat, para construción de polígonos regulares.</p>
+<p class="p7"><br /></p>
+<p class="p7"><br /></p>
+<p class="p4"><b>‘Primos’ de Mersenne</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6">\[M_p = 2^p - 1\]</p>
+<p class="p7"><br /></p>
+<p class="p6">donde $p$ es primo.</p>
+<p class="p7"><br /></p>
+<p class="p6">Probando,</p>
+<p class="p7"><br /></p>
+<p class="p6">$ M_2 =2^3-1=3 $, OK</p>
+<p class="p7"><br /></p>
+<p class="p6">$ M_3 = 2^3-1 = 7$, OK</p>
+<p class="p7"><br /></p>
+<p class="p6">$ M_5 = 2^5 - 1=31$, OK</p>
+<p class="p7"><br /></p>
+<p class="p6">$ M_7 = 2^7-1 = 127$, OK</p>
+<p class="p7"><br /></p>
+<p class="p6">$\vdots$</p>
+<p class="p7"><br /></p>
+<p class="p6">$ M_{31} = 2^31 -1$</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Cuántos dígitos tiene $M_p$?</b></p>
+<p class="p7"><br /></p>
+<p class="p6">Patrón:</p>
+<p class="p7"><br /></p>
+<p class="p6">$ 1 \dots 9$, log(1) = 0$</p>
+<p class="p6">$10 \dots 99$, log(10) = 1$</p>
+<p class="p6">$100 \dots 999$ = 2$</p>
+<p class="p6">....</p>
+<p class="p7"><br /></p>
+<p class="p6">$log(300,541) ~= 5.6 $<span class="Apple-converted-space"> </span></p>
+<p class="p6">$log(100,000) = log (10^5) = 5$<span class="Apple-converted-space"> </span></p>
+<p class="p6">$log(1M) = log (10^6) = 6$</p>
+<p class="p7"><br /></p>
+<p class="p6">Trivial:</p>
+<p class="p6"><span class="Apple-tab-span">	</span>$log (M_p) = log (2^p-1) $</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>$log (M_p +1) = 2^p, $</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Qué pasa con $M_p+1$?</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>nunca termina en 9! :]</p>
+<p class="p7"><br /></p>
+<p class="p6">Es valido comparar dígitos de $M_p$ vs $M_p+1$? <b>si!</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p7"><b></b><br /></p>
+<p class="p4"><b>Divisores (factores)</b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6">Podemos seguir un proceso de factorización de un número compuesto hasta que solo tengamos primos, y luego, el proceso <span class="s3">debe</span> terminar, porque los factores son "más y más pequeños", pero nunca 1.</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>En breve:</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Todo número natural $n &gt; 1$, es primo o compuesto. Si es compuesto, tiene una factorización en primos única (salvo el orden de los factores). <b>(Teorema fundamental de la aritmética)</b></p>
+<p class="p7"><br /></p>
+<p class="p6">En general, podemos escribir</p>
+<p class="p6"><span class="Apple-tab-span">	</span>$n = \mult p_i^{\alpha_i} $</p>
+<p class="p7"><span class="Apple-tab-span">	</span></p>
+<p class="p6"><span class="Apple-tab-span">	</span>donde $p_i$, son factores primos de $n$ y $\alpha_i$ es la multiplicidad de cada uno.</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>Qué divisores dividen a $n$? Cuáles son?</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">$36 = 6*6 = 2^2*3^2$</p>
+<p class="p7"><br /></p>
+<p class="p6">Sus divisores tienen la forma, $2^\delta_1*3^\delta_2$</p>
+<p class="p7"><br /></p>
+<p class="p6">$\delta_1 \in {0,1,2}$</p>
+<p class="p6">$\delta_2 \in {0,1,2}$</p>
+<p class="p7"><br /></p>
+<p class="p6">Cuántos divisores tiene 36? <b>R (w/ Sage): 9</b></p>
+<p class="p7"><br /></p>
+<p class="p6">||\delta_1|| * ||delta_2|| = 3*3 = 9 &lt;---<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6">Ej: n = 140 = 2^2*5*7</p>
+<p class="p7"><br /></p>
+<p class="p6">Sus divisores tienen la forma $2^\delta_1*5^\delta_2*5^\delta_3$</p>
+<p class="p7"><br /></p>
+<p class="p6">$\delta_1 \in {0,1,2}$</p>
+<p class="p6">$\delta_2 \in {0,1}$</p>
+<p class="p6">$\delta_1 \in {0,1}$</p>
+<p class="p7"><br /></p>
+<p class="p6">¿Cuántos divisores tiene 140? <b>R (w/ Sage): 12</b></p>
+<p class="p7"><br /></p>
+<p class="p6">En general, cuando</p>
+<p class="p7"><br /></p>
+<p class="p6">$n = p_1^{\alpha_1}*p_2^{\alpha_2}\dotsp_r^{\alpha_r}$</p>
+<p class="p7"><br /></p>
+<p class="p6">el <b>número de divisores </b>de n está dado por</p>
+<p class="p7"><br /></p>
+<p class="p6">$\tau(n) = (\alpha_1)*(\alpha_2)\dots(\alpha_r+1)$ = \mult_{k=1}^r (\alpha_k+1)$</p>
+<p class="p7"><br /></p>
+<p class="p6">Qué forma tiene $n$ si $\tau(n) = 1$ ? R: 1</p>
+<p class="p7"><br /></p>
+<p class="p6">Qué forma tiene $n$ si $\tau(n) = 2$ ? R: n debe ser primo</p>
+<p class="p7"><br /></p>
+<p class="p6">Qué forma tiene $n$ si $\tau(n) = 3$ ? R: n es $p^2$ donde $p$ es primo</p>
+<p class="p7"><br /></p>
+<p class="p6">Qué forma tiene $n$ si $\tau(n) = 4$ ?</p>
+<p class="p7"><br /></p>
+<p class="p6">$4=(\alpha_1+1)*(\alpha_2+1)\dots(\alpha_r+1)$ donde $\alpha_k &gt;= 1$, para $ 1 &lt;= k &lt;= r$.</p>
+<p class="p7"><br /></p>
+<p class="p6">$ 4 = (\alpha_1+1)(\alpha_2+1)$</p>
+<p class="p7"><br /></p>
+<p class="p6">donde tenemos los casos,<span class="Apple-converted-space"> </span></p>
+<p class="p7"><br /></p>
+<p class="p6">1. $alpha_1 = 3 ^ \alpha_2 = 0$ =&gt; n ^ p^3$</p>
+<p class="p7"><br /></p>
+<p class="p6">2. $alpha_1 = 1 ^ \alpha_2 = 1$ =&gt; n = p_1*p_2$</p>
+<p class="p7"><br /></p>
+<p class="p6">En notación,</p>
+<p class="p7"><br /></p>
+<p class="p6">$(\alpha_1,\alpha_2) = {(3,0),(1,1)}$</p>
+<p class="p7"><br /></p>
+<p class="p7"><br /></p>
+<p class="p4"><b>Números perfectos<span class="Apple-converted-space"> </span></b></p>
+<p class="p5"><b></b><br /></p>
+<p class="p6">Definiendo<span class="Apple-converted-space">  </span>div*(n):</p>
+<p class="p7"><span class="Apple-converted-space"> </span></p>
+<p class="p6">div*(n) = div(n) - {n}</p>
+<p class="p7"><br /></p>
+<p class="p6">Son aquellos cuya suma de sus divisores es el número mismo, i.e.</p>
+<p class="p7"><br /></p>
+<p class="p6">$ n = \sum_{k \in \: div*(n)} k$</p>
+<p class="p7"><br /></p>
+<p class="p6">e.g. 6 = 1 + 2 + 3, es perfecto.</p>
+<p class="p7"><br /></p>
+<p class="p6">$div*(28) = {1,2,7,2*7,2^2)$</p>
+<p class="p7"><br /></p>
+<p class="p6">$\sum_{k \in div*(28)} k = 1+2+7+14+4 = 28$, es perfecto.</p>
+<p class="p5"><b></b><br /></p>
+<p class="p6"><b>Relación entre primos de Mersenne &amp; números perfectos.</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">$6 = 2*3 <span class="Apple-tab-span">	</span>-&gt; 2^{2-1}*M_2$</p>
+<p class="p6">$28=2^2*7 -&gt; 2^{3-1}*M_3$</p>
+<p class="p6">$496 = 2^4*31 -&gt; 2^{5-1}*M_5$</p>
+<p class="p7"><br /></p>
+<p class="p6">En general, será que $2^{p-1}*M_p$, donde $p$ y $M_p$ son primos, dado por $M_p=2^p-1$ es perfecto.</p>
+<p class="p7"><br /></p>
+<p class="p6">Ejercicio de</p>
+<p class="p7"><br /></p>
+<p class="p6">$div(2^{p-1}*M_p)$ = {1,2,2^2,2^3\dots,2^{p-1}, M_p, 2*M_p, 2^2*M_p\dots,2^{p-1}*M_p}$</p>
+<p class="p7"><br /></p>
+<p class="p6">Nota con $2^{p-1}*M_p$</p>
+<p class="p7"><br /></p>
+<p class="p6">$\abs div(2^{p-1}*M_p) = 2p$</p>
+<p class="p7"><br /></p>
+<p class="p6">$\tau(2^{p-1}*M_p) = (p-1+1)(1+1) = 2p$</p>
+<p class="p7"><br /></p>
+<p class="p6">Nota con la "serie geométrica" $1+2+2^2 + 2^3 \dots + 2^{p-1} $</p>
+<p class="p7"><br /></p>
+<p class="p6">En general,</p>
+<p class="p7"><br /></p>
+<p class="p6">(a) $ 1+r+r^2+r^3+ \dots + r^n = S $<span class="Apple-converted-space"> </span></p>
+<p class="p6">multiplicando (a) por r</p>
+<p class="p6">(b) $r + r^2+r^3 \dots + r^n + r^{n+1} = r*S$</p>
+<p class="p6">Restando b con a,</p>
+<p class="p7"><br /></p>
+<p class="p6">$1 - r^{n+1} = S(1-r) =&gt; S = \frac{1-r^{n+1}}{1-r}$</p>
+<p class="p7"><br /></p>
+<p class="p6">Entonces, con la serie geométrica $1+2+2^2 + 2^3 \dots + 2^{p-1}$, tenemos</p>
+<p class="p7"><br /></p>
+<p class="p6">$1+2+2^2 + 2^3 \dots + 2^{p-1} = \frac{1-2^p}{1-2} = 2^p-1$</p>
+<p class="p7"><br /></p>
+<p class="p6">Entonces,</p>
+<p class="p7"><br /></p>
+<p class="p6">$\sum_{k \in \: div(2^{p-1}*M_p)} k = (2^p-1)+M_p(2^p-1) = (2^p-1)(1+M_p) = (2^p-1)*2^p = M_p*2^p</p>
+<p class="p7"><br /></p>
+<p class="p6">Finalmente, restamos</p>
+<p class="p7"><br /></p>
+<p class="p6">$M_p*2^p - (2^{p-1}*M_p) = 2^{p-1}*M_p(2-1) = 2^{p-1}*M_p$</p>
+<p class="p7"><br /></p>
+<p class="p6">En la otra clase...</p>
+<p class="p7"><br /></p>
+<p class="p6">Algoritmo de Euclides</p>
+<p class="p6">Máximo común divisor</p>
+<p class="p6">mínimo común múltiplo</p>
+<p class="p7"><br /></p>
+<p class="p7"><br /></p>
+<p class="p4"><b>Hoja de Trabajo</b></p>
+<p class="p7"><br /></p>
+<p class="p6"><b>1. Pelotón de 12 soldados puede marchar en 6 distintas formaciones:</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>12x1<span class="Apple-tab-span">	</span>1x12</p>
+<p class="p6"><span class="Apple-tab-span">	</span>6x2<span class="Apple-tab-span">	</span>2x6</p>
+<p class="p6"><span class="Apple-tab-span">	</span>4x3<span class="Apple-tab-span">	</span>3x4</p>
+<p class="p7"><br /></p>
+<p class="p6">¿ Cuáles son los pelotones más pequeños que pueden marchar en 8,12,72 distintas formaciones?</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>2. Qué entero o enteros n&lt;= 100 tiene el \tau(n) más grande.</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6">NOTA:<span class="Apple-converted-space">  </span>Tratar de usar ambos enfoques, teórico y computacional (sage!)</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>3. Encuentre los enteros más pequeños que cumplan con<span class="Apple-converted-space"> </span></b></p>
+<p class="p6"><span class="Apple-tab-span">	</span>$\tau(n) = 14$</p>
+<p class="p6"><span class="Apple-tab-span">	</span>$\tau(n) = 18$</p>
+<p class="p6"><span class="Apple-tab-span">	</span>$\tau(n) = 100$</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>4. En el problema pitagórico</b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span>z^2 = x^2 + y^2</b></p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>a) meustre que x,y NO pueden ser ambos pares</p>
+<p class="p6"><span class="Apple-tab-span">	</span>b) muestre que x,y no pueden ser ambos impares.</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>5.<span class="Apple-converted-space"> </span></b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span>a) Si n es par, ¿Qué puede decir de n^2?</b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span>b) Si n es impar, ¿qué puede decir de n^2?</b></p>
+<p class="p7"><br /></p>
+<p class="p6"><b>6. Encuentre el valor de x al ejecutar lo siguiente:</b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span></b>a) x &lt;- 0</p>
+<p class="p6"><b><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></b>for I = 1 to n do</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>fo j=1 to n do</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>x &lt;- x + 1</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>b) Cuántas veces se evalua</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>x&lt;- x+1 ?</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>for I = 1 to n do</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>for j to i/2 do<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>NOTA: i/2 ~= mayor entero</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>x &lt;- x +1</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>7.<span class="Apple-converted-space"> </span></b></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span>a) Muestre que 2 es factor de n^2 - n</b></p>
+<p class="p6"><span class="Apple-tab-span">	</span><b>b) Muestre que 3 es factor n^3 - n</b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6"><b><span class="Apple-tab-span">	</span></b>NOTA: Otra forma de pensar en ésto es pensar "n^2-n es divisibile por 2", etc.</p>
+<p class="p7"><br /></p>
+<p class="p6"><b>8 . Compruebe que el cuadrado de todo entero par es de la forma (8m+1), $m \in \mathbb{Z}$</b></p>
+<p class="p7"><br /></p>
+<p class="p6"><b>9. Euler propuso la función $E: \mathbb{N} -&gt; \mathbb{N} E(n) = n^2-n + 41 $ y observó que obtenía impares para $0 &lt;= n &lt;= 40$<span class="Apple-converted-space"> </span></b></p>
+<p class="p7"><b></b><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>a) E(41) ¿es primo o compuesto?</p>
+<p class="p6"><span class="Apple-tab-span">	</span>b) En sage compruebe la observación de Euler, o $E(0), E(1), \dots, E(40) $ son primos.</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>Bonus: Hágalo en 2 líneas de código</p>
+<p class="p6"><span class="Apple-tab-span">	</span>Bonus*: Hágalo en 1 línea de código</p>
+<p class="p7"><br /></p>
+<p class="p6"><span class="Apple-tab-span">	</span>NOTA:</p>
+<p class="p6"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>Comprensión de listas y Lambda?</p>
+<p class="p7"><b></b><br /></p>
+<p class="p6"><b>10. Cierto o no:</b></p>
+<p class="p6"><b>a)<span class="Apple-tab-span">	</span></b>$F_n$ es primo si $n$ es primo</p>
+<p class="p7"><br /></p>
+<p class="p6">Desde $F_n$ es el número de Fibonacci.</p>
+<p class="p7"><br /></p>
+<p class="p6">pruebe:</p>
+<p class="p6"><b>b) <span class="Apple-tab-span">	</span></b>$F_n$ es par si &amp; sólos: 3 divide a n.</p>
+<p class="p7"><b></b><br /></p>
+<p class="p7"><b><span class="Apple-tab-span">	</span></b></p>
+<p class="p7"><br /></p>
+</body>
+</html>

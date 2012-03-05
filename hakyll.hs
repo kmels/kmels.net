@@ -22,18 +22,23 @@ main = hakyll $ do
     -- Compress CSS
     match "css/*" $ do
         route   idRoute
-        compile compressCssCompiler
-        
-    -- static files
-    match "robots.txt" file
-	
-    -- Images
-    match "images/*" $ do
+        compile compressCssCompiler        
+      
+    -- Copy static files, list of glob's doesn't work now, leaving several blocks
+    match "robots.txt" $ do
         route   idRoute
     	compile copyFileCompiler
-
+    
+    match "images/*" $ do
+      route   idRoute
+      compile copyFileCompiler
+      
+    match "files/*" $ do
+      route   idRoute
+      compile copyFileCompiler
+      
     -- Render posts
-    match "posts/*" $ do
+    match "posts/*/*" $ do
         route   $ setExtension ".html"
         compile $ articleCompiler
             >>> applyTemplateCompiler "templates/post.html"
@@ -44,21 +49,28 @@ main = hakyll $ do
     match "posts.html" $ route idRoute
     create "posts.html" $ constA mempty
         >>> arr (setField "title" "All posts")
-        >>> requireAllA "posts/*" addPostList
+        >>> requireAllA "posts/*/*" addPostList
         >>> renderTagsField "prettytags" (fromCapture "tags/*")
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
+        >>> relativizeUrlsCompiler 
 
     -- Index
-    match "index.html" $ route idRoute
+    match "index.markdown" $ do
+      route $ setExtension ".html"
+      compile $ articleCompiler
+       -- >>> arr (setField "title" "All posts")
+        >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
+      
+    {-match "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "Personal Home Page of Carlos Lopez-Camey")
         >>> requireA "tags" (setFieldA "tags" (renderTagList'))
         >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . sortByBaseName) >>> addPostList)
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
+        >>> relativizeUrlsCompiler -}
 
     -- Tags
     create "tags" $

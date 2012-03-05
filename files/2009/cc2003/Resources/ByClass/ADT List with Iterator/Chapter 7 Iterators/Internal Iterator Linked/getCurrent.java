@@ -1,0 +1,1 @@
+public Object getCurrent() throws NoSuchElementException{	if (hasCurrent())		return currentNode.data; // or return currentNode.getData()	else		throw new NoSuchElementException("getCurrent(): " + 	                                 "no current entry");} // end getCurrent

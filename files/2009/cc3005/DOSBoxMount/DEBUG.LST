@@ -1,0 +1,788 @@
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 1
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+      1				     ;Universidad del Valle de Guatemala
+      2				     ;Departamento de Computación
+      3				     ;Introducción a los Sistemas de Computación
+      4
+      5				     ;Bidkar Alexander Pojoy Corzo
+      6				     ;02162
+      7
+      8				     ;Proyecto No. 1
+      9
+     10				     ;DESPLIEGUE DEL CONTENIDO DE LOS SEGMENTOS	DEL PROCESADOR
+     11
+     12				     ;El problema consiste en desplegar	los segmentos del procesador que el ;usuario elija.  Para   +
+     13				     esto se despliega un menú que le pide al usuario ;teclear las siguientes teclas para los	    +
+     14				     respectivos segmentos
+     15
+     16				     ;F1. CS
+     17				     ;F2. DS
+     18				     ;F3. SS
+     19				     ;F4. DS
+     20				     ;F5. QUIT
+     21
+     22				     ;El usuario al presionar cualquiera de estas teclas, la opción elegida ;será ejecutada.  NO se +
+     23				     aceptan otras teclas, el resultado	de oprimir de ;otras teclas, es	un BIP del computador.
+     24
+     25				     ;Al seleccionar un	segmento específico, se	podrá avanzar a	través de ;cuatro páginas diferentes+
+     26				     que muestran los contenidos de los	segmentos ;con las teclas de Avance de Pagina y	Retroceso de+
+     27				     Pagina.  Sólo es ;posible ver los registros en cuatro pantallazos distintos.
+     28
+     29				     ;Ya en el despliegue del contenido	de cualquier segmento, se podrá	;regresar el menú principal +
+     30				     al	presionar F6.
+     31
+     32				     ;Para Salir del programa, sitúese en el menú principal y presione F5.
+     33
+     34	0000			     .MODEL LARGE
+     35	0000			     .STACK 200H
+     36
+     37				     ;VARIABLES
+     38				     ;Servirán para el despliegue del contenido	del segmento
+     39
+     40	0000			     .DATA
+     41
+     42	0000  0020 0024		     SEGMENTO	     DW	     ' ','$'
+     43	0004  ??		     FIRST8BITS	     DB	     ?
+     44	0005  ??		     SEC8BITS	     DB	     ?
+     45	0006  ????		     DIRECCION	     DW	     ?
+     46	0008  ????		     DESPLAZAMIENTO  DW	     ?
+     47	000A  ??		     DATA	     DB	     ?
+     48	000B  20 20 24		     BLANCO	     DB	     '	','$'
+     49	000E  0D 0A 24		     INTRO	     DB	     0DH,0AH,'$'
+     50	0011  ????		     TEMPORAL	     DW	     ?
+     51	0013  ??		     CONTADOR	     DB	     ?
+     52
+     53				     ;Variables	Varias,	para despliegue	de menús y mensajes
+     54
+     55	0014  50 52 45 53 53 20	46+  TITLE0  DB'PRESS F6 TO RETURN TO MAIN MENU',0DH,0AH,'AVPAG	TO	       NEXT PAG',0DH,0AH,   +
+     56	      36 20 54 4F 20 52	45+  'REPAG TO LAST PAG',0DH,0AH,'$'
+     57	      54 55 52 4E 20 54	4F+
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 2
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+     58	      20 4D 41 49 4E 20	4D+
+     59	      45 4E 55 0D 0A 41	56+
+     60	      50 41 47 20 54 4F	20+
+     61	      20 20 20 20 20 20	20+
+     62	      20 20 20 20 20 4E	45+
+     63	      58 54 20 50 41 47	0D+
+     64	      0A 52 45 50 41 47	20+
+     65	      54 4F 20 4C 41 53	54+
+     66	      20 50 41 47 0D 0A	24
+     67	0068  20 20 44 49 52 45	43+  TITLE1	     DB	     '	DIRECCION      ','$'
+     68	      43 49 4F 4E 20 20	20+
+     69	      20 20 20 24
+     70	007A  20 20 20 20 20 20	20+  TITLE2	     DB	     '		HEXADECIMAL	   ','$'
+     71	      20 20 20 48 45 58	41+
+     72	      44 45 43 49 4D 41	4C+
+     73	      20 20 20 20 20 20	20+
+     74	      20 24
+     75	0098  20 20 20 20 20 20	20+  TITLE3	     DB	     '		     ASCII   ','$'
+     76	      20 20 20 20 20 20	20+
+     77	      20 41 53 43 49 49	20+
+     78	      20 20 24
+     79
+     80	00B0  4D 65 6E FA 0D 0A	0D+  MENU    DB	     'Menú',0DH,0AH,0DH,0AH,'F1.  CS',0DH,0AH,'F2.  DS',0DH,0AH,'F3.  ES',0DH,0AH,  +
+     81	      0A 46 31 2E 20 20	43+  'F4.  SS',0DH,0AH,'F5.  QUIT',0DH,0AH,'$'
+     82	      53 0D 0A 46 32 2E	20+
+     83	      20 44 53 0D 0A 46	33+
+     84	      2E 20 20 45 53 0D	0A+
+     85	      46 34 2E 20 20 53	53+
+     86	      0D 0A 46 35 2E 20	20+
+     87	      51 55 49 54 0D 0A	24
+     88
+     89	00E8  0D 0A 50 72 65 73	73+  MESSAGE	     DB	     0DH,0AH,'Press Key	to acces....',0DH,'$'
+     90	      20 4B 65 79 20 74	6F+
+     91	      20 61 63 63 65 73	2E+
+     92	      2E 2E 2E 0D 24
+     93
+     94	0102  00		     BANDERA	     DB	     0
+     95
+     96				     ;PROCEDIMIENTOS
+     97	0103			     .CODE
+     98				     ;_______________________________________________________________________
+     99	0000			     TOHEXA PROC FAR	     ;Procedimiento que	convierte
+    100								     ;Binario a	HEXADECIMAL de dos digitos
+    101	0000  51			     PUSH CX	     ;Guardar datos importantes
+    102	0001  52			     PUSH DX
+    103
+    104	0002  B1 04			     MOV CL,4		     ;Cada 4 digitos binarios hay un hexadecimal
+    105	0004  B5 04			     MOV CH,4		     ;Hay 4 digitos hexadecimales en una word
+    106	0006  A0 000Ar			     MOV AL,DATA	     ;DATA es lo que se	va a convertir
+    107	0009  B4 00			     MOV AH,0
+    108
+    109	000B			     HEXA:
+    110
+    111	000B  D3 C0			     ROL AX,CL		     ;Rotacion de 4 bits
+    112	000D  50			     PUSH AX	     ;Guardar para proximos calculos
+    113
+    114	000E  80 FD 02			     CMP CH,2		     ;Solo quiero desplegar 2 de los digitos
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 3
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    115	0011  7F 10			     JG	SEGUIR
+    116
+    117	0013  24 0F			     AND AL,0FH		     ;Borrar la	parte baja
+    118	0015  04 30			     ADD AL,30H		     ;Convertir	a numero
+    119	0017  3C 39			     CMP AL,'9'		     ;Si es numero
+    120	0019  76 02			     JBE DESPLEGAR   ;desplegar
+    121	001B  04 07			     ADD AL,7		     ;de lo contrario, convertir a letra
+    122
+    123	001D			     DESPLEGAR:
+    124
+    125	001D  B4 06			     MOV AH,6		     ;Despliegue de dato hexadecimal
+    126	001F  8A D0			     MOV DL,AL
+    127	0021  CD 21			     INT 21H
+    128
+    129	0023			     SEGUIR:
+    130	0023  58			     POP AX	     ;Recuperar	anterior
+    131
+    132	0024  FE CD			     DEC CH	     ;Decrementar el n£mero de digitos
+    133	0026  75 E3			     JNZ HEXA		     ;no desplegados, si no es cero seguir
+    134
+    135	0028  B4 06			     MOV AH,6		     ;Desplegar	espacio
+    136	002A  B2 20			     MOV DL,' '
+    137	002C  CD 21			     INT 21H
+    138
+    139	002E  5A			     POP DX	     ;Recuperar	datos importantes
+    140	002F  59			     POP CX
+    141
+    142	0030  CB			     RET		     ;Regresar a principal
+    143
+    144	0031			     ENDP TOHEXA
+    145				     ;_____________________________________________________________________
+    146
+    147	0031			     DIRTOHEXA PROC FAR	     ;Procedimiento que	transforma direcci¢n
+    148								     ;a	hexadecimal
+    149	0031  51			     PUSH CX	     ;Guardar datos importantes
+    150	0032  52			     PUSH DX
+    151
+    152	0033  B1 04			     MOV CL,4		     ;Cada 4 digitos binarios hay un hexadecimal
+    153	0035  B5 04			     MOV CH,4		     ;Hay 4 digitos hexadecimales en una word
+    154	0037  A1 0006r			     MOV AX,DIRECCION	     ;DIRECCION	es la que se convierte
+    155
+    156	003A			     HEXAD:
+    157
+    158	003A  D3 C0			     ROL AX,CL
+    159	003C  50			     PUSH AX
+    160
+    161	003D  24 0F		     AND AL,0FH	     ;Hay que desplegar	todos los dígitos ;hexadecimales
+    162	003F  04 30			     ADD AL,30H		     ;Convertir	a número
+    163	0041  3C 39			     CMP AL,'9'		     ;Si es numero
+    164	0043  76 02			     JBE DESPLEGARD	     ;Desplegar
+    165	0045  04 07			     ADD AL,7		     ;De lo contrario convertir	a letra
+    166
+    167	0047			     DESPLEGARD:
+    168
+    169	0047  B4 06			     MOV AH,6		     ;Desplegar
+    170	0049  8A D0			     MOV DL,AL
+    171	004B  CD 21			     INT 21H
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 4
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    172
+    173	004D  58			     POP AX	     ;Recuperar	dato anterior
+    174
+    175	004E  FE CD			     DEC CH	     ;Decrementar digitos no desplegados
+    176	0050  75 E8			     JNZ HEXAD		     ;Si no es cero seguir el ciclo
+    177
+    178	0052  5A			     POP DX	     ;Recuperar	datos importantes
+    179	0053  59			     POP CX
+    180
+    181	0054  CB			     RET		     ;Regresar al principal
+    182
+    183	0055			     ENDP DIRTOHEXA
+    184				     ;_______________________________________________________________________
+    185	0055			     SHOWASCCI PROC FAR	     ;Procedimiento que	despliega
+    186								     ;dato almacenado en una direccion
+    187
+    188	0055  80 3E 000Ar 20	     CMP DATA,20H	     ;Si DATA es menor que 20H
+    189	005A  7E 0A		     JLE UNO		     ;ir a UNO
+    190
+    191	005C  B4 06		     MOV AH,6			     ;Desplegar	data
+    192	005E  8A 16 000Ar	     MOV DL,DATA
+    193	0062  CD 21		     INT 21H
+    194	0064  EB 06		     JMP DOS		     ;ir a DOS
+    195
+    196	0066			     UNO:
+    197	0066  B4 06			     MOV AH,6		     ;Despliega	un punto
+    198	0068  B2 2E			     MOV DL,'.'
+    199	006A  CD 21			     INT 21H
+    200
+    201	006C			     DOS:
+    202	006C  B4 06			     MOV AH,6		     ;Despliega	espacio
+    203	006E  B2 20			     MOV DL,' '
+    204	0070  CD 21			     INT 21H
+    205
+    206	0072  CB		     RET			     ;Regresar a principal
+    207
+    208	0073			     ENDP SHOWASCCI
+    209				     ;_______________________________________________________________________
+    210
+    211	0073			     SHOWDIR PROC FAR		     ;Procedimiento que	despliegua
+    212								     ;direccion	del desplazamiento en HEXADECIMAL
+    213
+    214	0073  B4 06		     MOV AH,6			     ;Despliega	dos puntos
+    215	0075  B2 3A		     MOV DL,':'
+    216	0077  CD 21		     INT 21H
+    217
+    218	0079  8B 3E 0008r	     MOV DI,DESPLAZAMIENTO   ;Despliega	dirección
+    219	007D  89 3E 0006r	     MOV DIRECCION,DI
+    220	0081  0E E8 FFAC	     CALL DIRTOHEXA
+    221
+    222	0085  CB		     RET			     ;Regresar a principal
+    223
+    224	0086			     ENDP SHOWDIR
+    225				     ;_______________________________________________________________________
+    226	0086			     LIMPIARPANTALLA PROC FAR	     ;Procedimiento que	limpia pantalla
+    227
+    228	0086  50		     PUSH AX			     ;Guardar datos importantes
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 5
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    229	0087  53		     PUSH BX
+    230	0088  51		     PUSH CX
+    231	0089  52		     PUSH DX
+    232
+    233	008A  B8 0600		     MOV AX,0600H		     ;Recorrer pantalla
+    234	008D  B7 07		     MOV BH,07H				     ;Con color	negro
+    235
+    236	008F  B9 0000		     MOV CX,0000H		     ;Tamaño de	la pantalla
+    237	0092  BA 184F		     MOV DX,184FH
+    238	0095  CD 10		     INT 10H
+    239
+    240	0097  5A		     POP DX			     ;Recuperar	datos importantes
+    241	0098  59		     POP CX
+    242	0099  5B		     POP BX
+    243	009A  58		     POP AX
+    244
+    245	009B  CB		     RET				     ;Regresar a principal
+    246	009C			     ENDP LIMPIARPANTALLA
+    247
+    248
+    249
+    250
+    251
+    252				     ;_______________________________________________________________________
+    253	009C			     MAKETITLE PROC FAR		     ;Procedimiento que	despliega
+    254									     ;Instrucciones y encabezado
+    255	009C  50		     PUSH AX			     ;Guardar datos importantes
+    256	009D  53		     PUSH BX
+    257	009E  51		     PUSH CX
+    258	009F  52		     PUSH DX
+    259	00A0  B4 09		     MOV AH,09H				     ;Despliega	instrucciones
+    260	00A2  BA 0014r		     LEA DX,TITLE0
+    261	00A5  CD 21		     INT 21H
+    262	00A7  BA 000Er		     LEA DX,INTRO		     ;ENTER
+    263	00AA  CD 21		     INT 21H
+    264	00AC  BA 0068r		     LEA DX,TITLE1		     ;DIRECCION
+    265	00AF  CD 21		     INT 21H
+    266	00B1  BA 007Ar		     LEA DX,TITLE2		     ;HEXADECIMAL
+    267	00B4  CD 21		     INT 21H
+    268	00B6  BA 0098r		     LEA DX,TITLE3		     ;ASCII
+    269	00B9  CD 21		     INT 21H
+    270									   ;2 INTRO
+    271	00BB  B2 0Er		     MOV DL,OFFSET INTRO
+    272	00BD  CD 21		     INT 21H
+    273	00BF  CD 21		     INT 21H
+    274
+    275	00C1  5A		     POP DX			     ;Recuperar	datos importantes
+    276	00C2  59		     POP CX
+    277	00C3  5B		     POP BX
+    278	00C4  58		     POP AX
+    279
+    280	00C5  CB		     RET				     ;Regresar a principal
+    281
+    282	00C6			     ENDP MAKETITLE
+    283				     ;_______________________________________________________________________
+    284	00C6			     SHOWMENU PROC FAR			     ;Procedimiento que	despliega menu
+    285									     ;principal
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 6
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    286
+    287	00C6  0E E8 FFBC		     CALL LIMPIARPANTALLA    ;Limpia pantalla
+    288	00CA  50			     PUSH AX		     ;Guarda datos importantes
+    289	00CB  53			     PUSH BX
+    290	00CC  51			     PUSH CX
+    291	00CD  52			     PUSH DX
+    292
+    293	00CE  B4 09			     MOV AH,09H			     ;Despliega	men£
+    294	00D0  BA 00B0r			     LEA DX,MENU
+    295	00D3  CD 21			     INT 21H
+    296
+    297									     ;Despliega	mensaje	de petici¢n
+    298	00D5  BA 00E8r			     LEA DX,MESSAGE
+    299	00D8  CD 21			     INT 21H
+    300
+    301	00DA  5A			     POP DX		     ;Recuperar	datos importantes
+    302	00DB  59			     POP CX
+    303	00DC  5B			     POP BX
+    304	00DD  58			     POP AX
+    305
+    306	00DE  CB			     RET			     ;Regresar principal
+    307
+    308	00DF			     ENDP SHOWMENU
+    309				     ;_______________________________________________________________________
+    310	00DF			     BIP PROC FAR		     ;Procedimiento que	hace BIP
+    311
+    312	00DF  50			     PUSH AX
+    313	00E0  53			     PUSH BX
+    314	00E1  51			     PUSH CX
+    315	00E2  52			     PUSH DX
+    316	00E3  B4 06			     MOV AH,6			     ;Hacer BIP
+    317	00E5  B2 07			     MOV DL,07H
+    318	00E7  CD 21			     INT 21H
+    319
+    320	00E9  5A			     POP DX
+    321	00EA  59			     POP CX
+    322	00EB  5B			     POP BX
+    323	00EC  58			     POP AX
+    324
+    325	00ED  CB			     RET		     ;Regresar
+    326	00EE			     ENDP BIP
+    327				     ;_______________________________________________________________________
+    328
+    329	00EE			     ANALIZESCROLL PROC	FAR  ;Procedimiento que	analiza	tecla presionada
+    330								     ;para ejecutar el scroll de los datos
+    331								     ;adelante o atrás
+    332
+    333	00EE  C6 06 0013r 00	     MOV CONTADOR,0		     ;empezar nuevas 8 lineas
+    334
+    335								     ;Esperar a	que presione alguna tecla
+    336	00F3  B4 10		     READ:   MOV AH,10H
+    337	00F5  CD 16			     INT 16H
+    338
+    339	00F7  80 FC 40			     CMP AH,40H		     ;Si es F6 Salir
+    340	00FA  74 4A			     JE	BYE
+    341
+    342	00FC  3C 00			     CMP AL,00H		     ;Si es tecla no especial
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 7
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    343	00FE  74 F3			     JE	READ	     ;Pedir de nuevo tecla
+    344
+    345	0100  3C E0			     CMP AL,0E0H	     ;Si son teclas duplicadas
+    346	0102  74 06			     JE	NOTBIP		     ;NO BIP
+    347	0104			     SIBIP:
+    348	0104  0E E8 FFD7		     CALL BIP		     ;Hacer BIP
+    349	0108  EB E9			     JMP READ		     ;Regresar a leer
+    350	010A			     NOTBIP:
+    351
+    352	010A  80 FC 49			     CMP AH,49H		     ;Si es REPAG
+    353	010D  74 07			     JE	RETROCESO    ;Retroceder datos
+    354
+    355	010F  80 FC 51			     CMP AH,51H		     ;Si es AVPAG
+    356	0112  74 1C			     JE	AVANCE		     ;Avanzar datos
+    357
+    358	0114  EB DD			     JMP READ		     ;Si no es ninguna de las anteriores
+    359								     ;volver a leer
+    360
+    361								     ;Hay que restarle 060H en este programa
+    362	0116			     RETROCESO:
+    363
+    364	0116  83 2E 0008r 60		     SUB DESPLAZAMIENTO,060H ;Restar
+    365	011B  83 3E 0008r 00		     CMP DESPLAZAMIENTO,0    ;Si es menor que cero
+    366	0120  7E 02			     JLE MIN		     ;Ir a MIN
+    367
+    368	0122  EB 22			     JMP BYE		     ;Salir
+    369	0124			     MIN:
+    370	0124  C7 06 0008r 0000		     MOV DESPLAZAMIENTO,0    ;Regresar a 0
+    371	012A  0E E8 FFB1		     CALL BIP			     ;Hacer BIP
+    372	012E  EB 16			     JMP BYE		     ;Salir
+    373
+    374	0130			     AVANCE:
+    375	0130  81 3E 0008r 00C0		     CMP DESPLAZAMIENTO,0C0H ;Compara con 0C0H
+    376	0136  74 02			     JE	MAX		     ;Si es igual, ir a	MAX
+    377	0138  EB 0C			     JMP BYE		     ;Salir
+    378	013A			     MAX:
+    379	013A  C7 06 0008r 0090		     MOV DESPLAZAMIENTO,90H  ;Regresar a 90h
+    380	0140  0E E8 FF9B		     CALL BIP			     ;Hacer BIP
+    381	0144  EB 00			     JMP BYE		     ;Salir
+    382
+    383	0146			     BYE:
+    384	0146  CB			     RET		     ;Salir
+    385	0147			     ENDP ANALIZESCROLL
+    386				     ;_______________________________________________________________________
+    387	0147			     SHOWDATA PROC FAR			     ;Procedimiento que	llama a	todos los demás
+    388									     ;Despliega	los datos pedidos
+    389
+    390	0147  C7 06 0008r 0000		     MOV DESPLAZAMIENTO, 0000H	     ;Iniciar desplazamiento en	0
+    391	014D  BB 0000			     MOV BX,0				     ;Base siempre es 0
+    392	0150  C6 06 0013r 00		     MOV CONTADOR,0		     ;Contador de lineas a 0
+    393
+    394	0155  0E E8 FF43		     CALL MAKETITLE		     ;Desplegar	t¡tulo
+    395	0159			     REPETIR:
+    396	0159  81 3E 0008r 00FF		     CMP DESPLAZAMIENTO, 0FFH	     ;Comparar con 0ffh
+    397	015F  73 78			     JAE FIN			     ;Si es mayor, salir
+    398
+    399	0161  80 3E 0013r 08		     CMP CONTADOR,8		     ;Contador>=8?
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 8
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    400	0166  7C 11			     JL	DIRE			     ;NO, ir a DIRE
+    401
+    402	0168  0E E8 FF82		     CALL ANALIZESCROLL		     ;Esperar tecla y luego analizarla
+    403	016C  80 FC 40			     CMP AH,40H			     ;Salir con	F6
+    404	016F  74 68			     JE	FIN
+    405	0171  0E E8 FF11		     CALL LIMPIARPANTALLA	     ;Si ingreso tecla valida CLRSCR()
+    406	0175  0E E8 FF23		     CALL MAKETITLE		     ;Desplegar	t¡tulo
+    407
+    408	0179				     DIRE:
+    409
+    410	0179  8B 3E 0000r			     MOV DI,SEGMENTO	     ;Desplegar	direcci¢n del segmento
+    411	017D  89 3E 0006r			     MOV DIRECCION,DI
+    412	0181  0E E8 FEAC			     CALL DIRTOHEXA
+    413
+    414	0185  B4 06				     MOV AH,6			     ;Desplegar	:
+    415	0187  B2 3A				     MOV DL,':'
+    416	0189  CD 21				     INT 21H
+    417
+    418	018B  8B 3E 0008r			     MOV DI,DESPLAZAMIENTO   ;Desplegar	desplazamiento inicial
+    419	018F  89 3E 0006r			     MOV DIRECCION,DI
+    420	0193  0E E8 FE9A			     CALL DIRTOHEXA
+    421
+    422	0197  83 06 0008r 05			     ADD DESPLAZAMIENTO,5    ;Desplegar	desplazamiento final
+    423	019C  0E E8 FED3			     CALL SHOWDIR
+    424	01A0  83 2E 0008r 05			     SUB DESPLAZAMIENTO,5
+    425
+    426	01A5  B4 09				     MOV AH,09H			     ;Desplegar	espacios en blanco
+    427	01A7  BA 000Br				     LEA DX,BLANCO
+    428	01AA  CD 21				     INT 21H
+    429
+    430	01AC  50				     PUSH AX		     ;TEMPORAL<=DESPLAZAMIENTO
+    431	01AD  A1 0008r				     MOV AX,DESPLAZAMIENTO
+    432	01B0  A3 0011r				     MOV TEMPORAL,AX
+    433	01B3  58				     POP AX
+    434
+    435	01B4  B9 0000				     MOV CX,0			     ;Regresar contador	de datos a 0
+    436	01B7  0E E8 0055			     CALL NEXTNHEXA	     ;Desplegar	siguientes n datos
+    437
+    438	01BB  B4 06				     MOV AH,6
+    439	01BD  B2 20				     MOV DL,' '			     ;Desplegar	espacio
+    440	01BF  CD 21				     INT 21H
+    441
+    442	01C1  B9 0000				     MOV CX,0			     ;Regresar contador	de datos a 0
+    443	01C4  0E E8 007E			     CALL NEXTNASCII		     ;Desplegar	los datos en ASCII
+    444
+    445	01C8  B4 09				     MOV AH,09H
+    446	01CA  BA 000Er				     MOV DX,OFFSET INTRO     ;ENTER
+    447	01CD  CD 21				     INT 21H
+    448
+    449	01CF  FF 06 0008r		     INC DESPLAZAMIENTO		     ;Incrementar desplazamiento
+    450	01D3  FE 06 0013r		     INC CONTADOR		     ;Incrementar n£mero de lineas
+    451	01D7  EB 80			     JMP REPETIR			     ;Repetir ciclo
+    452	01D9			     FIN:
+    453	01D9  CB			     RET			     ;Regresar a principal
+    454
+    455	01DA			     ENDP SHOWDATA
+    456				     ;_______________________________________________________________________
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 9
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    457				     OBTENERDATA MACRO A	     ;Macro que	lee datos
+    458					     MOV AX,A:[BX][DI]		     ;Obtener datos
+    459				     ENDM				     ;Fin Macro
+    460				     ;_____________________________________________________________________
+    461	01DA			     ANALISIS PROC FAR		     ;Procedimiento que	analiza	opci¢n
+    462								     ;pedida por el usuario
+    463
+    464	01DA  80 3E 0102r 01	     OPT1:   CMP BANDERA,1	     ;F1
+    465	01DF  74 02			     JE	A1
+    466	01E1  EB 05			     JMP OPT2
+    467	01E3				     A1:
+    468						     OBTENERDATA CS  ;CODE SEGMENT
+1   469	01E3  2E: 8B 01			     MOV AX,CS:[BX][DI]		     ;Obtener datos
+    470	01E6  EB 27				     JMP ADIOS
+    471	01E8  80 3E 0102r 02	     OPT2:   CMP BANDERA,2	     ;F2
+    472	01ED  74 02			     JE	A2
+    473	01EF  EB 04			     JMP OPT3
+    474	01F1				     A2:
+    475						     OBTENERDATA DS  ;DATA SEGMENT
+1   476	01F1  8B 01			     MOV AX,DS:[BX][DI]		     ;Obtener datos
+    477	01F3  EB 1A				     JMP ADIOS
+    478	01F5  80 3E 0102r 03	     OPT3:   CMP BANDERA,3	     ;F3
+    479	01FA  74 02			     JE	A3
+    480	01FC  EB 05			     JMP OPT4
+    481	01FE				     A3:
+    482						     OBTENERDATA ES  ;EXTRA SEGMENT
+1   483	01FE  26: 8B 01			     MOV AX,ES:[BX][DI]		     ;Obtener datos
+    484	0201  EB 0C				     JMP ADIOS
+    485	0203  80 3E 0102r 04	     OPT4:   CMP BANDERA,4	     ;F4
+    486	0208  74 00			     JE	A4
+    487	020A				     A4:
+    488						     OBTENERDATA SS  ;STACK SEGMENT
+1   489	020A  36: 8B 01			     MOV AX,SS:[BX][DI]		     ;Obtener datos
+    490	020D  EB 00				     JMP ADIOS
+    491	020F			     ADIOS:
+    492	020F  CB			     RET		     ;Regresar
+    493	0210			     ENDP ANALISIS
+    494				     ;_____________________________________________________________________
+    495	0210			     NEXTNHEXA PROC FAR			     ;Procedimiento que	despliegua
+    496										     ;los siguientes datos
+    497
+    498	0210  8B 3E 0008r	     OTRAVEZ:	     MOV DI,DESPLAZAMIENTO   ;Desplazmiento inicial
+    499	0214  0E E8 FFC2			     CALL ANALISIS	     ;Analisis de opci¢n pedida	por
+    500										     ;usuario
+    501	0218  88 26 0004r			     MOV FIRST8BITS,AH		     ;Primer BYTE
+    502	021C  A2 0005r				     MOV SEC8BITS,AL	     ;Segundo BYTE
+    503
+    504	021F  8A 36 0004r			     MOV DH,FIRST8BITS
+    505	0223  88 36 000Ar			     MOV DATA,DH
+    506	0227  0E E8 FDD5			     CALL TOHEXA	     ;Desplegar	Primer Byte en HEXA
+    507
+    508	022B  8A 36 0005r			     MOV DH,SEC8BITS
+    509	022F  88 36 000Ar			     MOV DATA,DH
+    510	0233  0E E8 FDC9			     CALL TOHEXA	     ;Desplegar	Segundo	Byte en	HEXA
+    511
+    512	0237  FF 06 0008r			     INC DESPLAZAMIENTO	     ;Incrementar desplazamiento
+    513	023B  41				     INC CX		     ;Incrementar contador
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 10
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    514	023C  83 F9 06				     CMP CX,6		     ;Para desplegar 2*6 HEXADECIMALES
+    515	023F  7C CF				     JL	OTRAVEZ		     ;Si no ha terminado, OTRAVEZ
+    516
+    517	0241  FF 0E 0008r			     DEC DESPLAZAMIENTO	     ;Decrementar para ajustar despliegue
+    518	0245  CB			     RET				     ;Regresar principal
+    519
+    520	0246			     ENDP NEXTNHEXA
+    521				     ;_______________________________________________________________________
+    522	0246			     NEXTNASCII	PROC FAR		     ;Procedimiento que	despliegua los
+    523										     ;siguientes datos en ASCII
+    524	0246				     AGAIN:
+    525	0246  8B 3E 0011r			     MOV DI,TEMPORAL	     ;Desplazamiento inicial
+    526	024A  0E E8 FF8C			     CALL ANALISIS	     ;Analiza opci¢n ingresada por usuario
+    527
+    528	024E  88 26 0004r			     MOV FIRST8BITS,AH	     ;Primer BYTE
+    529	0252  A2 0005r				     MOV SEC8BITS,AL	     ;Segundo BYTE
+    530
+    531	0255  8A 36 0004r			     MOV DH,FIRST8BITS
+    532	0259  88 36 000Ar			     MOV DATA,DH
+    533	025D  0E E8 FDF4			     CALL SHOWASCCI	     ;Desplegar	Primer BYTE
+    534
+    535	0261  8A 36 0005r			     MOV DH,SEC8BITS
+    536	0265  88 36 000Ar			     MOV DATA,DH
+    537	0269  0E E8 FDE8			     CALL SHOWASCCI	     ;Desplegar	Segundo	BYTE
+    538
+    539	026D  FF 06 0011r			     INC TEMPORAL	     ;Incrementar desplazamiento
+    540	0271  41				     INC CX		     ;Ingcrementar contador
+    541	0272  83 F9 06				     CMP CX,6			     ;Desplegar	2*6 datos
+    542	0275  7C CF				     JL	AGAIN			     ;Si no ha terminado, AGAIN
+    543
+    544	0277  CB			     RET				     ;Regresar
+    545	0278			     ENDP NEXTNASCII
+    546				     ;_______________________________________________________________________
+    547	0278			     MAIN PROC FAR			     ;PROGRAMA PRINCIPAL
+    548
+    549					     .STARTUP				     ;Iniciar datos
+1   550	0278			     @Startup:
+1   551	0278  BA 0000s			     MOV     DX,@data
+1   552	027B  8E DA			     MOV     DS,DX
+1   553	027D  8C D3			     MOV     BX,SS
+1   554	027F  2B DA			     SUB     BX,DX
+1   555	0281  D1 E3			     SHL     BX,1
+1   556	0283  D1 E3			     SHL     BX,1
+1   557	0285  D1 E3			     SHL     BX,1
+1   558	0287  D1 E3			     SHL     BX,1
+1   559	0289  FA			     CLI
+1   560	028A  8E D2			     MOV     SS,DX
+1   561	028C  03 E3			     ADD     SP,BX
+1   562	028E  FB			     STI
+    563	028F  0E E8 FDF3		     CALL LIMPIARPANTALLA	     ;Limpiar pantalla
+    564	0293  0E E8 FE2F		     CALL SHOWMENU		     ;Desplegar	men£
+    565	0297			     LEER:
+    566	0297  0E E8 FDEB		     CALL LIMPIARPANTALLA	     ;Limpiar pantalla?
+    567	029B  0E E8 FE27		     CALL SHOWMENU		     ;Desplegar	men£?
+    568	029F  B4 10			     MOV AH,10H				     ;Pedir tecla
+    569	02A1  CD 16			     INT 16H
+    570	02A3  3C 00			     CMP AL,00H				     ;Si es tecla especial
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 11
+C:\DOCUME~1\BIDKAR~1\MISDOC~1\SISTEM~1\MYPROG~1\DEBUG.ASM
+
+
+
+    571	02A5  74 06			     JE	NOBIP				     ;ir a NOBIP
+    572	02A7			     YESBIP:
+    573	02A7  0E E8 FE34		     CALL BIP			     ;Hacer BIP
+    574	02AB  EB EA			     JMP LEER			     ;Pedir de nuevo tecla
+    575	02AD			     NOBIP:
+    576	02AD  80 FC 3B			     CMP AH,3BH			     ;Si es menor que F1
+    577	02B0  7C F5			     JL	YESBIP			     ;ir a YESBIP
+    578
+    579	02B2  80 FC 3F			     CMP AH,3FH			     ;Si es mayor que F5
+    580	02B5  7F F0			     JG	YESBIP			     ;ir a YESBIP
+    581	02B7  74 4D			     JE	SALIR			     ;Si es igual, salir
+    582									     ;En caso de:
+    583	02B9  80 FC 3B			     O1:     CMP AH,3BH		     ;F1
+    584	02BC  74 02				     JE	SEGCOD
+    585	02BE  EB 09				     JMP O2
+    586	02C0					     SEGCOD:
+    587	02C0  8C C8					     MOV AX,CS		     ;CODE SEGMENT
+    588	02C2  C6 06 0102r 01				     MOV BANDERA,1   ;BANDERA=1
+    589	02C7  EB 30					     JMP CONTINUAR   ;BREAK
+    590	02C9  80 FC 3C			     O2:     CMP AH,3CH			     ;F2
+    591	02CC  74 02				     JE	SEGDATA
+    592	02CE  EB 09				     JMP O3
+    593	02D0					     SEGDATA:
+    594	02D0  8C D8					     MOV AX,DS		     ;DATA SEGMENT
+    595	02D2  C6 06 0102r 02				     MOV BANDERA,2   ;BANDERA=2
+    596	02D7  EB 20					     JMP CONTINUAR   ;BREAK
+    597	02D9  80 FC 3D			     O3:     CMP AH,3DH			     ;F3
+    598	02DC  74 02				     JE	EXTRASEG
+    599	02DE  EB 09				     JMP O4
+    600	02E0					     EXTRASEG:
+    601	02E0  8C C0					     MOV AX,ES		     ;EXTRASEGMENT
+    602	02E2  C6 06 0102r 03				     MOV BANDERA,3   ;BANDERA=3
+    603	02E7  EB 10					     JMP CONTINUAR   ;BREAK
+    604	02E9  80 FC 3E			     O4:     CMP AH,3EH			     ;F4
+    605	02EC  74 02				     JE	STACKSEG
+    606	02EE  EB A7				     JMP LEER		     ;Redundante, de hecho,
+    607									     ;nunca llega aqu¡,	por si acaso
+    608	02F0					     STACKSEG:
+    609	02F0  8C D0					     MOV AX,SS		     ;STACKSEGMENT
+    610	02F2  C6 06 0102r 04				     MOV BANDERA,4   ;BANDERA=4
+    611	02F7  EB 00					     JMP CONTINUAR   ;BREAK
+    612	02F9			     CONTINUAR:
+    613	02F9  A3 0000r			     MOV SEGMENTO,AX		     ;Guardar segmento elegido
+    614	02FC  0E E8 FD86		     CALL LIMPIARPANTALLA	     ;Limpiar pantalla
+    615	0300  0E E8 FE43		     CALL SHOWDATA		     ;Desplegar	los datos pedidos
+    616	0304  EB 91			     JMP LEER				     ;Repetir el ciclo principal
+    617	0306  B4 4C		     SALIR:  MOV AH, 4CH		     ;Salir al DOS
+    618	0308  CD 21			     INT 21H
+    619	030A			     ENDP MAIN				     ;Fin Procedimiento	PRINCIPAL
+    620					  END MAIN			     ;Fin PROYECTO1
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 12
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "07/21/04"
+??FILENAME		Text   "DEBUG	"
+??TIME			Text   "21:19:18"
+??VERSION		Number 0201
+@CODE			Text   DEBUG_TEXT		   #34	#34  #97
+@CODESIZE		Text   1			   #34
+@CPU			Text   0101H
+@CURSEG			Text   DEBUG_TEXT		   #40	#97
+@DATA			Text   DGROUP			   #34	551
+@DATASIZE		Text   1			   #34
+@FILENAME		Text   DEBUG
+@MODEL			Text   5			   #34
+@STARTUP		Near   DEBUG_TEXT:0278		   #550
+@WORDSIZE		Text   2			   #40	#97
+A1			Near   DEBUG_TEXT:01E3		   465	#467
+A2			Near   DEBUG_TEXT:01F1		   472	#474
+A3			Near   DEBUG_TEXT:01FE		   479	#481
+A4			Near   DEBUG_TEXT:020A		   486	#487
+ADIOS			Near   DEBUG_TEXT:020F		   470	477  484  490  #491
+AGAIN			Near   DEBUG_TEXT:0246		   #524	 542
+ANALISIS		Far    DEBUG_TEXT:01DA		   #461	 499  526
+ANALIZESCROLL		Far    DEBUG_TEXT:00EE		   #329	 402
+AVANCE			Near   DEBUG_TEXT:0130		   356	#374
+BANDERA			Byte   DGROUP:0102		   #94	464  471  478  485  588	 595  602  610
+BIP			Far    DEBUG_TEXT:00DF		   #310	 348  371  380	573
+BLANCO			Byte   DGROUP:000B		   #48	427
+BYE			Near   DEBUG_TEXT:0146		   340	368  372  377  381  #383
+CONTADOR		Byte   DGROUP:0013		   #51	333  392  399  450
+CONTINUAR		Near   DEBUG_TEXT:02F9		   589	596  603  611  #612
+DATA			Byte   DGROUP:000A		   #47	106  188  192  505  509	 532  536
+DESPLAZAMIENTO		Word   DGROUP:0008		   #46	218  364  365  370  375	 379  390  396	418  422  424  431  449	  +
+							   498	512  517
+DESPLEGAR		Near   DEBUG_TEXT:001D		   120	#123
+DESPLEGARD		Near   DEBUG_TEXT:0047		   164	#167
+DIRE			Near   DEBUG_TEXT:0179		   400	#408
+DIRECCION		Word   DGROUP:0006		   #45	154  219  411  419
+DIRTOHEXA		Far    DEBUG_TEXT:0031		   #147	 220  412  420
+DOS			Near   DEBUG_TEXT:006C		   194	#201
+EXTRASEG		Near   DEBUG_TEXT:02E0		   598	#600
+FIN			Near   DEBUG_TEXT:01D9		   397	404  #452
+FIRST8BITS		Byte   DGROUP:0004		   #43	501  504  528  531
+HEXA			Near   DEBUG_TEXT:000B		   #109	 133
+HEXAD			Near   DEBUG_TEXT:003A		   #156	 176
+INTRO			Byte   DGROUP:000E		   #49	262  271  446
+LEER			Near   DEBUG_TEXT:0297		   #565	 574  606  616
+LIMPIARPANTALLA		Far    DEBUG_TEXT:0086		   #226	 287  405  563	566  614
+MAIN			Far    DEBUG_TEXT:0278		   #547	 620
+MAKETITLE		Far    DEBUG_TEXT:009C		   #253	 394  406
+MAX			Near   DEBUG_TEXT:013A		   376	#378
+MENU			Byte   DGROUP:00B0		   #80	294
+MESSAGE			Byte   DGROUP:00E8		   #89	298
+MIN			Near   DEBUG_TEXT:0124		   366	#369
+NEXTNASCII		Far    DEBUG_TEXT:0246		   443	#522
+NEXTNHEXA		Far    DEBUG_TEXT:0210		   436	#495
+Turbo Assembler	 Version 2.01	     07/21/04 21:19:18	    Page 13
+Symbol Table
+
+
+
+NOBIP			Near   DEBUG_TEXT:02AD		   571	#575
+NOTBIP			Near   DEBUG_TEXT:010A		   346	#350
+O1			Near   DEBUG_TEXT:02B9		   #583
+O2			Near   DEBUG_TEXT:02C9		   585	#590
+O3			Near   DEBUG_TEXT:02D9		   592	#597
+O4			Near   DEBUG_TEXT:02E9		   599	#604
+OPT1			Near   DEBUG_TEXT:01DA		   #464
+OPT2			Near   DEBUG_TEXT:01E8		   466	#471
+OPT3			Near   DEBUG_TEXT:01F5		   473	#478
+OPT4			Near   DEBUG_TEXT:0203		   480	#485
+OTRAVEZ			Near   DEBUG_TEXT:0210		   #498	 515
+READ			Near   DEBUG_TEXT:00F3		   #336	 343  349  358
+REPETIR			Near   DEBUG_TEXT:0159		   #395	 451
+RETROCESO		Near   DEBUG_TEXT:0116		   353	#362
+SALIR			Near   DEBUG_TEXT:0306		   581	#617
+SEC8BITS		Byte   DGROUP:0005		   #44	502  508  529  535
+SEGCOD			Near   DEBUG_TEXT:02C0		   584	#586
+SEGDATA			Near   DEBUG_TEXT:02D0		   591	#593
+SEGMENTO		Word   DGROUP:0000		   #42	410  613
+SEGUIR			Near   DEBUG_TEXT:0023		   115	#129
+SHOWASCCI		Far    DEBUG_TEXT:0055		   #185	 533  537
+SHOWDATA		Far    DEBUG_TEXT:0147		   #387	 615
+SHOWDIR			Far    DEBUG_TEXT:0073		   #211	 423
+SHOWMENU		Far    DEBUG_TEXT:00C6		   #284	 564  567
+SIBIP			Near   DEBUG_TEXT:0104		   #347
+STACKSEG		Near   DEBUG_TEXT:02F0		   605	#608
+TEMPORAL		Word   DGROUP:0011		   #50	432  525  539
+TITLE0			Byte   DGROUP:0014		   #55	260
+TITLE1			Byte   DGROUP:0068		   #67	264
+TITLE2			Byte   DGROUP:007A		   #70	266
+TITLE3			Byte   DGROUP:0098		   #75	268
+TOHEXA			Far    DEBUG_TEXT:0000		   #99	506  510
+UNO			Near   DEBUG_TEXT:0066		   189	#196
+YESBIP			Near   DEBUG_TEXT:02A7		   #572	 577  580
+
+Macro Name						   Cref	(defined at #)
+
+OBTENERDATA						   #457	 468  475  482	488
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+DEBUG_TEXT		16  030A Word	Public	CODE	   #34	34  #97	 97
+DGROUP			Group				   #34	34  551
+  STACK			16  0200 Para	Stack	STACK	   #35
+  _DATA			16  0103 Word	Public	DATA	   #34	#40
+

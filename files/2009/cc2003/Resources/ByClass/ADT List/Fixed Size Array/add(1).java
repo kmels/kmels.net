@@ -1,0 +1,1 @@
+public boolean add(Object newEntry){	boolean isSuccessful = true;	if (!isFull()) 	{		// position of new entry will be after last entry in list,		// that is, at position length+1; corresponding array index is		// 1 less than position, so index is length		entry[length] = newEntry;		length++;	}	else		isSuccessful = false;	return isSuccessful;} // end add

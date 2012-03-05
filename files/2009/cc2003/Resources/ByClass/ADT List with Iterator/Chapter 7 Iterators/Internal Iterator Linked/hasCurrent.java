@@ -1,0 +1,1 @@
+public boolean hasCurrent(){	return currentNode != null;} // end hasCurrent

@@ -1,0 +1,11 @@
+package object rutinas {
+  import math.abs
+
+  def NR(tolerancia:Double,seed:Double,f: Double => Double):Double = {
+    val next = f(seed)
+    if (abs(next-seed)<tolerancia)
+      next
+    else
+      NR(tolerancia,next,f)
+  }
+}

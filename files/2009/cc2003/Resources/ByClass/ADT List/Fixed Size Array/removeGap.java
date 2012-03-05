@@ -1,0 +1,1 @@
+/** Task: Shifts entries that are beyond the entry to be removed  *        to next lower position. *  Precondition: 1 <= givenPosition <= length; *                length is listâs length before removal. */private void removeGap(int givenPosition){	for (int index = givenPosition; index < length; index++)		entry[index-1] = entry[index];} // end removeGap

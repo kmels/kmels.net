@@ -1,0 +1,1 @@
+// immutable classpublic class StockPurchase{	private double cost;		public StockPurchase(double costPerShare)	{		cost = costPerShare;	} // end constructor		public double getCostPerShare()	{		return cost;	} // end getCostPerShare} // end StockPurchase

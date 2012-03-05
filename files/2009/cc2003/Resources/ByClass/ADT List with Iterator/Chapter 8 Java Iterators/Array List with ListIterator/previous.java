@@ -1,0 +1,1 @@
+public Object previous(){	if (hasPrevious())	{		wasPreviousCalled = true;		wasNextCalled = false;		wasAddCalled = false;		currentIndex--;		return entry[currentIndex];	}	else		throw new NoSuchElementException("previous() called after " + 		                                 "iteration has reached beginning.");} // end previous

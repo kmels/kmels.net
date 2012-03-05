@@ -1,0 +1,1 @@
+public void addToFront(Object newEntry){	DLNode newNode = new DLNode(null, newEntry, firstNode);	if (isEmpty())		lastNode = newNode;	else		firstNode.setPreviousNode(newNode);	firstNode = newNode;} // end addToFront

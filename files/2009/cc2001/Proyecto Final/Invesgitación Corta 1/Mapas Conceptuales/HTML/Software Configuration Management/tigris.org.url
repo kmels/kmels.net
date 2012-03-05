@@ -1,0 +1,5 @@
+http://tigris.org
+[DEFAULT]
+BASEURL=http://tigris.org
+[InternetShortcut]
+URL=http://tigris.org

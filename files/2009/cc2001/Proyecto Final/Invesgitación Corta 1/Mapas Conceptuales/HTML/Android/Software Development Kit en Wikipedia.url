@@ -1,0 +1,5 @@
+http://es.wikipedia.org/wiki/Software_development_kit
+[DEFAULT]
+BASEURL=http://es.wikipedia.org/wiki/Software_development_kit
+[InternetShortcut]
+URL=http://es.wikipedia.org/wiki/Software_development_kit

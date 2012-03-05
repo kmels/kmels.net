@@ -1,0 +1,1 @@
+public void enqueue(Object newEntry){	Node newNode = new Node(newEntry, null);	if (isEmpty())		firstNode = newNode;	else		lastNode.setNextNode(newNode);	lastNode = newNode;} // end enqueue

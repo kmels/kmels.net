@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=ExcelExporter()
+comment1.params=tabla\ file
+comment1.target=void\ exportTable(JTable,\ File)
+numComments=2

@@ -1,0 +1,8 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Marco Te\'{o}rico}{2}
+\contentsline {section}{\numberline {2}Descripci\'{o}n del experimento}{2}
+\contentsline {section}{\numberline {3}Procedimiento}{3}
+\contentsline {section}{\numberline {4}Resultados}{3}
+\contentsline {section}{\numberline {5}An\'{a}lisis}{5}
+\contentsline {section}{\numberline {6}Conclusiones}{8}
+\contentsline {section}{\numberline {7}Recomendaciones}{8}

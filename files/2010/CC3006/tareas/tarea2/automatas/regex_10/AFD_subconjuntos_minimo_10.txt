@@ -1,0 +1,15 @@
+*************************************************************
+	Minimización del AFD creado convirtiendo un AFN con subconjuntos
+*************************************************************
+Tiempo de creación del autómanta: 792909ns = 7.92909ms
+Genera un lenguaje a partir de la regex: (0|1)*(10)* -> (((0|1)*).((1.0)*))
+*************************************************************
+Lista de símbolos: [0, 1]
+Estado inicial (q0): q0
+Lista de estados (Q): [q0]
+Lista de aceptación (F): [q0]
+Transiciones:
+	* T(q0,0) = q0
+	* T(q0,1) = q0
+
+*************************************************************
