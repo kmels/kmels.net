@@ -62,15 +62,6 @@ main = hakyll $ do
        -- >>> arr (setField "title" "All posts")
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
-      
-    {-match "index.html" $ route idRoute
-    create "index.html" $ constA mempty
-        >>> arr (setField "title" "Personal Home Page of Carlos Lopez-Camey")
-        >>> requireA "tags" (setFieldA "tags" (renderTagList'))
-        >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . sortByBaseName) >>> addPostList)
-        >>> applyTemplateCompiler "templates/index.html"
-        >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler -}
 
     -- Tags
     create "tags" $
