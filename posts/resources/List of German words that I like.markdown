@@ -10,9 +10,13 @@ When you are learning a new language, you discover all these words and try do th
 
 They are chronologically sorted (newer come first).
 
-# Because of 'pure' meaning
+# Concerning etymology
 
-* **Frühstück** (Noun), means "breakfast". **Früh** == "early" and "Stück" == "piece". It thought it was a beautiful constructed word. Besides, the meaning and picturing of one's breakfast _lends itself_ to greater imagination, so the _raw_ "early stuck" suits it well.
+* **Urlaub** means vacations. It comes from the word **erlaub** (to allow). In the era of [King Arthur](http://en.wikipedia.org/wiki/King_Arthur), women use to serve men and when they wanted to go _on vacation_ they needed they permit (back then, women _allowed_ men vacations). 
+
+# Concerning meaning
+
+* **Frühstück** (Noun), means "breakfast". **Früh** == "early" and **Stück** == "piece". It thought it was a beautifully constructed word. Besides, the meaning and picturing of one's breakfast _lends itself_ to greater imagination, so the _raw_ "early stuck" suits it well IMO.
 
     A related music recommendation then: [Pink Floyd - Alan's Psychedelic Breakfast](http://www.youtube.com/watch?v=oPxJw5YfFqk) -- I like the original version better though.
 
