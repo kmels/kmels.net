@@ -10,3 +10,6 @@ published: false
 
 * [Introduction to Linguistics for Natural Language Processing](http://www.cl.cam.ac.uk/teaching/1112/L100/introling.pdf)
 
+* [Mathematics for Computer Science](http://www.cs.princeton.edu/courses/archive/spr10/cos433/mathcs.pdf)
+
+Be sure to check the [csbooks subreddit](http://www.reddit.com/r/csbooks/) too.

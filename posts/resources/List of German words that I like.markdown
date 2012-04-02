@@ -10,9 +10,11 @@ When you are learning a new language, you discover all these words and try do th
 
 They are chronologically sorted (newer come first).
 
+See also [other words I _love_](http://www.wordnik.com/users/kmels/favorites).
+
 # Concerning etymology
 
-* **Urlaub** means vacations. It comes from the word **erlaub** (to allow). In the era of [King Arthur](http://en.wikipedia.org/wiki/King_Arthur), women used to serve men and when they (men) wanted to go _on vacation_ they needed their permit (back then, women _allowed_ men vacations). 
+* **Urlaub** means vacations. It comes from the word **erlaub** (to allow). In the era of [King Arthur](http://en.wikipedia.org/wiki/King_Arthur), women used to serve men and when they (men) wanted to go _on vacation_ they needed their permit (back then, women _allowed_ men vacations). Also, the prefix **Ur** is related to prehistoric conditions, for example Urgroßeltern == great-grand parents. 
 
 # Concerning meaning
 
