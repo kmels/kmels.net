@@ -13,3 +13,5 @@ published: false
 * [Mathematics for Computer Science](http://www.cs.princeton.edu/courses/archive/spr10/cos433/mathcs.pdf)
 
 Be sure to check the [csbooks subreddit](http://www.reddit.com/r/csbooks/) too.
+
+* [Software Foundations](http://www.cis.upenn.edu/~bcpierce/sf/)
