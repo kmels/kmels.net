@@ -10,7 +10,6 @@ import Data.Either (rights)
 import Data.Maybe
 import Data.Time
 import Data.Time.Format
-import Locale
 
 import Hakyll
 
@@ -114,7 +113,7 @@ makeTagList tag posts =
 --
 addPostList :: Compiler (Page String, [Page String]) (Page String)
 addPostList = setFieldA "posts" $
-    arr (reverse . sortByBaseName)
+    arr (reverse . chronological)
         >>> require "templates/postitem.html" (\p t -> map (applyTemplate t) p)
         >>> arr mconcat
         >>> arr pageBody
