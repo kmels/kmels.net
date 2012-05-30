@@ -6,7 +6,7 @@ title: About me
 
 Hi! My name is Carlos, 22 years old. I studied 3+ years of Computer Science in Guatemala and I'm now in the process of enrolling again at the University in Germany.
 
-I am most passionate about Functional Programming and Computational Linguistics, I support free and open source software and I am also nonsectarian.
+I am most passionate about Functional Programming and Computational Linguistics, I support free and open source, I am also nonsectarian.
 
 <!---
 Here's my [Resume (en)](/files/CV_en.pdf)
