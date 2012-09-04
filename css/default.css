@@ -28,7 +28,7 @@ div.inline-image{
 }
 
 /* avoid big images */
-div.inline-image img{ max-width: 100%; } 
+div.inline-image img{ max-width: 960px; } 
 
 .clear { clear:both; }
 

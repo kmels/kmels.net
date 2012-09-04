@@ -4,6 +4,9 @@ title:
 
 Articles are sorted by date.
 
+* # Programming
+    - [XMonad.Actions.Launcher, a prompt with multiple functionalities](posts/programming/xmonad-launcher.html)
+
 * # Technical
     - [Defining logical disjunction and negation using Church Booleans](posts/technical/Defining logical disjunction and negation using Church Booleans.html)
     - [Movimiento en el espacio, aceleración y curvatura de flexión en coordenadas polares](posts/technical/Movimiento en el espacio, aceleración y curvatura de flexión en coordenadas polares.html)
