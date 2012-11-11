@@ -85,7 +85,7 @@ main = hakyll $ do
         requireAll_ "posts/*" >>> renderRss mainFeed
     
     -- Static pages
-    match (list ["about.markdown","contact.markdown","404.markdown"]) $ do
+    match (list ["about.markdown","courses.markdown","contact.markdown","404.markdown"]) $ do
     route   $ setExtension "html"
     compile $ pageCompiler
         >>> applyTemplateCompiler "templates/default.html"
