@@ -1,0 +1,224 @@
+\documentclass[10pt]{article}
+
+\usepackage{calc}
+  \usepackage{verbatim} 
+
+\reversemarginpar
+\usepackage[paper=letterpaper,
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+\setlength{\parindent}{0in}
+\usepackage{paralist}
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%w
+       \parbox{4in}{\, \hfill %
+                   % \arabic{page} of \protect\pageref*{LastPage} % +LP	         
+                               \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\usepackage[latin1]{inputenc} 
+
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+\newcommand{\makeheading}[1]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+                {\large \bfseries #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+\renewcommand{\section}[2]%
+        {\pagebreak[2]\vspace{1.3\baselineskip}%
+         \phantomsection\addcontentsline{toc}{section}{#1}%
+         \hspace{0in}%
+         \marginpar{
+         \raggedright \scshape #1}#2}
+
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\vspace{-\baselineskip}\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{compactitem}[#1]}{\end{compactitem}}
+
+\newcommand{\blankline}{\quad\pagebreak[2]}
+
+\begin{document}
+\makeheading{Carlos E. L\'{o}pez Camey}
+
+\section{Informaci\'{o}n de contacto}
+%
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table 
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+
+Ciudad de Guatemala, Guatemala  & \textit{M\'{o}vil:} (+502) 40077345 \\
+%           & \textit{Work:} (+502) 2258-6028 \\
+           & \textit{E-mail:} \href{mailto:c.lopez@kmels.net}{c.lopez@kmels.net} \\
+	 & \href{http://www.kmels.net/}{http://kmels.net} \\
+
+%\textit{Mobile:} (+502) 4473-2908 & \\ \href{http://kmels.net/}{http://kmels.net}
+%\textit{Work:} (+502 2258-6028 & Guatemala City, Guatemala
+\end{tabular}
+
+\section{Nacionalidad}
+%
+Guatemalteca
+
+%\section{Objective}
+%
+%Theoretical Computer Science, 
+%Computer Science Internship
+
+\section{Educaci\'{o}n}
+%
+\href{http://www.uvg.edu.gt/}{\textbf{Universidad Del Valle de Guatemala}}, 
+Ciudad de Guatemala, Guatemala
+\begin{outerlist}
+
+\item[] B.S., Ingenier\'{i}a en Ciencias de la Computaci\'{o}n
+        (fecha de graduaci\'{o}n esperada: Diciembre 2011)
+       \begin{innerlist}
+       \item Presidente Interino de la Asociaci\'{o}n de Estudiantes de Ciencias de la Computaci\'{o}n, 2009
+        \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\href{http://www.suizoamericano.edu.gt/}{\textbf{Colegio Suizo Americano}}, 
+Ciudad de Guatemala, Guatemala
+\begin{outerlist}
+\item[] Bachillerato en Computaci\'{o}n
+        (2006-2007)
+\end{outerlist}
+
+\blankline
+
+\section{Experiencia Profesional}
+%
+\href{http://www.tecnomaya.net/}{\textbf{Tecnomaya S.A. \& la Casa de la Bombilla S.A.}}, 
+Ciudad de Guatemala, Guatemala
+\begin{outerlist}
+
+\item[] \textit{Desarrollador Web / Administrador de Sistemas.}%
+        \hfill \textbf{Ene 2000-Abr 2001}
+\begin{innerlist}
+\item Desarrollo de un sistema de control de prorrateos.
+\item El sistema en \textit{Intranet} basado en SugarCRM y la plataforma Xoops.
+\item http://www.tecnomaya.net
+\item http://www.cabsagt.com
+\end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\section{T\'{e}cnico} Programaci\'{o}n: Scala (intermedio-avanzado), Java (intermedio), PHP (intermedio), Python, Pascal (Delphi), MySQL, Applescript.
+
+\blankline
+
+Sistemas de Control de Versiones: SVN, Mercurial.
+
+\blankline
+
+Sistemas operativos: Mac OS X, Linux Ubuntu, Windows XP/Vista y CentOS.
+
+\blankline
+
+Otros: \LaTeX{}, PGF (TikZ), Sage, Wordpress, gnuplot, Emacs, Apache Ant, Hibernate framework 
+
+\blankline
+
+\section{Intereses}
+Generales: Ciencia de la computaci\'{o}n te\'{o}rica, productos innovadores y Software libre.
+
+\blankline
+
+Espec\'{i}ficos: Lenguajes y programaci\'{o}n funcional, teor\'{i}a de tipos, compiladores.
+
+\section{Membres\'{i}as}
+\textbf{Association of Computing Machinery} (ACM)
+
+\blankline
+
+\textbf{Special Interest Group on Programming Languages} (SIGPLAN)
+
+\blankline
+
+\textbf{Universidad del Valle de Guatemala, Asociaci\'{o}n de Estudiantes de Ciencias de la Computaci\'{o}n} (AECC)
+
+\section{Idiomas}
+Espa\~{n}ol (Nativo), Ingl\'{e}s (escrito y hablado)
+
+\blankline
+
+\textbf{ELASH}, Colegio Suizo Americano
+
+\blankline
+
+\textbf{Embassy Certificate of English}, Embasy CES
+
+\section{Cursos tomados}
+\textbf{http://archive.kmels.net/courses} y \textbf{http://uvg.kmels.net/courses.html}, Cursos que estoy tomando/he tomado en la Universidad, \textit{Guatemala}
+
+%\blankline
+
+%\textbf{New Media Artists}, MacWorld Expo 2009, \textit{San Francisco, CA.}%
+%\hfill \textbf{Jan 2009}
+
+\blankline
+
+\textbf{Applescript with Sal Soghoian}, MacWorld Expo 2009, \textit{San Francisco, CA.} \hfill \textbf{Jan 2009}
+
+\blankline
+
+\textbf{Embassy Certificate of English}, Embasy CES,
+\textit{Hastings, UK}  \hfill \textbf{Nov 2007}
+
+\blankline
+
+\textbf{Presentaciones Juveniles, Dale Carnegie Training}, Dale Carnegie \& Associates, Inc., \textit{Guatemala City, Guatemala}  \hfill \textbf{March 2004}
+
+\blankline
+
+\textbf{Dale Carnegie Course for Teenagers}, Dale Carnegie \& Associates, Inc., \textit{Guatemala City, Guatemala}  \hfill \textbf{Dec 2003}
+
+\blankline
+
+
+\blankline
+
+\section {Referencias} \textbf{H\'{e}ctor Villafuerte (hfvillafuerte@uvg.edu.gt, +502 5305-3860)},Profesor,Departmento de Matem\'{a}tica, Universidad del Valle de Guatemala.
+
+\textbf{Douglas Barrios (douglas.barrios1@gmail.com, +502 50125586)},Profesor,Departamento de Ciencias de la Computaci\'{o}n, Universidad del Valle de Guatemala.
+ 
+\textbf{Luis Furl\'{a}n (furlan@uvg.edu.gt, +502 2368 8566)},Director,Departmento de Ciencias de la Computaci\'{o}n, Universidad del Valle de Guatemala. 
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%

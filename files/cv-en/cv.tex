@@ -1,0 +1,260 @@
+\documentclass[10pt]{article}
+
+\usepackage{calc}
+  \usepackage{verbatim}
+  \usepackage{eurosym}
+
+\reversemarginpar
+\usepackage[paper=letterpaper,
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+\setlength{\parindent}{0in}
+\usepackage{paralist}
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%w
+       \parbox{4in}{\, \hfill %
+                   % \arabic{page} of \protect\pageref*{LastPage} % +LP	         
+                               \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\usepackage[latin1]{inputenc} 
+
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+\newcommand{\makeheading}[1]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+                {\large \bfseries #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+\renewcommand{\section}[2]%
+        {\pagebreak[2]\vspace{1.3\baselineskip}%
+         \phantomsection\addcontentsline{toc}{section}{#1}%
+         \hspace{0in}%
+         \marginpar{
+         \raggedright \scshape #1}#2}
+
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\vspace{-\baselineskip}\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{compactitem}[#1]}{\end{compactitem}}
+
+\newcommand{\blankline}{\quad\pagebreak[2]}
+
+\begin{document}
+\makeheading{Carlos E. L\'{o}pez Camey}
+
+\section{Contact Information}
+%
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table 
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+St\"{o}ckenh\"{o}fe 6, 
+79299, Wittnau, Germany  & \textit{Mobile:} +49 0160 9671 2326 \\
+%           & \textit{Work:} (+502) 2258-6028 \\
+           & \textit{E-mail:} \href{mailto:c.lopez@kmels.net}{c.lopez@kmels.net} \\
+	 & \href{http://www.kmels.net/}{http://kmels.net} \\
+
+%\textit{Mobile:} (+502) 4473-2908 & \\ \href{http://kmels.net/}{http://kmels.net}
+%\textit{Work:} (+502 2258-6028 & Guatemala City, Guatemala
+\end{tabular}
+
+\section{Birth and Citizenship}
+%
+05.12.1989, Guatemala
+
+%\section{Objective}
+%
+%Theoretical Computer Science, 
+%Computer Science Internship
+
+\section{Education}
+%
+
+\href{http://www.uni-freiburg.de/}{\textbf{University of Freiburg}}, 
+Freiburg im Breisgau, Germany
+\begin{outerlist}
+
+\item[] B.Sc. in Computer Science (2012-2014)
+\end{outerlist}
+
+\blankline
+
+\href{http://www.uvg.edu.gt/}{\textbf{Universidad Del Valle de Guatemala}}, 
+Guatemala City, Guatemala
+\begin{outerlist}
+
+\item[] Three and a half years of B.Sc. in Computer Science (2008-2011) 
+       \begin{innerlist}
+       \item Interim President of the Computer Science Students Association, 2009
+       \item Teaching Assistant, Algorithms and Data Structures, 2010 and 2011 
+       \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\href{http://www.suizoamericano.edu.gt/}{\textbf{Colegio Suizo Americano}}, 
+Guatemala City, Guatemala
+\begin{outerlist}
+\item[] Programming oriented High School
+        (2006-2007)
+\end{outerlist}
+
+\blankline
+
+\section{Scholarships}
+\href{http://www.uu.nl/}{\textbf{Universiteit Utrecht}}, Utrecht, Netherlands
+
+\begin{outerlist}
+\item[] \href{http://www.utrechtsummerschool.nl/index.php?type=courses&code=H9}{Applied Functional Programming in Haskell} (2012)
+        \hfill Full course scholarship (835 euros)
+\end{outerlist}
+
+\blankline
+
+\section{Work experience} \href{http://www.digitalgeko.com/}{\textbf{Digitalgeko}}, 
+
+\begin{outerlist}
+
+\item[] \textit{Web Developer}%
+        \hfill \textbf{Aug 2010-Jan 2011}
+        \begin{innerlist}
+        \item Participated in the development of two systems for the Goverment of Timor-Leste in a team of 4 persons. Java technologies were used (Spring Framework, Hibernate, Stripes Framework).
+        \item Implemented a website in TYPO3.
+        \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\href{http://www.tecnomaya.net/}{\textbf{Tecnomaya S.A.}}, 
+Guatemala City, Guatemala
+
+\begin{outerlist}
+\item[] \textit{System Administrator/Mantainer.}%
+        \hfill \textbf{Jan 2008-Apr 2009}
+        \begin{innerlist}
+        \item Developed the apportionment system control in MS Access.
+        \item The intranet system, based on SugarCRM and the Xoops Platform.
+        \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+{\textbf{Misc.}}
+\begin{outerlist}
+\item[] \textit{Freelance, Elex de Guatemala S.A.} \hfill \textbf{Jan 2011-May 2011}
+        \begin{innerlist}
+        \item Redesigned database to implement an admin interface in \href{http://elexsa.com}{elexsa.com}
+        \item Implemented mobile website version in \href{http://elexsa.com/movil}{elexsa.com/movil}
+        \end{innerlist}
+\end{outerlist}
+
+\blankline
+
+\section{Open source project contributions}
+
+\textbf{XMonad}, worked on XMonad.Prompt and created the module XMonad.Actions.Launcher
+
+\blankline
+
+\section{Technical} \textbf{Programming languages:} Java (2 years of experience), Scala (1 year), Haskell (6 months). 
+
+\blankline
+
+\textbf{Less often or previously used:} Javascript, PHP, Python, Emacs and Common Lisp, C, Assembly 8086.
+
+\blankline
+
+\textbf{Versioning Control Systems:} SVN, Mercurial, Git, darcs.
+
+\blankline
+
+\textbf{Operating Systems:} Mac OS X, Windows XP/Vista, Linux Ubuntu.
+
+\blankline
+
+\textbf{Tools and Libraries:} Play framework, \LaTeX{}, PGF (TikZ), sage, gnuplot, HTML and CSS, GTK.
+
+\blankline
+
+\section{Interests and Hobbies}
+The art of programming, Functional Programming, program verification, Free and Open Source Software, Mathematical Logic, Music, Squash, Beer.
+
+\blankline
+
+\section{Current/past organization Membership}
+\textbf{Universidad del Valle de Guatemala, Computer Science Students Association} (AECC), 2009-2010.
+
+\section{Language Skills}
+Spanish (Native speaker)
+
+\blankline
+
+English (15+ years of continuous practice)
+
+\blankline
+
+German (6 months of intensive lessons), level B2/C1 (Upper intermediate/becoming fluent).
+
+\blankline
+
+Official certificates:
+\begin{outerlist}  
+  \item \textbf{DSH-2}, Language Teaching Center, University of Freiburg. \hfill \textbf{2012}
+  \item \textbf{TOEFL}, Advanced in writing, hearing and reading. Intermediate in speaking. \hfill \textbf{2012}
+  \item \textbf{ELASH}, Colegio Suizo Americano    \hfill \textbf{2007}
+  \item  \textbf{Embassy Certificate of English}, Embasy CES \hfill \textbf{2007}
+\end{outerlist}
+
+\section{Miscellaneous Courses}
+\textbf{Applescript with Sal Soghoian}, MacWorld Expo 2009, \textit{San Francisco, CA.} \hfill \textbf{Jan 2009}
+
+\blankline
+
+\textbf{Embassy Certificate of English}, Embasy CES,
+\textit{Hastings, UK}  \hfill \textbf{Nov 2007}
+
+\blankline
+
+\textbf{Presentaciones Juveniles, Dale Carnegie Training}, Dale Carnegie \& Associates, Inc., \textit{Guatemala City, Guatemala}  \hfill \textbf{March 2004}
+
+\blankline
+
+\textbf{Dale Carnegie Course for Teenagers}, Dale Carnegie \& Associates, Inc., \textit{Guatemala City, Guatemala}  \hfill \textbf{Dec 2003}
+
+\blankline
+
+\section {References} Available upon request
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
