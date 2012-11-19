@@ -25,6 +25,7 @@ div.inline-image{
     float: left;
     display: inline;
     margin: 20px 5px;
+    padding-right: 25px;
 }
 
 /* avoid big images */
