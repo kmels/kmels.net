@@ -1,32 +1,39 @@
 ---
-title: About me
+title: About
 ---
 
-<div class="inline-image">![Me, late 2010](/images/me.png "Me, late 2010") </div>
+<div class="inline-image">![Me, late 2012](/images/me2012.png "Carlos López-Camey, 2012") </div>
 
-Hello my name is Carlos. I am deeply entertained with Functional Programming, its study and applications. My next goals in life are: work on awesome projects and build something with principles.
+Hi! I'm Carlos (nickname kmels), a Computer Science student at the University of Freiburg and this website is merely an archive of thoughts, guides, or work I do. 
 
-I'm in the process of enrolling at the University in Germany. I support free and open source, I am also nonsectarian.
+I like to have fun with Functional Programming, a way of writing computer programs that can be precisely studied within frameworks of mathematical logic. 
 
-[CV](/files/CV_en.pdf)
+I **enjoy** music, my favorite band is called Pink Floyd. 
+
+I appreciate creativity when it comes with values, like those of the Free Software or Open Source Software [1].
+
+For any type of feedback, my email address is `c.lopez (at) kmels (dot) net`.
+
+[Vita](/files/cv-en/cv.pdf)
 
 <div class="clear"></div>
 
-Contact
-------
-My E-mail, Jabber(gtalk) and Skype is c<a href="http://www.google.com/recaptcha/mailhide/d?k=010GrpEOOhgdFBz38I4b3zhA==&amp;c=hJAnVo\
-Su4owh9BE2F5w_wPQscGobJ2uPP4XnECvhbXk=" onclick="contactCaptcha" title="Reveal my e-mail address">...</a>@kmels.net.
+**Me on other websites:**
 
-Me on the web
-------
-* [Github](https://github.com/kmels), some of the programming I do
-* [Google +](https://plus.google.com/117463675576666998868/), general sharing
-* [Twitter](http://twitter.com/kmels), random sharing
-* [Last.fm](http://last.fm/user/kmels), music I hear
-* [Stackoverflow](http://stackoverflow.com/users/225956/carlos-lopez-camey), questions and answers I have about programming
-* [Facebook](http://facebook.com/kmels), you know, in case you want to communicate in that way
+  * [Github](https://github.com/kmels)
 
-Links
-------
-* [Soy Su](http://soysu.net) - my mom's blog (Spanish).
-* [The Harsh Side](http://harshside.wordpress.com/) - webblog from my programmer friend Ernesto Rodriguez (English).
+  * [Last.fm](http://last.fm/user/kmels)
+
+  * [Twitter](http://twitter.com/kmels), [Google+](https://plus.google.com/117463675576666998868/), [Facebook](http://facebook.com/kmels)
+
+  * [Wordnik](http://www.wordnik.com/users/kmels)
+  
+  * [Stackoverflow](http://stackoverflow.com/users/225956/carlos-lopez-camey)
+
+
+**Blogroll**
+
+* [Soy Su](http://soysu.net) - my mother's blog (Spanish).
+* [The Harsh Side](http://harshside.wordpress.com/) - blog from my programmer friend Ernesto Rodriguez (English).
+
+[1] Free Software and Open Source software are almost the same concept but essentialy two different schools. The dichotomy lies on the politics of re-licensing. That is, Free Software has to remain always Free Software. Open Source licenses may not impose this restriction. I don't really care about the difference, I tend to use permissive licenses but I admire and believe on the principles of the Free Software Movement equally. They are only, sadly, too idealistic for this world.
