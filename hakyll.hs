@@ -39,6 +39,22 @@ main = hakyll $ do
     match "files/*" $ do
       route   idRoute
       compile copyFileCompiler
+
+    -- Render projects
+    match "projects/*" $ do
+      route $ setExtension ".html"
+      compile $ articleCompiler
+        >>> applyTemplateCompiler "templates/project.html"
+        >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
+    
+    match "projects/*/*" $ do
+      route   idRoute
+      compile copyFileCompiler
+    
+    match "projects/*/*/*" $ do
+      route   idRoute
+      compile copyFileCompiler
       
     -- Render posts
     match "posts/*/*" $ do

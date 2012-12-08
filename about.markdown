@@ -4,7 +4,7 @@ title: About
 
 <div class="inline-image">![Me, late 2012](/images/me2012.png "Carlos López-Camey, 2012") </div>
 
-Hi! I'm Carlos (nickname kmels), a Computer Science student at the University of Freiburg and this website is merely an archive of thoughts, guides, or work I do. 
+Hi! I'm Carlos (nickname kmels), a Computer Science student at the [http://www.uni-freiburg.de/](University of Freiburg) and this website is merely an archive of thoughts, guides, or work I do. 
 
 I like to have fun with Functional Programming, a way of writing computer programs that can be precisely studied within frameworks of mathematical logic. 
 
