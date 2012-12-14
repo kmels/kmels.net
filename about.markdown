@@ -4,13 +4,15 @@ title: About
 
 <div class="inline-image">![Me, late 2012](/images/me2012.png "Carlos López-Camey, 2012") </div>
 
-Hi! I'm Carlos (nickname kmels), a Computer Science student at the [http://www.uni-freiburg.de/](University of Freiburg) and this website is merely an archive of thoughts, guides, or work I do. 
+Hey! I'm a Computer Science student at [Uni Freiburg](http://www.uni-freiburg.de/). This website is an archive of thoughts, guides, or work I do. 
 
-I like to have fun with Functional Programming, a way of writing computer programs that can be precisely studied within frameworks of mathematical logic. 
+I like to have fun with Functional Programming, a way of writing computer programs that can be precisely studied within the frameworks of mathematical logic. 
 
-I **enjoy** music, my favorite band is called Pink Floyd. 
+I enjoy music, my favorite band is called Pink Floyd. 
 
-I appreciate creativity when it comes with values, like those of the Free Software or Open Source Software [1].
+I appreciate creativity when it comes with values, like those of the Free Software or Open Source Software [1]. That is why I'm working on [Tersus](http://tersusland.com) with [Ernesto Rodriguez](http://netowork.me).
+
+I am also working on an [experimental desktop indexer](http://hub.darcs.net/kmels/orange), with features I'm learning in my [Information Retrieval course](http://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS1213). 
 
 For any type of feedback, my email address is `c.lopez (at) kmels (dot) net`.
 
