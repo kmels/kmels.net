@@ -5,7 +5,12 @@ title: Homepage of Carlos López-Camey
 Articles are sorted by date.
 
 * ### Programming
+    - [CYK Algorithm in Haskell, a $O(n^3)$ algorithm that solves the word probelm](posts/programming/cyk.html)
+
     - [XMonad.Actions.Launcher, a prompt with multiple functionalities](posts/programming/xmonad-launcher.html)
+
+* ### Projects
+    - [Trac statistics](projects/trac-statistics.html)
 
 * ### Technical
     - [Defining logical disjunction and negation using Church Booleans](posts/technical/Defining logical disjunction and negation using Church Booleans.html)

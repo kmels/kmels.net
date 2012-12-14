@@ -1,0 +1,687 @@
+<!-- (trac-stats debug output)-->
+<!-- Fetching feed..-->
+<!-- Fetched feed..-->
+<!-- Parsing.. -->
+<!--    REPORT - Number of created tickets: 11015
+- Number of closed tickets: 6907
+- Number of Wikipages edits fetched: 242
+- Number of Changesets (commits) fetched: 820
+- Unknown: fromList [(2012-10-11,1)]
+-->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Trac statistics</title></title>
+<link rel="stylesheet" href="html/demo.css" type="text/css" media="screen">
+
+<script type="text/javascript">var exports = new Object();</script></script>
+<script type="text/javascript" src="html/raphael.js"></script></script>
+<script type="text/javascript" src="html/raphael_linechart.js"></script></script>
+<script type="text/javascript" src="html/prelude.js"></script></script>
+</head>
+<body></body>
+<div id="main"><h1>About</h1><p>This program is open source, you can <a href="https://github.com/kmels/trac-stats">download and use it for free</a>.</p>
+<p>The following open source programs make it possible: <a href="http://raphaeljs.com/">Raphaël</a> (Vector graphics), <a href="https://github.com/n0nick/raphael-linechart">raphael-linechart</a> (Plotting), <a href="http://gkz.github.com/prelude-ls/">prelude.ls</a> (Functional programming in Javascript) and <a href="http://www.haskell.org/">Haskell</a> (A general purpose functional programming language).</p>
+</h1>
+<h1>Summary</h1>
+<p> Number of created tickets: 11015</p>
+<p> Number of closed tickets: 6907</p>
+<p> Number of Wikipages edits fetched: 242</p>
+<p> Number of Changesets fetched: 820</p>
+<h1>Tickets</h1></h1>
+<h3>Created tickets </h3>                    <p>Accummulated numbers. The frequency shown in a day is the number of tickets created that day plus the sum of the frequencies in previous days. The first day assumes no tickets in previous days.</p>
+<div id="created-tickets"></div>
+</h3>
+<h3>Closed tickets </h3>                    Accummulated numbers. The frequency shown in a day is the number of tickets closed that day plus the sum of the frequencies in previous days. The first day assumes no tickets in previous days.
+<div id="closed-tickets"></div>
+</h3>
+<h3>Created vs closed </h3>                    The two previous graphics merged in one.
+<div id="created-vs-closed-tickets"></div>
+</h3>
+</div>
+ 
+<table id="created_tickets" style="display: none;"><tfoot><tr><th>2012-09-16</th></th>
+<th>2012-09-17</th></th>
+<th>2012-09-18</th></th>
+<th>2012-09-19</th></th>
+<th>2012-09-20</th></th>
+<th>2012-09-21</th></th>
+<th>2012-09-22</th></th>
+<th>2012-09-23</th></th>
+<th>2012-09-24</th></th>
+<th>2012-09-25</th></th>
+<th>2012-09-27</th></th>
+<th>2012-09-28</th></th>
+<th>2012-09-29</th></th>
+<th>2012-09-30</th></th>
+<th>2012-10-01</th></th>
+<th>2012-10-02</th></th>
+<th>2012-10-03</th></th>
+<th>2012-10-04</th></th>
+<th>2012-10-05</th></th>
+<th>2012-10-08</th></th>
+<th>2012-10-09</th></th>
+<th>2012-10-10</th></th>
+<th>2012-10-11</th></th>
+<th>2012-10-12</th></th>
+<th>2012-10-13</th></th>
+<th>2012-10-14</th></th>
+<th>2012-10-15</th></th>
+<th>2012-10-16</th></th>
+<th>2012-10-17</th></th>
+<th>2012-10-18</th></th>
+<th>2012-10-19</th></th>
+<th>2012-10-20</th></th>
+<th>2012-10-21</th></th>
+<th>2012-10-22</th></th>
+<th>2012-10-23</th></th>
+<th>2012-10-24</th></th>
+<th>2012-10-25</th></th>
+<th>2012-10-26</th></th>
+<th>2012-10-28</th></th>
+<th>2012-10-29</th></th>
+<th>2012-10-30</th></th>
+<th>2012-10-31</th></th>
+<th>2012-11-01</th></th>
+<th>2012-11-02</th></th>
+<th>2012-11-03</th></th>
+<th>2012-11-04</th></th>
+<th>2012-11-05</th></th>
+<th>2012-11-07</th></th>
+<th>2012-11-08</th></th>
+<th>2012-11-09</th></th>
+<th>2012-11-10</th></th>
+<th>2012-11-12</th></th>
+<th>2012-11-13</th></th>
+<th>2012-11-14</th></th>
+<th>2012-11-15</th></th>
+<th>2012-11-16</th></th>
+<th>2012-11-17</th></th>
+<th>2012-11-18</th></th>
+<th>2012-11-19</th></th>
+<th>2012-11-20</th></th>
+<th>2012-11-21</th></th>
+<th>2012-11-22</th></th>
+<th>2012-11-23</th></th>
+<th>2012-11-24</th></th>
+<th>2012-11-26</th></th>
+<th>2012-11-27</th></th>
+<th>2012-11-28</th></th>
+<th>2012-11-29</th></th>
+<th>2012-11-30</th></th>
+<th>2012-12-01</th></th>
+<th>2012-12-02</th></th>
+<th>2012-12-03</th></th>
+<th>2012-12-04</th></th>
+<th>2012-12-05</th></th>
+<th>2012-12-06</th></th>
+<th>2012-12-07</th></th>
+<th>2012-12-08</th></th>
+<th>2012-12-09</th></th>
+<th>2012-12-10</th></th>
+<th>2012-12-11</th></th>
+<th>2012-12-13</th></th>
+<th>2012-12-14</th></th>
+</tr>
+</tfoot>
+<tbody class="data"><tr><td>1</td></td>
+<td>7</td></td>
+<td>11</td></td>
+<td>13</td></td>
+<td>17</td></td>
+<td>20</td></td>
+<td>21</td></td>
+<td>24</td></td>
+<td>29</td></td>
+<td>30</td></td>
+<td>31</td></td>
+<td>39</td></td>
+<td>40</td></td>
+<td>43</td></td>
+<td>46</td></td>
+<td>50</td></td>
+<td>53</td></td>
+<td>56</td></td>
+<td>60</td></td>
+<td>69</td></td>
+<td>74</td></td>
+<td>76</td></td>
+<td>77</td></td>
+<td>81</td></td>
+<td>85</td></td>
+<td>87</td></td>
+<td>91</td></td>
+<td>94</td></td>
+<td>100</td></td>
+<td>102</td></td>
+<td>106</td></td>
+<td>111</td></td>
+<td>113</td></td>
+<td>117</td></td>
+<td>120</td></td>
+<td>123</td></td>
+<td>124</td></td>
+<td>128</td></td>
+<td>131</td></td>
+<td>133</td></td>
+<td>134</td></td>
+<td>136</td></td>
+<td>140</td></td>
+<td>146</td></td>
+<td>149</td></td>
+<td>151</td></td>
+<td>152</td></td>
+<td>154</td></td>
+<td>157</td></td>
+<td>158</td></td>
+<td>160</td></td>
+<td>163</td></td>
+<td>170</td></td>
+<td>173</td></td>
+<td>176</td></td>
+<td>178</td></td>
+<td>183</td></td>
+<td>184</td></td>
+<td>187</td></td>
+<td>192</td></td>
+<td>193</td></td>
+<td>197</td></td>
+<td>201</td></td>
+<td>206</td></td>
+<td>209</td></td>
+<td>211</td></td>
+<td>215</td></td>
+<td>217</td></td>
+<td>222</td></td>
+<td>226</td></td>
+<td>228</td></td>
+<td>233</td></td>
+<td>237</td></td>
+<td>239</td></td>
+<td>244</td></td>
+<td>245</td></td>
+<td>248</td></td>
+<td>249</td></td>
+<td>252</td></td>
+<td>253</td></td>
+<td>256</td></td>
+<td>258</td></td>
+</tr>
+</tbody>
+<tbody class="line1"><tr><td>1 Created tickets</td></td>
+<td>7 Created tickets</td></td>
+<td>11 Created tickets</td></td>
+<td>13 Created tickets</td></td>
+<td>17 Created tickets</td></td>
+<td>20 Created tickets</td></td>
+<td>21 Created tickets</td></td>
+<td>24 Created tickets</td></td>
+<td>29 Created tickets</td></td>
+<td>30 Created tickets</td></td>
+<td>31 Created tickets</td></td>
+<td>39 Created tickets</td></td>
+<td>40 Created tickets</td></td>
+<td>43 Created tickets</td></td>
+<td>46 Created tickets</td></td>
+<td>50 Created tickets</td></td>
+<td>53 Created tickets</td></td>
+<td>56 Created tickets</td></td>
+<td>60 Created tickets</td></td>
+<td>69 Created tickets</td></td>
+<td>74 Created tickets</td></td>
+<td>76 Created tickets</td></td>
+<td>77 Created tickets</td></td>
+<td>81 Created tickets</td></td>
+<td>85 Created tickets</td></td>
+<td>87 Created tickets</td></td>
+<td>91 Created tickets</td></td>
+<td>94 Created tickets</td></td>
+<td>100 Created tickets</td></td>
+<td>102 Created tickets</td></td>
+<td>106 Created tickets</td></td>
+<td>111 Created tickets</td></td>
+<td>113 Created tickets</td></td>
+<td>117 Created tickets</td></td>
+<td>120 Created tickets</td></td>
+<td>123 Created tickets</td></td>
+<td>124 Created tickets</td></td>
+<td>128 Created tickets</td></td>
+<td>131 Created tickets</td></td>
+<td>133 Created tickets</td></td>
+<td>134 Created tickets</td></td>
+<td>136 Created tickets</td></td>
+<td>140 Created tickets</td></td>
+<td>146 Created tickets</td></td>
+<td>149 Created tickets</td></td>
+<td>151 Created tickets</td></td>
+<td>152 Created tickets</td></td>
+<td>154 Created tickets</td></td>
+<td>157 Created tickets</td></td>
+<td>158 Created tickets</td></td>
+<td>160 Created tickets</td></td>
+<td>163 Created tickets</td></td>
+<td>170 Created tickets</td></td>
+<td>173 Created tickets</td></td>
+<td>176 Created tickets</td></td>
+<td>178 Created tickets</td></td>
+<td>183 Created tickets</td></td>
+<td>184 Created tickets</td></td>
+<td>187 Created tickets</td></td>
+<td>192 Created tickets</td></td>
+<td>193 Created tickets</td></td>
+<td>197 Created tickets</td></td>
+<td>201 Created tickets</td></td>
+<td>206 Created tickets</td></td>
+<td>209 Created tickets</td></td>
+<td>211 Created tickets</td></td>
+<td>215 Created tickets</td></td>
+<td>217 Created tickets</td></td>
+<td>222 Created tickets</td></td>
+<td>226 Created tickets</td></td>
+<td>228 Created tickets</td></td>
+<td>233 Created tickets</td></td>
+<td>237 Created tickets</td></td>
+<td>239 Created tickets</td></td>
+<td>244 Created tickets</td></td>
+<td>245 Created tickets</td></td>
+<td>248 Created tickets</td></td>
+<td>249 Created tickets</td></td>
+<td>252 Created tickets</td></td>
+<td>253 Created tickets</td></td>
+<td>256 Created tickets</td></td>
+<td>258 Created tickets</td></td>
+</tr>
+</tbody>
+<tbody class="line2"><tr><td>2012-09-16</td></td>
+<td>2012-09-17</td></td>
+<td>2012-09-18</td></td>
+<td>2012-09-19</td></td>
+<td>2012-09-20</td></td>
+<td>2012-09-21</td></td>
+<td>2012-09-22</td></td>
+<td>2012-09-23</td></td>
+<td>2012-09-24</td></td>
+<td>2012-09-25</td></td>
+<td>2012-09-27</td></td>
+<td>2012-09-28</td></td>
+<td>2012-09-29</td></td>
+<td>2012-09-30</td></td>
+<td>2012-10-01</td></td>
+<td>2012-10-02</td></td>
+<td>2012-10-03</td></td>
+<td>2012-10-04</td></td>
+<td>2012-10-05</td></td>
+<td>2012-10-08</td></td>
+<td>2012-10-09</td></td>
+<td>2012-10-10</td></td>
+<td>2012-10-11</td></td>
+<td>2012-10-12</td></td>
+<td>2012-10-13</td></td>
+<td>2012-10-14</td></td>
+<td>2012-10-15</td></td>
+<td>2012-10-16</td></td>
+<td>2012-10-17</td></td>
+<td>2012-10-18</td></td>
+<td>2012-10-19</td></td>
+<td>2012-10-20</td></td>
+<td>2012-10-21</td></td>
+<td>2012-10-22</td></td>
+<td>2012-10-23</td></td>
+<td>2012-10-24</td></td>
+<td>2012-10-25</td></td>
+<td>2012-10-26</td></td>
+<td>2012-10-28</td></td>
+<td>2012-10-29</td></td>
+<td>2012-10-30</td></td>
+<td>2012-10-31</td></td>
+<td>2012-11-01</td></td>
+<td>2012-11-02</td></td>
+<td>2012-11-03</td></td>
+<td>2012-11-04</td></td>
+<td>2012-11-05</td></td>
+<td>2012-11-07</td></td>
+<td>2012-11-08</td></td>
+<td>2012-11-09</td></td>
+<td>2012-11-10</td></td>
+<td>2012-11-12</td></td>
+<td>2012-11-13</td></td>
+<td>2012-11-14</td></td>
+<td>2012-11-15</td></td>
+<td>2012-11-16</td></td>
+<td>2012-11-17</td></td>
+<td>2012-11-18</td></td>
+<td>2012-11-19</td></td>
+<td>2012-11-20</td></td>
+<td>2012-11-21</td></td>
+<td>2012-11-22</td></td>
+<td>2012-11-23</td></td>
+<td>2012-11-24</td></td>
+<td>2012-11-26</td></td>
+<td>2012-11-27</td></td>
+<td>2012-11-28</td></td>
+<td>2012-11-29</td></td>
+<td>2012-11-30</td></td>
+<td>2012-12-01</td></td>
+<td>2012-12-02</td></td>
+<td>2012-12-03</td></td>
+<td>2012-12-04</td></td>
+<td>2012-12-05</td></td>
+<td>2012-12-06</td></td>
+<td>2012-12-07</td></td>
+<td>2012-12-08</td></td>
+<td>2012-12-09</td></td>
+<td>2012-12-10</td></td>
+<td>2012-12-11</td></td>
+<td>2012-12-13</td></td>
+<td>2012-12-14</td></td>
+</tr>
+</tbody>
+<table id="closed_tickets" style="display: none;"><tfoot><tr><th>2012-09-18</th></th>
+<th>2012-09-21</th></th>
+<th>2012-09-22</th></th>
+<th>2012-09-24</th></th>
+<th>2012-09-25</th></th>
+<th>2012-09-26</th></th>
+<th>2012-09-27</th></th>
+<th>2012-09-29</th></th>
+<th>2012-10-02</th></th>
+<th>2012-10-03</th></th>
+<th>2012-10-05</th></th>
+<th>2012-10-07</th></th>
+<th>2012-10-08</th></th>
+<th>2012-10-09</th></th>
+<th>2012-10-10</th></th>
+<th>2012-10-11</th></th>
+<th>2012-10-12</th></th>
+<th>2012-10-13</th></th>
+<th>2012-10-14</th></th>
+<th>2012-10-15</th></th>
+<th>2012-10-16</th></th>
+<th>2012-10-17</th></th>
+<th>2012-10-18</th></th>
+<th>2012-10-20</th></th>
+<th>2012-10-21</th></th>
+<th>2012-10-22</th></th>
+<th>2012-10-23</th></th>
+<th>2012-10-24</th></th>
+<th>2012-10-25</th></th>
+<th>2012-10-26</th></th>
+<th>2012-10-30</th></th>
+<th>2012-10-31</th></th>
+<th>2012-11-02</th></th>
+<th>2012-11-03</th></th>
+<th>2012-11-04</th></th>
+<th>2012-11-05</th></th>
+<th>2012-11-06</th></th>
+<th>2012-11-07</th></th>
+<th>2012-11-08</th></th>
+<th>2012-11-10</th></th>
+<th>2012-11-13</th></th>
+<th>2012-11-14</th></th>
+<th>2012-11-15</th></th>
+<th>2012-11-16</th></th>
+<th>2012-11-17</th></th>
+<th>2012-11-19</th></th>
+<th>2012-11-21</th></th>
+<th>2012-11-23</th></th>
+<th>2012-11-24</th></th>
+<th>2012-11-26</th></th>
+<th>2012-11-27</th></th>
+<th>2012-11-28</th></th>
+<th>2012-11-29</th></th>
+<th>2012-11-30</th></th>
+<th>2012-12-01</th></th>
+<th>2012-12-02</th></th>
+<th>2012-12-04</th></th>
+<th>2012-12-07</th></th>
+<th>2012-12-08</th></th>
+<th>2012-12-09</th></th>
+<th>2012-12-10</th></th>
+<th>2012-12-11</th></th>
+<th>2012-12-13</th></th>
+<th>2012-12-14</th></th>
+</tr>
+</tfoot>
+<tbody class="data"><tr><td>4</td></td>
+<td>8</td></td>
+<td>9</td></td>
+<td>11</td></td>
+<td>13</td></td>
+<td>16</td></td>
+<td>18</td></td>
+<td>19</td></td>
+<td>24</td></td>
+<td>26</td></td>
+<td>29</td></td>
+<td>32</td></td>
+<td>35</td></td>
+<td>40</td></td>
+<td>42</td></td>
+<td>58</td></td>
+<td>64</td></td>
+<td>66</td></td>
+<td>69</td></td>
+<td>71</td></td>
+<td>73</td></td>
+<td>74</td></td>
+<td>75</td></td>
+<td>76</td></td>
+<td>80</td></td>
+<td>89</td></td>
+<td>92</td></td>
+<td>94</td></td>
+<td>98</td></td>
+<td>101</td></td>
+<td>102</td></td>
+<td>107</td></td>
+<td>108</td></td>
+<td>109</td></td>
+<td>113</td></td>
+<td>117</td></td>
+<td>122</td></td>
+<td>123</td></td>
+<td>124</td></td>
+<td>125</td></td>
+<td>127</td></td>
+<td>130</td></td>
+<td>133</td></td>
+<td>135</td></td>
+<td>138</td></td>
+<td>142</td></td>
+<td>145</td></td>
+<td>151</td></td>
+<td>153</td></td>
+<td>158</td></td>
+<td>159</td></td>
+<td>161</td></td>
+<td>190</td></td>
+<td>197</td></td>
+<td>199</td></td>
+<td>204</td></td>
+<td>207</td></td>
+<td>213</td></td>
+<td>215</td></td>
+<td>216</td></td>
+<td>218</td></td>
+<td>219</td></td>
+<td>220</td></td>
+<td>221</td></td>
+</tr>
+<tbody class="line1"><tr><td>4 Closed tickets</td></td>
+<td>8 Closed tickets</td></td>
+<td>9 Closed tickets</td></td>
+<td>11 Closed tickets</td></td>
+<td>13 Closed tickets</td></td>
+<td>16 Closed tickets</td></td>
+<td>18 Closed tickets</td></td>
+<td>19 Closed tickets</td></td>
+<td>24 Closed tickets</td></td>
+<td>26 Closed tickets</td></td>
+<td>29 Closed tickets</td></td>
+<td>32 Closed tickets</td></td>
+<td>35 Closed tickets</td></td>
+<td>40 Closed tickets</td></td>
+<td>42 Closed tickets</td></td>
+<td>58 Closed tickets</td></td>
+<td>64 Closed tickets</td></td>
+<td>66 Closed tickets</td></td>
+<td>69 Closed tickets</td></td>
+<td>71 Closed tickets</td></td>
+<td>73 Closed tickets</td></td>
+<td>74 Closed tickets</td></td>
+<td>75 Closed tickets</td></td>
+<td>76 Closed tickets</td></td>
+<td>80 Closed tickets</td></td>
+<td>89 Closed tickets</td></td>
+<td>92 Closed tickets</td></td>
+<td>94 Closed tickets</td></td>
+<td>98 Closed tickets</td></td>
+<td>101 Closed tickets</td></td>
+<td>102 Closed tickets</td></td>
+<td>107 Closed tickets</td></td>
+<td>108 Closed tickets</td></td>
+<td>109 Closed tickets</td></td>
+<td>113 Closed tickets</td></td>
+<td>117 Closed tickets</td></td>
+<td>122 Closed tickets</td></td>
+<td>123 Closed tickets</td></td>
+<td>124 Closed tickets</td></td>
+<td>125 Closed tickets</td></td>
+<td>127 Closed tickets</td></td>
+<td>130 Closed tickets</td></td>
+<td>133 Closed tickets</td></td>
+<td>135 Closed tickets</td></td>
+<td>138 Closed tickets</td></td>
+<td>142 Closed tickets</td></td>
+<td>145 Closed tickets</td></td>
+<td>151 Closed tickets</td></td>
+<td>153 Closed tickets</td></td>
+<td>158 Closed tickets</td></td>
+<td>159 Closed tickets</td></td>
+<td>161 Closed tickets</td></td>
+<td>190 Closed tickets</td></td>
+<td>197 Closed tickets</td></td>
+<td>199 Closed tickets</td></td>
+<td>204 Closed tickets</td></td>
+<td>207 Closed tickets</td></td>
+<td>213 Closed tickets</td></td>
+<td>215 Closed tickets</td></td>
+<td>216 Closed tickets</td></td>
+<td>218 Closed tickets</td></td>
+<td>219 Closed tickets</td></td>
+<td>220 Closed tickets</td></td>
+<td>221 Closed tickets</td></td>
+</tr>
+</tbody>
+</tbody>
+<tbody class="line2"><tr><td>2012-09-16</td></td>
+<td>2012-09-17</td></td>
+<td>2012-09-18</td></td>
+<td>2012-09-19</td></td>
+<td>2012-09-20</td></td>
+<td>2012-09-21</td></td>
+<td>2012-09-22</td></td>
+<td>2012-09-23</td></td>
+<td>2012-09-24</td></td>
+<td>2012-09-25</td></td>
+<td>2012-09-27</td></td>
+<td>2012-09-28</td></td>
+<td>2012-09-29</td></td>
+<td>2012-09-30</td></td>
+<td>2012-10-01</td></td>
+<td>2012-10-02</td></td>
+<td>2012-10-03</td></td>
+<td>2012-10-04</td></td>
+<td>2012-10-05</td></td>
+<td>2012-10-08</td></td>
+<td>2012-10-09</td></td>
+<td>2012-10-10</td></td>
+<td>2012-10-11</td></td>
+<td>2012-10-12</td></td>
+<td>2012-10-13</td></td>
+<td>2012-10-14</td></td>
+<td>2012-10-15</td></td>
+<td>2012-10-16</td></td>
+<td>2012-10-17</td></td>
+<td>2012-10-18</td></td>
+<td>2012-10-19</td></td>
+<td>2012-10-20</td></td>
+<td>2012-10-21</td></td>
+<td>2012-10-22</td></td>
+<td>2012-10-23</td></td>
+<td>2012-10-24</td></td>
+<td>2012-10-25</td></td>
+<td>2012-10-26</td></td>
+<td>2012-10-28</td></td>
+<td>2012-10-29</td></td>
+<td>2012-10-30</td></td>
+<td>2012-10-31</td></td>
+<td>2012-11-01</td></td>
+<td>2012-11-02</td></td>
+<td>2012-11-03</td></td>
+<td>2012-11-04</td></td>
+<td>2012-11-05</td></td>
+<td>2012-11-07</td></td>
+<td>2012-11-08</td></td>
+<td>2012-11-09</td></td>
+<td>2012-11-10</td></td>
+<td>2012-11-12</td></td>
+<td>2012-11-13</td></td>
+<td>2012-11-14</td></td>
+<td>2012-11-15</td></td>
+<td>2012-11-16</td></td>
+<td>2012-11-17</td></td>
+<td>2012-11-18</td></td>
+<td>2012-11-19</td></td>
+<td>2012-11-20</td></td>
+<td>2012-11-21</td></td>
+<td>2012-11-22</td></td>
+<td>2012-11-23</td></td>
+<td>2012-11-24</td></td>
+<td>2012-11-26</td></td>
+<td>2012-11-27</td></td>
+<td>2012-11-28</td></td>
+<td>2012-11-29</td></td>
+<td>2012-11-30</td></td>
+<td>2012-12-01</td></td>
+<td>2012-12-02</td></td>
+<td>2012-12-03</td></td>
+<td>2012-12-04</td></td>
+<td>2012-12-05</td></td>
+<td>2012-12-06</td></td>
+<td>2012-12-07</td></td>
+<td>2012-12-08</td></td>
+<td>2012-12-09</td></td>
+<td>2012-12-10</td></td>
+<td>2012-12-11</td></td>
+<td>2012-12-13</td></td>
+<td>2012-12-14</td></td>
+</tr>
+</tbody>
+</table>
+</table>
+<script type="text/javascript">var render_graphic = function(canvas_name,lines){var canvas = Raphael(canvas_name, 840, 250);           
+//plot the first line with labels
+canvas.lineChart({data_holder: head(lines).table_name,                    
+width: 840,
+show_area: false,
+mouse_coords: 'rect',
+x_labels_step: 3,
+y_labels_count: 5,
+colors: {master: head(lines).color,
+line1: "#000000",
+line2: head(lines).color}
+});
+if (length(lines) > 1){var plot_on = function(line){canvas.lineChart({data_holder: line.table_name,
+width: 840,
+mouse_coords: 'rect',
+colors: {master: line.color,
+line1: "#000000",
+line2: line.color,}
+});}
+//add the missing lines
+exports.each(plot_on,tail(lines))}}
+render_graphic('created-tickets',[{color: "#01A8F0", table_name: 'created_tickets'}])
+render_graphic('closed-tickets',[{color: "#32CD32", table_name: 'closed_tickets'}])  
+render_graphic('created-vs-closed-tickets',[{color: "#01A8F0", table_name: 'created_tickets'},{color: "#32CD32", table_name: 'closed_tickets'}])</script>
+</html>
+
