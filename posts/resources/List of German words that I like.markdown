@@ -18,6 +18,8 @@ See also [other words I _love_](http://www.wordnik.com/users/kmels/favorites).
 
 # Concerning meaning
 
+* **[Lebensmittel](http://www.dict.cc/?s=Lebensmittel)**, literally "Mediums of life" since 1. Leben means life and mittel means mediums. Detergent for the washing machine for example, is called *Waschmittel*. It is pretty neat to think about the meaning of it when I'm doing my accounting and instead of thinking groceries, I think "Mediums of Life".
+
 * **Frühstück** (Noun), means "breakfast". **Früh** == "early" and **Stück** == "piece". It thought it was a beautifully constructed word. Besides, the meaning and picturing of one's breakfast _lends itself_ to greater imagination, so the _raw_ "early stuck" suits it well IMO.
 
     A related music recommendation then: [Pink Floyd - Alan's Psychedelic Breakfast](http://www.youtube.com/watch?v=oPxJw5YfFqk) -- I like the original version better though.
