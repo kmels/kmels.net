@@ -2,7 +2,7 @@
 title: About
 ---
 
-<div class="inline-image">![Me, late 2012](/images/me2012.png "Carlos López-Camey, 2012") </div>
+<div class="inline-image">![Me, late 2012](/images/me-2013.png "Carlos López-Camey, 2012") </div>
 
 Hey! I'm a Computer Science student at [Uni Freiburg](http://www.uni-freiburg.de/). This website is an archive of thoughts, guides, or work I do. 
 
