@@ -12,7 +12,7 @@ I enjoy music, my favorite band is called Pink Floyd.
 
 I appreciate creativity when it comes with values, like those of the Free Software or Open Source Software [1]. That is why I'm working on [Tersus](http://tersusland.com) with [Ernesto Rodriguez](http://netowork.me).
 
-I am also working on [automatic testing for Haskell](http://hub.darcs.net/kmels/hs-dart), and on an [experimental desktop indexer](http://hub.darcs.net/kmels/orange)
+I am also working on [automatic testing for Haskell](http://github.com/kmels/haskell-dart), and on an [experimental desktop indexer](http://github/kmels/orange)
 
 My full name is Carlos Eduardo López Camey, my nickname is kmels and my email address is `c.lopez (at) kmels (dot) net`.
 
