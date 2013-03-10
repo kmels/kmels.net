@@ -4,7 +4,7 @@ title: Carlos López-Camey
 
 <div class="inline-image">![Me, late 2012](/images/me-2013.png "Carlos López-Camey, 2012") </div>
 
-Hello, how do you do? I'm a Computer Science student at [Uni Freiburg](http://www.uni-freiburg.de/). Earlier I studied in Guatemala, where I come from. This website is an archive of thoughts, guides, or work I do. 
+How do you do? I'm a Computer Science student at [Uni Freiburg](http://www.uni-freiburg.de/). Earlier I studied in Guatemala, where I come from. This website is an archive of thoughts, guides, or work I do. 
 
 I like to have fun with Functional Programming, a way of writing computer programs that can be precisely studied within the frameworks of mathematical logic. 
 
@@ -12,7 +12,9 @@ I enjoy music, my favorite band is called Pink Floyd.
 
 I appreciate creativity when it comes with values, like those of the Free Software or Open Source Software [1]. That is why I'm working on [Tersus](http://tersusland.com) with [Ernesto Rodriguez](http://netowork.me).
 
-I am also working on [automatic testing for Haskell](http://github.com/kmels/haskell-dart), and on an [experimental desktop indexer](http://github/kmels/orange)
+I am also working on behalf of the University of Freiburg on [automatic testing of programs in Haskell](http://github.com/kmels/dart-haskell). 
+
+<!-- and on an [experimental desktop indexer](http://github/kmels/orange) -->
 
 My full name is Carlos Eduardo López Camey, my nickname is kmels and my email address is `c.lopez (at) kmels (dot) net`.
 
