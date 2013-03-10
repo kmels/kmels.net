@@ -27,6 +27,7 @@ Articles are sorted by date.
     - [Call org-mobile-push automatically after saving an org-file](posts/how-to/Call org-mobile-push automatically after saving an org-file.html)
 
 * ### Some Homework
+    - [In der Heimat zu arbeiten vs. ins Ausland zu gehen](posts/german/in-der-heimat-arbeiten-vs-ins-ausland-zu-gehen.html)
     - [Problemas y Soluciones de Algebra Lineal 2, Examen final](posts/uvg/Problemas y Soluciones de Algebra Lineal 2, Examen final.html)
     - [Circuito contador de impares ascendentes de 4 bits](posts/uvg/Circuito contador de impares ascendentes de 4 bits.html)
     - [Tema de actualidad, el Memristor](posts/uvg/Tema de actualidad, el Memristor.html)

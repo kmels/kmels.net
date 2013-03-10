@@ -21,6 +21,10 @@ a:hover {
   text-decoration: underline;
 }
 
+/* text tweaks */
+.normal-font-weight { font-weight: normal }
+
+/* image tweaks */ 
 div.inline-image{
     float: left;
     display: inline;
