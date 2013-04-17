@@ -6,7 +6,7 @@ lang: es
 tags: poema,amor,deseo
 ---
 
-Esto es algo que escribí un día que no podía desear más. :-)
+Esto es algo que escribí un día en el que no podía desear más. :-)
 
 ___Fantasías de lo deseado___
 
