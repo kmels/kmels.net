@@ -3,6 +3,7 @@ title: Solución de mi exámen final (Algebra lineal 2)
 author: Carlos Lopez
 date: November 24, 2011
 lang: es
+tags: algebra-lineal, uvg
 ---
 
 1. Problemas de calentamiento:

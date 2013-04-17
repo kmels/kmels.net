@@ -4,6 +4,7 @@ author: Carlos Lopez
 date: February 2012
 lang: en
 published: false
+tags: language, semantics
 ---
 
 When you are learning a new language, you discover all these words and try do the translation to your "mother language" and you question yourself: why isn't it like that in my native language? Or something similar.. so here's a list of words in German that I've liked at least for a small amount of time.

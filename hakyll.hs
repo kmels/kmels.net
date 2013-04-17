@@ -5,158 +5,178 @@ module Main where
 import Prelude hiding (id)
 import Control.Category (id)
 import Control.Arrow ((>>>), (&&&), (***), (+++), (|||), arr)
-import Data.Monoid (mempty, mconcat)
+import Data.Monoid (mempty, mconcat, mappend)
 import Data.Either (rights)
 import Data.Maybe
 import Data.Time
 import Data.Time.Format
 
+import Control.Monad.IO.Class
 import Hakyll
-
-import Text.Pandoc (HTMLMathMethod(..),WriterOptions(..), defaultWriterOptions)
-import Text.Pandoc.Shared (ObfuscationMethod(..))
+--import Text.Pandoc (HTMLMathMethod(..),WriterOptions(..), defaultWriterOptions)
+--import Text.Pandoc.Shared (ObfuscationMethod(..))
+import Text.Pandoc.Options(WriterOptions(..))
 
 main :: IO ()
 main = hakyll $ do
     -- Compress CSS
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler        
+    match "css/*" $ route idRoute >> compile compressCssCompiler        
       
-    -- Copy static files, list of glob's doesn't work now, leaving several blocks
-    match "robots.txt" $ do
-        route   idRoute
-    	compile copyFileCompiler
-    
-    match "images/*" $ do
-      route   idRoute
-      compile copyFileCompiler
-    
-    match "images/*/*" $ do
-      route   idRoute
-      compile copyFileCompiler
-      
-    match "files/*" $ do
-      route   idRoute
-      compile copyFileCompiler
+    -- Copy static files
+    match ("images/**" .||. "favicon.ico" .||. "robots.txt") $ do
+       route   idRoute
+       compile copyFileCompiler
+       
+    -- match "files/**" $ do
+    --   route idRoute
+    --   compile copyFileCompiler 
 
-    -- Render projects
+    tags <- buildTags "posts/*" (fromCapture "tags/*.html")
+        
+    -- Render each project page
     match "projects/*" $ do
       route $ setExtension ".html"
-      compile $ articleCompiler
-        >>> applyTemplateCompiler "templates/project.html"
-        >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
+      compile $ pandocCompiler
+        >>= loadAndApplyTemplate "templates/project.html" (postCtx tags)
+        >>= loadAndApplyTemplate  "templates/default.html" defaultContext
+        >>= relativizeUrls
     
-    match "projects/*/*" $ do
+    match "projects/**" $ do
       route   idRoute
       compile copyFileCompiler
     
-    match "projects/*/*/*" $ do
+    match "projects/**" $ do
       route   idRoute
       compile copyFileCompiler
       
     -- Render posts
-    match "posts/*/*" $ do
+    match "posts/**" $ do
         route   $ setExtension ".html"
-        compile $ articleCompiler
-            >>> applyTemplateCompiler "templates/post.html"
-            >>> applyTemplateCompiler "templates/default.html"
-            >>> relativizeUrlsCompiler
+        compile $ do 
+          pandocCompiler
+            >>= loadAndApplyTemplate "templates/post.html" (postCtx tags)
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= relativizeUrls
 
-    -- Render posts list
-    match "posts.html" $ route idRoute
-    create "posts.html" $ constA mempty
-        >>> arr (setField "title" "All posts")
-        >>> requireAllA "posts/*/*" addPostList
-        >>> renderTagsField "prettytags" (fromCapture "tags/*")
-        >>> applyTemplateCompiler "templates/posts.html"
-        >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler 
-
+    -- Posts list
+    create ["posts.html"] $ do
+      route idRoute
+      compile $ do
+        list <- postList tags "posts/**" recentFirst
+        makeItem list
+          >>= loadAndApplyTemplate "templates/posts.html"
+          (constField "title" "Posts!" `mappend`
+           constField "posts" "ASDF" `mappend`
+           defaultContext)
+          >>= loadAndApplyTemplate "templates/default.html" defaultContext
+          >>= relativizeUrls
+                
     -- Index
     match "index.markdown" $ do
       route $ setExtension ".html"
-      compile $ articleCompiler
-       -- >>> arr (setField "title" "All posts")
-        >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
-
-    -- Tags
-    create "tags" $
-        requireAll "posts/*" (\_ ps -> readTags ps :: Tags String)
-
-    -- Add a tag list compiler for every tag
-    match "tags/*" $ route $ setExtension ".html"
-    metaCompile $ require_ "tags"
-        >>> arr tagsMap
-        >>> arr (map (\(t, p) -> (tagIdentifier t, makeTagList t p)))
+      compile $ do
+        pandocCompiler
+        >>= loadAndApplyTemplate "templates/default.html" (indexCtx "list" tags)
+        >>= relativizeUrls
         
     -- Read templates
     match "templates/*" $ compile templateCompiler
-
-    -- Render feed
-    match  "feed.xml" $ route idRoute
-    create "feed.xml" $
-        requireAll_ "posts/*" >>> renderRss mainFeed
     
     -- Static pages
-    match (list ["about.markdown","dashboard.markdown","contact.markdown","404.markdown"]) $ do
-    route   $ setExtension "html"
-    compile $ pageCompiler
-        >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
+    match (fromList static_pages) $ do
+      route   $ setExtension "html"
+      compile $ pandocCompiler
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+        >>= relativizeUrls
 
-    where       
-      renderTagList' :: Compiler (Tags String) String
-      renderTagList' = renderTagList tagIdentifier
+  where
+--    static_pages :: [String]
+    static_pages = ["about.markdown","dashboard.markdown","contact.markdown","404.markdown"]
+    --   renderTagList' :: Compiler (Tags String) String
+    --   renderTagList' = renderTagList tagIdentifier
 
-      tagIdentifier :: String -> Identifier (Page String)
-      tagIdentifier = fromCapture "tags/*"
+    --   tagIdentifier :: String -> Identifier (Page String)
+    --   tagIdentifier = fromCapture "tags/*"
       
     
     
-makeTagList :: String
-            -> [Page String]
-            -> Compiler () (Page String)
-makeTagList tag posts =
-    constA posts
-        >>> pageListCompiler recentFirst "templates/postitem.html"
-        >>> arr (copyBodyToField "posts" . fromBody)
-        >>> arr (setField "title" ("Posts tagged " ++ tag))
-        >>> applyTemplateCompiler "templates/posts.html"
-        >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
+-- makeTagList :: String
+--             -> [Page String]
+--             -> Compiler () (Page String)
+-- makeTagList tag posts =
+--     constA posts
+--         >>> pageListCompiler recentFirst "templates/postitem.html"
+--         >>> arr (copyBodyToField "posts" . fromBody)
+--         >>> arr (setField "title" ("Posts tagged " ++ tag))
+--         >>> applyTemplateCompiler "templates/posts.html"
+--         >>> applyTemplateCompiler "templates/default.html"
+--         >>> relativizeUrlsCompiler
         
 -- | Auxiliary compiler: generate a post list from a list of given posts, and
 -- add it to the current page under @$posts@
 --
-addPostList :: Compiler (Page String, [Page String]) (Page String)
-addPostList = setFieldA "posts" $
-    arr (reverse . chronological)
-        >>> require "templates/postitem.html" (\p t -> map (applyTemplate t) p)
-        >>> arr mconcat
-        >>> arr pageBody
+-- addPostList :: Compiler (Item String, [Item String]) (Item String)
+-- addPostList = setFieldA "posts" $
+--     arr (reverse . chronological)
+--         >>> require "templates/postitem.html" (\p t -> map (applyTemplate t) p)
+--         >>> arr mconcat
+--         >>> arr pageBody
 
 -- from https://github.com/beastaugh/extralogical.net/blob/d96a3ecd467facc68db0c8eada784313968b6a45/site.hs#L132-142
 -- | Read a page, add default fields, substitute fields and render with Pandoc.
 --
-articleCompiler :: Compiler Resource (Page String)
-articleCompiler = pageCompilerWith defaultHakyllParserState articleWriterOptions
+--articleCompiler :: Compiler Resource (Page String)
+--articleCompiler = pageCompilerWith defaultHakyllParserState articleWriterOptions
 
 -- | Pandoc writer options for articles on Extralogical.
 --
-articleWriterOptions :: WriterOptions
-articleWriterOptions = defaultWriterOptions
-    { writerEmailObfuscation = NoObfuscation
-    , writerHTMLMathMethod   = MathML Nothing
-    , writerLiterateHaskell  = True
-    }
+-- articleWriterOptions :: WriterOptions
+-- articleWriterOptions = defaultWriterOptions
+--     { writerEmailObfuscation = NoObfuscation
+--     , writerHTMLMathMethod   = MathML Nothing
+--     , writerLiterateHaskell  = True
+--     }
 
-mainFeed = FeedConfiguration
-    { feedRoot         = "http://kmels.net"
-    , feedTitle       = "kmels posts"
-    , feedDescription = "Articles from Carlos Lopez-Camey"
-    , feedAuthorName  = "Carlos Lopez-Camey"
+postList :: Tags -> Pattern -> ([Item String] -> Compiler [Item String])
+         -> Compiler String
+postList tags pattern preprocess' = do
+    postItemTpl <- loadBody "templates/postitem.html"
+    posts <- preprocess' =<< loadAll pattern
+    applyTemplateList postItemTpl (postCtx tags) posts
+    
+feedConfiguration :: FeedConfiguration
+feedConfiguration = FeedConfiguration
+    { feedTitle = "kmels.net - latest content"
+    , feedDescription = "Articles listed in kmels.net"
+    , feedAuthorName = "Carlos López-Camey"
+    , feedAuthorEmail = "c.lopez@kmels.net"
+    , feedRoot = "http://kmels.net"
     }
+    
+----------------------------------------
+--               Contexts
+----------------------------------------
+feedCtx :: Context String
+feedCtx = mconcat [ bodyField "description"
+                 , defaultContext
+                 ]
+
+postCtx :: Tags -> Context String
+postCtx tags = mconcat
+    [ --modificationTimeField "mtime" "%U"
+--      dateField "date" "%B %e, %Y"
+     tagsField "tags" tags
+    , defaultContext
+    ]    
+    
+indexCtx :: String -> Tags -> Context String 
+indexCtx list tags = constField "posts" list `mappend`
+                field "tags" (\_ -> renderTagList tags) `mappend`
+                defaultContext
+----------------------------------------
+--               Pandoc
+----------------------------------------
+
+--lhsExtension :: Extension
+--lhsExtension = Ext_literate_haskell
 

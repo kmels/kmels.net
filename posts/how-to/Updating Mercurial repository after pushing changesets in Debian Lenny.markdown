@@ -3,6 +3,7 @@ title: Updating mercurial repository after pushing changesets (Debian Lenny)
 author: Carlos López Camey
 date: April 01, 2011
 lang: en
+tags: linux, mercurial
 ---
 Suppose the remote repository (the repository you want to update) is in ''/home/you/hg'' and the user "you" owns the file /home/you/hg/.hg/hgrc
 

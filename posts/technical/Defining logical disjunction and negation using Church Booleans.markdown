@@ -3,6 +3,7 @@ title: Logical disjunction and negation as combinators with Church Booleans
 author: Carlos López
 date: January 28, 2011
 lang: en
+tags: lambda-calculus, combinators, boolean
 ---
 
 Going through chapter 5 of [TAPL](http://www.cis.upenn.edu/~bcpierce/tapl/ "TAPL"), I found myself dealing, for the first time, with combinators in the lambda calculus, so I’ll try to practice what I learnt doing a small exercise.

@@ -12,7 +12,7 @@ I upgraded to Ubuntu 12.04; configuring xmonad took longer than expected. How it
 
         sudo apt-get install libxinerama-dev libxft-dev zlib1g-dev libxft-dev
 
- 1. Install `xmonad`/`xmonad-contrib`, either with `cabal`<sup id="sup0"><a href="#ref0">[0]</a></sup>. or `apt-get`. I prefer cabal:
+ 1. Install `xmonad` and xmonad-contrib`, either with <a href="#ref0">cabal <sup id="sup0">[0]</sup></a> or `apt-get`. I prefer cabal:
 
         cabal install xmonad
     	cabal install xmonad-contrib

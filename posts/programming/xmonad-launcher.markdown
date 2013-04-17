@@ -1,7 +1,7 @@
 ---
 title: A Prompt with multiple functionalities in XMonad (XMonad.Actions.Launcher)
 author: Carlos López
-date: June 23th, 2011
+date: June 23, 2011
 lang: es
 tags: xmonad,xmonad-contrib,prompt,xprompt
 ---

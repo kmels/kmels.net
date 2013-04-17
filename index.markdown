@@ -2,10 +2,15 @@
 title: Homepage of Carlos López-Camey
 ---
 
-Articles are sorted by date.
+Articles are sorted by originality/date.
+
+* ### Thoughts
+    - [Fantasías de lo deseado](posts/topics/Fantasias de lo deseado.html)
+
+    - [My favorite Pink Floyd songs](posts/topics/My favorite Pink Floyd songs.html)
 
 * ### Programming
-    - [CYK Algorithm in Haskell, a $O(n^3)$ algorithm that solves the word probelm](posts/programming/cyk.html)
+    - [CYK Algorithm in Haskell, a O(n<sup>3</sup>) algorithm that solves the word probelm](posts/programming/cyk.html)
 
     - [XMonad.Actions.Launcher, a prompt with multiple functionalities](posts/programming/xmonad-launcher.html)
 

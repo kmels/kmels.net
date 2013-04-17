@@ -3,6 +3,7 @@ title: Mapa conceptual de Programación orientada a objetos
 author: Carlos López Camey, José Fernando Valdez, José García Meagli
 date: January 28, 2009
 lang: es
+tags: uvg
 ---
 
 Un mapa conceptual sobre Programación Orientada a Objetos.

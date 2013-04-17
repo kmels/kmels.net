@@ -1,36 +1,36 @@
 ---
 title: CYK Algorithm in Haskell
 author: Carlos López
-date: Dec 10th, 2012
+date: December 10, 2012
 lang: en
 tags: parsing,O(n^3),cyk,algorithm,dynamic programming
 ---
 
-This page was generated from a literall haskell file. You can download it and run it yourself: [cyk.lhs](http://hub.darcs.net/kmels/haskell-gym/algorithms/cyk.lhs)
+This program is also posted in School of Haskell, where it can be partially run. You can also [download the source code](http://hub.darcs.net/kmels/haskell-gym/algorithms/cyk.lhs)
 
 LICENSE
 ---
- Public domain
+Public domain
 
 Description
 ----
-This program solves the word problem using the [CYK algorithm](http://en.wikipedia.org/wiki/CYK_algorithm). It takes a grammar $G$ and a word $w$ as input and outputs a matrix $M$ from which it can be decided if $w \in L(G)$.
+This program solves the word problem using the [CYK algorithm](http://en.wikipedia.org/wiki/CYK_algorithm). It takes a grammar $G$ and a word $w$ as input and outputs a matrix $M$ from which it can be decided if $w \in L(G)$, or not.
 
 > import Data.List
 > import Data.Maybe
 
 Data Structures
 ----
-A Symbol $S$ in a CNF context free grammar can be a either a non terminal, a terminal or the concatenation of two non terminal symbols. 
-
-**Note**: The type system lets us build the concatenation of two terminals, such construct however is not allowed in a CNF grammar.
-
-> data Symbol = T Char | NT String | C Symbol Symbol 
->             deriving Eq
+A Symbol $S$ in a [CNF](http://en.wikipedia.org/wiki/Chomsky_normal_form) context free grammar can be a either a non terminal, a terminal or the concatenation of two non terminal symbols. 
 
  * The constructor T represents Terminal
  * The constructor NT represents a non terminal
  * The constructor C represents a concatenation of two symbols
+ 
+> data Symbol = T Char | NT String | C Symbol Symbol 
+>             deriving Eq
+
+We have tipified `Symbol` in a way that concatenation of two terminals,e.g. `C (T 'a') (T 'b')`), is possible, however such construct is not allowed in a CNF grammar.
 
 > instance Show Symbol where
 >   show (T c) = [c]
@@ -40,7 +40,7 @@ A Symbol $S$ in a CNF context free grammar can be a either a non terminal, a ter
 > type Production = (Symbol,Symbol) 
 > type Grammar = ([Production],Symbol)
 
-**Note**: Again, we can have a Grammar whose start symbol is not a non terminal, but that is not allowed.
+Again, `Grammar` can have a have a terminal as its start symbol, that is not allowed, it rather defeats the purpose of the algorithm.
 
 Algorithm
 ----
@@ -81,7 +81,7 @@ Algorithm
 Helper functions 
 ---
 
-Given a production $A$ symbol $S$. This function returns true if and only if $S$ is of the form $A {\Rightarrow_G}^* S$ where $S = BC$
+Given a production $A$ and symbol $S$, `isConcatenation` returns true, if and only if, $S$ is of the form $A {\Rightarrow_G}^* S$ where $S = BC$ for some $B$ and $C$.
 
 > isConcatenation :: Production -> Symbol -> Bool
 > production@(NT a,C b c)  `isConcatenation` (C b' c') = b == b' && c == c'

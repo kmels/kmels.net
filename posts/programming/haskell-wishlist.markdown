@@ -1,7 +1,7 @@
 ---
 title: My Haskell wishlist
 author: Carlos López
-published: December 31, 2999
+date: 
 lang: en
 tags: haskell,wishlist
 ---
