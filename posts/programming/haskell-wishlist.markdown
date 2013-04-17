@@ -1,4 +1,10 @@
-
+---
+title: My Haskell wishlist
+author: Carlos López
+published: December 31, 2999
+lang: en
+tags: haskell,wishlist
+---
 
 in ghci:
 
@@ -17,5 +23,18 @@ Prelude Data.Text> splitAt 1 xs
   > 
   
   Fix: call `Data.Text.splitAt`
-  Wish: `Text.splitAt` should work too.
+  Wish: `Text.splitAt` should work too.c
 
+
+* haskell-mode
+
+ - Support region auto-indentation. To fix, look for the error message "Auto-reindentation of a region is not supported"
+
+
+## Higher precedence for `>>`!
+
+Suppose I've got a function `debugM :: String -> IO ()` that debugs, and a function `compute :: IO ()`. Then I can't write
+
+`debugM $ "going computing" >> compute`
+
+because `$` has so much precedence.
