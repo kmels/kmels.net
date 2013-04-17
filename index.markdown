@@ -2,12 +2,7 @@
 title: Homepage of Carlos López-Camey
 ---
 
-Articles are sorted by originality/date.
-
-* ### Thoughts
-    - [Fantasías de lo deseado](posts/topics/Fantasias de lo deseado.html)
-
-    - [My favorite Pink Floyd songs](posts/topics/My favorite Pink Floyd songs.html)
+Articles are sorted by date.
 
 * ### Programming
     - [CYK Algorithm in Haskell, a O(n<sup>3</sup>) algorithm that solves the word probelm](posts/programming/cyk.html)
@@ -16,6 +11,12 @@ Articles are sorted by originality/date.
 
 * ### Projects
     - [Trac statistics](projects/trac-statistics.html)
+
+
+* ### Thoughts
+    - [Fantasías de lo deseado](posts/topics/Fantasias de lo deseado.html)
+
+    - [My favorite Pink Floyd songs](posts/topics/My favorite Pink Floyd songs.html)
 
 * ### Technical
     - [Defining logical disjunction and negation using Church Booleans](posts/technical/Defining logical disjunction and negation using Church Booleans.html)
