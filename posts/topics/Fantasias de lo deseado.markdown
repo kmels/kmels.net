@@ -6,6 +6,8 @@ lang: es
 tags: poema,amor,deseo
 ---
 
+Esto es algo que escribí un día que no podía desear más. :-)
+
 ___Fantasías de lo deseado___
 
 La expectativa no concretada y reaccionada,  <br />
