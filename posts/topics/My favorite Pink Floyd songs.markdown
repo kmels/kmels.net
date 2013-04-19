@@ -26,7 +26,7 @@ was one of the few lyrics completely written by Richard Wright.
 
  * **Echoes**: I think this might be my all time favorite.
 The very first note calls for attention. Special about it is, its
-direct relationship to nature. 23 amazing minutes
+direct relationship to nature, where everything seems so calm and fluid. 23 amazing minutes
 making this track one of the very finest master pieces of sound ever created
 by a group of musicians.
 

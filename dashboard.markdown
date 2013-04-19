@@ -2,6 +2,31 @@
 title: Dashboard
 ---
 
+<!--------------------------------------------------------------------------------> 
+# SS2013
+
+<center>
+<table class="table"> <thead> <tr> <th>
+  #### Uni Freiburg
+  </th></tr></thead> 
+  <tbody><tr><td>
+
+ - [Stochastik](http://www.stochastik.uni-freiburg.de/Vorlesungen/vvSS2013/VorStochInfo/)
+
+ - [Optimierung](http://ac.informatik.uni-freiburg.de/teaching/ss_13/optimization.php)
+
+ - [Künstliche Intelligenz](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/) ([Lectures](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/lecture.html), [Exercises](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/exercises.html), [Book](http://aima.cs.berkeley.edu/))
+
+ - [Softwarepraktikum](https://monteverdi.informatik.uni-freiburg.de/) ([Forum](https://monteverdi.informatik.uni-freiburg.de/sopraboard/index.php), [Wiki](https://monteverdi.informatik.uni-freiburg.de/), [Gruppeneinteilung](https://monteverdi.informatik.uni-freiburg.de/soprawiki/Gruppeneinteilung))
+
+ - [Softwaretechnik ](http://dbis.informatik.uni-freiburg.de/index.php?course=WS1213/Kursvorlesung/Datenbanken+und+Informationssysteme/index.html) [(Übungen)](http://dbis.informatik.uni-freiburg.de/lehre/WS1213/Kursvorlesung/Datenbanken+und+Informationssysteme/uebungen.html)          
+
+      </td></tr></tbody></table>
+</center>
+
+<!--------------------------------------------------------------------------------> 
+# WS2012
+
 <table class="table">
   <thead>
   <tr>
@@ -16,7 +41,6 @@ title: Dashboard
   <tbody>
   <tr>
   <td>
-
 
  - [Informatik III: (Theoretische Informatik)](http://www.informatik.uni-freiburg.de/~ki/teaching/ws1213/info3/)
 

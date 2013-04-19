@@ -18,8 +18,8 @@ y lo natural conectado bien ordenado. <br />
 Una ida completa por miradas exageradas, <br />
 productos atrapantes y duraciones prohibidas. <br />
 Un viaje sin prisa con desvíos incorporados, <br />
-la constante intención, para siempre sin excepción. <br />
+la constante intención: para siempre sin excepción. <br />
 
 La distincción de vos incierta, <br />
 la que asombra y no consiente, <br />
-la que no se va, la que siempre viene. <br />
+la que no se va, la que solo viene. <br />
