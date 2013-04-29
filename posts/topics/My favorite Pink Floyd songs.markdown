@@ -10,6 +10,23 @@ I thought I could comment on what my opinion is on some tracks from my
 favorite band. Albums are sorted by release date, tracks by number
 within the album.
 
+A Saucerful of Secrets
+----
+
+* **Set The Controls For The Heart Of The Sun**. Just... terrific.
+It makes me think of a desert planet, probably because of Pompeii. The
+title summarizes the lyrics on this one for me; it is about trying to
+masterize mind controls, the most important controls you will ever
+set. Overall enjoyment: 9/10
+
+<!--Atom Heart Mother
+----
+
+ * **Summer 68**: This *must* be about a girl. I interpret it mostly
+as reproach. My favorite part is the beginning: "We said goodbye
+before we said hello", suggesting time could have improved history. It
+was one of the few lyrics completely written by Richard Wright. -->
+
 Meddle
 ----
  * **One of these Days**. Exciting, turbolent and awesome start. The
@@ -18,11 +35,6 @@ parts where I always turn the volume up for major experiencing. It is
 simply the culmination of the songs' take off (from the start!). I
 like to hear this one when I haven't heard Floyd in a while, usually
 getting an exciting feeling. Overall enjoyment: 8.5/10.
-
- * **Summer 68**: This *must* be about a girl. I interpret it mostly
-as reproach. My favorite part is the beginning: "We said goodbye
-before we said hello", suggesting time could have improved history. It
-was one of the few lyrics completely written by Richard Wright.
 
  * **Echoes**: I think this might be my all time favorite.
 The very first note calls for attention. Special about it is, its
@@ -44,12 +56,6 @@ Overall enjoyment: 9/10
 * **Any color you like**. This is the most representative psychedelic
 sound I can think of. There is not a lot left to say, it is waves of
 sound perfectly harmonized. Overall enjoyment: 10/10
-
-* **Set The Controls For The Heart Of The Sun**. Just... terrific.
-It makes me think of a desert planet, probably because of Pompeii. The
-title summarizes the lyrics on this one for me; it is about trying to
-masterize mind controls, the most important controls you will ever
-set. Overall enjoyment: 9/10
 
 * **Brain Damage**. This one makes it inevitable to think of Syd
 living freely and independently in his world. The phrase _The

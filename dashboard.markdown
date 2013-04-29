@@ -17,9 +17,9 @@ title: Dashboard
 
  - [Künstliche Intelligenz](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/) ([Lectures](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/lecture.html), [Exercises](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/exercises.html), [Book](http://aima.cs.berkeley.edu/))
 
- - [Softwarepraktikum](https://monteverdi.informatik.uni-freiburg.de/) ([Forum](https://monteverdi.informatik.uni-freiburg.de/sopraboard/index.php), [Wiki](https://monteverdi.informatik.uni-freiburg.de/), [Gruppeneinteilung](https://monteverdi.informatik.uni-freiburg.de/soprawiki/Gruppeneinteilung))
+ - [Softwarepraktikum](https://monteverdi.informatik.uni-freiburg.de/) ([Forum](https://monteverdi.informatik.uni-freiburg.de/sopraboard/index.php), [Trac](https://sotec.informatik.uni-freiburg.de/trac/sopra04/wiki), [Wiki](https://monteverdi.informatik.uni-freiburg.de/soprawiki/))
 
- - [Softwaretechnik ](http://dbis.informatik.uni-freiburg.de/index.php?course=WS1213/Kursvorlesung/Datenbanken+und+Informationssysteme/index.html) [(Übungen)](http://dbis.informatik.uni-freiburg.de/lehre/WS1213/Kursvorlesung/Datenbanken+und+Informationssysteme/uebungen.html)          
+ - [Softwaretechnik](http://proglang.informatik.uni-freiburg.de/teaching/swt/2013/)
 
       </td></tr></tbody></table>
 </center>

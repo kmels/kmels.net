@@ -4,7 +4,7 @@ title: Carlos López-Camey
 
 <div class="inline-image">![Me, late 2012](/images/me-2013.png "Carlos López-Camey, 2012") </div>
 
-How do you do? I'm a student of Computer Science at [Uni Freiburg](http://www.uni-freiburg.de/). Earlier I studied in Guatemala, where I come from. This website is an archive of thoughts, guides, or work I do. 
+Hi! I study Computer Science at [Uni Freiburg](http://www.uni-freiburg.de/). Earlier I studied in Guatemala, where I come from. This website is an archive of thoughts, guides, or work I do.
 
 I like to have fun with Functional Programming, a way of writing computer programs that can be precisely studied within frameworks of mathematical logic. 
 

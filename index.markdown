@@ -6,16 +6,13 @@ Articles are sorted by date.
 
 * ### Programming
     - [CYK Algorithm in Haskell, a O(n<sup>3</sup>) algorithm that solves the word probelm](posts/programming/cyk.html)
-
     - [XMonad.Actions.Launcher, a prompt with multiple functionalities](posts/programming/xmonad-launcher.html)
 
 * ### Projects
     - [Trac statistics](projects/trac-statistics.html)
 
-
 * ### Thoughts
     - [Fantasías de lo deseado](posts/topics/Fantasias de lo deseado.html)
-
     - [My favorite Pink Floyd songs](posts/topics/My favorite Pink Floyd songs.html)
 
 * ### Technical
