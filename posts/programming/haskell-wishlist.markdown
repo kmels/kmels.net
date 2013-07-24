@@ -38,3 +38,6 @@ Suppose I've got a function `debugM :: String -> IO ()` that debugs, and a funct
 `debugM $ "going computing" >> compute`
 
 because `$` has so much precedence.
+
+# Text.Read.Lex.Number should read 10^2 too
+

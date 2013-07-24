@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.3.1)  10 APR 2013 22:32
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.21)  21 JUN 2013 11:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -342,7 +342,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (11.08984pt too wide) in paragraph at lines 193--194
+Overfull \hbox (11.08984pt too wide) in paragraph at lines 197--198
 []\OT1/cmr/bx/n/10 XMonad\OT1/cmr/m/n/10 , worked on XMonad.Prompt and cre-ated
  the mod-ule XMonad.Actions.Launcher 
  []
@@ -350,23 +350,23 @@ Overfull \hbox (11.08984pt too wide) in paragraph at lines 193--194
 [2] 
 AED: lastpage setting LastPage
 [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 270.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 270.
  (./cv.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 270.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 270.
 Package rerunfilecheck Info: File `cv.out' has not changed.
 (rerunfilecheck)             Checksum: 4BF78C5D034D7A4D3872B40D81BF7D33;659.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 266.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 270.
  ) 
 Here is how much of TeX's memory you used:
  5680 strings out of 495059
- 83420 string characters out of 3182031
+ 83420 string characters out of 3182030
  175895 words of memory out of 3000000
  8819 multiletter control sequences out of 15000+200000
  5200 words of font info for 19 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,13n,43p,241b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,12n,43p,243b,497s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
@@ -374,10 +374,10 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmti10.pfb>
-Output written on cv.pdf (3 pages, 105924 bytes).
+Output written on cv.pdf (3 pages, 107080 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 119 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
  16 named destinations out of 1000 (max. 500000)
  97 words of extra memory for PDF output out of 10000 (max. 10000000)
 
