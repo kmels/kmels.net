@@ -6,3 +6,4 @@ _site/
 hakyll
 hakyll.hi
 hakyll.o
+.Rproj.user

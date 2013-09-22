@@ -1,6 +1,58 @@
 ---
 title: Dashboard
 ---
+<!--------------------------------------------------------------------------------> 
+#SS2013-GT
+
+<center>
+<table class="table">
+<!-- table header, 3 columns -->
+<thead>
+<tr><th>
+  #### Dominos Pizza
+</th><th>
+  #### Uni Valle
+</th><th>
+  #### Personal
+</th></tr>
+</thead>
+<tbody><tr>
+
+<!-- Dominos -->
+<td>
+ - [Unresolved issues](https://digitalgeko.atlassian.net/browse/DOM-25?jql=project%20%3D%20DOM%20AND%20resolution%20%3D%20Unresolved%20ORDER%20BY%20priority%20DESC)
+
+ - [Repository activity](https://digitalgeko.beanstalkapp.com/dominos)
+
+</td>
+
+<!-- UVG -->
+<td>
+ - [Historia](https://uvg.blackboard.com/webapps/portal/frameset.jsp?tab_tab_group_id=_2_1&url=%2Fwebapps%2Fblackboard%2Fexecute%2Flauncher%3Ftype%3DCourse%26id%3D_13077_1%26url%3D)
+
+ - [Matemática Discreta](https://uvg.blackboard.com/webapps/portal/frameset.jsp?tab_tab_group_id=_2_1&url=%2Fwebapps%2Fblackboard%2Fexecute%2Flauncher%3Ftype%3DCourse%26id%3D_13855_1%26url%3D)
+
+ - [Minería de Datos](https://uvg.blackboard.com/webapps/portal/frameset.jsp?tab_tab_group_id=_2_1&url=%2Fwebapps%2Fblackboard%2Fexecute%2Flauncher%3Ftype%3DCourse%26id%3D_13485_1%26url%3D)
+
+ - [Modelación y simulación](https://uvg.blackboard.com/webapps/portal/frameset.jsp?tab_tab_group_id=_2_1&url=%2Fwebapps%2Fblackboard%2Fexecute%2Flauncher%3Ftype%3DCourse%26id%3D_13035_1%26url%3D)
+
+ - [Comunicación Eficaz](https://uvg.blackboard.com/webapps/portal/frameset.jsp?tab_tab_group_id=_2_1&url=%2Fwebapps%2Fblackboard%2Fexecute%2Flauncher%3Ftype%3DCourse%26id%3D_13039_1%26url%3D)
+
+ - [Ética](https://uvg.blackboard.com/webapps/portal/frameset.jsp?tab_tab_group_id=_2_1&url=%2Fwebapps%2Fblackboard%2Fexecute%2Flauncher%3Ftype%3DCourse%26id%3D_13160_1%26url%3D)
+    - Llevar portafolio
+</td>
+
+<!-- Personal -->
+<td>
+ - [Finances](/finances)
+
+</td></tr>
+
+</tbody></table>
+</center>
+
+<!--------------------------------------------------------------------------------> 
+
 
 <!--------------------------------------------------------------------------------> 
 # SS2013
@@ -14,6 +66,7 @@ title: Dashboard
  - [Stochastik](http://www.stochastik.uni-freiburg.de/Vorlesungen/vvSS2013/VorStochInfo/)
 
  - [Optimierung](http://ac.informatik.uni-freiburg.de/teaching/ss_13/optimization.php)
+)
 
  - [Künstliche Intelligenz](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/) ([Lectures](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/lecture.html), [Exercises](http://www.informatik.uni-freiburg.de/~ki/teaching/ss13/gki/exercises.html), [Book](http://aima.cs.berkeley.edu/))
 
