@@ -1,0 +1,7 @@
+<h3> Journal </h3>
+$blog-excerpt$
+
+<h3> Table of articles </h3>
+$tableOfContents$
+
+

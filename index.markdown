@@ -2,6 +2,10 @@
 title: Homepage of Carlos López-Camey
 ---
 
+### Blog
+
+$blog-excerpt$
+
 Articles are sorted by date.
 
 * ### Programming

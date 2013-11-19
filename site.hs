@@ -20,19 +20,19 @@ import Text.Pandoc (WriterOptions (..), HTMLMathMethod (MathJax))
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    match ("images/**" .||. "favicon.ico" .||. "robots.txt") $ do
+    match ("images/**" .||. "favicon.ico" .||. "robots.txt" .||. "js/**") $ do
       route   idRoute      
       compile copyFileCompiler
 
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
-
+        
     match (fromList ["about.markdown", "dashboard.markdown","contact.markdown","404.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
+            >>= relativizeUrls    
             
     tags <- buildTags "posts/**" (fromCapture "tags/*.html")
 
@@ -53,12 +53,25 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "templates/post.html"    (postCtx tags)
             >>= loadAndApplyTemplate "templates/default.html" (postCtx tags)
             >>= relativizeUrls    
-    
+
+    -- to be included within the homepage
+    -- make the table of contents
+    match "toc.markdown" $ compile $ pandocCompiler >>= relativizeUrls
+          
+    -- to be included within the homepage
+    -- make homepage excerpts as html, don't create new (individual) files.
+    match "blog/*" $ do
+        route idRoute
+        compile $
+          pandocCompiler
+            >>= loadAndApplyTemplate "templates/blog.excerpt.entry.html"    (postCtx tags)
+            >>= relativizeUrls
+            
     -- Render posts page
     create ["posts.html"] $ do
         route idRoute
         compile $ postPage tags "All Posts" "posts/**"
-        
+
     -- create ["posts.html"] $ do
     --     route idRoute
     --     compile $ do
@@ -72,21 +85,34 @@ main = hakyll $ do
     --             >>= loadAndApplyTemplate "templates/default.html" archiveCtx
     --             >>= relativizeUrls
 
-
-    match "index.markdown" $ do
-        route $ setExtension ".html"
-        compile $ do                    
-          pandocCompiler
-          >>= loadAndApplyTemplate "templates/default.html" indexCtx
-          >>= relativizeUrls
+        
+    create ["home"] $ do      
+      route idRoute
+      compile $ do
+--         -- compile blog excerpt
+        blogExcerpt <- mkBlogExcerpt :: Compiler String
+        toc <- loadBody "toc.markdown" :: Compiler String
+        let ctx = (mkHomeContext blogExcerpt toc)
+        makeItem ""
+          >>= loadAndApplyTemplate "templates/home.template" ctx
+          >>= loadAndApplyTemplate "templates/default.html" (ctx <> constField "title" "TITLE")
+          >>= relativizeUrls 
           
     match "templates/*" $ compile templateCompiler
 
 
 --------------------------------------------------------------------------------
-indexCtx :: Context String 
-indexCtx = defaultContext
-                     
+    
+mkHomeContext :: String -> String -> Context String 
+mkHomeContext blogExcerpt toc = mconcat [
+                                defaultContext
+                                , constField "blog-excerpt" blogExcerpt
+                                , constField "tableOfContents" toc
+                                ]
+-- | Assuming all entries from blog/* have been compiled, this function joins their html together
+mkBlogExcerpt :: Compiler String
+mkBlogExcerpt = byDateField <$> loadAll "blog/*" >>= return . concatMap itemBody
+    
 --------------------------------------------------------------------------------
 postCtx :: Tags -> Context String
 postCtx tags = mconcat

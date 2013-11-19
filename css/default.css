@@ -8,6 +8,7 @@ body {
     line-height: 1.4em;
 }
 
+div.centerer { margin:0 auto;}
 a:link {
   color: #0044b3;
   text-decoration: none;
@@ -74,3 +75,8 @@ table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode
 
 /* TODO 
 http://blog.favrik.com/2011/02/22/preview-all-pygments-styles-for-your-code-highlighting-needs/#stylesheetNavigator*/
+
+div.blog-excerpt { display: none}
+div.blog-excerpt.active {display:block}
+div.blog-excerpt em { float: left}
+div.blog-excerpt span { float: right}
