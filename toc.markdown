@@ -14,9 +14,9 @@
 
 <!-- Dominos -->
 <td>
- - [In der Heimat zu arbeiten oder ins Ausland zu gehen](https://)
+ - [In der Heimat zu arbeiten oder ins Ausland zu gehen](posts/german/in-der-heimat-arbeiten-vs-ins-ausland-zu-gehen.html)
 
- - [Problemas de exámen final de Álgebra Líneal 2](https://)
+ - [Problemas de exámen final de Álgebra Líneal 2](posts/uvg/Problemas%20y%20Soluciones%20de%20Algebra%20Lineal%202,%20Examen%20final.html)
 
 </td>
 

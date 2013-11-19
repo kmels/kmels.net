@@ -86,7 +86,7 @@ main = hakyll $ do
     --             >>= relativizeUrls
 
         
-    create ["home"] $ do      
+    create ["home.html"] $ do      
       route idRoute
       compile $ do
 --         -- compile blog excerpt
