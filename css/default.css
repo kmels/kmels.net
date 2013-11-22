@@ -31,10 +31,11 @@ div.inline-image{
     display: inline;
     margin: 20px 5px;
     padding-right: 25px;
+    margin-top: 0px;
 }
 
 /* avoid big images */
-div.inline-image img{ max-width: 960px; } 
+div.inline-image img{ width: 200px;} 
 
 .clear { clear:both; }
 

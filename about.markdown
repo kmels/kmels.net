@@ -4,7 +4,7 @@ title: Carlos López-Camey
 
 <div class="inline-image">![Me, late 2012](/images/me-2013.png "Carlos López-Camey, 2012") </div>
 
-My name is Carlos and I have always been interested.
+Hi, my name is Carlos and I have always been interested.
 
 I write code in functional language Haskell, work as a developer, and study Computer Science.
 
@@ -19,11 +19,7 @@ I write code in functional language Haskell, work as a developer, and study Comp
   <thead>
   <tr>
   <th>
-  ___Software___
   </th>
-  <th>
-
-  </th>    
   </tr>
   </thead>
   <tbody>
@@ -36,11 +32,7 @@ I write code in functional language Haskell, work as a developer, and study Comp
 
  - [Stackoverflow](http://stackoverflow.com/users/225956/carlos-lopez-camey), questions about software codification.
   </td>
-
-  <td>
-
-      </td>
-    </tr> 
+  </tr> 
 </tbody>
 </table>    
     
