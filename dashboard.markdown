@@ -44,7 +44,13 @@ title: Dashboard
 
 <!-- Personal -->
 <td>
+
+ - [Literary Theory](http://openmedia.yale.edu/projects/iphone/departments/engl/engl300.html)
+
+ - [Financal Markets (2011)](http://openmedia.yale.edu/projects/iphone/departments/econ/econ252_11.html)
+
  - [Finances](/finances)
+
 
 </td></tr>
 
