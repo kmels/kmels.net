@@ -10,7 +10,7 @@ I upgraded to Ubuntu 12.04; configuring xmonad took longer than expected. How it
 
  0. If you are planning to use multiple monitors/xmonad-contrib, I had to:
 
-        sudo apt-get install libxinerama-dev libxft-dev zlib1g-dev libxft-dev
+        sudo apt-get install libxinerama-dev libxft-dev zlib1g-dev libxft-dev libxrandr-dev
 
  1. Install `xmonad` and xmonad-contrib`, either with <a href="#ref0">cabal <sup id="sup0">[0]</sup></a> or `apt-get`. I prefer cabal:
 
