@@ -1,7 +1,7 @@
 ---
 title: Quotes
 author: Carlos López-Camey
-date: 
+date: Feb 23, 2015
 lang: en
 tags: quotes
 ---
@@ -13,4 +13,9 @@ tags: quotes
     that's creativity
 
 — Charles Mingus, musician (1922-1979)
+
+
+    Machines were, it may be said, the weapon employed by the capitalists to quell the revolt of specialized labor.
+
+— Karl Marx, sociologist (1818-1883)
 
