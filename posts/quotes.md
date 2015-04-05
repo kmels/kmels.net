@@ -19,3 +19,6 @@ tags: quotes
 
 — Karl Marx, sociologist (1818-1883)
 
+    A supercomputer is a device for turning compute-bound problems into I/O-bound problems
+
+– Ken Batcher, computer designer (1935-)
